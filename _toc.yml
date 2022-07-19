@@ -1,0 +1,35 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
+chapters:
+- file: 01_Python_Notebook_ Linear_Model_Overfitting
+- file: 02_PM1_Notebook1_Prediction_newdata
+- file: 03_PM1_Notebook_Inference
+- file: 04_py-notebook-vaccine-rcts
+- file: 05_Analyzing_RCT_with_Precision
+- file: 06_Analyzing_rct_reemployment_experiment
+- file: 07_python_notebook_linear_penalized_regs
+- file: 09_python_notebook_experiment_on_orthogonal_learning
+- file: 10_pm2_notebook_jannis
+- file: 11_py-heterogenous-wage-effects
+- file: 13_pm3-notebook-newdata
+- file: 14_pm3_notebook_newdata_nn
+- file: 15_automl_for_wage_prediction
+- file: 16_py-Functional-Approximation-By-NN-and-RF
+- file: 17_notebook_dagitty
+- file: 19_pm3_notebook_inference_clustering
+- file: 20_pm3_notebook_inference_nn
+- file: 21_pm5-401k-kaggle-py
+- file: 23_debiased-ml-for-partially-linear-model-in-python
+- file: 24_sensitivity_analysis_with_sensmakr_and_debiased_ml
+- file: 25_debiased-ml-for-partially-linear-iv-model-in-python
+- file: 27_r_weak_iv_experiments
+- file: average_treatment_effect_1
+- file: dml_for_conditional_average_treatment_effect
+- file: Double_Machine_Learning
+- file: example_PySensemakr
+- file: py_double_ml_pension

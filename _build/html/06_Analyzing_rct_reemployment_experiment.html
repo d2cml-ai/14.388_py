@@ -1,0 +1,1693 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Analyzing RCT data with Precision Adjustment &#8212; 14.388_py</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Penalized Linear Regressions: A Simulation Experiment" href="07_python_notebook_linear_penalized_regs.html" />
+    <link rel="prev" title="Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_Analyzing_RCT_with_Precision.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">14.388_py</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python_Notebook_%20Linear_Model_Overfitting.html">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_py-notebook-vaccine-rcts.html">
+   Vaccine RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analyzing RCT data with Precision Adjustment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_python_notebook_linear_penalized_regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_python_notebook_experiment_on_orthogonal_learning.html">
+   Simulation Design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_pm3-notebook-newdata.html">
+   A Simple Case Study using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_automl_for_wage_prediction.html">
+   Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_py-Functional-Approximation-By-NN-and-RF.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook_dagitty.html">
+   Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm3_notebook_inference_nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_pm5-401k-kaggle-py.html">
+   Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_debiased-ml-for-partially-linear-model-in-python.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_r_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="average_treatment_effect_1.html">
+   1. ATE I: Binary treatment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Double_Machine_Learning.html">
+   1.0 The basics of double/debiased machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="py_double_ml_pension.html">
+   Python: Impact of 401(k) on Financial Wealth
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/06_Analyzing_rct_reemployment_experiment.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F06_Analyzing_rct_reemployment_experiment.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/06_Analyzing_rct_reemployment_experiment.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Analyzing RCT data with Precision Adjustment
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model">
+       Model
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analysis">
+       Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
+   Carry out covariate balance check
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regress-treatment-on-all-covariates">
+     Regress treatment on all covariates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-specification">
+   Model Specification
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-we-try-out-partialling-out-with-lasso">
+   Next we try out partialling out with lasso
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#results">
+     Results
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analyzing RCT data with Precision Adjustment</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Analyzing RCT data with Precision Adjustment
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data">
+     Data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model">
+       Model
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analysis">
+       Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
+   Carry out covariate balance check
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regress-treatment-on-all-covariates">
+     Regress treatment on all covariates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-specification">
+   Model Specification
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-we-try-out-partialling-out-with-lasso">
+   Next we try out partialling out with lasso
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#results">
+     Results
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <ul class="simple">
+<li><p>Python code replication of:
+” <a class="reference external" href="https://www.kaggle.com/victorchernozhukov/analyzing-rct-reemployment-experiment">https://www.kaggle.com/victorchernozhukov/analyzing-rct-reemployment-experiment</a> “</p></li>
+<li><p>Created by: Alexander Quispe and Anzony Quispe</p></li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-data-with-precision-adjustment">
+<h1>Analyzing RCT data with Precision Adjustment<a class="headerlink" href="#analyzing-rct-data-with-precision-adjustment" title="Permalink to this headline">#</a></h1>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<p>In this lab, we analyze the Pennsylvania re-employment bonus experiment, which was previously studied in “Sequential testing of duration data: the case of the Pennsylvania ‘reemployment bonus’ experiment” (Bilias, 2000), among others. These experiments were conducted in the 1980s by the U.S. Department of Labor to test the incentive effects of alternative compensation schemes for unemployment insurance (UI). In these experiments, UI claimants were randomly assigned either to a control group or one of five treatment groups. Actually, there are six treatment groups in the experiments. Here we focus on treatment group 4, but feel free to explore other treatment groups. In the control group the current rules of the UI applied. Individuals in the treatment groups were offered a cash bonus if they found a job within some pre-specified period of time (qualification period), provided that the job was retained for a specified duration. The treatments differed in the level of the bonus, the length of the qualification period, and whether the bonus was declining over time in the qualification period; see <a class="reference external" href="http://qed.econ.queensu.ca/jae/2000-v15.6/bilias/readme.b.txt">http://qed.econ.queensu.ca/jae/2000-v15.6/bilias/readme.b.txt</a> for further details on data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pyreadr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## loading the data</span>
+<span class="n">Penn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/penn_jae.dat&quot;</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">p_1</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">Penn</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;tg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;tg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## loading the data</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Penn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/penn_jae.dat&quot;</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">n</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">p_1</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pandas\util\_decorators.py:311,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pandas\io\parsers\readers.py:680,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">677</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">680</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pandas\io\parsers\readers.py:575,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">577</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">578</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pandas\io\parsers\readers.py:933,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">930</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">932</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">933</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pandas\io\parsers\readers.py:1217,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1213</span>     <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;rb&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1214</span> <span class="c1"># error: No overload variant of &quot;get_handle&quot; matches argument types</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span> <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span> <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1217</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1220</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1221</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1222</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1223</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1224</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1225</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1226</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1227</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1228</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pandas\io\common.py:789,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">786</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">789</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">794</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">796</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">797</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">798</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/penn_jae.dat&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Penn</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5782, 24)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dependent variable</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[[</span><span class="s1">&#39;tg&#39;</span><span class="p">]]</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Create category variable</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span> <span class="s1">&#39;category&#39;</span> <span class="p">)</span>
+<span class="n">Penn</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abdt</th>
+      <th>tg</th>
+      <th>inuidur1</th>
+      <th>inuidur2</th>
+      <th>female</th>
+      <th>black</th>
+      <th>hispanic</th>
+      <th>othrace</th>
+      <th>dep</th>
+      <th>q1</th>
+      <th>...</th>
+      <th>q6</th>
+      <th>recall</th>
+      <th>agelt35</th>
+      <th>agegt54</th>
+      <th>durable</th>
+      <th>nondurable</th>
+      <th>lusd</th>
+      <th>husd</th>
+      <th>muld</th>
+      <th>T4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10824</td>
+      <td>0</td>
+      <td>18</td>
+      <td>18</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10824</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10747</td>
+      <td>0</td>
+      <td>27</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>10607</td>
+      <td>4</td>
+      <td>9</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>10831</td>
+      <td>0</td>
+      <td>27</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 25 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 0, 1]
+Categories (3, int64): [2, 0, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h3>
+<p>To evaluate the impact of the treatments on unemployment duration, we consider the linear regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+Y =  D \beta_1 + W'\beta_2 + \varepsilon, \quad E \varepsilon (D,W')' = 0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is  the  log of duration of unemployment, <span class="math notranslate nohighlight">\(D\)</span> is a treatment  indicators,  and <span class="math notranslate nohighlight">\(W\)</span> is a set of controls including age group dummies, gender, race, number of dependents, quarter of the experiment, location within the state, existence of recall expectations, and type of occupation.   Here <span class="math notranslate nohighlight">\(\beta_1\)</span> is the ATE, if the RCT assumptions hold rigorously.</p>
+<p>We also consider interactive regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+Y =  D \alpha_1 + D W' \alpha_2 + W'\beta_2 + \varepsilon, \quad E \varepsilon (D,W', DW')' = 0,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(W\)</span>’s are demeaned (apart from the intercept), so that <span class="math notranslate nohighlight">\(\alpha_1\)</span> is the ATE, if the RCT assumptions hold rigorously.</p>
+<p>Under RCT, the projection coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> has
+the interpretation of the causal effect of the treatment on
+the average outcome. We thus refer to <span class="math notranslate nohighlight">\(\beta_1\)</span> as the average
+treatment effect (ATE). Note that the covariates, here are
+independent of the treatment <span class="math notranslate nohighlight">\(D\)</span>, so we can identify <span class="math notranslate nohighlight">\(\beta_1\)</span> by
+just linear regression of <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\(D\)</span>, without adding covariates.
+However we do add covariates in an effort to improve the
+precision of our estimates of the average treatment effect.</p>
+</section>
+<section id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h3>
+<p>We consider</p>
+<ul class="simple">
+<li><p>classical 2-sample approach, no adjustment (CL)</p></li>
+<li><p>classical linear regression adjustment (CRA)</p></li>
+<li><p>interactive regression adjusment (IRA)</p></li>
+</ul>
+<p>and carry out robust inference using the <em>estimatr</em> R packages.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="carry-out-covariate-balance-check">
+<h1>Carry out covariate balance check<a class="headerlink" href="#carry-out-covariate-balance-check" title="Permalink to this headline">#</a></h1>
+<p>This is done using “lm_robust” command which unlike “lm” in the base command automatically does the correct Eicher-Huber-White standard errors, instead othe classical non-robus formula based on the homoscdedasticity command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">patsy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="regress-treatment-on-all-covariates">
+<h2>Regress treatment on all covariates<a class="headerlink" href="#regress-treatment-on-all-covariates" title="Permalink to this headline">#</a></h2>
+<p>I use data from R</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[[</span><span class="s1">&#39;T4&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/m_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = &quot;T4~(female+black+othrace+C(dep)+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2&quot;</span>
+<span class="n">model_results</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">y</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model_results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Number of regressors in the basic model:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">model_results</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     T4   R-squared:                       0.029
+Model:                            OLS   Adj. R-squared:                  0.009
+Method:                 Least Squares   F-statistic:                     29.07
+Date:                Fri, 17 Sep 2021   Prob (F-statistic):               0.00
+Time:                        16:31:12   Log-Likelihood:                -3358.5
+No. Observations:                5099   AIC:                             6923.
+Df Residuals:                    4996   BIC:                             7596.
+Df Model:                         102                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+(Intercept)              0.3215      0.161      1.993      0.046       0.005       0.638
+female                   0.1042      0.136      0.765      0.444      -0.163       0.371
+black                    0.0716      0.083      0.864      0.387      -0.091       0.234
+othrace                  0.0280      0.405      0.069      0.945      -0.766       0.822
+factor(dep)1            -0.0736      0.201     -0.366      0.714      -0.468       0.320
+factor(dep)2            -0.1085      0.158     -0.689      0.491      -0.417       0.200
+q2                      -0.0267      0.163     -0.164      0.870      -0.345       0.292
+q3                      -0.0057      0.162     -0.035      0.972      -0.324       0.312
+q4                       0.0433      0.162      0.267      0.789      -0.275       0.362
+q5                       0.0939      0.162      0.581      0.561      -0.223       0.411
+q6                      -0.2216      0.160     -1.386      0.166      -0.535       0.092
+agelt35                 -0.1092      0.133     -0.820      0.412      -0.370       0.152
+agegt54                 -0.4367      0.136     -3.215      0.001      -0.703      -0.170
+durable                 -0.1250      0.171     -0.732      0.464      -0.460       0.210
+lusd                     0.1143      0.068      1.675      0.094      -0.019       0.248
+husd                     0.0947      0.074      1.286      0.199      -0.050       0.239
+female:black             0.0889      0.044      2.028      0.043       0.003       0.175
+female:othrace          -0.4135      0.165     -2.509      0.012      -0.737      -0.090
+female:factor(dep)1      0.0555      0.046      1.194      0.233      -0.036       0.147
+female:factor(dep)2      0.0454      0.041      1.121      0.262      -0.034       0.125
+female:q2               -0.1888      0.136     -1.390      0.165      -0.455       0.078
+female:q3               -0.1653      0.136     -1.218      0.223      -0.431       0.101
+female:q4               -0.1763      0.135     -1.303      0.193      -0.442       0.089
+female:q5               -0.2032      0.135     -1.507      0.132      -0.468       0.061
+female:q6               -0.0427      0.142     -0.300      0.764      -0.322       0.236
+female:agelt35           0.0734      0.030      2.444      0.015       0.015       0.132
+female:agegt54           0.0261      0.051      0.513      0.608      -0.074       0.126
+female:durable           0.0198      0.044      0.452      0.651      -0.066       0.105
+female:lusd              0.0021      0.034      0.061      0.951      -0.064       0.069
+female:husd              0.0118      0.037      0.315      0.753      -0.062       0.085
+black:factor(dep)1      -0.1173      0.068     -1.725      0.085      -0.251       0.016
+black:factor(dep)2      -0.0222      0.063     -0.350      0.726      -0.147       0.102
+black:q2                -0.0335      0.090     -0.373      0.709      -0.210       0.143
+black:q3                -0.1966      0.085     -2.311      0.021      -0.363      -0.030
+black:q4                -0.1249      0.086     -1.452      0.147      -0.294       0.044
+black:q5                -0.2099      0.084     -2.499      0.012      -0.375      -0.045
+black:agelt35            0.0623      0.045      1.380      0.168      -0.026       0.151
+black:agegt54            0.0513      0.085      0.606      0.544      -0.114       0.217
+black:durable            0.1048      0.066      1.583      0.113      -0.025       0.234
+black:lusd              -0.0210      0.056     -0.376      0.707      -0.131       0.089
+black:husd               0.2496      0.169      1.479      0.139      -0.081       0.580
+othrace:factor(dep)1    -0.8581      0.331     -2.594      0.010      -1.507      -0.210
+othrace:factor(dep)2     0.2415      0.133      1.812      0.070      -0.020       0.503
+othrace:q2               0.4372      0.347      1.261      0.207      -0.243       1.117
+othrace:q3              -0.3734      0.377     -0.990      0.322      -1.113       0.366
+othrace:q4               0.4159      0.330      1.262      0.207      -0.230       1.062
+othrace:q5               0.0061      0.311      0.019      0.984      -0.604       0.616
+othrace:agelt35          0.3165      0.183      1.725      0.085      -0.043       0.676
+othrace:agegt54          0.3092      0.159      1.943      0.052      -0.003       0.621
+othrace:durable         -0.1908      0.138     -1.387      0.166      -0.460       0.079
+othrace:lusd            -0.0911      0.203     -0.450      0.653      -0.488       0.306
+othrace:husd             0.0052      0.203      0.025      0.980      -0.393       0.403
+factor(dep)1:q2          0.1658      0.201      0.825      0.409      -0.228       0.559
+factor(dep)2:q2          0.0875      0.157      0.559      0.576      -0.220       0.395
+factor(dep)1:q3          0.1210      0.200      0.606      0.545      -0.270       0.512
+factor(dep)2:q3          0.1396      0.157      0.891      0.373      -0.168       0.447
+factor(dep)1:q4          0.0848      0.199      0.426      0.670      -0.306       0.475
+factor(dep)2:q4          0.0910      0.157      0.580      0.562      -0.217       0.399
+factor(dep)1:q5          0.1105      0.198      0.557      0.578      -0.278       0.499
+factor(dep)2:q5          0.0960      0.155      0.618      0.537      -0.209       0.401
+factor(dep)1:q6          0.1007      0.209      0.482      0.630      -0.309       0.510
+factor(dep)2:q6          0.0484      0.164      0.295      0.768      -0.273       0.370
+factor(dep)1:agelt35    -0.0737      0.049     -1.518      0.129      -0.169       0.021
+factor(dep)2:agelt35    -0.0244      0.038     -0.650      0.515      -0.098       0.049
+factor(dep)1:agegt54    -0.0806      0.068     -1.180      0.238      -0.214       0.053
+factor(dep)2:agegt54     0.0280      0.128      0.219      0.826      -0.222       0.279
+factor(dep)1:durable    -0.0603      0.060     -1.011      0.312      -0.177       0.057
+factor(dep)2:durable     0.1247      0.050      2.481      0.013       0.026       0.223
+factor(dep)1:lusd        0.0590      0.052      1.124      0.261      -0.044       0.162
+factor(dep)2:lusd        0.0516      0.047      1.095      0.273      -0.041       0.144
+factor(dep)1:husd       -0.0433      0.056     -0.775      0.438      -0.153       0.066
+factor(dep)2:husd       -0.0882      0.048     -1.847      0.065      -0.182       0.005
+q2:agelt35               0.1275      0.133      0.957      0.338      -0.134       0.389
+q2:agegt54               0.5296      0.137      3.869      0.000       0.261       0.798
+q2:durable               0.1261      0.170      0.744      0.457      -0.206       0.458
+q2:lusd                 -0.0762      0.071     -1.070      0.285      -0.216       0.063
+q2:husd                 -0.0188      0.075     -0.250      0.803      -0.167       0.129
+q3:agelt35               0.1306      0.133      0.982      0.326      -0.130       0.391
+q3:agegt54               0.4782      0.134      3.567      0.000       0.215       0.741
+q3:durable               0.0542      0.169      0.320      0.749      -0.278       0.386
+q3:lusd                 -0.0538      0.070     -0.770      0.442      -0.191       0.083
+q3:husd                 -0.0601      0.075     -0.802      0.422      -0.207       0.087
+q4:agelt35               0.1310      0.133      0.987      0.324      -0.129       0.391
+q4:agegt54               0.5403      0.131      4.111      0.000       0.283       0.798
+q4:durable               0.0963      0.170      0.567      0.571      -0.237       0.429
+q4:lusd                 -0.1034      0.071     -1.466      0.143      -0.242       0.035
+q4:husd                 -0.1719      0.075     -2.306      0.021      -0.318      -0.026
+q5:agelt35               0.0708      0.132      0.536      0.592      -0.188       0.330
+q5:agegt54               0.4438      0.131      3.399      0.001       0.188       0.700
+q5:durable               0.0747      0.168      0.445      0.656      -0.254       0.403
+q5:lusd                 -0.0761      0.070     -1.087      0.277      -0.213       0.061
+q5:husd                 -0.1616      0.073     -2.213      0.027      -0.305      -0.018
+q6:agelt35               0.1703      0.139      1.226      0.220      -0.102       0.443
+q6:agegt54               0.5655      0.150      3.760      0.000       0.271       0.860
+q6:durable               0.2558      0.178      1.434      0.152      -0.094       0.605
+agelt35:durable          0.0095      0.041      0.234      0.815      -0.070       0.089
+agelt35:lusd            -0.0259      0.035     -0.730      0.465      -0.095       0.044
+agelt35:husd             0.0355      0.040      0.893      0.372      -0.042       0.113
+agegt54:durable         -0.0623      0.064     -0.975      0.330      -0.188       0.063
+agegt54:lusd            -0.0366      0.058     -0.632      0.527      -0.150       0.077
+agegt54:husd            -0.0742      0.061     -1.212      0.226      -0.194       0.046
+durable:lusd            -0.0552      0.043     -1.271      0.204      -0.140       0.030
+durable:husd            -0.0002      0.053     -0.003      0.997      -0.104       0.103
+==============================================================================
+Omnibus:                    34121.343   Durbin-Watson:                   1.963
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              815.623
+Skew:                           0.643   Prob(JB):                    7.76e-178
+Kurtosis:                       1.522   Cond. No.                         177.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+Number of regressors in the basic model: 103 
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that that even though this is a randomized experiment, balance conditions are failed.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="model-specification">
+<h1>Model Specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">#</a></h1>
+<p>I use data from R.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model specifications</span>
+<span class="c1"># take log of inuidur1</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;log_inuidur1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">)</span> 
+<span class="n">log_inuidur1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+<span class="c1"># no adjustment (2-sample approach)</span>
+<span class="n">formula_cl</span> <span class="o">=</span> <span class="s1">&#39;log_inuidur1 ~ T4&#39;</span>
+
+<span class="c1"># adding controls</span>
+<span class="c1"># formula_cra = &#39;log_inuidur1 ~ T4 + (female+black+othrace+dep+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2&#39;</span>
+<span class="c1"># Omitted dummies: q1, nondurable, muld</span>
+
+<span class="n">ols_cl</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">formula_cl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Penn</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="c1">#getting data</span>
+<span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/ols_cra_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">]</span>
+
+<span class="n">ols_cra</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Results </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_cl</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_cra</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           log_inuidur1   R-squared:                       0.001
+Model:                            OLS   Adj. R-squared:                  0.001
+Method:                 Least Squares   F-statistic:                     5.680
+Date:                Fri, 17 Sep 2021   Prob (F-statistic):             0.0172
+Time:                        16:31:12   Log-Likelihood:                -8223.8
+No. Observations:                5099   AIC:                         1.645e+04
+Df Residuals:                    5097   BIC:                         1.646e+04
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.0568      0.021     98.156      0.000       2.016       2.098
+T4            -0.0855      0.036     -2.383      0.017      -0.156      -0.015
+==============================================================================
+Omnibus:                     2610.670   Durbin-Watson:                   1.973
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              516.984
+Skew:                          -0.542   Prob(JB):                    5.47e-113
+Kurtosis:                       1.877   Cond. No.                         2.41
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               inuidur1   R-squared:                       0.060
+Model:                            OLS   Adj. R-squared:                  0.040
+Method:                 Least Squares   F-statistic:                     16.64
+Date:                Fri, 17 Sep 2021   Prob (F-statistic):          3.84e-244
+Time:                        16:31:12   Log-Likelihood:                -8070.0
+No. Observations:                5099   AIC:                         1.635e+04
+Df Residuals:                    4995   BIC:                         1.703e+04
+Df Model:                         103                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+(Intercept)              2.6331      0.368      7.153      0.000       1.911       3.355
+T4TRUE                  -0.0797      0.036     -2.239      0.025      -0.149      -0.010
+female                  -0.1146      0.316     -0.362      0.717      -0.735       0.506
+black                   -0.8990      0.240     -3.742      0.000      -1.370      -0.428
+othrace                 -2.6269      0.454     -5.784      0.000      -3.517      -1.737
+factor(dep)1            -0.7197      0.581     -1.238      0.216      -1.859       0.420
+factor(dep)2            -0.0406      0.360     -0.113      0.910      -0.746       0.665
+q2                      -0.1597      0.370     -0.431      0.666      -0.886       0.567
+q3                      -0.5399      0.370     -1.459      0.145      -1.265       0.186
+q4                      -0.4334      0.371     -1.167      0.243      -1.161       0.294
+q5                      -0.3452      0.369     -0.936      0.349      -1.068       0.378
+q6                      -0.4937      0.371     -1.330      0.184      -1.221       0.234
+agelt35                 -0.6259      0.308     -2.035      0.042      -1.229      -0.023
+agegt54                 -0.3614      0.712     -0.507      0.612      -1.758       1.035
+durable                 -0.2792      0.492     -0.568      0.570      -1.243       0.684
+lusd                    -0.2229      0.187     -1.190      0.234      -0.590       0.144
+husd                    -0.1702      0.201     -0.847      0.397      -0.564       0.224
+female:black            -0.1550      0.122     -1.271      0.204      -0.394       0.084
+female:othrace           0.3102      0.424      0.732      0.464      -0.520       1.141
+female:factor(dep)1     -0.0279      0.118     -0.237      0.812      -0.258       0.202
+female:factor(dep)2      0.1482      0.103      1.440      0.150      -0.054       0.350
+female:q2               -0.0874      0.316     -0.277      0.782      -0.707       0.532
+female:q3                0.2049      0.316      0.649      0.516      -0.414       0.824
+female:q4                0.2732      0.316      0.866      0.387      -0.345       0.892
+female:q5                0.0611      0.315      0.194      0.846      -0.556       0.678
+female:q6                0.2872      0.338      0.849      0.396      -0.376       0.951
+female:agelt35           0.1264      0.077      1.639      0.101      -0.025       0.278
+female:agegt54           0.0400      0.127      0.314      0.754      -0.210       0.290
+female:durable           0.0680      0.110      0.619      0.536      -0.147       0.283
+female:lusd              0.0837      0.085      0.986      0.324      -0.083       0.250
+female:husd              0.0623      0.094      0.663      0.507      -0.122       0.247
+black:factor(dep)1       0.1575      0.194      0.810      0.418      -0.224       0.539
+black:factor(dep)2      -0.1038      0.183     -0.567      0.571      -0.463       0.255
+black:q2                 0.4585      0.250      1.832      0.067      -0.032       0.949
+black:q3                 0.4166      0.241      1.731      0.084      -0.055       0.888
+black:q4                 0.5485      0.241      2.280      0.023       0.077       1.020
+black:q5                 0.7346      0.239      3.079      0.002       0.267       1.202
+black:agelt35            0.0151      0.128      0.118      0.906      -0.236       0.266
+black:agegt54            0.4438      0.203      2.183      0.029       0.045       0.842
+black:durable            0.2436      0.177      1.378      0.168      -0.103       0.590
+black:lusd               0.2910      0.152      1.919      0.055      -0.006       0.588
+black:husd               1.3149      0.338      3.896      0.000       0.653       1.977
+othrace:factor(dep)1     1.0736      0.641      1.674      0.094      -0.184       2.331
+othrace:factor(dep)2     0.0070      0.429      0.016      0.987      -0.834       0.848
+othrace:q2               1.7441      0.494      3.531      0.000       0.776       2.712
+othrace:q3               1.3575      0.601      2.261      0.024       0.180       2.535
+othrace:q4               1.4433      0.511      2.822      0.005       0.441       2.446
+othrace:q5               1.4252      0.538      2.651      0.008       0.371       2.479
+othrace:agelt35          1.1845      0.389      3.048      0.002       0.423       1.946
+othrace:agegt54         -0.2219      0.695     -0.319      0.749      -1.584       1.140
+othrace:durable          1.6280      0.365      4.464      0.000       0.913       2.343
+othrace:lusd            -0.0707      0.461     -0.153      0.878      -0.975       0.834
+othrace:husd            -0.7714      0.351     -2.197      0.028      -1.460      -0.083
+factor(dep)1:q2          0.6398      0.573      1.116      0.264      -0.484       1.763
+factor(dep)2:q2         -0.0445      0.358     -0.124      0.901      -0.747       0.658
+factor(dep)1:q3          0.6984      0.574      1.217      0.224      -0.427       1.823
+factor(dep)2:q3         -0.0295      0.359     -0.082      0.934      -0.734       0.674
+factor(dep)1:q4          0.5041      0.574      0.879      0.379      -0.620       1.629
+factor(dep)2:q4          0.1390      0.361      0.385      0.700      -0.569       0.848
+factor(dep)1:q5          0.5278      0.571      0.924      0.355      -0.592       1.647
+factor(dep)2:q5         -0.1697      0.359     -0.472      0.637      -0.874       0.535
+factor(dep)1:q6          1.0950      0.603      1.816      0.069      -0.087       2.277
+factor(dep)2:q6          0.3409      0.388      0.879      0.379      -0.419       1.101
+factor(dep)1:agelt35     0.0746      0.122      0.612      0.541      -0.164       0.314
+factor(dep)2:agelt35     0.0333      0.094      0.353      0.724      -0.152       0.218
+factor(dep)1:agegt54     0.0725      0.169      0.429      0.668      -0.259       0.404
+factor(dep)2:agegt54     0.1567      0.369      0.425      0.671      -0.566       0.879
+factor(dep)1:durable     0.2946      0.149      1.979      0.048       0.003       0.586
+factor(dep)2:durable     0.0454      0.120      0.379      0.705      -0.189       0.280
+factor(dep)1:lusd        0.1500      0.128      1.169      0.242      -0.101       0.401
+factor(dep)2:lusd        0.1826      0.113      1.617      0.106      -0.039       0.404
+factor(dep)1:husd        0.0814      0.139      0.587      0.557      -0.190       0.353
+factor(dep)2:husd        0.1522      0.121      1.258      0.209      -0.085       0.390
+q2:agelt35               0.4302      0.307      1.401      0.161      -0.172       1.032
+q2:agegt54               0.6712      0.709      0.947      0.344      -0.718       2.061
+q2:durable              -0.1064      0.488     -0.218      0.827      -1.062       0.850
+q2:lusd                 -0.0428      0.190     -0.226      0.821      -0.414       0.329
+q2:husd                 -0.0417      0.197     -0.212      0.832      -0.428       0.344
+q3:agelt35               0.4545      0.307      1.479      0.139      -0.148       1.057
+q3:agegt54               0.8660      0.709      1.221      0.222      -0.524       2.256
+q3:durable               0.2450      0.487      0.503      0.615      -0.710       1.200
+q3:lusd                  0.0859      0.187      0.459      0.646      -0.281       0.453
+q3:husd                  0.1703      0.197      0.865      0.387      -0.216       0.556
+q4:agelt35               0.3882      0.307      1.263      0.207      -0.214       0.991
+q4:agegt54               0.5553      0.707      0.785      0.432      -0.832       1.942
+q4:durable               0.2173      0.491      0.443      0.658      -0.745       1.180
+q4:lusd                 -0.0950      0.188     -0.505      0.614      -0.464       0.274
+q4:husd                 -0.1206      0.199     -0.606      0.545      -0.511       0.270
+q5:agelt35               0.2780      0.306      0.908      0.364      -0.322       0.878
+q5:agegt54               0.4515      0.706      0.639      0.523      -0.933       1.836
+q5:durable               0.2881      0.487      0.591      0.554      -0.667       1.243
+q5:lusd                 -0.1040      0.189     -0.550      0.582      -0.475       0.267
+q5:husd                 -0.1523      0.197     -0.774      0.439      -0.538       0.234
+q6:agelt35               0.3381      0.333      1.016      0.310      -0.314       0.990
+q6:agegt54               0.9493      0.729      1.302      0.193      -0.480       2.378
+q6:durable               0.4092      0.508      0.805      0.421      -0.587       1.405
+agelt35:durable          0.0253      0.102      0.249      0.803      -0.174       0.224
+agelt35:lusd            -0.0653      0.088     -0.739      0.460      -0.238       0.108
+agelt35:husd             0.0577      0.102      0.567      0.571      -0.142       0.257
+agegt54:durable          0.0320      0.166      0.193      0.847      -0.293       0.357
+agegt54:lusd            -0.1482      0.137     -1.078      0.281      -0.418       0.121
+agegt54:husd            -0.3015      0.154     -1.961      0.050      -0.603      -0.000
+durable:lusd             0.1158      0.110      1.052      0.293      -0.100       0.332
+durable:husd             0.2376      0.129      1.842      0.066      -0.015       0.491
+==============================================================================
+Omnibus:                     1286.589   Durbin-Watson:                   1.987
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              424.494
+Skew:                          -0.505   Prob(JB):                     6.64e-93
+Kurtosis:                       2.010   Cond. No.                         181.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The interactive specificaiton corresponds to the approach introduced in Lin (2013).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create Y variable </span>
+<span class="n">log_inuidur1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset index to estimation</span>
+<span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/ols_ira_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;S1&#39;</span><span class="p">]</span>
+
+<span class="n">ols_ira</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Results </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_ira</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               inuidur1   R-squared:                       0.079
+Model:                            OLS   Adj. R-squared:                  0.041
+Method:                 Least Squares   F-statistic:                     30.63
+Date:                Fri, 17 Sep 2021   Prob (F-statistic):               0.00
+Time:                        16:31:13   Log-Likelihood:                -8016.3
+No. Observations:                5099   AIC:                         1.644e+04
+Df Residuals:                    4896   BIC:                         1.777e+04
+Df Model:                         202                                         
+Covariance Type:                  HC1                                         
+============================================================================================
+                               coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------------
+(Intercept)                  2.0318      0.017    120.388      0.000       1.999       2.065
+T4                          -0.0755      0.036     -2.121      0.034      -0.145      -0.006
+Xfemale                     -0.1294      0.319     -0.406      0.685      -0.754       0.495
+Xblack                      -0.9210      0.246     -3.744      0.000      -1.403      -0.439
+Xothrace                    -3.2933      0.631     -5.223      0.000      -4.529      -2.057
+Xfactor(dep)1               -0.7625      0.504     -1.512      0.131      -1.751       0.226
+Xfactor(dep)2                0.0193      0.351      0.055      0.956      -0.669       0.708
+Xq2                         -0.1371      0.391     -0.350      0.726      -0.904       0.630
+Xq3                         -0.5212      0.391     -1.333      0.182      -1.287       0.245
+Xq4                         -0.4196      0.392     -1.072      0.284      -1.187       0.348
+Xq5                         -0.3362      0.390     -0.863      0.388      -1.100       0.428
+Xq6                         -0.4730      0.395     -1.197      0.231      -1.248       0.302
+Xagelt35                    -0.6148      0.321     -1.913      0.056      -1.245       0.015
+Xagegt54                    -0.2266      0.718     -0.316      0.752      -1.634       1.181
+Xdurable                    -0.4414      0.434     -1.017      0.309      -1.292       0.409
+Xlusd                       -0.2546      0.193     -1.319      0.187      -0.633       0.124
+Xhusd                       -0.2155      0.209     -1.031      0.303      -0.625       0.194
+Xfemale:black               -0.1682      0.123     -1.365      0.172      -0.410       0.073
+Xfemale:othrace              0.4083      0.413      0.990      0.322      -0.401       1.217
+Xfemale:factor(dep)1        -0.0379      0.115     -0.328      0.743      -0.264       0.188
+Xfemale:factor(dep)2         0.1796      0.104      1.734      0.083      -0.023       0.383
+Xfemale:q2                  -0.0630      0.316     -0.199      0.842      -0.683       0.557
+Xfemale:q3                   0.2286      0.316      0.722      0.470      -0.392       0.849
+Xfemale:q4                   0.2874      0.317      0.908      0.364      -0.333       0.908
+Xfemale:q5                   0.0826      0.315      0.262      0.793      -0.536       0.701
+Xfemale:q6                   0.3235      0.341      0.948      0.343      -0.346       0.993
+Xfemale:agelt35              0.1397      0.078      1.790      0.074      -0.013       0.293
+Xfemale:agegt54              0.0726      0.129      0.562      0.574      -0.181       0.326
+Xfemale:durable              0.0712      0.114      0.626      0.531      -0.152       0.294
+Xfemale:lusd                 0.0594      0.086      0.689      0.491      -0.110       0.228
+Xfemale:husd                 0.0089      0.095      0.094      0.925      -0.176       0.194
+Xblack:factor(dep)1          0.1742      0.199      0.876      0.381      -0.215       0.564
+Xblack:factor(dep)2         -0.1015      0.185     -0.549      0.583      -0.464       0.261
+Xblack:q2                    0.4777      0.257      1.861      0.063      -0.026       0.981
+Xblack:q3                    0.4357      0.247      1.766      0.077      -0.048       0.919
+Xblack:q4                    0.5653      0.246      2.294      0.022       0.082       1.048
+Xblack:q5                    0.7634      0.245      3.118      0.002       0.283       1.243
+Xblack:agelt35               0.0248      0.130      0.190      0.849      -0.230       0.280
+Xblack:agegt54               0.4595      0.204      2.253      0.024       0.060       0.859
+Xblack:durable               0.2173      0.183      1.186      0.236      -0.142       0.576
+Xblack:lusd                  0.3123      0.151      2.065      0.039       0.016       0.609
+Xblack:husd                  1.0166      0.445      2.283      0.022       0.144       1.890
+Xothrace:factor(dep)1        2.5202      1.860      1.355      0.175      -1.125       6.166
+Xothrace:factor(dep)2        0.7091      0.401      1.767      0.077      -0.078       1.496
+Xothrace:q2                  1.6939      0.465      3.642      0.000       0.782       2.606
+Xothrace:q3                  1.2930      0.534      2.419      0.016       0.245       2.341
+Xothrace:q4                  2.5920      0.620      4.179      0.000       1.376       3.808
+Xothrace:q5                  1.1748      0.452      2.601      0.009       0.289       2.060
+Xothrace:agelt35             1.9828      0.666      2.977      0.003       0.677       3.289
+Xothrace:agegt54             0.6247      0.554      1.128      0.259      -0.461       1.710
+Xothrace:durable             1.8800      0.407      4.625      0.000       1.083       2.677
+Xothrace:lusd               -0.2795      0.354     -0.789      0.430      -0.974       0.415
+Xothrace:husd               -0.1798      0.614     -0.293      0.770      -1.383       1.024
+Xfactor(dep)1:q2             0.7246      0.499      1.453      0.146      -0.253       1.702
+Xfactor(dep)2:q2            -0.1405      0.350     -0.401      0.688      -0.827       0.546
+Xfactor(dep)1:q3             0.7431      0.499      1.490      0.136      -0.235       1.721
+Xfactor(dep)2:q3            -0.1036      0.351     -0.295      0.768      -0.791       0.584
+Xfactor(dep)1:q4             0.5445      0.499      1.091      0.275      -0.434       1.523
+Xfactor(dep)2:q4             0.0802      0.353      0.228      0.820      -0.611       0.771
+Xfactor(dep)1:q5             0.5348      0.495      1.079      0.280      -0.437       1.506
+Xfactor(dep)2:q5            -0.2546      0.351     -0.726      0.468      -0.942       0.433
+Xfactor(dep)1:q6             1.1489      0.536      2.145      0.032       0.099       2.199
+Xfactor(dep)2:q6             0.3320      0.382      0.868      0.385      -0.418       1.082
+Xfactor(dep)1:agelt35        0.0637      0.120      0.530      0.596      -0.172       0.299
+Xfactor(dep)2:agelt35        0.0275      0.096      0.288      0.774      -0.160       0.215
+Xfactor(dep)1:agegt54        0.1499      0.167      0.899      0.369      -0.177       0.477
+Xfactor(dep)2:agegt54        0.1148      0.321      0.357      0.721      -0.515       0.745
+Xfactor(dep)1:durable        0.2050      0.158      1.297      0.195      -0.105       0.515
+Xfactor(dep)2:durable        0.0345      0.124      0.278      0.781      -0.208       0.277
+Xfactor(dep)1:lusd           0.1281      0.127      1.007      0.314      -0.121       0.377
+Xfactor(dep)2:lusd           0.1761      0.114      1.551      0.121      -0.047       0.399
+Xfactor(dep)1:husd           0.0852      0.136      0.629      0.529      -0.180       0.351
+Xfactor(dep)2:husd           0.1941      0.122      1.589      0.112      -0.045       0.434
+Xq2:agelt35                  0.3975      0.321      1.239      0.216      -0.232       1.027
+Xq2:agegt54                  0.4714      0.715      0.659      0.510      -0.931       1.873
+Xq2:durable                  0.0846      0.427      0.198      0.843      -0.753       0.922
+Xq2:lusd                    -0.0108      0.197     -0.055      0.956      -0.396       0.375
+Xq2:husd                     0.0003      0.206      0.002      0.999      -0.403       0.403
+Xq3:agelt35                  0.4365      0.321      1.360      0.174      -0.193       1.066
+Xq3:agegt54                  0.6583      0.714      0.922      0.356      -0.741       2.057
+Xq3:durable                  0.4318      0.427      1.010      0.312      -0.406       1.270
+Xq3:lusd                     0.1063      0.194      0.548      0.584      -0.274       0.487
+Xq3:husd                     0.2055      0.205      1.001      0.317      -0.197       0.608
+Xq4:agelt35                  0.3587      0.321      1.118      0.264      -0.270       0.988
+Xq4:agegt54                  0.3677      0.710      0.517      0.605      -1.025       1.761
+Xq4:durable                  0.3788      0.433      0.875      0.382      -0.470       1.227
+Xq4:lusd                    -0.0651      0.195     -0.334      0.738      -0.447       0.317
+Xq4:husd                    -0.0414      0.208     -0.199      0.842      -0.449       0.366
+Xq5:agelt35                  0.2492      0.320      0.779      0.436      -0.378       0.876
+Xq5:agegt54                  0.2647      0.710      0.373      0.710      -1.128       1.657
+Xq5:durable                  0.4294      0.428      1.004      0.315      -0.409       1.267
+Xq5:lusd                    -0.0485      0.197     -0.247      0.805      -0.434       0.337
+Xq5:husd                    -0.0727      0.205     -0.354      0.723      -0.475       0.330
+Xq6:agelt35                  0.3820      0.349      1.093      0.274      -0.303       1.067
+Xq6:agegt54                  0.8362      0.730      1.146      0.252      -0.594       2.266
+Xq6:durable                  0.5617      0.454      1.238      0.216      -0.328       1.451
+Xagelt35:durable             0.0466      0.104      0.448      0.654      -0.157       0.250
+Xagelt35:lusd               -0.0621      0.090     -0.694      0.488      -0.238       0.113
+Xagelt35:husd                0.0646      0.103      0.629      0.529      -0.137       0.266
+Xagegt54:durable             0.0626      0.166      0.378      0.706      -0.262       0.387
+Xagegt54:lusd               -0.1070      0.140     -0.767      0.443      -0.381       0.167
+Xagegt54:husd               -0.2492      0.155     -1.611      0.107      -0.552       0.054
+Xdurable:lusd                0.1352      0.113      1.197      0.231      -0.086       0.357
+Xdurable:husd                0.1981      0.130      1.522      0.128      -0.057       0.453
+T4:Xfemale                   1.5687      0.645      2.432      0.015       0.304       2.833
+T4:Xblack                   -0.1681      0.527     -0.319      0.750      -1.202       0.865
+T4:Xothrace                  1.5323      1.010      1.518      0.129      -0.447       3.512
+T4:Xfactor(dep)1            -2.3330      1.018     -2.293      0.022      -4.328      -0.338
+T4:Xfactor(dep)2            -0.5623      0.709     -0.793      0.428      -1.952       0.827
+T4:Xq2                       0.3434      0.864      0.398      0.691      -1.350       2.036
+T4:Xq3                       0.2924      0.862      0.339      0.735      -1.398       1.983
+T4:Xq4                       0.1763      0.864      0.204      0.838      -1.517       1.869
+T4:Xq5                       0.1043      0.860      0.121      0.903      -1.581       1.789
+T4:Xq6                       0.5963      0.883      0.675      0.499      -1.134       2.327
+T4:Xagelt35                  0.1837      0.654      0.281      0.779      -1.099       1.466
+T4:Xagegt54                  0.2266      0.554      0.409      0.682      -0.859       1.312
+T4:Xdurable                  1.1589      0.803      1.443      0.149      -0.415       2.733
+T4:Xlusd                    -0.4532      0.421     -1.076      0.282      -1.279       0.373
+T4:Xhusd                    -0.4467      0.473     -0.944      0.345      -1.374       0.481
+T4:Xfemale:black             0.1381      0.261      0.528      0.597      -0.374       0.651
+T4:Xfemale:othrace          -0.5587      0.772     -0.723      0.470      -2.073       0.955
+T4:Xfemale:factor(dep)1      0.3961      0.244      1.627      0.104      -0.081       0.873
+T4:Xfemale:factor(dep)2     -0.1082      0.220     -0.492      0.623      -0.540       0.323
+T4:Xfemale:q2               -1.3293      0.638     -2.083      0.037      -2.581      -0.078
+T4:Xfemale:q3               -1.3339      0.638     -2.089      0.037      -2.586      -0.082
+T4:Xfemale:q4               -1.2681      0.639     -1.983      0.047      -2.522      -0.015
+T4:Xfemale:q5               -1.4118      0.637     -2.217      0.027      -2.660      -0.164
+T4:Xfemale:q6               -1.7085      0.702     -2.432      0.015      -3.086      -0.331
+T4:Xfemale:agelt35          -0.0888      0.166     -0.535      0.592      -0.414       0.236
+T4:Xfemale:agegt54          -0.4767      0.270     -1.763      0.078      -1.007       0.053
+T4:Xfemale:durable          -0.0767      0.243     -0.315      0.752      -0.553       0.400
+T4:Xfemale:lusd             -0.0369      0.181     -0.204      0.838      -0.392       0.318
+T4:Xfemale:husd             -0.1521      0.199     -0.765      0.444      -0.542       0.238
+T4:Xblack:factor(dep)1       0.1904      0.443      0.430      0.667      -0.677       1.058
+T4:Xblack:factor(dep)2       0.2898      0.388      0.747      0.455      -0.471       1.050
+T4:Xblack:q2                 0.1490      0.533      0.280      0.780      -0.896       1.194
+T4:Xblack:q3                 0.3089      0.521      0.593      0.553      -0.712       1.330
+T4:Xblack:q4                 0.0614      0.508      0.121      0.904      -0.934       1.056
+T4:Xblack:q5                 0.3031      0.518      0.585      0.558      -0.712       1.318
+T4:Xblack:agelt35           -0.1701      0.277     -0.615      0.539      -0.712       0.372
+T4:Xblack:agegt54            0.1066      0.424      0.252      0.801      -0.724       0.937
+T4:Xblack:durable           -0.7329      0.383     -1.915      0.056      -1.483       0.018
+T4:Xblack:lusd               0.0108      0.321      0.034      0.973      -0.619       0.641
+T4:Xblack:husd               1.3639      0.718      1.900      0.058      -0.044       2.772
+T4:Xothrace:factor(dep)2    -1.4020      0.697     -2.011      0.044      -2.769      -0.035
+T4:Xothrace:q2              -1.1359      0.919     -1.236      0.217      -2.937       0.666
+T4:Xothrace:q3               1.0393      1.122      0.926      0.354      -1.160       3.239
+T4:Xothrace:q4              -3.7042      1.089     -3.401      0.001      -5.839      -1.569
+T4:Xothrace:q5               0.5951      0.957      0.622      0.534      -1.281       2.471
+T4:Xothrace:agelt35         -0.7749      1.233     -0.629      0.530      -3.191       1.642
+T4:Xothrace:agegt54         -0.5700      1.402     -0.406      0.684      -3.319       2.179
+T4:Xothrace:durable          0.3781      1.019      0.371      0.711      -1.620       2.377
+T4:Xothrace:lusd             1.2125      0.639      1.897      0.058      -0.041       2.466
+T4:Xfactor(dep)1:q2          1.4339      1.004      1.428      0.153      -0.534       3.402
+T4:Xfactor(dep)2:q2          0.2255      0.710      0.317      0.751      -1.167       1.618
+T4:Xfactor(dep)1:q3          1.7205      1.002      1.718      0.086      -0.243       3.684
+T4:Xfactor(dep)2:q3          0.4410      0.708      0.623      0.533      -0.946       1.828
+T4:Xfactor(dep)1:q4          1.6610      1.005      1.653      0.098      -0.309       3.631
+T4:Xfactor(dep)2:q4          0.7075      0.714      0.990      0.322      -0.693       2.108
+T4:Xfactor(dep)1:q5          1.1550      0.997      1.159      0.246      -0.799       3.109
+T4:Xfactor(dep)2:q5          0.9001      0.711      1.266      0.206      -0.494       2.294
+T4:Xfactor(dep)1:q6          1.9447      1.094      1.778      0.075      -0.199       4.089
+T4:Xfactor(dep)2:q6          0.9842      0.795      1.238      0.216      -0.574       2.543
+T4:Xfactor(dep)1:agelt35     0.0376      0.251      0.150      0.881      -0.454       0.529
+T4:Xfactor(dep)2:agelt35    -0.2680      0.204     -1.314      0.189      -0.668       0.132
+T4:Xfactor(dep)1:agegt54     0.3310      0.351      0.942      0.346      -0.358       1.019
+T4:Xfactor(dep)2:agegt54    -0.3165      0.635     -0.499      0.618      -1.561       0.928
+T4:Xfactor(dep)1:durable    -0.3936      0.349     -1.128      0.259      -1.077       0.290
+T4:Xfactor(dep)2:durable    -0.2344      0.259     -0.904      0.366      -0.743       0.274
+T4:Xfactor(dep)1:lusd        1.1350      0.259      4.379      0.000       0.627       1.643
+T4:Xfactor(dep)2:lusd        0.1783      0.239      0.746      0.456      -0.290       0.647
+T4:Xfactor(dep)1:husd        0.3741      0.287      1.303      0.193      -0.189       0.937
+T4:Xfactor(dep)2:husd        0.5146      0.256      2.008      0.045       0.012       1.017
+T4:Xq2:agelt35              -0.3017      0.652     -0.463      0.644      -1.579       0.976
+T4:Xq2:agegt54               0.1146      0.567      0.202      0.840      -0.998       1.227
+T4:Xq2:durable              -0.5168      0.778     -0.664      0.507      -2.042       1.008
+T4:Xq2:lusd                  0.1658      0.431      0.385      0.700      -0.679       1.011
+T4:Xq2:husd                  0.5323      0.462      1.153      0.249      -0.373       1.438
+T4:Xq3:agelt35              -0.2257      0.652     -0.346      0.729      -1.504       1.053
+T4:Xq3:agegt54              -0.1937      0.566     -0.342      0.732      -1.303       0.916
+T4:Xq3:durable              -0.8490      0.782     -1.085      0.278      -2.383       0.684
+T4:Xq3:lusd                  0.3147      0.423      0.745      0.456      -0.514       1.143
+T4:Xq3:husd                  0.3113      0.463      0.672      0.502      -0.597       1.220
+T4:Xq4:agelt35              -0.1348      0.651     -0.207      0.836      -1.411       1.142
+T4:Xq4:agegt54               0.3529      0.550      0.641      0.521      -0.726       1.432
+T4:Xq4:durable              -0.6281      0.795     -0.790      0.429      -2.186       0.930
+T4:Xq4:lusd                  0.3023      0.422      0.716      0.474      -0.526       1.130
+T4:Xq4:husd                  0.3029      0.469      0.646      0.518      -0.617       1.222
+T4:Xq5:agelt35               0.0970      0.649      0.149      0.881      -1.176       1.370
+T4:Xq5:agegt54               0.4823      0.556      0.868      0.386      -0.607       1.572
+T4:Xq5:durable              -1.2396      0.786     -1.578      0.115      -2.780       0.300
+T4:Xq5:lusd                  0.6158      0.426      1.446      0.148      -0.219       1.451
+T4:Xq5:husd                  0.2946      0.463      0.636      0.525      -0.614       1.203
+T4:Xq6:agelt35              -0.0010      0.730     -0.001      0.999      -1.431       1.429
+T4:Xq6:durable              -1.3652      0.850     -1.607      0.108      -3.031       0.300
+T4:Xagelt35:durable          0.1439      0.223      0.646      0.518      -0.293       0.581
+T4:Xagelt35:lusd            -0.0139      0.190     -0.073      0.942      -0.386       0.359
+T4:Xagelt35:husd             0.0294      0.217      0.135      0.892      -0.397       0.456
+T4:Xagegt54:durable          0.5449      0.343      1.588      0.112      -0.128       1.217
+T4:Xagegt54:lusd            -0.5794      0.288     -2.013      0.044      -1.143      -0.015
+T4:Xagegt54:husd             0.1910      0.328      0.583      0.560      -0.451       0.833
+T4:Xdurable:lusd            -0.3744      0.240     -1.560      0.119      -0.845       0.096
+T4:Xdurable:husd            -0.3381      0.277     -1.219      0.223      -0.882       0.206
+==============================================================================
+Omnibus:                     1106.287   Durbin-Watson:                   1.985
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              404.801
+Skew:                          -0.498   Prob(JB):                     1.25e-88
+Kurtosis:                       2.044   Cond. No.                         266.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\python\python38\lib\site-packages\statsmodels\base\model.py:1832: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 202, but rank is 197
+  warnings.warn(&#39;covariance of constraints does not have full &#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="next-we-try-out-partialling-out-with-lasso">
+<h1>Next we try out partialling out with lasso<a class="headerlink" href="#next-we-try-out-partialling-out-with-lasso" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hdmpy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we try out partialling out with lasso</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/rlasso_ira_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlassoEffects</span><span class="p">(</span> <span class="n">X_vars</span><span class="p">,</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>       
+
+<span class="n">rlasso_ira</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;se&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> \
+           <span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;pval&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Coef.&#39;</span> <span class="p">,</span> \
+                            <span class="s2">&quot;Std.Err.&quot;</span> <span class="p">,</span> <span class="s2">&quot;t&quot;</span> <span class="p">,</span> <span class="s1">&#39;P&gt;|t|&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T4&#39;</span><span class="p">])</span>
+<span class="n">rlasso_ira</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+
+<span class="n">table2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table2</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;$CL$&quot;</span><span class="p">,</span> <span class="s2">&quot;$CRA$&quot;</span><span class="p">,</span> <span class="s2">&quot;$IRA$&quot;</span><span class="p">,</span> <span class="s2">&quot;$IRA Lasso$&quot;</span><span class="p">],</span> \
+                      <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;estimate&quot;</span><span class="p">,</span><span class="s2">&quot;standard error&quot;</span><span class="p">])</span>
+<span class="n">table2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\begin{tabular}{lrrrr}
+\toprule
+{} &amp;      \$CL\$ &amp;     \$CRA\$ &amp;     \$IRA\$ &amp;  \$IRA Lasso\$ \\
+\midrule
+estimate       &amp; -0.085455 &amp; -0.079680 &amp; -0.075501 &amp;    -0.078886 \\
+standard error &amp;  0.035856 &amp;  0.035591 &amp;  0.035605 &amp;     0.035530 \\
+\bottomrule
+\end{tabular}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Treatment group 4 experiences an average decrease of about <span class="math notranslate nohighlight">\(7.8\%\)</span> in the length of unemployment spell.</p>
+<p>Observe that regression estimators delivers estimates that are slighly more efficient (lower standard errors) than the simple 2 mean estimator, but essentially all methods have very similar standard errors. From IRA results we also see that there is not any statistically detectable heterogeneity.  We also see the regression estimators offer slightly lower estimates – these difference occur perhaps to due minor imbalance in the treatment allocation, which the regression estimators try to correct.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="05_Analyzing_RCT_with_Precision.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07_python_notebook_linear_penalized_regs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Penalized Linear Regressions: A Simulation Experiment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
