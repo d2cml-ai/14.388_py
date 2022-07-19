@@ -1,0 +1,112 @@
+Traceback (most recent call last):
+  File "C:\Users\User\anaconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Users\User\anaconda3\lib\asyncio\base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Reshaping Y variable
+Y_vec = Y.reshape( Y.size, 1)
+
+# Scalar distribution
+scaler = StandardScaler()
+scaler.fit( Y_vec )
+std_Y = scaler.transform( Y_vec )
+
+# Regressions
+fit_lasso_cv = LassoCV(cv = 10 , random_state = 0 , normalize = True ).fit( X, std_Y )
+fit_ridge = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.0001 ).fit( X, std_Y )
+fit_elnet = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ).fit( X, std_Y )
+
+# Predictions
+yhat_lasso_cv = scaler.inverse_transform( fit_lasso_cv.predict( X ) )
+yhat_ridge = scaler.inverse_transform( fit_ridge.predict( X ) )
+yhat_elnet = scaler.inverse_transform( fit_elnet.predict( X ) )
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mValueError[0m                                Traceback (most recent call last)
+Input [1;32mIn [4][0m, in [0;36m<cell line: 15>[1;34m()[0m
+[0;32m     12[0m fit_elnet [38;5;241m=[39m ElasticNetCV( cv [38;5;241m=[39m [38;5;241m10[39m , normalize [38;5;241m=[39m [38;5;28;01mTrue[39;00m , random_state [38;5;241m=[39m [38;5;241m0[39m , l1_ratio [38;5;241m=[39m [38;5;241m0.5[39m, max_iter [38;5;241m=[39m [38;5;241m100000[39m )[38;5;241m.[39mfit( X, std_Y )
+[0;32m     14[0m [38;5;66;03m# Predictions[39;00m
+[1;32m---> 15[0m yhat_lasso_cv [38;5;241m=[39m [43mscaler[49m[38;5;241;43m.[39;49m[43minverse_transform[49m[43m([49m[43m [49m[43mfit_lasso_cv[49m[38;5;241;43m.[39;49m[43mpredict[49m[43m([49m[43m [49m[43mX[49m[43m [49m[43m)[49m[43m [49m[43m)[49m
+[0;32m     16[0m yhat_ridge [38;5;241m=[39m scaler[38;5;241m.[39minverse_transform( fit_ridge[38;5;241m.[39mpredict( X ) )
+[0;32m     17[0m yhat_elnet [38;5;241m=[39m scaler[38;5;241m.[39minverse_transform( fit_elnet[38;5;241m.[39mpredict( X ) )
+
+File [1;32m~\anaconda3\lib\site-packages\sklearn\preprocessing\_data.py:1016[0m, in [0;36mStandardScaler.inverse_transform[1;34m(self, X, copy)[0m
+[0;32m   1013[0m check_is_fitted([38;5;28mself[39m)
+[0;32m   1015[0m copy [38;5;241m=[39m copy [38;5;28;01mif[39;00m copy [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m [38;5;28mself[39m[38;5;241m.[39mcopy
+[1;32m-> 1016[0m X [38;5;241m=[39m [43mcheck_array[49m[43m([49m
+[0;32m   1017[0m [43m    [49m[43mX[49m[43m,[49m
+[0;32m   1018[0m [43m    [49m[43maccept_sparse[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mcsr[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[0;32m   1019[0m [43m    [49m[43mcopy[49m[38;5;241;43m=[39;49m[43mcopy[49m[43m,[49m
+[0;32m   1020[0m [43m    [49m[43mestimator[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[43m,[49m
+[0;32m   1021[0m [43m    [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mFLOAT_DTYPES[49m[43m,[49m
+[0;32m   1022[0m [43m    [49m[43mforce_all_finite[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mallow-nan[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[0;32m   1023[0m [43m[49m[43m)[49m
+[0;32m   1025[0m [38;5;28;01mif[39;00m sparse[38;5;241m.[39missparse(X):
+[0;32m   1026[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mwith_mean:
+
+File [1;32m~\anaconda3\lib\site-packages\sklearn\utils\validation.py:769[0m, in [0;36mcheck_array[1;34m(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator)[0m
+[0;32m    767[0m     [38;5;66;03m# If input is 1D raise error[39;00m
+[0;32m    768[0m     [38;5;28;01mif[39;00m array[38;5;241m.[39mndim [38;5;241m==[39m [38;5;241m1[39m:
+[1;32m--> 769[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[0;32m    770[0m             [38;5;124m"[39m[38;5;124mExpected 2D array, got 1D array instead:[39m[38;5;130;01m\n[39;00m[38;5;124marray=[39m[38;5;132;01m{}[39;00m[38;5;124m.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[0;32m    771[0m             [38;5;124m"[39m[38;5;124mReshape your data either using array.reshape(-1, 1) if [39m[38;5;124m"[39m
+[0;32m    772[0m             [38;5;124m"[39m[38;5;124myour data has a single feature or array.reshape(1, -1) [39m[38;5;124m"[39m
+[0;32m    773[0m             [38;5;124m"[39m[38;5;124mif it contains a single sample.[39m[38;5;124m"[39m[38;5;241m.[39mformat(array)
+[0;32m    774[0m         )
+[0;32m    776[0m [38;5;66;03m# make sure we actually converted to numeric:[39;00m
+[0;32m    777[0m [38;5;28;01mif[39;00m dtype_numeric [38;5;129;01mand[39;00m array[38;5;241m.[39mdtype[38;5;241m.[39mkind [38;5;129;01min[39;00m [38;5;124m"[39m[38;5;124mOUSV[39m[38;5;124m"[39m:
+
+[1;31mValueError[0m: Expected 2D array, got 1D array instead:
+array=[-0.52824669 -0.42611364 -0.37364994 -0.52839122 -0.28639466  0.72086442
+  1.1303653  -0.45161759  1.12929936  0.17428403  1.25449433 -0.29695557
+  0.91389712 -0.13261589 -0.59298855  1.28740648  0.15292009  0.12996321
+  0.86195568  0.70154156 -0.40837193 -0.36884159 -0.50033999  0.9237899
+ -0.18822506 -0.73234928 -0.90651706 -0.59941652 -0.08053321 -0.32951166
+ -0.19608077 -0.42654015  0.6033825  -0.65817584 -0.58132637  0.29209092
+ -0.54409035  0.30579411 -0.17170476 -0.6094322   0.54986777  1.24930937
+ -0.48542922  2.12713011 -0.63969573 -0.59930353 -0.55412949 -0.09300235
+  0.62723285  0.23779854 -0.50561997 -0.37277    -0.75050566  1.82013513
+  0.78810526 -0.86230284 -0.6423295   1.81182349 -0.60712102 -0.30298051
+ -0.42597842 -0.20719816  0.08723028 -0.52223356  0.69537129 -0.76105008
+ -0.4879969  -0.28106335  1.11896808  1.85314289 -0.56469799 -0.39880309
+ -0.78138298  0.40834612 -0.49814948 -0.75098089  1.33742151  0.04454473
+ -0.25576858  0.50685533  0.43032676 -0.17153577 -0.13243253  0.08407064
+  0.14958452 -0.86412761  1.16860688 -0.60426491 -0.8321674  -0.31467982
+ -0.25297371  0.73843117  0.67847614 -0.58140559 -0.41203888 -0.72140197
+ -0.14579173  0.00774245 -0.61456794 -0.18625868].
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+ValueError: Expected 2D array, got 1D array instead:
+array=[-0.52824669 -0.42611364 -0.37364994 -0.52839122 -0.28639466  0.72086442
+  1.1303653  -0.45161759  1.12929936  0.17428403  1.25449433 -0.29695557
+  0.91389712 -0.13261589 -0.59298855  1.28740648  0.15292009  0.12996321
+  0.86195568  0.70154156 -0.40837193 -0.36884159 -0.50033999  0.9237899
+ -0.18822506 -0.73234928 -0.90651706 -0.59941652 -0.08053321 -0.32951166
+ -0.19608077 -0.42654015  0.6033825  -0.65817584 -0.58132637  0.29209092
+ -0.54409035  0.30579411 -0.17170476 -0.6094322   0.54986777  1.24930937
+ -0.48542922  2.12713011 -0.63969573 -0.59930353 -0.55412949 -0.09300235
+  0.62723285  0.23779854 -0.50561997 -0.37277    -0.75050566  1.82013513
+  0.78810526 -0.86230284 -0.6423295   1.81182349 -0.60712102 -0.30298051
+ -0.42597842 -0.20719816  0.08723028 -0.52223356  0.69537129 -0.76105008
+ -0.4879969  -0.28106335  1.11896808  1.85314289 -0.56469799 -0.39880309
+ -0.78138298  0.40834612 -0.49814948 -0.75098089  1.33742151  0.04454473
+ -0.25576858  0.50685533  0.43032676 -0.17153577 -0.13243253  0.08407064
+  0.14958452 -0.86412761  1.16860688 -0.60426491 -0.8321674  -0.31467982
+ -0.25297371  0.73843117  0.67847614 -0.58140559 -0.41203888 -0.72140197
+ -0.14579173  0.00774245 -0.61456794 -0.18625868].
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
+

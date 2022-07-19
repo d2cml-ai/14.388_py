@@ -1,0 +1,958 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso &#8212; 14.388_py</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A Simple Case Study using Wage Data from 2015" href="13_pm3-notebook-newdata.html" />
+    <link rel="prev" title="Testing the Convergence Hypothesis" href="10_pm2_notebook_jannis.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">14.388_py</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python_Notebook_%20Linear_Model_Overfitting.html">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_py-notebook-vaccine-rcts.html">
+   Vaccine RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_Analyzing_rct_reemployment_experiment.html">
+   Analyzing RCT data with Precision Adjustment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_python_notebook_linear_penalized_regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_python_notebook_experiment_on_orthogonal_learning.html">
+   Simulation Design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_pm3-notebook-newdata.html">
+   A Simple Case Study using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_automl_for_wage_prediction.html">
+   Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_py-Functional-Approximation-By-NN-and-RF.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook_dagitty.html">
+   Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm3_notebook_inference_nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_pm5-401k-kaggle-py.html">
+   Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_debiased-ml-for-partially-linear-model-in-python.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_r_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="average_treatment_effect_1.html">
+   1. ATE I: Binary treatment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Double_Machine_Learning.html">
+   1.0 The basics of double/debiased machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="py_double_ml_pension.html">
+   Python: Impact of 401(k) on Financial Wealth
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/11_py-heterogenous-wage-effects.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F11_py-heterogenous-wage-effects.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/11_py-heterogenous-wage-effects.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="application-heterogeneous-effect-of-gender-on-wage-using-double-lasso">
+<h1>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso<a class="headerlink" href="#application-heterogeneous-effect-of-gender-on-wage-using-double-lasso" title="Permalink to this headline">#</a></h1>
+<p>We use US census data from the year 2012 to analyse the effect of gender and interaction effects of other variables with gender on wage jointly. The dependent variable is the logarithm of the wage, the target variable is <em>female</em> (in combination with other variables). All other variables denote some other socio-economic characteristics, e.g. marital status, education, and experience.  For a detailed description of the variables we refer to the help page.</p>
+<p>This analysis allows a closer look how discrimination according to gender is related to other socio-economic variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hdmpy</span>
+<span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">patsy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">figure</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">sci_lag</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cps2012_env</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/cps2012.Rdata&quot;</span><span class="p">)</span>
+<span class="n">cps2012</span> <span class="o">=</span> <span class="n">cps2012_env</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
+<span class="n">cps2012</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">PyreadrError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cps2012_env</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/cps2012.Rdata&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">cps2012</span> <span class="o">=</span> <span class="n">cps2012_env</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">cps2012</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\pyreadr\pyreadr.py:65,</span> in <span class="ni">read_r</span><span class="nt">(path, use_objects, timezone)</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="n">filename_bytes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">filename_bytes</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename_bytes</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">65</span>     <span class="k">raise</span> <span class="n">PyreadrError</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">{0}</span><span class="s2"> does not exist!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename_bytes</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename_bytes</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span> <span class="n">result</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+<span class="ne">PyreadrError</span>: File b&#39;../data/cps2012.Rdata&#39; does not exist!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula_basic</span> <span class="o">=</span>  <span class="s1">&#39;&#39;&#39;lnw ~ -1 + female + female:(widowed + divorced + separated + nevermarried +</span>
+<span class="s1">hsd08 + hsd911 + hsg + cg + ad + mw + so + we + exp1 + exp2 + exp3) + +(widowed +</span>
+<span class="s1">divorced + separated + nevermarried + hsd08 + hsd911 + hsg + cg + ad + mw + so +</span>
+<span class="s1">we + exp1 + exp2 + exp3) ** 2&#39;&#39;&#39;</span>
+
+<span class="n">y</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">patsy</span><span class="o">.</span><span class="n">dmatrices</span><span class="p">(</span><span class="n">formula_basic</span><span class="p">,</span> <span class="n">cps2012</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>136
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have the same number of covariables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variance_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span>  <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">variance_cols</span> <span class="o">!=</span> <span class="mi">0</span>   <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">demean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">dif</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">dif</span> 
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span> <span class="n">demean</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+
+<span class="n">index_gender</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;female&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The parameter estimates for the target parameters, i.e. all coefficients related to gender (i.e. by interaction with other variables) are calculated and summarized by the following commands:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">effect_female</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlassoEffects</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">X</span> <span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">index_gender</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_coeff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span> <span class="p">[</span> <span class="n">effect_female</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;coefficients&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">:</span> <span class="s2">&quot;Estimate.&quot;</span> <span class="p">})</span> <span class="p">,</span> \
+             <span class="n">effect_female</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;se&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">:</span> <span class="s2">&quot;Std. Error&quot;</span> <span class="p">}</span> <span class="p">)</span> <span class="p">,</span> \
+             <span class="n">effect_female</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;t&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">:</span> <span class="s2">&quot;t value&quot;</span> <span class="p">}</span> <span class="p">)</span> <span class="p">,</span> \
+             <span class="n">effect_female</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;pval&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">:</span> <span class="s2">&quot;Pr(&gt;|t|)&quot;</span> <span class="p">}</span> <span class="p">)</span> <span class="p">]</span> <span class="p">,</span>\
+             <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="n">result_coeff</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     Estimate.  Std. Error   t value      Pr(&gt;|t|)
+female               -0.154593    0.048599 -3.180992  1.467717e-03
+female:widowed        0.136096    0.094115  1.446056  1.481614e-01
+female:divorced       0.136939    0.021680  6.316402  2.677227e-10
+female:separated      0.023303    0.048849  0.477034  6.333381e-01
+female:nevermarried   0.186853    0.020094  9.299104  1.416347e-20
+female:hsd08          0.027810    0.140357  0.198140  8.429356e-01
+female:hsd911        -0.119335    0.052223 -2.285101  2.230692e-02
+female:hsg           -0.012885    0.018229 -0.706850  4.796595e-01
+female:cg             0.010139    0.018079  0.560797  5.749360e-01
+female:ad            -0.030464    0.022807 -1.335714  1.816429e-01
+female:mw            -0.001063    0.018715 -0.056822  9.546869e-01
+female:so            -0.008183    0.019027 -0.430096  6.671256e-01
+female:we            -0.004226    0.021422 -0.197281  8.436076e-01
+female:exp1           0.004733    0.007483  0.632488  5.270682e-01
+female:exp2          -0.159519    0.043479 -3.668908  2.435892e-04
+female:exp3           0.026512    0.008244  3.215830  1.300681e-03
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\\begin{tabular}{lrrrr}\n\\toprule\n{} &amp;  Estimate. &amp;  Std. Error &amp;  t value &amp;  Pr(&gt;|t|) \\\\\n\\midrule\nfemale              &amp;     -0.155 &amp;       0.049 &amp;   -3.181 &amp;     0.001 \\\\\nfemale:widowed      &amp;      0.136 &amp;       0.094 &amp;    1.446 &amp;     0.148 \\\\\nfemale:divorced     &amp;      0.137 &amp;       0.022 &amp;    6.316 &amp;     0.000 \\\\\nfemale:separated    &amp;      0.023 &amp;       0.049 &amp;    0.477 &amp;     0.633 \\\\\nfemale:nevermarried &amp;      0.187 &amp;       0.020 &amp;    9.299 &amp;     0.000 \\\\\nfemale:hsd08        &amp;      0.028 &amp;       0.140 &amp;    0.198 &amp;     0.843 \\\\\nfemale:hsd911       &amp;     -0.119 &amp;       0.052 &amp;   -2.285 &amp;     0.022 \\\\\nfemale:hsg          &amp;     -0.013 &amp;       0.018 &amp;   -0.707 &amp;     0.480 \\\\\nfemale:cg           &amp;      0.010 &amp;       0.018 &amp;    0.561 &amp;     0.575 \\\\\nfemale:ad           &amp;     -0.030 &amp;       0.023 &amp;   -1.336 &amp;     0.182 \\\\\nfemale:mw           &amp;     -0.001 &amp;       0.019 &amp;   -0.057 &amp;     0.955 \\\\\nfemale:so           &amp;     -0.008 &amp;       0.019 &amp;   -0.430 &amp;     0.667 \\\\\nfemale:we           &amp;     -0.004 &amp;       0.021 &amp;   -0.197 &amp;     0.844 \\\\\nfemale:exp1         &amp;      0.005 &amp;       0.007 &amp;    0.632 &amp;     0.527 \\\\\nfemale:exp2         &amp;     -0.160 &amp;       0.043 &amp;   -3.669 &amp;     0.000 \\\\\nfemale:exp3         &amp;      0.027 &amp;       0.008 &amp;    3.216 &amp;     0.001 \\\\\n\\bottomrule\n\\end{tabular}\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">29217</span> <span class="o">-</span> <span class="mi">116</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pointwise_CI</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span> <span class="s1">&#39;5%&#39;</span> <span class="p">:</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> \
+                                     <span class="o">-</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">*</span> <span class="n">t_value</span> <span class="p">,</span>\
+                              <span class="s1">&#39;95%&#39;</span> <span class="p">:</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span> \
+                             <span class="o">+</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">*</span> <span class="n">t_value</span> <span class="p">})</span>
+<span class="n">pointwise_CI</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_coeff</span> <span class="o">=</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Estimate.&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">index</span>
+
+<span class="n">coef</span> <span class="o">=</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">sd_error</span> <span class="o">=</span> <span class="p">(</span> <span class="n">result_coeff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">*</span> <span class="n">t_value</span> <span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">coef</span> <span class="p">,</span> <span class="n">yerr</span> <span class="o">=</span> <span class="n">sd_error</span> <span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;None&quot;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> \
+              <span class="n">capsize</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;s&quot;</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">mfc</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">,</span> <span class="n">mec</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/11_py-heterogenous-wage-effects_11_0.png" src="_images/11_py-heterogenous-wage-effects_11_0.png" />
+</div>
+</div>
+<p>Now, we estimate and plot confident intervals, first “pointwise” and then the joint confidence intervals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">effect_female</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;coefficients&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:,</span> <span class="mi">0</span> <span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.1545932731827906,
+ 0.13609550288298192,
+ 0.13693939221511991,
+ 0.023302771994035233,
+ 0.18685348640356858,
+ 0.027810312784543743,
+ -0.11933503921829447,
+ -0.01288483245739874,
+ 0.010138550922289817,
+ -0.0304637472338401,
+ -0.0010634393390639041,
+ -0.008183337595043904,
+ -0.004226127118997856,
+ 0.004732893281720598,
+ -0.15951933512468575,
+ 0.026512194276155938]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">confint_joint_python</span><span class="p">(</span> <span class="n">rlassomodel</span> <span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mf">0.95</span> <span class="p">):</span>
+    
+    <span class="n">coef</span> <span class="o">=</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;se&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="mi">1</span> <span class="p">,</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;se&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>
+    
+    <span class="n">e</span> <span class="o">=</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">][</span><span class="s1">&#39;e&#39;</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">][</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+    
+    <span class="n">n</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">ev</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">*</span> <span class="n">v</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">Ev2</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    
+    
+    <span class="n">Omegahat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span> <span class="n">k</span> <span class="p">,</span> <span class="n">k</span> <span class="p">)</span> <span class="p">)</span>
+    
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">k</span> <span class="p">):</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">k</span> <span class="p">):</span>
+            <span class="n">Omegahat</span><span class="p">[</span> <span class="n">j</span> <span class="p">,</span> <span class="n">l</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span> <span class="n">Ev2</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">*</span> <span class="n">Ev2</span><span class="p">[</span> <span class="n">l</span> <span class="p">]</span> <span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">j</span> <span class="p">]</span> <span class="o">*</span> <span class="n">ev</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">l</span> <span class="p">]</span> <span class="p">)</span>
+            <span class="n">Omegahat</span><span class="p">[</span> <span class="n">l</span> <span class="p">,</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span> <span class="n">Ev2</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">*</span> <span class="n">Ev2</span><span class="p">[</span> <span class="n">l</span> <span class="p">]</span> <span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ev</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">j</span> <span class="p">]</span> <span class="o">*</span> <span class="n">ev</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="n">l</span> <span class="p">]</span> <span class="p">)</span>
+    
+    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span> <span class="n">Omegahat</span> <span class="p">)</span>
+    
+    <span class="n">B</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="n">B</span> <span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">B</span> <span class="p">):</span>
+        <span class="n">beta_i</span> <span class="o">=</span> <span class="n">mvrnorm</span><span class="p">(</span> <span class="n">mu</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="p">)</span> <span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span>  <span class="n">Omegahat</span> <span class="o">/</span> <span class="n">n</span> <span class="p">)</span>
+        <span class="n">sim</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span> <span class="n">beta_i</span><span class="o">/</span> <span class="p">(</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    
+    <span class="n">t_stat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span> <span class="n">sim</span> <span class="p">,</span> <span class="n">level</span> <span class="p">)</span>
+    
+    <span class="n">low_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">level</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">)</span>
+    <span class="n">upper_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">level</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="p">)</span>
+    
+    <span class="n">sd_tstat</span> <span class="o">=</span> <span class="n">t_stat</span> <span class="o">*</span> <span class="p">(</span> <span class="n">var</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="p">)</span>
+    
+    <span class="n">low</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">-</span> <span class="n">sd_tstat</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">+</span> <span class="n">sd_tstat</span>
+    
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">low_num</span><span class="si">}</span><span class="s1">%&#39;</span> <span class="p">:</span> <span class="n">low</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">upper_num</span><span class="si">}</span><span class="s1">%&#39;</span> <span class="p">:</span> <span class="n">upper</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> \
+                           <span class="s1">&#39;Coef.&#39;</span> <span class="p">:</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;coefficients&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:,</span> <span class="mi">0</span> <span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span> <span class="p">},</span> \
+                         <span class="n">index</span> <span class="o">=</span> <span class="n">rlassomodel</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s1">&#39;coefficients&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">index</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span> <span class="n">table</span><span class="p">,</span> <span class="n">sd_tstat</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mvrnorm</span><span class="p">(</span> <span class="n">mu</span> <span class="p">,</span> <span class="n">Sigma</span> <span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">size</span>
+    
+    <span class="n">ev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span> <span class="n">Sigma</span> <span class="p">)[</span> <span class="mi">0</span> <span class="p">]</span>
+    <span class="n">vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span> <span class="n">Sigma</span> <span class="p">)[</span> <span class="mi">1</span> <span class="p">]</span>
+    
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span>  <span class="n">p</span> <span class="o">*</span> <span class="n">n</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">n</span> <span class="p">,</span> <span class="n">p</span> <span class="p">)</span>
+    
+    <span class="n">diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span> <span class="n">ev</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="p">)</span>
+    
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">p</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">+</span> <span class="n">vectors</span> <span class="o">@</span> <span class="p">(</span> <span class="n">diagonal</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+    
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    
+    <span class="k">return</span><span class="p">(</span> <span class="n">resultado</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we compare the pointwise confidence intervals to joint confidence intervals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.sandbox.stats.multicomp</span> <span class="kn">import</span> <span class="n">multipletests</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joint_CI</span> <span class="o">=</span>  <span class="n">confint_joint_python</span><span class="p">(</span> <span class="n">effect_female</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">size_err</span> <span class="o">=</span>  <span class="n">confint_joint_python</span><span class="p">(</span> <span class="n">effect_female</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joint_CI</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>5%</th>
+      <th>95%</th>
+      <th>Coef.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>female</th>
+      <td>-0.287258</td>
+      <td>-0.021928</td>
+      <td>-0.154593</td>
+    </tr>
+    <tr>
+      <th>female:widowed</th>
+      <td>-0.120818</td>
+      <td>0.393009</td>
+      <td>0.136096</td>
+    </tr>
+    <tr>
+      <th>female:divorced</th>
+      <td>0.077758</td>
+      <td>0.196121</td>
+      <td>0.136939</td>
+    </tr>
+    <tr>
+      <th>female:separated</th>
+      <td>-0.110045</td>
+      <td>0.156651</td>
+      <td>0.023303</td>
+    </tr>
+    <tr>
+      <th>female:nevermarried</th>
+      <td>0.132002</td>
+      <td>0.241705</td>
+      <td>0.186853</td>
+    </tr>
+    <tr>
+      <th>female:hsd08</th>
+      <td>-0.355334</td>
+      <td>0.410954</td>
+      <td>0.027810</td>
+    </tr>
+    <tr>
+      <th>female:hsd911</th>
+      <td>-0.261893</td>
+      <td>0.023223</td>
+      <td>-0.119335</td>
+    </tr>
+    <tr>
+      <th>female:hsg</th>
+      <td>-0.062645</td>
+      <td>0.036875</td>
+      <td>-0.012885</td>
+    </tr>
+    <tr>
+      <th>female:cg</th>
+      <td>-0.039213</td>
+      <td>0.059490</td>
+      <td>0.010139</td>
+    </tr>
+    <tr>
+      <th>female:ad</th>
+      <td>-0.092722</td>
+      <td>0.031795</td>
+      <td>-0.030464</td>
+    </tr>
+    <tr>
+      <th>female:mw</th>
+      <td>-0.052152</td>
+      <td>0.050025</td>
+      <td>-0.001063</td>
+    </tr>
+    <tr>
+      <th>female:so</th>
+      <td>-0.060122</td>
+      <td>0.043756</td>
+      <td>-0.008183</td>
+    </tr>
+    <tr>
+      <th>female:we</th>
+      <td>-0.062703</td>
+      <td>0.054251</td>
+      <td>-0.004226</td>
+    </tr>
+    <tr>
+      <th>female:exp1</th>
+      <td>-0.015694</td>
+      <td>0.025160</td>
+      <td>0.004733</td>
+    </tr>
+    <tr>
+      <th>female:exp2</th>
+      <td>-0.278207</td>
+      <td>-0.040832</td>
+      <td>-0.159519</td>
+    </tr>
+    <tr>
+      <th>female:exp3</th>
+      <td>0.004007</td>
+      <td>0.049017</td>
+      <td>0.026512</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">joint_CI</span><span class="o">.</span><span class="n">index</span>
+
+<span class="n">coef</span> <span class="o">=</span> <span class="n">joint_CI</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">sd_error</span> <span class="o">=</span> <span class="n">size_err</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">coef</span> <span class="p">,</span> <span class="n">yerr</span> <span class="o">=</span> <span class="n">sd_error</span> <span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;None&quot;</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> \
+              <span class="n">capsize</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;s&quot;</span> <span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">,</span> <span class="n">mfc</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">,</span> <span class="n">mec</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/11_py-heterogenous-wage-effects_20_0.png" src="_images/11_py-heterogenous-wage-effects_20_0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="10_pm2_notebook_jannis.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Testing the Convergence Hypothesis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="13_pm3-notebook-newdata.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A Simple Case Study using Wage Data from 2015</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

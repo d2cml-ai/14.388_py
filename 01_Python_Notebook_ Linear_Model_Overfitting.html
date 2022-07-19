@@ -1,0 +1,2442 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Simple Exercise on Overfitting &#8212; 14.388_py</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="02_PM1_Notebook1_Prediction_newdata.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">14.388_py</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_py-notebook-vaccine-rcts.html">
+   Vaccine RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_Analyzing_RCT_with_Precision.html">
+   Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_Analyzing_rct_reemployment_experiment.html">
+   Analyzing RCT data with Precision Adjustment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_python_notebook_linear_penalized_regs.html">
+   Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_python_notebook_experiment_on_orthogonal_learning.html">
+   Simulation Design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_pm2_notebook_jannis.html">
+   Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_pm3-notebook-newdata.html">
+   A Simple Case Study using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_pm3_notebook_newdata_nn.html">
+   A Simple Case Study using Wage Data from 2015 - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_automl_for_wage_prediction.html">
+   Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_py-Functional-Approximation-By-NN-and-RF.html">
+   Functional Approximations by Trees and Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook_dagitty.html">
+   Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_pm3_notebook_inference_clustering.html">
+   A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm3_notebook_inference_nn.html">
+   The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_pm5-401k-kaggle-py.html">
+   Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_debiased-ml-for-partially-linear-model-in-python.html">
+   Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_r_weak_iv_experiments.html">
+   A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="average_treatment_effect_1.html">
+   1. ATE I: Binary treatment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Double_Machine_Learning.html">
+   1.0 The basics of double/debiased machine learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="py_double_ml_pension.html">
+   Python: Impact of 401(k) on Financial Wealth
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/01_Python_Notebook_ Linear_Model_Overfitting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F01_Python_Notebook_ Linear_Model_Overfitting.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/01_Python_Notebook_ Linear_Model_Overfitting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-set-p-n">
+   1. First set p=n
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-set-p-n-2">
+   2. Second, set p=n/2.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#third-set-p-n-05">
+   3. Third, set p/n =.05
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Simple Exercise on Overfitting</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-set-p-n">
+   1. First set p=n
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-set-p-n-2">
+   2. Second, set p=n/2.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#third-set-p-n-05">
+   3. Third, set p/n =.05
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <ul class="simple">
+<li><p>Python code replication of:
+” <a class="reference external" href="https://www.kaggle.com/victorchernozhukov/r-notebook-linear-model-overfiting">https://www.kaggle.com/victorchernozhukov/r-notebook-linear-model-overfiting</a> “</p></li>
+<li><p>Created by: Alexander Quispe</p></li>
+</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="simple-exercise-on-overfitting">
+<h1>Simple Exercise on Overfitting<a class="headerlink" href="#simple-exercise-on-overfitting" title="Permalink to this headline">#</a></h1>
+<section id="first-set-p-n">
+<h2>1. First set p=n<a class="headerlink" href="#first-set-p-n" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Seed</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5714025946899135
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>    <span class="c1"># Describe model</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:1749: RuntimeWarning: divide by zero encountered in true_divide
+  return 1 - (np.divide(self.nobs - self.k_constant, self.df_resid)
+C:\Users\User\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:1749: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - (np.divide(self.nobs - self.k_constant, self.df_resid)
+C:\Users\User\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:1671: RuntimeWarning: divide by zero encountered in double_scalars
+  return np.dot(wresid, wresid) / self.df_resid
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       1.000
+Model:                            OLS   Adj. R-squared:                    nan
+Method:                 Least Squares   F-statistic:                       nan
+Date:                Tue, 19 Jul 2022   Prob (F-statistic):                nan
+Time:                        12:12:44   Log-Likelihood:                 24141.
+No. Observations:                1000   AIC:                        -4.628e+04
+Df Residuals:                       0   BIC:                        -4.137e+04
+Df Model:                         999                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1          -335.8232        inf         -0        nan         nan         nan
+x2           249.1560        inf          0        nan         nan         nan
+x3           -11.1248        inf         -0        nan         nan         nan
+x4           -93.0903        inf         -0        nan         nan         nan
+x5          -104.1303        inf         -0        nan         nan         nan
+x6          -143.0748        inf         -0        nan         nan         nan
+x7           -59.0607        inf         -0        nan         nan         nan
+x8           -50.5769        inf         -0        nan         nan         nan
+x9          -128.7987        inf         -0        nan         nan         nan
+x10            1.3534        inf          0        nan         nan         nan
+x11          -46.7349        inf         -0        nan         nan         nan
+x12          -35.3970        inf         -0        nan         nan         nan
+x13          167.7730        inf          0        nan         nan         nan
+x14          -67.8256        inf         -0        nan         nan         nan
+x15         -127.6224        inf         -0        nan         nan         nan
+x16          -68.8209        inf         -0        nan         nan         nan
+x17          -23.3424        inf         -0        nan         nan         nan
+x18          -62.9061        inf         -0        nan         nan         nan
+x19         -166.3231        inf         -0        nan         nan         nan
+x20         -150.2893        inf         -0        nan         nan         nan
+x21          160.9273        inf          0        nan         nan         nan
+x22           18.8854        inf          0        nan         nan         nan
+x23          -65.3957        inf         -0        nan         nan         nan
+x24           25.4177        inf          0        nan         nan         nan
+x25          -14.4017        inf         -0        nan         nan         nan
+x26         -173.0584        inf         -0        nan         nan         nan
+x27         -101.8339        inf         -0        nan         nan         nan
+x28          -93.0395        inf         -0        nan         nan         nan
+x29           34.4504        inf          0        nan         nan         nan
+x30         -279.5492        inf         -0        nan         nan         nan
+x31          -26.8918        inf         -0        nan         nan         nan
+x32          179.9432        inf          0        nan         nan         nan
+x33           54.6881        inf          0        nan         nan         nan
+x34          200.1262        inf          0        nan         nan         nan
+x35          -87.5250        inf         -0        nan         nan         nan
+x36           59.9125        inf          0        nan         nan         nan
+x37            3.5333        inf          0        nan         nan         nan
+x38          -82.0972        inf         -0        nan         nan         nan
+x39           67.0767        inf          0        nan         nan         nan
+x40         -176.3820        inf         -0        nan         nan         nan
+x41            5.3313        inf          0        nan         nan         nan
+x42         -156.6710        inf         -0        nan         nan         nan
+x43           48.4964        inf          0        nan         nan         nan
+x44          190.3932        inf          0        nan         nan         nan
+x45          -69.8863        inf         -0        nan         nan         nan
+x46          180.3631        inf          0        nan         nan         nan
+x47         -169.5835        inf         -0        nan         nan         nan
+x48         -207.6708        inf         -0        nan         nan         nan
+x49           43.9378        inf          0        nan         nan         nan
+x50          116.3140        inf          0        nan         nan         nan
+x51         -337.6426        inf         -0        nan         nan         nan
+x52          -17.2553        inf         -0        nan         nan         nan
+x53         -177.7191        inf         -0        nan         nan         nan
+x54          265.9355        inf          0        nan         nan         nan
+x55          168.5503        inf          0        nan         nan         nan
+x56         -161.2986        inf         -0        nan         nan         nan
+x57         -213.2373        inf         -0        nan         nan         nan
+x58         -328.1888        inf         -0        nan         nan         nan
+x59          111.1715        inf          0        nan         nan         nan
+x60          -95.3619        inf         -0        nan         nan         nan
+x61          -35.1984        inf         -0        nan         nan         nan
+x62         -196.8164        inf         -0        nan         nan         nan
+x63          -77.4975        inf         -0        nan         nan         nan
+x64         -101.1617        inf         -0        nan         nan         nan
+x65           27.2317        inf          0        nan         nan         nan
+x66          -13.2229        inf         -0        nan         nan         nan
+x67           16.5742        inf          0        nan         nan         nan
+x68           43.2946        inf          0        nan         nan         nan
+x69          130.4587        inf          0        nan         nan         nan
+x70         -433.2292        inf         -0        nan         nan         nan
+x71          -66.1499        inf         -0        nan         nan         nan
+x72         -113.9588        inf         -0        nan         nan         nan
+x73          -56.7564        inf         -0        nan         nan         nan
+x74           11.5523        inf          0        nan         nan         nan
+x75            3.5911        inf          0        nan         nan         nan
+x76          106.0437        inf          0        nan         nan         nan
+x77           28.5278        inf          0        nan         nan         nan
+x78          111.8500        inf          0        nan         nan         nan
+x79         -178.0377        inf         -0        nan         nan         nan
+x80           63.4678        inf          0        nan         nan         nan
+x81           72.6107        inf          0        nan         nan         nan
+x82         -180.1418        inf         -0        nan         nan         nan
+x83          -67.9079        inf         -0        nan         nan         nan
+x84          -86.5926        inf         -0        nan         nan         nan
+x85         -198.7568        inf         -0        nan         nan         nan
+x86           36.8810        inf          0        nan         nan         nan
+x87          252.6225        inf          0        nan         nan         nan
+x88          -60.8399        inf         -0        nan         nan         nan
+x89          -21.8864        inf         -0        nan         nan         nan
+x90         -108.3598        inf         -0        nan         nan         nan
+x91           89.2474        inf          0        nan         nan         nan
+x92           93.6761        inf          0        nan         nan         nan
+x93          149.5203        inf          0        nan         nan         nan
+x94         -145.4593        inf         -0        nan         nan         nan
+x95         -140.9671        inf         -0        nan         nan         nan
+x96         -158.8399        inf         -0        nan         nan         nan
+x97           13.4193        inf          0        nan         nan         nan
+x98          -38.6054        inf         -0        nan         nan         nan
+x99           96.2547        inf          0        nan         nan         nan
+x100         133.2123        inf          0        nan         nan         nan
+x101        -204.1574        inf         -0        nan         nan         nan
+x102         -28.1876        inf         -0        nan         nan         nan
+x103        -144.1807        inf         -0        nan         nan         nan
+x104          41.8111        inf          0        nan         nan         nan
+x105         -23.2320        inf         -0        nan         nan         nan
+x106        -160.4359        inf         -0        nan         nan         nan
+x107         -40.3280        inf         -0        nan         nan         nan
+x108         200.6712        inf          0        nan         nan         nan
+x109         -76.0538        inf         -0        nan         nan         nan
+x110        -124.9769        inf         -0        nan         nan         nan
+x111         129.5543        inf          0        nan         nan         nan
+x112        -174.4662        inf         -0        nan         nan         nan
+x113        -254.9991        inf         -0        nan         nan         nan
+x114          82.4800        inf          0        nan         nan         nan
+x115         -42.4507        inf         -0        nan         nan         nan
+x116         -34.7842        inf         -0        nan         nan         nan
+x117        -226.5318        inf         -0        nan         nan         nan
+x118         -16.8590        inf         -0        nan         nan         nan
+x119           2.4296        inf          0        nan         nan         nan
+x120         -53.4291        inf         -0        nan         nan         nan
+x121        -149.9244        inf         -0        nan         nan         nan
+x122          46.9932        inf          0        nan         nan         nan
+x123         -34.9204        inf         -0        nan         nan         nan
+x124         -90.0855        inf         -0        nan         nan         nan
+x125          17.3893        inf          0        nan         nan         nan
+x126         -15.3375        inf         -0        nan         nan         nan
+x127          -4.1745        inf         -0        nan         nan         nan
+x128         327.9713        inf          0        nan         nan         nan
+x129          74.3139        inf          0        nan         nan         nan
+x130          49.2539        inf          0        nan         nan         nan
+x131         -43.3894        inf         -0        nan         nan         nan
+x132          10.2460        inf          0        nan         nan         nan
+x133         149.0386        inf          0        nan         nan         nan
+x134         -55.7093        inf         -0        nan         nan         nan
+x135         314.6697        inf          0        nan         nan         nan
+x136          26.7970        inf          0        nan         nan         nan
+x137        -132.3077        inf         -0        nan         nan         nan
+x138        -107.2039        inf         -0        nan         nan         nan
+x139         108.2325        inf          0        nan         nan         nan
+x140         -33.8244        inf         -0        nan         nan         nan
+x141         -62.6217        inf         -0        nan         nan         nan
+x142         -70.9995        inf         -0        nan         nan         nan
+x143          -5.0800        inf         -0        nan         nan         nan
+x144          27.5557        inf          0        nan         nan         nan
+x145        -158.4038        inf         -0        nan         nan         nan
+x146          12.5680        inf          0        nan         nan         nan
+x147         240.3187        inf          0        nan         nan         nan
+x148        -117.6291        inf         -0        nan         nan         nan
+x149         141.3310        inf          0        nan         nan         nan
+x150          87.2114        inf          0        nan         nan         nan
+x151         -81.2898        inf         -0        nan         nan         nan
+x152         -66.4021        inf         -0        nan         nan         nan
+x153         208.6984        inf          0        nan         nan         nan
+x154           3.1009        inf          0        nan         nan         nan
+x155        -107.1063        inf         -0        nan         nan         nan
+x156         -56.2311        inf         -0        nan         nan         nan
+x157          51.7549        inf          0        nan         nan         nan
+x158          -4.8079        inf         -0        nan         nan         nan
+x159        -224.8986        inf         -0        nan         nan         nan
+x160           4.6192        inf          0        nan         nan         nan
+x161          -6.3734        inf         -0        nan         nan         nan
+x162          33.9706        inf          0        nan         nan         nan
+x163         -17.6408        inf         -0        nan         nan         nan
+x164         196.7758        inf          0        nan         nan         nan
+x165          42.3073        inf          0        nan         nan         nan
+x166          53.3780        inf          0        nan         nan         nan
+x167         -21.5360        inf         -0        nan         nan         nan
+x168        -214.7716        inf         -0        nan         nan         nan
+x169        -182.7290        inf         -0        nan         nan         nan
+x170        -337.2194        inf         -0        nan         nan         nan
+x171        -248.7032        inf         -0        nan         nan         nan
+x172          43.4750        inf          0        nan         nan         nan
+x173          -6.6321        inf         -0        nan         nan         nan
+x174         196.2223        inf          0        nan         nan         nan
+x175           1.9236        inf          0        nan         nan         nan
+x176         119.5719        inf          0        nan         nan         nan
+x177         219.6197        inf          0        nan         nan         nan
+x178        -200.2833        inf         -0        nan         nan         nan
+x179          63.2547        inf          0        nan         nan         nan
+x180        -121.9921        inf         -0        nan         nan         nan
+x181         406.8723        inf          0        nan         nan         nan
+x182        -119.3808        inf         -0        nan         nan         nan
+x183         -91.1325        inf         -0        nan         nan         nan
+x184          27.9142        inf          0        nan         nan         nan
+x185        -195.8997        inf         -0        nan         nan         nan
+x186         158.8380        inf          0        nan         nan         nan
+x187        -172.2291        inf         -0        nan         nan         nan
+x188         147.4471        inf          0        nan         nan         nan
+x189         309.1575        inf          0        nan         nan         nan
+x190         107.3773        inf          0        nan         nan         nan
+x191         305.6128        inf          0        nan         nan         nan
+x192         152.1623        inf          0        nan         nan         nan
+x193        -109.0641        inf         -0        nan         nan         nan
+x194         234.2857        inf          0        nan         nan         nan
+x195          46.3344        inf          0        nan         nan         nan
+x196          53.3371        inf          0        nan         nan         nan
+x197         -53.6110        inf         -0        nan         nan         nan
+x198         -46.4170        inf         -0        nan         nan         nan
+x199         -22.2160        inf         -0        nan         nan         nan
+x200        -102.5024        inf         -0        nan         nan         nan
+x201        -212.7458        inf         -0        nan         nan         nan
+x202         114.6837        inf          0        nan         nan         nan
+x203          53.2598        inf          0        nan         nan         nan
+x204        -113.4992        inf         -0        nan         nan         nan
+x205         -24.9575        inf         -0        nan         nan         nan
+x206         116.1805        inf          0        nan         nan         nan
+x207         -51.8759        inf         -0        nan         nan         nan
+x208        -166.7003        inf         -0        nan         nan         nan
+x209        -218.8826        inf         -0        nan         nan         nan
+x210         132.0696        inf          0        nan         nan         nan
+x211         -30.9388        inf         -0        nan         nan         nan
+x212        -241.4717        inf         -0        nan         nan         nan
+x213         -23.9626        inf         -0        nan         nan         nan
+x214        -219.8848        inf         -0        nan         nan         nan
+x215          63.4825        inf          0        nan         nan         nan
+x216        -128.0749        inf         -0        nan         nan         nan
+x217         111.5233        inf          0        nan         nan         nan
+x218         127.0553        inf          0        nan         nan         nan
+x219         275.8194        inf          0        nan         nan         nan
+x220         -59.1683        inf         -0        nan         nan         nan
+x221          86.5275        inf          0        nan         nan         nan
+x222         -31.5348        inf         -0        nan         nan         nan
+x223         140.4308        inf          0        nan         nan         nan
+x224        -154.6315        inf         -0        nan         nan         nan
+x225         -95.3965        inf         -0        nan         nan         nan
+x226         146.9917        inf          0        nan         nan         nan
+x227          18.1246        inf          0        nan         nan         nan
+x228         -19.8016        inf         -0        nan         nan         nan
+x229         215.3558        inf          0        nan         nan         nan
+x230        -194.0090        inf         -0        nan         nan         nan
+x231        -178.5333        inf         -0        nan         nan         nan
+x232         149.5547        inf          0        nan         nan         nan
+x233         -99.7930        inf         -0        nan         nan         nan
+x234         -56.9980        inf         -0        nan         nan         nan
+x235         107.7851        inf          0        nan         nan         nan
+x236          73.1563        inf          0        nan         nan         nan
+x237         -22.0560        inf         -0        nan         nan         nan
+x238         -69.5367        inf         -0        nan         nan         nan
+x239        -303.6076        inf         -0        nan         nan         nan
+x240         -93.4844        inf         -0        nan         nan         nan
+x241         -23.5433        inf         -0        nan         nan         nan
+x242         -72.4449        inf         -0        nan         nan         nan
+x243         -74.3703        inf         -0        nan         nan         nan
+x244        -205.9226        inf         -0        nan         nan         nan
+x245         -39.3284        inf         -0        nan         nan         nan
+x246          65.5194        inf          0        nan         nan         nan
+x247        -180.0434        inf         -0        nan         nan         nan
+x248          98.8947        inf          0        nan         nan         nan
+x249        -245.5462        inf         -0        nan         nan         nan
+x250         179.3505        inf          0        nan         nan         nan
+x251          99.9704        inf          0        nan         nan         nan
+x252           5.8021        inf          0        nan         nan         nan
+x253           0.9547        inf          0        nan         nan         nan
+x254         128.6016        inf          0        nan         nan         nan
+x255         -81.7074        inf         -0        nan         nan         nan
+x256         -21.9036        inf         -0        nan         nan         nan
+x257         192.1277        inf          0        nan         nan         nan
+x258         164.1580        inf          0        nan         nan         nan
+x259         -34.8864        inf         -0        nan         nan         nan
+x260          90.4330        inf          0        nan         nan         nan
+x261          39.2973        inf          0        nan         nan         nan
+x262        -104.0545        inf         -0        nan         nan         nan
+x263         175.9880        inf          0        nan         nan         nan
+x264        -145.1819        inf         -0        nan         nan         nan
+x265        -111.8437        inf         -0        nan         nan         nan
+x266          48.8023        inf          0        nan         nan         nan
+x267         211.6260        inf          0        nan         nan         nan
+x268         -10.3815        inf         -0        nan         nan         nan
+x269           0.4728        inf          0        nan         nan         nan
+x270        -162.9388        inf         -0        nan         nan         nan
+x271        -101.7296        inf         -0        nan         nan         nan
+x272          46.0388        inf          0        nan         nan         nan
+x273         196.1899        inf          0        nan         nan         nan
+x274        -247.3183        inf         -0        nan         nan         nan
+x275         -16.3469        inf         -0        nan         nan         nan
+x276         -26.9887        inf         -0        nan         nan         nan
+x277        -106.1926        inf         -0        nan         nan         nan
+x278         -52.1138        inf         -0        nan         nan         nan
+x279         303.9552        inf          0        nan         nan         nan
+x280           9.7746        inf          0        nan         nan         nan
+x281          -5.0250        inf         -0        nan         nan         nan
+x282         -76.9358        inf         -0        nan         nan         nan
+x283          72.2640        inf          0        nan         nan         nan
+x284         -67.6338        inf         -0        nan         nan         nan
+x285        -108.9753        inf         -0        nan         nan         nan
+x286         -50.5664        inf         -0        nan         nan         nan
+x287          33.3434        inf          0        nan         nan         nan
+x288          79.7574        inf          0        nan         nan         nan
+x289          58.1675        inf          0        nan         nan         nan
+x290         -39.9233        inf         -0        nan         nan         nan
+x291         124.5859        inf          0        nan         nan         nan
+x292         184.7208        inf          0        nan         nan         nan
+x293        -180.8216        inf         -0        nan         nan         nan
+x294         -45.1957        inf         -0        nan         nan         nan
+x295         -32.2280        inf         -0        nan         nan         nan
+x296        -295.8904        inf         -0        nan         nan         nan
+x297          30.3651        inf          0        nan         nan         nan
+x298          -6.8134        inf         -0        nan         nan         nan
+x299          -3.2901        inf         -0        nan         nan         nan
+x300          76.5570        inf          0        nan         nan         nan
+x301         -87.3988        inf         -0        nan         nan         nan
+x302          10.2018        inf          0        nan         nan         nan
+x303         270.6462        inf          0        nan         nan         nan
+x304         -88.4651        inf         -0        nan         nan         nan
+x305          58.9551        inf          0        nan         nan         nan
+x306         231.4239        inf          0        nan         nan         nan
+x307        -112.8045        inf         -0        nan         nan         nan
+x308          85.6150        inf          0        nan         nan         nan
+x309        -100.4197        inf         -0        nan         nan         nan
+x310         152.0194        inf          0        nan         nan         nan
+x311         -40.9256        inf         -0        nan         nan         nan
+x312         -97.6707        inf         -0        nan         nan         nan
+x313          14.2335        inf          0        nan         nan         nan
+x314         111.3617        inf          0        nan         nan         nan
+x315          57.7360        inf          0        nan         nan         nan
+x316        -107.2084        inf         -0        nan         nan         nan
+x317          23.1999        inf          0        nan         nan         nan
+x318        -132.9122        inf         -0        nan         nan         nan
+x319          64.6035        inf          0        nan         nan         nan
+x320        -262.9041        inf         -0        nan         nan         nan
+x321         -35.2295        inf         -0        nan         nan         nan
+x322          61.3684        inf          0        nan         nan         nan
+x323         -62.4953        inf         -0        nan         nan         nan
+x324         103.0614        inf          0        nan         nan         nan
+x325        -114.0444        inf         -0        nan         nan         nan
+x326         133.2227        inf          0        nan         nan         nan
+x327         -40.0432        inf         -0        nan         nan         nan
+x328         -19.3435        inf         -0        nan         nan         nan
+x329        -126.8612        inf         -0        nan         nan         nan
+x330         -40.3869        inf         -0        nan         nan         nan
+x331         -43.4217        inf         -0        nan         nan         nan
+x332         245.2917        inf          0        nan         nan         nan
+x333         177.4393        inf          0        nan         nan         nan
+x334          49.1386        inf          0        nan         nan         nan
+x335          69.8850        inf          0        nan         nan         nan
+x336        -201.9238        inf         -0        nan         nan         nan
+x337         118.3301        inf          0        nan         nan         nan
+x338          67.3297        inf          0        nan         nan         nan
+x339         480.5410        inf          0        nan         nan         nan
+x340         158.6588        inf          0        nan         nan         nan
+x341         -51.1874        inf         -0        nan         nan         nan
+x342         253.8962        inf          0        nan         nan         nan
+x343          52.1387        inf          0        nan         nan         nan
+x344          57.3599        inf          0        nan         nan         nan
+x345          14.6308        inf          0        nan         nan         nan
+x346           8.8987        inf          0        nan         nan         nan
+x347         -66.4719        inf         -0        nan         nan         nan
+x348           0.1491        inf          0        nan         nan         nan
+x349         123.7367        inf          0        nan         nan         nan
+x350         331.8764        inf          0        nan         nan         nan
+x351         292.4545        inf          0        nan         nan         nan
+x352         -36.2466        inf         -0        nan         nan         nan
+x353        -115.4737        inf         -0        nan         nan         nan
+x354         130.9748        inf          0        nan         nan         nan
+x355          28.2888        inf          0        nan         nan         nan
+x356        -135.9565        inf         -0        nan         nan         nan
+x357          27.5844        inf          0        nan         nan         nan
+x358          34.9369        inf          0        nan         nan         nan
+x359         -17.5534        inf         -0        nan         nan         nan
+x360         205.8985        inf          0        nan         nan         nan
+x361         276.9337        inf          0        nan         nan         nan
+x362        -171.6492        inf         -0        nan         nan         nan
+x363         225.7893        inf          0        nan         nan         nan
+x364         176.5373        inf          0        nan         nan         nan
+x365          40.3747        inf          0        nan         nan         nan
+x366         -43.9331        inf         -0        nan         nan         nan
+x367        -117.9130        inf         -0        nan         nan         nan
+x368        -248.3314        inf         -0        nan         nan         nan
+x369        -215.1161        inf         -0        nan         nan         nan
+x370         -30.6205        inf         -0        nan         nan         nan
+x371         125.5759        inf          0        nan         nan         nan
+x372          52.9072        inf          0        nan         nan         nan
+x373         122.7142        inf          0        nan         nan         nan
+x374         -93.3394        inf         -0        nan         nan         nan
+x375        -143.6763        inf         -0        nan         nan         nan
+x376        -146.0652        inf         -0        nan         nan         nan
+x377         -10.1637        inf         -0        nan         nan         nan
+x378           8.2546        inf          0        nan         nan         nan
+x379        -202.9573        inf         -0        nan         nan         nan
+x380        -116.4710        inf         -0        nan         nan         nan
+x381          43.5564        inf          0        nan         nan         nan
+x382        -266.9412        inf         -0        nan         nan         nan
+x383         144.9649        inf          0        nan         nan         nan
+x384          40.8668        inf          0        nan         nan         nan
+x385         -96.7730        inf         -0        nan         nan         nan
+x386         136.5324        inf          0        nan         nan         nan
+x387         -42.4023        inf         -0        nan         nan         nan
+x388         168.9650        inf          0        nan         nan         nan
+x389          75.4864        inf          0        nan         nan         nan
+x390         314.2543        inf          0        nan         nan         nan
+x391        -151.7198        inf         -0        nan         nan         nan
+x392          97.3108        inf          0        nan         nan         nan
+x393         154.5620        inf          0        nan         nan         nan
+x394         268.3647        inf          0        nan         nan         nan
+x395        -177.3940        inf         -0        nan         nan         nan
+x396        -196.1499        inf         -0        nan         nan         nan
+x397          42.7534        inf          0        nan         nan         nan
+x398          -6.1051        inf         -0        nan         nan         nan
+x399        -198.3503        inf         -0        nan         nan         nan
+x400        -134.6096        inf         -0        nan         nan         nan
+x401         -86.2784        inf         -0        nan         nan         nan
+x402          65.2330        inf          0        nan         nan         nan
+x403        -139.0287        inf         -0        nan         nan         nan
+x404        -143.2258        inf         -0        nan         nan         nan
+x405         130.3477        inf          0        nan         nan         nan
+x406        -152.4128        inf         -0        nan         nan         nan
+x407         218.0291        inf          0        nan         nan         nan
+x408        -161.2161        inf         -0        nan         nan         nan
+x409          81.5291        inf          0        nan         nan         nan
+x410          28.1633        inf          0        nan         nan         nan
+x411        -191.1693        inf         -0        nan         nan         nan
+x412        -119.1473        inf         -0        nan         nan         nan
+x413         -42.9802        inf         -0        nan         nan         nan
+x414         -91.0173        inf         -0        nan         nan         nan
+x415        -148.0222        inf         -0        nan         nan         nan
+x416        -145.0867        inf         -0        nan         nan         nan
+x417          36.3727        inf          0        nan         nan         nan
+x418          27.9868        inf          0        nan         nan         nan
+x419        -115.0711        inf         -0        nan         nan         nan
+x420         144.8842        inf          0        nan         nan         nan
+x421          14.5430        inf          0        nan         nan         nan
+x422         217.5117        inf          0        nan         nan         nan
+x423         148.0486        inf          0        nan         nan         nan
+x424        -162.3276        inf         -0        nan         nan         nan
+x425         212.1621        inf          0        nan         nan         nan
+x426          13.7875        inf          0        nan         nan         nan
+x427         162.6052        inf          0        nan         nan         nan
+x428        -401.3136        inf         -0        nan         nan         nan
+x429         160.2541        inf          0        nan         nan         nan
+x430          29.1004        inf          0        nan         nan         nan
+x431          36.9252        inf          0        nan         nan         nan
+x432         -12.9316        inf         -0        nan         nan         nan
+x433          51.7648        inf          0        nan         nan         nan
+x434          64.9720        inf          0        nan         nan         nan
+x435         108.9342        inf          0        nan         nan         nan
+x436        -218.0883        inf         -0        nan         nan         nan
+x437         -68.9894        inf         -0        nan         nan         nan
+x438         -98.4707        inf         -0        nan         nan         nan
+x439         153.2195        inf          0        nan         nan         nan
+x440         -52.6319        inf         -0        nan         nan         nan
+x441          83.6245        inf          0        nan         nan         nan
+x442        -212.6705        inf         -0        nan         nan         nan
+x443         -59.2942        inf         -0        nan         nan         nan
+x444         -49.6827        inf         -0        nan         nan         nan
+x445          26.6740        inf          0        nan         nan         nan
+x446         -60.9777        inf         -0        nan         nan         nan
+x447         -24.8271        inf         -0        nan         nan         nan
+x448        -139.0566        inf         -0        nan         nan         nan
+x449        -129.5416        inf         -0        nan         nan         nan
+x450        -204.3348        inf         -0        nan         nan         nan
+x451        -109.3119        inf         -0        nan         nan         nan
+x452         120.0997        inf          0        nan         nan         nan
+x453          -1.4506        inf         -0        nan         nan         nan
+x454         -41.0920        inf         -0        nan         nan         nan
+x455          14.5835        inf          0        nan         nan         nan
+x456         -74.7079        inf         -0        nan         nan         nan
+x457         -61.8631        inf         -0        nan         nan         nan
+x458         -71.2901        inf         -0        nan         nan         nan
+x459         -92.8308        inf         -0        nan         nan         nan
+x460         -97.4362        inf         -0        nan         nan         nan
+x461        -134.6423        inf         -0        nan         nan         nan
+x462        -119.8379        inf         -0        nan         nan         nan
+x463         125.7376        inf          0        nan         nan         nan
+x464          90.5988        inf          0        nan         nan         nan
+x465         -24.9719        inf         -0        nan         nan         nan
+x466         129.2679        inf          0        nan         nan         nan
+x467         -37.1888        inf         -0        nan         nan         nan
+x468         127.5458        inf          0        nan         nan         nan
+x469         -70.4438        inf         -0        nan         nan         nan
+x470         -72.5902        inf         -0        nan         nan         nan
+x471         284.9864        inf          0        nan         nan         nan
+x472        -137.9036        inf         -0        nan         nan         nan
+x473          92.4289        inf          0        nan         nan         nan
+x474        -118.5088        inf         -0        nan         nan         nan
+x475         164.0110        inf          0        nan         nan         nan
+x476         -51.3693        inf         -0        nan         nan         nan
+x477         -29.9051        inf         -0        nan         nan         nan
+x478         132.5272        inf          0        nan         nan         nan
+x479          38.5223        inf          0        nan         nan         nan
+x480         -49.1462        inf         -0        nan         nan         nan
+x481        -114.5821        inf         -0        nan         nan         nan
+x482         142.4250        inf          0        nan         nan         nan
+x483         170.1436        inf          0        nan         nan         nan
+x484          11.7187        inf          0        nan         nan         nan
+x485         -46.8675        inf         -0        nan         nan         nan
+x486         265.4538        inf          0        nan         nan         nan
+x487          -7.9320        inf         -0        nan         nan         nan
+x488         -89.5659        inf         -0        nan         nan         nan
+x489         -70.1322        inf         -0        nan         nan         nan
+x490         126.0460        inf          0        nan         nan         nan
+x491          -9.8919        inf         -0        nan         nan         nan
+x492         -65.6304        inf         -0        nan         nan         nan
+x493           2.1721        inf          0        nan         nan         nan
+x494          28.0303        inf          0        nan         nan         nan
+x495         116.6233        inf          0        nan         nan         nan
+x496         333.0831        inf          0        nan         nan         nan
+x497         -17.4075        inf         -0        nan         nan         nan
+x498         102.9943        inf          0        nan         nan         nan
+x499         183.9967        inf          0        nan         nan         nan
+x500          12.4986        inf          0        nan         nan         nan
+x501         -42.4770        inf         -0        nan         nan         nan
+x502         105.3640        inf          0        nan         nan         nan
+x503        -211.1804        inf         -0        nan         nan         nan
+x504         154.2137        inf          0        nan         nan         nan
+x505         146.7271        inf          0        nan         nan         nan
+x506         -94.7907        inf         -0        nan         nan         nan
+x507         166.8260        inf          0        nan         nan         nan
+x508        -117.9118        inf         -0        nan         nan         nan
+x509          37.5285        inf          0        nan         nan         nan
+x510        -147.7604        inf         -0        nan         nan         nan
+x511          79.3724        inf          0        nan         nan         nan
+x512         164.2727        inf          0        nan         nan         nan
+x513          17.7326        inf          0        nan         nan         nan
+x514          -9.7122        inf         -0        nan         nan         nan
+x515        -219.4288        inf         -0        nan         nan         nan
+x516        -151.6598        inf         -0        nan         nan         nan
+x517         112.7822        inf          0        nan         nan         nan
+x518          59.9930        inf          0        nan         nan         nan
+x519         -10.3388        inf         -0        nan         nan         nan
+x520         291.9320        inf          0        nan         nan         nan
+x521         -60.8389        inf         -0        nan         nan         nan
+x522         -72.1755        inf         -0        nan         nan         nan
+x523         291.3412        inf          0        nan         nan         nan
+x524          19.0069        inf          0        nan         nan         nan
+x525         -24.7006        inf         -0        nan         nan         nan
+x526          35.1439        inf          0        nan         nan         nan
+x527         -67.1949        inf         -0        nan         nan         nan
+x528           7.4797        inf          0        nan         nan         nan
+x529          50.8924        inf          0        nan         nan         nan
+x530          64.3875        inf          0        nan         nan         nan
+x531         123.9372        inf          0        nan         nan         nan
+x532        -130.5763        inf         -0        nan         nan         nan
+x533          39.0200        inf          0        nan         nan         nan
+x534        -304.4532        inf         -0        nan         nan         nan
+x535         -87.8971        inf         -0        nan         nan         nan
+x536          69.4966        inf          0        nan         nan         nan
+x537         195.5687        inf          0        nan         nan         nan
+x538          93.2734        inf          0        nan         nan         nan
+x539        -167.7118        inf         -0        nan         nan         nan
+x540         106.3774        inf          0        nan         nan         nan
+x541          17.2517        inf          0        nan         nan         nan
+x542        -100.4643        inf         -0        nan         nan         nan
+x543        -140.0539        inf         -0        nan         nan         nan
+x544          -4.1330        inf         -0        nan         nan         nan
+x545          56.2008        inf          0        nan         nan         nan
+x546         105.0577        inf          0        nan         nan         nan
+x547           3.0830        inf          0        nan         nan         nan
+x548        -198.1270        inf         -0        nan         nan         nan
+x549          48.6608        inf          0        nan         nan         nan
+x550         -18.1876        inf         -0        nan         nan         nan
+x551        -130.4712        inf         -0        nan         nan         nan
+x552         -57.6119        inf         -0        nan         nan         nan
+x553         123.0899        inf          0        nan         nan         nan
+x554        -230.3626        inf         -0        nan         nan         nan
+x555         -50.7772        inf         -0        nan         nan         nan
+x556         141.3928        inf          0        nan         nan         nan
+x557         146.9622        inf          0        nan         nan         nan
+x558         -49.5602        inf         -0        nan         nan         nan
+x559          63.8172        inf          0        nan         nan         nan
+x560        -125.2720        inf         -0        nan         nan         nan
+x561         -31.0185        inf         -0        nan         nan         nan
+x562         247.3806        inf          0        nan         nan         nan
+x563         -31.9409        inf         -0        nan         nan         nan
+x564          61.3207        inf          0        nan         nan         nan
+x565         107.7482        inf          0        nan         nan         nan
+x566         -12.0683        inf         -0        nan         nan         nan
+x567          30.6270        inf          0        nan         nan         nan
+x568         -49.6650        inf         -0        nan         nan         nan
+x569          59.2833        inf          0        nan         nan         nan
+x570         -90.3510        inf         -0        nan         nan         nan
+x571         -88.1454        inf         -0        nan         nan         nan
+x572         -21.6723        inf         -0        nan         nan         nan
+x573          80.1535        inf          0        nan         nan         nan
+x574          60.3119        inf          0        nan         nan         nan
+x575        -183.9991        inf         -0        nan         nan         nan
+x576         186.6363        inf          0        nan         nan         nan
+x577         118.2020        inf          0        nan         nan         nan
+x578        -213.9082        inf         -0        nan         nan         nan
+x579          93.8101        inf          0        nan         nan         nan
+x580        -245.3400        inf         -0        nan         nan         nan
+x581         249.9587        inf          0        nan         nan         nan
+x582          82.8862        inf          0        nan         nan         nan
+x583         -64.9300        inf         -0        nan         nan         nan
+x584         -91.4766        inf         -0        nan         nan         nan
+x585        -217.7710        inf         -0        nan         nan         nan
+x586        -174.2251        inf         -0        nan         nan         nan
+x587         116.4511        inf          0        nan         nan         nan
+x588          78.3432        inf          0        nan         nan         nan
+x589         133.4460        inf          0        nan         nan         nan
+x590          24.8229        inf          0        nan         nan         nan
+x591         -39.6742        inf         -0        nan         nan         nan
+x592           4.7088        inf          0        nan         nan         nan
+x593          51.1291        inf          0        nan         nan         nan
+x594        -295.5857        inf         -0        nan         nan         nan
+x595        -124.0196        inf         -0        nan         nan         nan
+x596           7.6911        inf          0        nan         nan         nan
+x597         -58.5635        inf         -0        nan         nan         nan
+x598        -149.6020        inf         -0        nan         nan         nan
+x599         109.0380        inf          0        nan         nan         nan
+x600         -78.0285        inf         -0        nan         nan         nan
+x601          52.2076        inf          0        nan         nan         nan
+x602         -51.6341        inf         -0        nan         nan         nan
+x603         -59.6851        inf         -0        nan         nan         nan
+x604           2.7374        inf          0        nan         nan         nan
+x605        -120.4373        inf         -0        nan         nan         nan
+x606         208.9649        inf          0        nan         nan         nan
+x607         161.4570        inf          0        nan         nan         nan
+x608          66.2146        inf          0        nan         nan         nan
+x609         209.5857        inf          0        nan         nan         nan
+x610        -139.5339        inf         -0        nan         nan         nan
+x611          -0.9922        inf         -0        nan         nan         nan
+x612         210.3287        inf          0        nan         nan         nan
+x613         107.8491        inf          0        nan         nan         nan
+x614         124.7109        inf          0        nan         nan         nan
+x615          60.3125        inf          0        nan         nan         nan
+x616          17.0853        inf          0        nan         nan         nan
+x617        -135.1969        inf         -0        nan         nan         nan
+x618         219.3475        inf          0        nan         nan         nan
+x619          20.2197        inf          0        nan         nan         nan
+x620         143.2312        inf          0        nan         nan         nan
+x621        -107.6420        inf         -0        nan         nan         nan
+x622          52.4373        inf          0        nan         nan         nan
+x623        -209.5164        inf         -0        nan         nan         nan
+x624          36.1206        inf          0        nan         nan         nan
+x625         -65.2672        inf         -0        nan         nan         nan
+x626         100.9306        inf          0        nan         nan         nan
+x627          11.5602        inf          0        nan         nan         nan
+x628         -93.7360        inf         -0        nan         nan         nan
+x629         -12.9169        inf         -0        nan         nan         nan
+x630         195.7122        inf          0        nan         nan         nan
+x631          56.7220        inf          0        nan         nan         nan
+x632         164.1044        inf          0        nan         nan         nan
+x633          41.5451        inf          0        nan         nan         nan
+x634        -208.0274        inf         -0        nan         nan         nan
+x635        -117.0371        inf         -0        nan         nan         nan
+x636         -77.5505        inf         -0        nan         nan         nan
+x637          89.5669        inf          0        nan         nan         nan
+x638         298.7903        inf          0        nan         nan         nan
+x639         187.1672        inf          0        nan         nan         nan
+x640          21.2191        inf          0        nan         nan         nan
+x641         -63.0360        inf         -0        nan         nan         nan
+x642          46.5656        inf          0        nan         nan         nan
+x643         -69.1784        inf         -0        nan         nan         nan
+x644        -235.5272        inf         -0        nan         nan         nan
+x645         -43.8765        inf         -0        nan         nan         nan
+x646         116.5703        inf          0        nan         nan         nan
+x647          83.2404        inf          0        nan         nan         nan
+x648         235.9399        inf          0        nan         nan         nan
+x649          18.2034        inf          0        nan         nan         nan
+x650          59.4592        inf          0        nan         nan         nan
+x651          66.4797        inf          0        nan         nan         nan
+x652         117.9403        inf          0        nan         nan         nan
+x653          -8.0780        inf         -0        nan         nan         nan
+x654        -176.5087        inf         -0        nan         nan         nan
+x655        -169.6124        inf         -0        nan         nan         nan
+x656        -219.4298        inf         -0        nan         nan         nan
+x657         241.9794        inf          0        nan         nan         nan
+x658          66.7109        inf          0        nan         nan         nan
+x659        -100.1633        inf         -0        nan         nan         nan
+x660        -179.5382        inf         -0        nan         nan         nan
+x661         135.9538        inf          0        nan         nan         nan
+x662        -103.5836        inf         -0        nan         nan         nan
+x663        -112.4034        inf         -0        nan         nan         nan
+x664         -49.9726        inf         -0        nan         nan         nan
+x665         295.7840        inf          0        nan         nan         nan
+x666         -33.5302        inf         -0        nan         nan         nan
+x667         -51.3907        inf         -0        nan         nan         nan
+x668         106.8312        inf          0        nan         nan         nan
+x669        -169.9852        inf         -0        nan         nan         nan
+x670          39.2403        inf          0        nan         nan         nan
+x671          48.9905        inf          0        nan         nan         nan
+x672          52.3122        inf          0        nan         nan         nan
+x673        -113.7016        inf         -0        nan         nan         nan
+x674        -167.6450        inf         -0        nan         nan         nan
+x675         199.4184        inf          0        nan         nan         nan
+x676        -213.6489        inf         -0        nan         nan         nan
+x677        -109.9695        inf         -0        nan         nan         nan
+x678         -59.8491        inf         -0        nan         nan         nan
+x679         -13.1769        inf         -0        nan         nan         nan
+x680        -121.7576        inf         -0        nan         nan         nan
+x681        -235.0710        inf         -0        nan         nan         nan
+x682          32.5167        inf          0        nan         nan         nan
+x683         -93.8533        inf         -0        nan         nan         nan
+x684        -143.5270        inf         -0        nan         nan         nan
+x685         -29.4391        inf         -0        nan         nan         nan
+x686          72.6841        inf          0        nan         nan         nan
+x687         -59.7262        inf         -0        nan         nan         nan
+x688         -87.0235        inf         -0        nan         nan         nan
+x689         120.5391        inf          0        nan         nan         nan
+x690          -0.6155        inf         -0        nan         nan         nan
+x691          42.3125        inf          0        nan         nan         nan
+x692        -195.4568        inf         -0        nan         nan         nan
+x693         271.9294        inf          0        nan         nan         nan
+x694         170.7247        inf          0        nan         nan         nan
+x695          68.6685        inf          0        nan         nan         nan
+x696          30.2651        inf          0        nan         nan         nan
+x697         151.7728        inf          0        nan         nan         nan
+x698          54.5004        inf          0        nan         nan         nan
+x699        -161.0964        inf         -0        nan         nan         nan
+x700          93.2355        inf          0        nan         nan         nan
+x701          13.8663        inf          0        nan         nan         nan
+x702          94.9910        inf          0        nan         nan         nan
+x703          39.5689        inf          0        nan         nan         nan
+x704          23.8835        inf          0        nan         nan         nan
+x705         -71.3052        inf         -0        nan         nan         nan
+x706        -300.3553        inf         -0        nan         nan         nan
+x707         -25.0914        inf         -0        nan         nan         nan
+x708           7.1585        inf          0        nan         nan         nan
+x709        -290.3230        inf         -0        nan         nan         nan
+x710         127.8583        inf          0        nan         nan         nan
+x711        -104.7689        inf         -0        nan         nan         nan
+x712          -3.1499        inf         -0        nan         nan         nan
+x713         -73.7494        inf         -0        nan         nan         nan
+x714          41.8721        inf          0        nan         nan         nan
+x715         -10.5941        inf         -0        nan         nan         nan
+x716         -51.7983        inf         -0        nan         nan         nan
+x717          30.7329        inf          0        nan         nan         nan
+x718         164.5383        inf          0        nan         nan         nan
+x719          45.7815        inf          0        nan         nan         nan
+x720          48.9009        inf          0        nan         nan         nan
+x721          -4.0819        inf         -0        nan         nan         nan
+x722         -58.7286        inf         -0        nan         nan         nan
+x723        -186.0626        inf         -0        nan         nan         nan
+x724        -396.7346        inf         -0        nan         nan         nan
+x725        -170.6459        inf         -0        nan         nan         nan
+x726         -90.2483        inf         -0        nan         nan         nan
+x727         -83.6562        inf         -0        nan         nan         nan
+x728         -55.8060        inf         -0        nan         nan         nan
+x729         -13.4203        inf         -0        nan         nan         nan
+x730         342.8394        inf          0        nan         nan         nan
+x731         116.7937        inf          0        nan         nan         nan
+x732          71.3956        inf          0        nan         nan         nan
+x733          38.1373        inf          0        nan         nan         nan
+x734         118.1770        inf          0        nan         nan         nan
+x735          80.8147        inf          0        nan         nan         nan
+x736         273.3060        inf          0        nan         nan         nan
+x737         -21.6395        inf         -0        nan         nan         nan
+x738        -289.1901        inf         -0        nan         nan         nan
+x739          71.3272        inf          0        nan         nan         nan
+x740        -160.9674        inf         -0        nan         nan         nan
+x741        -122.5096        inf         -0        nan         nan         nan
+x742         290.3172        inf          0        nan         nan         nan
+x743          18.2871        inf          0        nan         nan         nan
+x744          87.6223        inf          0        nan         nan         nan
+x745          96.4677        inf          0        nan         nan         nan
+x746         162.9042        inf          0        nan         nan         nan
+x747           5.6462        inf          0        nan         nan         nan
+x748         171.4936        inf          0        nan         nan         nan
+x749        -124.8634        inf         -0        nan         nan         nan
+x750         167.1855        inf          0        nan         nan         nan
+x751        -146.1138        inf         -0        nan         nan         nan
+x752         173.1594        inf          0        nan         nan         nan
+x753          42.7966        inf          0        nan         nan         nan
+x754          44.0300        inf          0        nan         nan         nan
+x755         -67.5413        inf         -0        nan         nan         nan
+x756        -179.5873        inf         -0        nan         nan         nan
+x757         119.1976        inf          0        nan         nan         nan
+x758         -53.2690        inf         -0        nan         nan         nan
+x759         -70.7481        inf         -0        nan         nan         nan
+x760        -213.2144        inf         -0        nan         nan         nan
+x761        -138.1703        inf         -0        nan         nan         nan
+x762         107.3464        inf          0        nan         nan         nan
+x763          64.2991        inf          0        nan         nan         nan
+x764          12.9810        inf          0        nan         nan         nan
+x765          67.1728        inf          0        nan         nan         nan
+x766         116.8403        inf          0        nan         nan         nan
+x767        -134.7356        inf         -0        nan         nan         nan
+x768         -38.6462        inf         -0        nan         nan         nan
+x769           2.3412        inf          0        nan         nan         nan
+x770         -70.9360        inf         -0        nan         nan         nan
+x771          79.3460        inf          0        nan         nan         nan
+x772         178.9353        inf          0        nan         nan         nan
+x773         -30.7806        inf         -0        nan         nan         nan
+x774          83.4805        inf          0        nan         nan         nan
+x775         -41.1774        inf         -0        nan         nan         nan
+x776        -143.1739        inf         -0        nan         nan         nan
+x777        -112.1511        inf         -0        nan         nan         nan
+x778        -267.3463        inf         -0        nan         nan         nan
+x779          78.4010        inf          0        nan         nan         nan
+x780          91.1412        inf          0        nan         nan         nan
+x781         -90.8865        inf         -0        nan         nan         nan
+x782          50.2210        inf          0        nan         nan         nan
+x783         192.5746        inf          0        nan         nan         nan
+x784          61.9646        inf          0        nan         nan         nan
+x785         -36.1385        inf         -0        nan         nan         nan
+x786         243.4314        inf          0        nan         nan         nan
+x787          50.9820        inf          0        nan         nan         nan
+x788         -92.1879        inf         -0        nan         nan         nan
+x789         -39.2760        inf         -0        nan         nan         nan
+x790        -199.8761        inf         -0        nan         nan         nan
+x791         -31.9812        inf         -0        nan         nan         nan
+x792          93.1187        inf          0        nan         nan         nan
+x793         159.7194        inf          0        nan         nan         nan
+x794         -61.9650        inf         -0        nan         nan         nan
+x795           7.3271        inf          0        nan         nan         nan
+x796         207.7118        inf          0        nan         nan         nan
+x797        -207.5009        inf         -0        nan         nan         nan
+x798        -285.1071        inf         -0        nan         nan         nan
+x799        -178.7894        inf         -0        nan         nan         nan
+x800        -231.6470        inf         -0        nan         nan         nan
+x801         -97.0063        inf         -0        nan         nan         nan
+x802          -2.5217        inf         -0        nan         nan         nan
+x803        -234.0803        inf         -0        nan         nan         nan
+x804          73.9335        inf          0        nan         nan         nan
+x805         104.3330        inf          0        nan         nan         nan
+x806          46.6334        inf          0        nan         nan         nan
+x807          21.4746        inf          0        nan         nan         nan
+x808         184.4659        inf          0        nan         nan         nan
+x809          10.1588        inf          0        nan         nan         nan
+x810         235.4697        inf          0        nan         nan         nan
+x811        -208.3673        inf         -0        nan         nan         nan
+x812         120.0996        inf          0        nan         nan         nan
+x813         -84.1598        inf         -0        nan         nan         nan
+x814        -126.6120        inf         -0        nan         nan         nan
+x815          23.4786        inf          0        nan         nan         nan
+x816        -171.1450        inf         -0        nan         nan         nan
+x817         214.7902        inf          0        nan         nan         nan
+x818          60.1633        inf          0        nan         nan         nan
+x819          96.6613        inf          0        nan         nan         nan
+x820         102.8824        inf          0        nan         nan         nan
+x821           9.7588        inf          0        nan         nan         nan
+x822          13.9339        inf          0        nan         nan         nan
+x823           7.4129        inf          0        nan         nan         nan
+x824        -174.7151        inf         -0        nan         nan         nan
+x825         -90.9468        inf         -0        nan         nan         nan
+x826         -20.1214        inf         -0        nan         nan         nan
+x827          14.2212        inf          0        nan         nan         nan
+x828         -40.0210        inf         -0        nan         nan         nan
+x829         218.9817        inf          0        nan         nan         nan
+x830         149.0814        inf          0        nan         nan         nan
+x831          50.1952        inf          0        nan         nan         nan
+x832         -30.3773        inf         -0        nan         nan         nan
+x833          39.9146        inf          0        nan         nan         nan
+x834         -16.4949        inf         -0        nan         nan         nan
+x835        -139.0635        inf         -0        nan         nan         nan
+x836         -12.1789        inf         -0        nan         nan         nan
+x837          92.6589        inf          0        nan         nan         nan
+x838         285.0536        inf          0        nan         nan         nan
+x839        -209.5946        inf         -0        nan         nan         nan
+x840         156.3737        inf          0        nan         nan         nan
+x841         -61.3672        inf         -0        nan         nan         nan
+x842          99.0096        inf          0        nan         nan         nan
+x843        -125.8593        inf         -0        nan         nan         nan
+x844         -19.5691        inf         -0        nan         nan         nan
+x845          56.0031        inf          0        nan         nan         nan
+x846        -192.7314        inf         -0        nan         nan         nan
+x847         -84.5538        inf         -0        nan         nan         nan
+x848         -28.2397        inf         -0        nan         nan         nan
+x849        -100.0477        inf         -0        nan         nan         nan
+x850          25.5386        inf          0        nan         nan         nan
+x851        -193.0162        inf         -0        nan         nan         nan
+x852        -167.4214        inf         -0        nan         nan         nan
+x853         -57.9086        inf         -0        nan         nan         nan
+x854        -287.1719        inf         -0        nan         nan         nan
+x855        -141.7675        inf         -0        nan         nan         nan
+x856         -40.6180        inf         -0        nan         nan         nan
+x857          76.3588        inf          0        nan         nan         nan
+x858           9.8909        inf          0        nan         nan         nan
+x859         -94.1051        inf         -0        nan         nan         nan
+x860         200.1645        inf          0        nan         nan         nan
+x861          45.2327        inf          0        nan         nan         nan
+x862          26.3346        inf          0        nan         nan         nan
+x863         101.4251        inf          0        nan         nan         nan
+x864          86.6785        inf          0        nan         nan         nan
+x865        -185.9422        inf         -0        nan         nan         nan
+x866          91.7641        inf          0        nan         nan         nan
+x867         162.4569        inf          0        nan         nan         nan
+x868        -198.2728        inf         -0        nan         nan         nan
+x869        -123.2651        inf         -0        nan         nan         nan
+x870         173.0974        inf          0        nan         nan         nan
+x871          34.1772        inf          0        nan         nan         nan
+x872         -36.7118        inf         -0        nan         nan         nan
+x873          39.5895        inf          0        nan         nan         nan
+x874         -71.6120        inf         -0        nan         nan         nan
+x875        -121.7050        inf         -0        nan         nan         nan
+x876          94.5301        inf          0        nan         nan         nan
+x877         215.0014        inf          0        nan         nan         nan
+x878         116.7271        inf          0        nan         nan         nan
+x879        -111.0817        inf         -0        nan         nan         nan
+x880        -479.5766        inf         -0        nan         nan         nan
+x881          78.2433        inf          0        nan         nan         nan
+x882          51.1210        inf          0        nan         nan         nan
+x883         -68.6790        inf         -0        nan         nan         nan
+x884        -232.4654        inf         -0        nan         nan         nan
+x885         -32.2756        inf         -0        nan         nan         nan
+x886         -97.0117        inf         -0        nan         nan         nan
+x887         104.8478        inf          0        nan         nan         nan
+x888        -177.5546        inf         -0        nan         nan         nan
+x889         -99.7241        inf         -0        nan         nan         nan
+x890         -41.5765        inf         -0        nan         nan         nan
+x891           1.3907        inf          0        nan         nan         nan
+x892        -121.0749        inf         -0        nan         nan         nan
+x893         260.9940        inf          0        nan         nan         nan
+x894          46.4052        inf          0        nan         nan         nan
+x895        -154.9724        inf         -0        nan         nan         nan
+x896        -152.0490        inf         -0        nan         nan         nan
+x897          22.3507        inf          0        nan         nan         nan
+x898         -67.9987        inf         -0        nan         nan         nan
+x899          -9.6202        inf         -0        nan         nan         nan
+x900         -24.2236        inf         -0        nan         nan         nan
+x901          14.0916        inf          0        nan         nan         nan
+x902          11.9813        inf          0        nan         nan         nan
+x903         279.4996        inf          0        nan         nan         nan
+x904         -98.7753        inf         -0        nan         nan         nan
+x905        -217.7901        inf         -0        nan         nan         nan
+x906         122.8762        inf          0        nan         nan         nan
+x907        -163.1984        inf         -0        nan         nan         nan
+x908        -170.7764        inf         -0        nan         nan         nan
+x909        -134.2318        inf         -0        nan         nan         nan
+x910         -85.8293        inf         -0        nan         nan         nan
+x911        -180.1042        inf         -0        nan         nan         nan
+x912         156.3973        inf          0        nan         nan         nan
+x913          68.0317        inf          0        nan         nan         nan
+x914         170.4838        inf          0        nan         nan         nan
+x915         -58.4205        inf         -0        nan         nan         nan
+x916         302.1704        inf          0        nan         nan         nan
+x917        -341.4830        inf         -0        nan         nan         nan
+x918         -18.4740        inf         -0        nan         nan         nan
+x919        -181.5717        inf         -0        nan         nan         nan
+x920         120.6264        inf          0        nan         nan         nan
+x921          70.8730        inf          0        nan         nan         nan
+x922         -65.0695        inf         -0        nan         nan         nan
+x923         135.8337        inf          0        nan         nan         nan
+x924         -57.7412        inf         -0        nan         nan         nan
+x925          82.1834        inf          0        nan         nan         nan
+x926         217.8366        inf          0        nan         nan         nan
+x927         -48.8009        inf         -0        nan         nan         nan
+x928          63.6699        inf          0        nan         nan         nan
+x929         -57.4102        inf         -0        nan         nan         nan
+x930        -121.9657        inf         -0        nan         nan         nan
+x931        -135.1799        inf         -0        nan         nan         nan
+x932          50.9444        inf          0        nan         nan         nan
+x933           0.2232        inf          0        nan         nan         nan
+x934        -151.6812        inf         -0        nan         nan         nan
+x935          71.1167        inf          0        nan         nan         nan
+x936           0.6780        inf          0        nan         nan         nan
+x937         -14.6012        inf         -0        nan         nan         nan
+x938          90.1250        inf          0        nan         nan         nan
+x939          74.5567        inf          0        nan         nan         nan
+x940        -126.9782        inf         -0        nan         nan         nan
+x941         -16.3813        inf         -0        nan         nan         nan
+x942        -214.6051        inf         -0        nan         nan         nan
+x943          66.8494        inf          0        nan         nan         nan
+x944         -76.0529        inf         -0        nan         nan         nan
+x945         -94.1568        inf         -0        nan         nan         nan
+x946        -242.0890        inf         -0        nan         nan         nan
+x947         -44.3129        inf         -0        nan         nan         nan
+x948          -9.3892        inf         -0        nan         nan         nan
+x949         -81.0122        inf         -0        nan         nan         nan
+x950         -75.7101        inf         -0        nan         nan         nan
+x951          87.5652        inf          0        nan         nan         nan
+x952         208.1085        inf          0        nan         nan         nan
+x953         -91.7749        inf         -0        nan         nan         nan
+x954         -88.2460        inf         -0        nan         nan         nan
+x955         -24.3026        inf         -0        nan         nan         nan
+x956          59.3497        inf          0        nan         nan         nan
+x957          30.9615        inf          0        nan         nan         nan
+x958        -177.6945        inf         -0        nan         nan         nan
+x959        -161.6459        inf         -0        nan         nan         nan
+x960          90.2354        inf          0        nan         nan         nan
+x961         190.7491        inf          0        nan         nan         nan
+x962         194.0770        inf          0        nan         nan         nan
+x963         210.0477        inf          0        nan         nan         nan
+x964          37.8777        inf          0        nan         nan         nan
+x965        -220.9617        inf         -0        nan         nan         nan
+x966         164.3556        inf          0        nan         nan         nan
+x967         -27.7907        inf         -0        nan         nan         nan
+x968        -219.1329        inf         -0        nan         nan         nan
+x969         -75.3833        inf         -0        nan         nan         nan
+x970         -99.1152        inf         -0        nan         nan         nan
+x971          13.6788        inf          0        nan         nan         nan
+x972          18.8125        inf          0        nan         nan         nan
+x973         215.9930        inf          0        nan         nan         nan
+x974          11.9414        inf          0        nan         nan         nan
+x975         -29.4205        inf         -0        nan         nan         nan
+x976         -82.2817        inf         -0        nan         nan         nan
+x977          18.9519        inf          0        nan         nan         nan
+x978         -27.2455        inf         -0        nan         nan         nan
+x979          35.0844        inf          0        nan         nan         nan
+x980          72.9881        inf          0        nan         nan         nan
+x981          84.3917        inf          0        nan         nan         nan
+x982        -328.8788        inf         -0        nan         nan         nan
+x983         -53.7779        inf         -0        nan         nan         nan
+x984        -150.5639        inf         -0        nan         nan         nan
+x985          79.4147        inf          0        nan         nan         nan
+x986          15.7190        inf          0        nan         nan         nan
+x987        -167.6505        inf         -0        nan         nan         nan
+x988        -364.6891        inf         -0        nan         nan         nan
+x989         240.2223        inf          0        nan         nan         nan
+x990          18.0844        inf          0        nan         nan         nan
+x991         119.9524        inf          0        nan         nan         nan
+x992        -154.1307        inf         -0        nan         nan         nan
+x993          33.4301        inf          0        nan         nan         nan
+x994        -231.1350        inf         -0        nan         nan         nan
+x995          39.7426        inf          0        nan         nan         nan
+x996         -20.1846        inf         -0        nan         nan         nan
+x997         -85.2751        inf         -0        nan         nan         nan
+x998         391.2461        inf          0        nan         nan         nan
+x999         -96.3419        inf         -0        nan         nan         nan
+x1000       -135.7611        inf         -0        nan         nan         nan
+==============================================================================
+Omnibus:                        1.836   Durbin-Watson:                   1.944
+Prob(Omnibus):                  0.399   Jarque-Bera (JB):                1.775
+Skew:                          -0.043   Prob(JB):                        0.412
+Kurtosis:                       2.813   Cond. No.                     1.27e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.27e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p/n is&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p/n is
+1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2 is&quot;</span><span class="p">)</span>
+<span class="n">res</span><span class="o">.</span><span class="n">rsquared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R2 is
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjusted R2 is&quot;</span><span class="p">)</span>
+<span class="n">est2</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">est2</span><span class="o">.</span><span class="n">rsquared_adj</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Adjusted R2 is
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:1749: RuntimeWarning: divide by zero encountered in true_divide
+  return 1 - (np.divide(self.nobs - self.k_constant, self.df_resid)
+C:\Users\User\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:1749: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - (np.divide(self.nobs - self.k_constant, self.df_resid)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="second-set-p-n-2">
+<h2>2. Second, set p=n/2.<a class="headerlink" href="#second-set-p-n-2" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>    <span class="c1"># Describe model</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                      y   R-squared (uncentered):                   0.513
+Model:                            OLS   Adj. R-squared (uncentered):              0.026
+Method:                 Least Squares   F-statistic:                              1.053
+Date:                Tue, 19 Jul 2022   Prob (F-statistic):                       0.283
+Time:                        12:12:46   Log-Likelihood:                         -1079.7
+No. Observations:                1000   AIC:                                      3159.
+Df Residuals:                     500   BIC:                                      5613.
+Df Model:                         500                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             0.0382      0.043      0.897      0.370      -0.045       0.122
+x2            -0.1217      0.045     -2.731      0.007      -0.209      -0.034
+x3             0.0676      0.047      1.451      0.147      -0.024       0.159
+x4             0.0085      0.048      0.178      0.859      -0.085       0.102
+x5            -0.0038      0.044     -0.087      0.930      -0.090       0.082
+x6            -0.0786      0.043     -1.828      0.068      -0.163       0.006
+x7             0.0059      0.045      0.131      0.896      -0.082       0.094
+x8            -0.0290      0.044     -0.656      0.512      -0.116       0.058
+x9            -0.0477      0.044     -1.079      0.281      -0.135       0.039
+x10            0.0789      0.047      1.672      0.095      -0.014       0.172
+x11            0.0706      0.044      1.600      0.110      -0.016       0.157
+x12            0.0224      0.045      0.503      0.615      -0.065       0.110
+x13           -0.0608      0.047     -1.305      0.193      -0.152       0.031
+x14           -0.0455      0.044     -1.032      0.303      -0.132       0.041
+x15           -0.0819      0.046     -1.800      0.072      -0.171       0.007
+x16           -0.0303      0.046     -0.659      0.510      -0.121       0.060
+x17           -0.0289      0.045     -0.645      0.519      -0.117       0.059
+x18           -0.0153      0.045     -0.338      0.735      -0.104       0.073
+x19           -0.0728      0.047     -1.538      0.125      -0.166       0.020
+x20            0.0328      0.043      0.755      0.451      -0.053       0.118
+x21            0.0542      0.046      1.182      0.238      -0.036       0.144
+x22            0.0699      0.046      1.511      0.131      -0.021       0.161
+x23           -0.0992      0.044     -2.248      0.025      -0.186      -0.012
+x24            0.0284      0.045      0.630      0.529      -0.060       0.117
+x25           -0.0018      0.046     -0.039      0.969      -0.091       0.088
+x26           -0.0766      0.046     -1.679      0.094      -0.166       0.013
+x27            0.0346      0.045      0.776      0.438      -0.053       0.122
+x28         8.482e-06      0.045      0.000      1.000      -0.088       0.088
+x29           -0.0008      0.046     -0.017      0.987      -0.091       0.089
+x30            0.0041      0.047      0.087      0.931      -0.089       0.097
+x31            0.0693      0.045      1.555      0.121      -0.018       0.157
+x32            0.0540      0.046      1.186      0.236      -0.035       0.144
+x33           -0.0116      0.044     -0.264      0.792      -0.098       0.075
+x34            0.0504      0.045      1.116      0.265      -0.038       0.139
+x35            0.0077      0.046      0.166      0.868      -0.083       0.099
+x36            0.0845      0.047      1.814      0.070      -0.007       0.176
+x37           -0.0955      0.045     -2.103      0.036      -0.185      -0.006
+x38           -0.0063      0.044     -0.144      0.885      -0.092       0.080
+x39           -0.0420      0.045     -0.923      0.356      -0.131       0.047
+x40            0.0496      0.044      1.117      0.264      -0.038       0.137
+x41           -0.0350      0.044     -0.795      0.427      -0.122       0.052
+x42            0.0449      0.044      1.031      0.303      -0.041       0.130
+x43           -0.0092      0.044     -0.210      0.834      -0.096       0.077
+x44            0.0118      0.044      0.266      0.790      -0.076       0.099
+x45            0.0062      0.046      0.136      0.892      -0.083       0.096
+x46           -0.0108      0.047     -0.227      0.820      -0.104       0.082
+x47            0.0678      0.045      1.496      0.135      -0.021       0.157
+x48           -0.0764      0.046     -1.655      0.098      -0.167       0.014
+x49           -0.0827      0.045     -1.823      0.069      -0.172       0.006
+x50            0.0150      0.044      0.339      0.735      -0.072       0.102
+x51           -0.0573      0.046     -1.251      0.211      -0.147       0.033
+x52            0.0073      0.044      0.167      0.867      -0.078       0.093
+x53           -0.0172      0.043     -0.401      0.689      -0.102       0.067
+x54            0.0457      0.045      1.024      0.306      -0.042       0.133
+x55           -0.0217      0.044     -0.494      0.622      -0.108       0.064
+x56            0.0578      0.045      1.289      0.198      -0.030       0.146
+x57            0.0197      0.046      0.434      0.665      -0.070       0.109
+x58            0.0775      0.045      1.733      0.084      -0.010       0.165
+x59           -0.0037      0.044     -0.086      0.932      -0.089       0.082
+x60           -0.1268      0.047     -2.671      0.008      -0.220      -0.034
+x61            0.0028      0.045      0.061      0.951      -0.086       0.092
+x62            0.0440      0.043      1.013      0.312      -0.041       0.129
+x63           -0.0025      0.045     -0.054      0.957      -0.091       0.087
+x64           -0.0298      0.047     -0.636      0.525      -0.122       0.062
+x65            0.0359      0.045      0.794      0.428      -0.053       0.125
+x66           -0.0184      0.045     -0.407      0.684      -0.107       0.070
+x67            0.0008      0.043      0.018      0.986      -0.084       0.086
+x68           -0.0323      0.045     -0.711      0.478      -0.121       0.057
+x69           -0.0068      0.046     -0.146      0.884      -0.098       0.084
+x70            0.0166      0.047      0.353      0.724      -0.076       0.109
+x71            0.0068      0.043      0.157      0.875      -0.079       0.092
+x72           -0.0723      0.044     -1.634      0.103      -0.159       0.015
+x73           -0.0118      0.044     -0.271      0.787      -0.098       0.074
+x74            0.0243      0.047      0.522      0.602      -0.067       0.116
+x75           -0.0106      0.046     -0.229      0.819      -0.102       0.080
+x76           -0.0861      0.044     -1.957      0.051      -0.172       0.000
+x77            0.0854      0.048      1.791      0.074      -0.008       0.179
+x78           -0.0523      0.046     -1.145      0.253      -0.142       0.037
+x79           -0.0859      0.045     -1.904      0.057      -0.175       0.003
+x80            0.0190      0.045      0.424      0.672      -0.069       0.107
+x81            0.0110      0.046      0.240      0.810      -0.079       0.101
+x82            0.0061      0.047      0.131      0.895      -0.085       0.098
+x83           -0.0296      0.043     -0.684      0.494      -0.115       0.055
+x84            0.0755      0.044      1.705      0.089      -0.012       0.163
+x85           -0.0326      0.045     -0.718      0.473      -0.122       0.057
+x86            0.0935      0.046      2.029      0.043       0.003       0.184
+x87           -0.0307      0.046     -0.673      0.501      -0.120       0.059
+x88           -0.0185      0.045     -0.406      0.685      -0.108       0.071
+x89           -0.0106      0.046     -0.233      0.816      -0.100       0.079
+x90            0.0132      0.046      0.289      0.773      -0.076       0.103
+x91           -0.0078      0.047     -0.167      0.867      -0.100       0.084
+x92           -0.0012      0.045     -0.028      0.978      -0.089       0.086
+x93            0.1126      0.046      2.448      0.015       0.022       0.203
+x94           -0.0380      0.044     -0.856      0.392      -0.125       0.049
+x95            0.0308      0.047      0.650      0.516      -0.062       0.124
+x96            0.0010      0.044      0.023      0.982      -0.086       0.088
+x97           -0.0049      0.045     -0.108      0.914      -0.093       0.083
+x98            0.0218      0.046      0.476      0.634      -0.068       0.112
+x99            0.0827      0.043      1.918      0.056      -0.002       0.167
+x100          -0.0244      0.046     -0.526      0.599      -0.116       0.067
+x101          -0.0177      0.045     -0.391      0.696      -0.107       0.071
+x102           0.0268      0.046      0.579      0.563      -0.064       0.118
+x103          -0.0757      0.044     -1.716      0.087      -0.162       0.011
+x104           0.0313      0.043      0.727      0.468      -0.053       0.116
+x105          -0.0408      0.046     -0.887      0.376      -0.131       0.050
+x106           0.0133      0.048      0.278      0.781      -0.081       0.108
+x107          -0.0159      0.044     -0.361      0.718      -0.102       0.071
+x108           0.0155      0.046      0.340      0.734      -0.074       0.106
+x109          -0.0874      0.048     -1.840      0.066      -0.181       0.006
+x110           0.0079      0.046      0.170      0.865      -0.083       0.099
+x111          -0.0472      0.044     -1.066      0.287      -0.134       0.040
+x112          -0.0186      0.045     -0.410      0.682      -0.108       0.071
+x113          -0.0192      0.044     -0.441      0.659      -0.105       0.066
+x114           0.0153      0.047      0.328      0.743      -0.076       0.107
+x115          -0.0404      0.046     -0.883      0.378      -0.130       0.050
+x116          -0.0211      0.048     -0.443      0.658      -0.115       0.073
+x117          -0.0551      0.044     -1.239      0.216      -0.142       0.032
+x118          -0.0974      0.047     -2.086      0.038      -0.189      -0.006
+x119          -0.0165      0.044     -0.370      0.711      -0.104       0.071
+x120          -0.0550      0.048     -1.150      0.251      -0.149       0.039
+x121           0.0567      0.045      1.245      0.214      -0.033       0.146
+x122          -0.0172      0.046     -0.372      0.710      -0.108       0.074
+x123          -0.0002      0.043     -0.004      0.996      -0.084       0.084
+x124           0.0305      0.044      0.692      0.489      -0.056       0.117
+x125           0.0686      0.042      1.627      0.104      -0.014       0.151
+x126          -0.0393      0.046     -0.862      0.389      -0.129       0.050
+x127          -0.0499      0.049     -1.021      0.308      -0.146       0.046
+x128           0.0248      0.044      0.570      0.569      -0.061       0.111
+x129           0.0734      0.045      1.641      0.101      -0.014       0.161
+x130          -0.0655      0.047     -1.396      0.163      -0.158       0.027
+x131           0.0090      0.046      0.194      0.846      -0.082       0.100
+x132           0.0031      0.045      0.070      0.944      -0.085       0.091
+x133           0.0165      0.045      0.367      0.713      -0.072       0.105
+x134           0.0080      0.044      0.180      0.857      -0.079       0.095
+x135           0.0167      0.045      0.368      0.713      -0.072       0.106
+x136           0.0471      0.044      1.068      0.286      -0.040       0.134
+x137           0.0371      0.044      0.845      0.399      -0.049       0.123
+x138          -0.0786      0.044     -1.803      0.072      -0.164       0.007
+x139           0.0260      0.042      0.613      0.540      -0.057       0.109
+x140          -0.0254      0.044     -0.581      0.562      -0.111       0.060
+x141          -0.0423      0.043     -0.987      0.324      -0.126       0.042
+x142          -0.0372      0.045     -0.821      0.412      -0.126       0.052
+x143          -0.0598      0.047     -1.276      0.202      -0.152       0.032
+x144          -0.0455      0.047     -0.968      0.333      -0.138       0.047
+x145           0.0173      0.048      0.363      0.717      -0.076       0.111
+x146          -0.0523      0.045     -1.155      0.249      -0.141       0.037
+x147          -0.0450      0.043     -1.052      0.293      -0.129       0.039
+x148           0.0264      0.043      0.606      0.545      -0.059       0.112
+x149           0.0486      0.044      1.098      0.273      -0.038       0.136
+x150          -0.0058      0.047     -0.123      0.902      -0.098       0.087
+x151           0.0450      0.046      0.975      0.330      -0.046       0.136
+x152          -0.0669      0.044     -1.516      0.130      -0.154       0.020
+x153           0.0355      0.048      0.741      0.459      -0.059       0.129
+x154          -0.0007      0.045     -0.016      0.987      -0.089       0.088
+x155          -0.0472      0.045     -1.052      0.293      -0.135       0.041
+x156          -0.0478      0.044     -1.085      0.278      -0.134       0.039
+x157          -0.0470      0.047     -1.000      0.318      -0.139       0.045
+x158          -0.0171      0.045     -0.377      0.706      -0.106       0.072
+x159          -0.0521      0.045     -1.155      0.249      -0.141       0.037
+x160          -0.1124      0.044     -2.541      0.011      -0.199      -0.025
+x161          -0.0601      0.047     -1.266      0.206      -0.153       0.033
+x162          -0.0563      0.047     -1.194      0.233      -0.149       0.036
+x163          -0.0225      0.045     -0.501      0.617      -0.111       0.066
+x164           0.0258      0.047      0.543      0.587      -0.068       0.119
+x165          -0.0066      0.046     -0.142      0.887      -0.098       0.084
+x166          -0.0270      0.046     -0.580      0.562      -0.118       0.064
+x167           0.0199      0.045      0.440      0.660      -0.069       0.109
+x168           0.0326      0.046      0.710      0.478      -0.058       0.123
+x169          -0.0522      0.044     -1.172      0.242      -0.140       0.035
+x170           0.0218      0.045      0.482      0.630      -0.067       0.111
+x171          -0.0302      0.046     -0.654      0.513      -0.121       0.061
+x172          -0.0199      0.046     -0.431      0.666      -0.111       0.071
+x173          -0.0900      0.046     -1.965      0.050      -0.180   -4.75e-06
+x174          -0.0581      0.047     -1.248      0.213      -0.150       0.033
+x175          -0.0576      0.044     -1.306      0.192      -0.144       0.029
+x176           0.0042      0.045      0.093      0.926      -0.084       0.092
+x177           0.0188      0.045      0.413      0.680      -0.070       0.108
+x178          -0.0625      0.046     -1.366      0.173      -0.152       0.027
+x179          -0.0380      0.044     -0.861      0.389      -0.125       0.049
+x180          -0.0476      0.046     -1.037      0.300      -0.138       0.043
+x181          -0.0677      0.045     -1.496      0.135      -0.157       0.021
+x182           0.0289      0.046      0.629      0.529      -0.061       0.119
+x183           0.0210      0.047      0.447      0.655      -0.071       0.113
+x184          -0.0096      0.045     -0.215      0.830      -0.097       0.078
+x185           0.0928      0.044      2.105      0.036       0.006       0.179
+x186           0.0803      0.046      1.736      0.083      -0.011       0.171
+x187           0.0939      0.046      2.030      0.043       0.003       0.185
+x188          -0.0299      0.046     -0.653      0.514      -0.120       0.060
+x189          -0.0652      0.048     -1.349      0.178      -0.160       0.030
+x190           0.0019      0.045      0.042      0.966      -0.087       0.091
+x191           0.0756      0.044      1.734      0.084      -0.010       0.161
+x192          -0.0074      0.045     -0.163      0.870      -0.097       0.082
+x193          -0.0491      0.043     -1.132      0.258      -0.134       0.036
+x194          -0.0342      0.045     -0.767      0.443      -0.122       0.053
+x195           0.0409      0.049      0.837      0.403      -0.055       0.137
+x196          -0.0317      0.044     -0.720      0.472      -0.118       0.055
+x197           0.0674      0.047      1.422      0.156      -0.026       0.161
+x198          -0.0417      0.044     -0.937      0.349      -0.129       0.046
+x199           0.0828      0.043      1.943      0.053      -0.001       0.166
+x200          -0.0210      0.043     -0.492      0.623      -0.105       0.063
+x201          -0.0277      0.046     -0.596      0.552      -0.119       0.064
+x202           0.0111      0.047      0.238      0.812      -0.081       0.103
+x203           0.0168      0.044      0.380      0.704      -0.070       0.104
+x204           0.0011      0.044      0.026      0.980      -0.085       0.088
+x205          -0.0949      0.045     -2.122      0.034      -0.183      -0.007
+x206          -0.0495      0.041     -1.198      0.232      -0.131       0.032
+x207           0.0164      0.047      0.350      0.727      -0.076       0.109
+x208          -0.0335      0.044     -0.755      0.451      -0.121       0.054
+x209          -0.0095      0.048     -0.197      0.844      -0.104       0.085
+x210           0.0357      0.044      0.812      0.417      -0.051       0.122
+x211          -0.0198      0.046     -0.435      0.664      -0.109       0.070
+x212          -0.0106      0.048     -0.219      0.827      -0.106       0.085
+x213          -0.0070      0.042     -0.167      0.867      -0.090       0.076
+x214           0.0659      0.046      1.421      0.156      -0.025       0.157
+x215          -0.0230      0.046     -0.501      0.616      -0.113       0.067
+x216           0.0106      0.046      0.230      0.818      -0.080       0.101
+x217          -0.0196      0.046     -0.423      0.672      -0.111       0.071
+x218           0.0675      0.044      1.542      0.124      -0.019       0.153
+x219           0.1327      0.047      2.805      0.005       0.040       0.226
+x220           0.0707      0.049      1.459      0.145      -0.025       0.166
+x221           0.0095      0.048      0.197      0.844      -0.085       0.104
+x222           0.0616      0.045      1.358      0.175      -0.028       0.151
+x223          -0.0232      0.044     -0.532      0.595      -0.109       0.062
+x224           0.0841      0.045      1.869      0.062      -0.004       0.173
+x225          -0.0280      0.045     -0.628      0.530      -0.116       0.060
+x226           0.0975      0.046      2.116      0.035       0.007       0.188
+x227          -0.0165      0.046     -0.357      0.721      -0.107       0.074
+x228           0.0037      0.043      0.085      0.932      -0.082       0.089
+x229          -0.0306      0.045     -0.674      0.500      -0.120       0.058
+x230           0.0212      0.044      0.480      0.631      -0.066       0.108
+x231           0.0384      0.043      0.901      0.368      -0.045       0.122
+x232           0.0848      0.045      1.892      0.059      -0.003       0.173
+x233          -0.0209      0.048     -0.438      0.662      -0.115       0.073
+x234           0.0109      0.043      0.255      0.798      -0.073       0.095
+x235          -0.0019      0.044     -0.043      0.965      -0.088       0.084
+x236           0.0242      0.045      0.543      0.587      -0.063       0.112
+x237          -0.0387      0.042     -0.912      0.362      -0.122       0.045
+x238           0.0743      0.047      1.590      0.112      -0.018       0.166
+x239          -0.0370      0.046     -0.799      0.424      -0.128       0.054
+x240          -0.0177      0.044     -0.399      0.690      -0.105       0.069
+x241           0.0098      0.044      0.223      0.824      -0.077       0.096
+x242          -0.1082      0.046     -2.347      0.019      -0.199      -0.018
+x243           0.0619      0.047      1.314      0.189      -0.031       0.154
+x244           0.0180      0.045      0.398      0.691      -0.071       0.107
+x245           0.0073      0.046      0.160      0.873      -0.082       0.097
+x246          -0.0425      0.044     -0.958      0.338      -0.130       0.045
+x247          -0.0730      0.042     -1.726      0.085      -0.156       0.010
+x248           0.1053      0.043      2.437      0.015       0.020       0.190
+x249          -0.0626      0.044     -1.409      0.159      -0.150       0.025
+x250           0.0569      0.044      1.298      0.195      -0.029       0.143
+x251          -0.0140      0.046     -0.304      0.761      -0.104       0.076
+x252           0.0467      0.046      1.010      0.313      -0.044       0.138
+x253           0.0025      0.045      0.054      0.957      -0.087       0.091
+x254           0.0480      0.043      1.109      0.268      -0.037       0.133
+x255           0.0929      0.045      2.078      0.038       0.005       0.181
+x256          -0.0094      0.045     -0.209      0.835      -0.097       0.079
+x257           0.0081      0.043      0.188      0.851      -0.077       0.093
+x258          -0.0281      0.042     -0.665      0.506      -0.111       0.055
+x259           0.0223      0.045      0.491      0.623      -0.067       0.111
+x260          -0.0044      0.048     -0.093      0.926      -0.098       0.089
+x261           0.0118      0.044      0.268      0.789      -0.075       0.098
+x262          -0.0236      0.044     -0.537      0.591      -0.110       0.063
+x263           0.0399      0.043      0.919      0.358      -0.045       0.125
+x264           0.0642      0.045      1.434      0.152      -0.024       0.152
+x265           0.0459      0.045      1.012      0.312      -0.043       0.135
+x266          -0.0321      0.046     -0.700      0.484      -0.122       0.058
+x267          -0.0271      0.044     -0.613      0.540      -0.114       0.060
+x268           0.0003      0.044      0.007      0.994      -0.086       0.087
+x269          -0.0359      0.044     -0.811      0.418      -0.123       0.051
+x270           0.0137      0.045      0.305      0.760      -0.074       0.102
+x271          -0.0108      0.047     -0.229      0.819      -0.104       0.082
+x272           0.0267      0.045      0.589      0.556      -0.062       0.116
+x273          -0.0333      0.045     -0.735      0.463      -0.122       0.056
+x274          -0.0592      0.047     -1.259      0.209      -0.152       0.033
+x275          -0.0061      0.047     -0.130      0.897      -0.098       0.086
+x276           0.0693      0.044      1.563      0.119      -0.018       0.156
+x277           0.0157      0.045      0.345      0.730      -0.074       0.105
+x278          -0.0931      0.043     -2.141      0.033      -0.178      -0.008
+x279          -0.0271      0.045     -0.599      0.550      -0.116       0.062
+x280          -0.0486      0.046     -1.063      0.288      -0.138       0.041
+x281          -0.0061      0.047     -0.130      0.896      -0.098       0.085
+x282           0.1297      0.043      3.009      0.003       0.045       0.214
+x283           0.0037      0.044      0.084      0.933      -0.082       0.089
+x284          -0.0174      0.044     -0.399      0.690      -0.103       0.068
+x285           0.0289      0.046      0.635      0.526      -0.061       0.118
+x286           0.0112      0.044      0.255      0.799      -0.075       0.097
+x287          -0.0050      0.043     -0.117      0.907      -0.090       0.080
+x288          -0.0946      0.044     -2.135      0.033      -0.182      -0.008
+x289           0.0332      0.044      0.748      0.455      -0.054       0.120
+x290          -0.0642      0.044     -1.469      0.142      -0.150       0.022
+x291          -0.0741      0.043     -1.722      0.086      -0.159       0.010
+x292          -0.1065      0.044     -2.438      0.015      -0.192      -0.021
+x293           0.0160      0.043      0.370      0.712      -0.069       0.101
+x294          -0.0027      0.045     -0.061      0.951      -0.090       0.085
+x295           0.0609      0.046      1.324      0.186      -0.029       0.151
+x296           0.0309      0.044      0.699      0.485      -0.056       0.118
+x297           0.0206      0.044      0.472      0.637      -0.065       0.107
+x298          -0.0131      0.046     -0.284      0.777      -0.104       0.077
+x299          -0.0373      0.045     -0.824      0.410      -0.126       0.052
+x300          -0.0396      0.047     -0.850      0.396      -0.131       0.052
+x301          -0.0326      0.046     -0.711      0.477      -0.123       0.058
+x302          -0.0010      0.046     -0.022      0.982      -0.090       0.088
+x303          -0.0607      0.045     -1.335      0.182      -0.150       0.029
+x304          -0.0485      0.047     -1.040      0.299      -0.140       0.043
+x305           0.0728      0.045      1.625      0.105      -0.015       0.161
+x306           0.0688      0.046      1.510      0.132      -0.021       0.158
+x307          -0.0031      0.045     -0.069      0.945      -0.092       0.086
+x308          -0.1337      0.045     -2.945      0.003      -0.223      -0.044
+x309          -0.0522      0.045     -1.149      0.251      -0.142       0.037
+x310          -0.0944      0.048     -1.983      0.048      -0.188      -0.001
+x311          -0.0215      0.046     -0.472      0.637      -0.111       0.068
+x312           0.0274      0.045      0.605      0.546      -0.062       0.116
+x313          -0.0358      0.045     -0.803      0.422      -0.123       0.052
+x314           0.0285      0.043      0.668      0.505      -0.055       0.112
+x315          -0.0135      0.045     -0.302      0.763      -0.101       0.074
+x316          -0.0155      0.046     -0.336      0.737      -0.106       0.075
+x317          -0.0350      0.046     -0.768      0.443      -0.125       0.055
+x318          -0.0138      0.047     -0.294      0.769      -0.106       0.079
+x319           0.0075      0.044      0.170      0.865      -0.080       0.095
+x320          -0.1168      0.046     -2.567      0.011      -0.206      -0.027
+x321          -0.0458      0.044     -1.033      0.302      -0.133       0.041
+x322           0.0265      0.047      0.569      0.570      -0.065       0.118
+x323          -0.0616      0.043     -1.448      0.148      -0.145       0.022
+x324          -0.0058      0.043     -0.134      0.894      -0.091       0.079
+x325           0.0201      0.045      0.444      0.657      -0.069       0.109
+x326           0.0059      0.045      0.130      0.897      -0.083       0.094
+x327          -0.0034      0.045     -0.076      0.939      -0.091       0.084
+x328          -0.0592      0.045     -1.330      0.184      -0.147       0.028
+x329           0.0618      0.045      1.380      0.168      -0.026       0.150
+x330           0.0072      0.044      0.162      0.871      -0.080       0.094
+x331          -0.0082      0.046     -0.181      0.857      -0.098       0.081
+x332          -0.0599      0.044     -1.363      0.174      -0.146       0.026
+x333          -0.0637      0.045     -1.427      0.154      -0.151       0.024
+x334          -0.0665      0.043     -1.538      0.125      -0.151       0.018
+x335          -0.0395      0.046     -0.859      0.391      -0.130       0.051
+x336           0.0093      0.048      0.194      0.846      -0.084       0.103
+x337           0.0390      0.045      0.869      0.385      -0.049       0.127
+x338           0.0237      0.045      0.522      0.602      -0.065       0.113
+x339           0.0049      0.051      0.096      0.923      -0.096       0.105
+x340          -0.0094      0.045     -0.208      0.835      -0.098       0.079
+x341          -0.0128      0.046     -0.277      0.782      -0.103       0.078
+x342          -0.0787      0.045     -1.757      0.080      -0.167       0.009
+x343          -0.0392      0.042     -0.931      0.353      -0.122       0.044
+x344           0.0290      0.044      0.659      0.510      -0.057       0.115
+x345          -0.0104      0.046     -0.224      0.823      -0.101       0.081
+x346          -0.0131      0.046     -0.283      0.777      -0.104       0.078
+x347           0.0332      0.047      0.713      0.476      -0.058       0.125
+x348           0.0105      0.047      0.223      0.824      -0.082       0.103
+x349           0.1056      0.049      2.164      0.031       0.010       0.201
+x350          -0.0194      0.045     -0.429      0.668      -0.108       0.069
+x351           0.0425      0.044      0.960      0.338      -0.045       0.129
+x352           0.0554      0.045      1.238      0.216      -0.032       0.143
+x353          -0.0107      0.046     -0.232      0.816      -0.101       0.079
+x354          -0.0283      0.046     -0.616      0.538      -0.118       0.062
+x355           0.0320      0.044      0.731      0.465      -0.054       0.118
+x356          -0.0670      0.044     -1.538      0.125      -0.152       0.019
+x357          -0.0282      0.043     -0.657      0.512      -0.112       0.056
+x358           0.0053      0.046      0.117      0.907      -0.084       0.095
+x359           0.0204      0.045      0.450      0.653      -0.069       0.110
+x360           0.0117      0.045      0.261      0.794      -0.077       0.100
+x361          -0.0037      0.044     -0.084      0.933      -0.090       0.083
+x362          -0.0409      0.044     -0.927      0.354      -0.127       0.046
+x363          -0.0045      0.046     -0.098      0.922      -0.094       0.085
+x364           0.0877      0.045      1.956      0.051      -0.000       0.176
+x365          -0.0697      0.044     -1.573      0.116      -0.157       0.017
+x366           0.1079      0.045      2.375      0.018       0.019       0.197
+x367          -0.0309      0.047     -0.663      0.508      -0.122       0.061
+x368          -0.0302      0.047     -0.646      0.519      -0.122       0.062
+x369           0.0063      0.045      0.142      0.887      -0.081       0.094
+x370          -0.0530      0.046     -1.152      0.250      -0.144       0.037
+x371          -0.0314      0.044     -0.707      0.480      -0.119       0.056
+x372          -0.0409      0.045     -0.916      0.360      -0.129       0.047
+x373           0.0367      0.045      0.813      0.416      -0.052       0.125
+x374          -0.0333      0.045     -0.733      0.464      -0.123       0.056
+x375           0.0320      0.043      0.745      0.456      -0.052       0.116
+x376          -0.0756      0.045     -1.688      0.092      -0.164       0.012
+x377          -0.0127      0.043     -0.295      0.768      -0.097       0.072
+x378           0.0302      0.047      0.643      0.521      -0.062       0.122
+x379          -0.0190      0.046     -0.417      0.677      -0.109       0.071
+x380          -0.0330      0.046     -0.724      0.469      -0.122       0.056
+x381          -0.0372      0.047     -0.797      0.426      -0.129       0.054
+x382          -0.0650      0.044     -1.487      0.138      -0.151       0.021
+x383           0.0628      0.046      1.376      0.169      -0.027       0.152
+x384          -0.0005      0.046     -0.011      0.991      -0.090       0.089
+x385          -0.0687      0.047     -1.472      0.142      -0.160       0.023
+x386           0.0008      0.041      0.020      0.984      -0.081       0.082
+x387          -0.0015      0.044     -0.034      0.973      -0.088       0.085
+x388          -0.0539      0.046     -1.169      0.243      -0.145       0.037
+x389          -0.0425      0.047     -0.914      0.361      -0.134       0.049
+x390           0.0079      0.042      0.189      0.850      -0.074       0.090
+x391          -0.0853      0.044     -1.941      0.053      -0.172       0.001
+x392           0.0757      0.046      1.647      0.100      -0.015       0.166
+x393          -0.0735      0.046     -1.585      0.114      -0.165       0.018
+x394           0.0185      0.046      0.400      0.689      -0.072       0.109
+x395           0.0431      0.044      0.986      0.324      -0.043       0.129
+x396           0.0090      0.045      0.200      0.841      -0.079       0.097
+x397           0.0708      0.044      1.594      0.111      -0.016       0.158
+x398           0.0761      0.045      1.674      0.095      -0.013       0.165
+x399           0.0498      0.045      1.115      0.265      -0.038       0.138
+x400           0.0284      0.042      0.683      0.495      -0.053       0.110
+x401          -0.0133      0.046     -0.291      0.771      -0.103       0.076
+x402           0.0180      0.045      0.398      0.691      -0.071       0.107
+x403          -0.0051      0.046     -0.112      0.911      -0.095       0.085
+x404          -0.0001      0.046     -0.003      0.998      -0.091       0.091
+x405          -0.0480      0.045     -1.058      0.291      -0.137       0.041
+x406           0.0086      0.046      0.188      0.851      -0.082       0.099
+x407           0.1033      0.045      2.274      0.023       0.014       0.193
+x408           0.0377      0.044      0.866      0.387      -0.048       0.123
+x409          -0.0172      0.048     -0.358      0.720      -0.112       0.077
+x410           0.0634      0.046      1.390      0.165      -0.026       0.153
+x411           0.0493      0.044      1.119      0.264      -0.037       0.136
+x412           0.0301      0.045      0.662      0.508      -0.059       0.119
+x413           0.0556      0.047      1.190      0.235      -0.036       0.147
+x414          -0.0161      0.043     -0.376      0.707      -0.100       0.068
+x415          -0.0408      0.045     -0.903      0.367      -0.129       0.048
+x416          -0.0180      0.045     -0.397      0.691      -0.107       0.071
+x417           0.0341      0.046      0.745      0.456      -0.056       0.124
+x418          -0.0094      0.047     -0.199      0.842      -0.102       0.083
+x419          -0.1020      0.046     -2.214      0.027      -0.192      -0.011
+x420           0.0125      0.045      0.279      0.780      -0.076       0.101
+x421          -0.0518      0.046     -1.118      0.264      -0.143       0.039
+x422          -0.0243      0.043     -0.561      0.575      -0.110       0.061
+x423           0.0687      0.045      1.533      0.126      -0.019       0.157
+x424          -0.0647      0.044     -1.479      0.140      -0.151       0.021
+x425          -0.0531      0.047     -1.120      0.263      -0.146       0.040
+x426          -0.0008      0.046     -0.017      0.986      -0.090       0.089
+x427           0.0704      0.046      1.523      0.128      -0.020       0.161
+x428           0.0370      0.044      0.842      0.400      -0.049       0.123
+x429           0.0063      0.046      0.138      0.890      -0.083       0.096
+x430           0.0762      0.044      1.732      0.084      -0.010       0.163
+x431          -0.0216      0.044     -0.491      0.624      -0.108       0.065
+x432          -0.0809      0.044     -1.819      0.069      -0.168       0.006
+x433           0.0322      0.045      0.716      0.474      -0.056       0.121
+x434          -0.0160      0.045     -0.353      0.725      -0.105       0.073
+x435          -0.0721      0.043     -1.663      0.097      -0.157       0.013
+x436          -0.0116      0.046     -0.251      0.802      -0.103       0.079
+x437           0.0770      0.042      1.831      0.068      -0.006       0.160
+x438           0.0190      0.045      0.417      0.677      -0.070       0.108
+x439          -0.0246      0.045     -0.547      0.584      -0.113       0.064
+x440          -0.0357      0.045     -0.794      0.427      -0.124       0.053
+x441           0.0476      0.045      1.054      0.292      -0.041       0.136
+x442          -0.0103      0.049     -0.213      0.832      -0.106       0.085
+x443           0.0169      0.044      0.385      0.700      -0.069       0.103
+x444           0.0320      0.045      0.709      0.479      -0.057       0.121
+x445           0.0234      0.045      0.516      0.606      -0.066       0.112
+x446          -0.0212      0.045     -0.472      0.637      -0.109       0.067
+x447           0.0900      0.047      1.907      0.057      -0.003       0.183
+x448           0.0107      0.045      0.241      0.810      -0.077       0.098
+x449           0.0055      0.046      0.119      0.905      -0.085       0.096
+x450          -0.0297      0.046     -0.645      0.519      -0.120       0.061
+x451           0.0622      0.045      1.384      0.167      -0.026       0.150
+x452           0.0254      0.046      0.548      0.584      -0.066       0.117
+x453           0.0767      0.045      1.714      0.087      -0.011       0.165
+x454          -0.0309      0.047     -0.654      0.513      -0.124       0.062
+x455           0.0061      0.044      0.137      0.891      -0.081       0.093
+x456          -0.0108      0.043     -0.249      0.803      -0.096       0.074
+x457          -0.0202      0.046     -0.443      0.658      -0.110       0.069
+x458          -0.0142      0.047     -0.302      0.763      -0.106       0.078
+x459           0.0437      0.044      0.990      0.323      -0.043       0.130
+x460           0.0057      0.046      0.125      0.900      -0.084       0.096
+x461           0.0100      0.045      0.221      0.826      -0.079       0.099
+x462           0.0806      0.047      1.725      0.085      -0.011       0.172
+x463           0.0497      0.047      1.068      0.286      -0.042       0.141
+x464          -0.0841      0.045     -1.858      0.064      -0.173       0.005
+x465          -0.0089      0.046     -0.192      0.848      -0.100       0.082
+x466           0.0490      0.046      1.071      0.285      -0.041       0.139
+x467           0.0023      0.045      0.051      0.959      -0.086       0.091
+x468          -0.1156      0.045     -2.579      0.010      -0.204      -0.028
+x469          -0.0595      0.047     -1.269      0.205      -0.151       0.033
+x470           0.0408      0.045      0.900      0.369      -0.048       0.130
+x471           0.0011      0.045      0.025      0.980      -0.087       0.090
+x472          -0.0634      0.044     -1.439      0.151      -0.150       0.023
+x473           0.0494      0.045      1.092      0.275      -0.039       0.138
+x474           0.0750      0.044      1.695      0.091      -0.012       0.162
+x475          -0.0303      0.046     -0.653      0.514      -0.122       0.061
+x476          -0.0576      0.046     -1.239      0.216      -0.149       0.034
+x477           0.0592      0.043      1.374      0.170      -0.025       0.144
+x478           0.0108      0.044      0.246      0.806      -0.075       0.097
+x479           0.0274      0.044      0.622      0.534      -0.059       0.114
+x480           0.0025      0.046      0.054      0.957      -0.087       0.092
+x481           0.0638      0.046      1.401      0.162      -0.026       0.153
+x482          -0.0405      0.043     -0.939      0.348      -0.125       0.044
+x483          -0.0068      0.045     -0.151      0.880      -0.095       0.082
+x484           0.0060      0.047      0.129      0.898      -0.086       0.098
+x485          -0.0008      0.046     -0.018      0.986      -0.091       0.089
+x486           0.0534      0.044      1.216      0.224      -0.033       0.140
+x487          -0.0270      0.044     -0.607      0.544      -0.114       0.060
+x488          -0.0397      0.046     -0.863      0.389      -0.130       0.051
+x489           0.0311      0.047      0.657      0.512      -0.062       0.124
+x490           0.0064      0.043      0.148      0.883      -0.078       0.091
+x491          -0.0576      0.046     -1.249      0.212      -0.148       0.033
+x492           0.0071      0.043      0.165      0.869      -0.077       0.091
+x493           0.0507      0.047      1.075      0.283      -0.042       0.143
+x494          -0.0096      0.042     -0.228      0.819      -0.092       0.073
+x495           0.0237      0.045      0.529      0.597      -0.064       0.112
+x496           0.0082      0.043      0.192      0.848      -0.076       0.092
+x497          -0.0173      0.042     -0.409      0.682      -0.100       0.066
+x498          -0.0314      0.045     -0.704      0.482      -0.119       0.056
+x499          -0.0254      0.044     -0.576      0.565      -0.112       0.061
+x500          -0.0829      0.047     -1.781      0.076      -0.174       0.009
+==============================================================================
+Omnibus:                        0.038   Durbin-Watson:                   1.999
+Prob(Omnibus):                  0.981   Jarque-Bera (JB):                0.076
+Skew:                           0.011   Prob(JB):                        0.962
+Kurtosis:                       2.963   Cond. No.                         5.74
+==============================================================================
+
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p/n is&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2 is&quot;</span><span class="p">)</span>
+<span class="n">res</span><span class="o">.</span><span class="n">rsquared</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adjusted R2 is&quot;</span><span class="p">)</span>
+<span class="n">est2</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">est2</span><span class="o">.</span><span class="n">rsquared_adj</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p/n is
+0.5
+R2 is
+Adjusted R2 is
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.025712821102538364
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p/n is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">p</span><span class="o">/</span><span class="n">n</span> <span class="p">)</span>
+<span class="c1">#print(&quot;summary()\n&quot;,res.summary())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rsquared</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">est2</span><span class="o">.</span><span class="n">rsquared</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rsquared_adj</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">est2</span><span class="o">.</span><span class="n">rsquared_adj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p/n is 
+ 0.5
+rsquared
+ 0.5128564105512692
+rsquared_adj
+ 0.025712821102538364
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="third-set-p-n-05">
+<h2>3. Third, set p/n =.05<a class="headerlink" href="#third-set-p-n-05" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.05</span><span class="o">*</span><span class="n">n</span>
+<span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>    <span class="c1"># Describe model</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                      y   R-squared (uncentered):                   0.033
+Model:                            OLS   Adj. R-squared (uncentered):             -0.018
+Method:                 Least Squares   F-statistic:                             0.6545
+Date:                Tue, 19 Jul 2022   Prob (F-statistic):                       0.970
+Time:                        12:12:46   Log-Likelihood:                         -1420.4
+No. Observations:                1000   AIC:                                      2941.
+Df Residuals:                     950   BIC:                                      3186.
+Df Model:                          50                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1            -0.0175      0.034     -0.515      0.607      -0.084       0.049
+x2            -0.0222      0.034     -0.658      0.510      -0.089       0.044
+x3            -0.0264      0.034     -0.774      0.439      -0.093       0.040
+x4             0.0335      0.032      1.041      0.298      -0.030       0.097
+x5             0.0022      0.033      0.068      0.946      -0.062       0.066
+x6            -0.0227      0.034     -0.668      0.504      -0.089       0.044
+x7            -0.0161      0.033     -0.491      0.624      -0.080       0.048
+x8            -0.0105      0.034     -0.307      0.759      -0.077       0.056
+x9             0.0235      0.034      0.698      0.485      -0.042       0.089
+x10            0.0010      0.032      0.030      0.976      -0.062       0.064
+x11            0.0028      0.034      0.082      0.935      -0.063       0.069
+x12           -0.0141      0.034     -0.419      0.676      -0.080       0.052
+x13            0.0332      0.033      0.994      0.321      -0.032       0.099
+x14            0.0066      0.034      0.195      0.846      -0.060       0.073
+x15            0.0078      0.034      0.227      0.820      -0.059       0.075
+x16            0.0443      0.034      1.316      0.188      -0.022       0.110
+x17            0.0123      0.032      0.380      0.704      -0.051       0.075
+x18            0.0034      0.032      0.108      0.914      -0.059       0.066
+x19           -0.0125      0.032     -0.389      0.698      -0.076       0.051
+x20           -0.0190      0.033     -0.572      0.567      -0.084       0.046
+x21           -0.0020      0.033     -0.061      0.951      -0.066       0.062
+x22            0.0035      0.033      0.107      0.915      -0.060       0.067
+x23           -0.0218      0.034     -0.640      0.522      -0.089       0.045
+x24            0.0037      0.034      0.110      0.913      -0.063       0.070
+x25           -0.0132      0.033     -0.396      0.692      -0.079       0.052
+x26            0.0382      0.034      1.129      0.259      -0.028       0.105
+x27            0.0052      0.034      0.154      0.878      -0.061       0.071
+x28           -0.0125      0.034     -0.367      0.714      -0.079       0.054
+x29           -0.0087      0.035     -0.250      0.803      -0.077       0.060
+x30            0.0171      0.034      0.511      0.609      -0.049       0.083
+x31           -0.0500      0.033     -1.509      0.132      -0.115       0.015
+x32            0.0256      0.034      0.764      0.445      -0.040       0.091
+x33           -0.0481      0.033     -1.444      0.149      -0.114       0.017
+x34           -0.0009      0.034     -0.028      0.978      -0.067       0.065
+x35            0.0010      0.033      0.032      0.974      -0.063       0.065
+x36           -0.0084      0.033     -0.259      0.796      -0.073       0.056
+x37            0.0385      0.033      1.153      0.249      -0.027       0.104
+x38           -0.0860      0.033     -2.593      0.010      -0.151      -0.021
+x39            0.0520      0.033      1.589      0.112      -0.012       0.116
+x40           -0.0729      0.034     -2.158      0.031      -0.139      -0.007
+x41            0.0069      0.033      0.211      0.833      -0.057       0.071
+x42           -0.0176      0.032     -0.544      0.586      -0.081       0.046
+x43            0.0039      0.035      0.111      0.912      -0.065       0.072
+x44           -0.0150      0.034     -0.442      0.659      -0.082       0.052
+x45           -0.0279      0.033     -0.844      0.399      -0.093       0.037
+x46            0.0115      0.033      0.350      0.727      -0.053       0.076
+x47            0.0150      0.034      0.442      0.658      -0.052       0.082
+x48           -0.0053      0.034     -0.156      0.876      -0.072       0.062
+x49            0.0151      0.034      0.446      0.655      -0.051       0.082
+x50            0.0383      0.032      1.187      0.235      -0.025       0.102
+==============================================================================
+Omnibus:                        1.194   Durbin-Watson:                   2.002
+Prob(Omnibus):                  0.551   Jarque-Bera (JB):                1.213
+Skew:                          -0.025   Prob(JB):                        0.545
+Kurtosis:                       2.837   Cond. No.                         1.56
+==============================================================================
+
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p/n is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">p</span><span class="o">/</span><span class="n">n</span> <span class="p">)</span>
+<span class="c1">#print(&quot;summary()\n&quot;,res.summary())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rsquared</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">res</span><span class="o">.</span><span class="n">rsquared</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rsquared_adj</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">res</span><span class="o">.</span><span class="n">rsquared_adj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p/n is 
+ 0.05
+rsquared
+ 0.03329838353485126
+rsquared_adj
+ -0.017580648910682894
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><strong>Welcome to your Jupyter Book</strong></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="02_PM1_Notebook1_Prediction_newdata.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
