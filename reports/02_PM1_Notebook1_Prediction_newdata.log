@@ -17,26 +17,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-rdata_read = pyreadr.read_r("../data/wage2015_subsample_inference.Rdata")
-data = rdata_read[ 'data' ]
-type(data)
-data.shape
+# Package for latex table 
+import array_to_latex as a2l
+
+table = np.zeros((3, 5))
+table[0,0:5] = [p1, R2_1, MSE1, R2_adj1, MSE_adj1]
+table[1,0:5] = [p2, R2_2, MSE2, R2_adj2, MSE_adj2]
+table[2,0:5] = [pL, R2_L, MSEL, R2_adjL, MSE_adjL]
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mPyreadrError[0m                              Traceback (most recent call last)
-Input [1;32mIn [2][0m, in [0;36m<cell line: 1>[1;34m()[0m
-[1;32m----> 1[0m rdata_read [38;5;241m=[39m [43mpyreadr[49m[38;5;241;43m.[39;49m[43mread_r[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m../data/wage2015_subsample_inference.Rdata[39;49m[38;5;124;43m"[39;49m[43m)[49m
-[0;32m      2[0m data [38;5;241m=[39m rdata_read[ [38;5;124m'[39m[38;5;124mdata[39m[38;5;124m'[39m ]
-[0;32m      3[0m [38;5;28mtype[39m(data)
+[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Input [1;32mIn [20][0m, in [0;36m<cell line: 2>[1;34m()[0m
+[0;32m      1[0m [38;5;66;03m# Package for latex table [39;00m
+[1;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01marray_to_latex[39;00m [38;5;28;01mas[39;00m [38;5;21;01ma2l[39;00m
+[0;32m      4[0m table [38;5;241m=[39m np[38;5;241m.[39mzeros(([38;5;241m3[39m, [38;5;241m5[39m))
+[0;32m      5[0m table[[38;5;241m0[39m,[38;5;241m0[39m:[38;5;241m5[39m] [38;5;241m=[39m [p1, R2_1, MSE1, R2_adj1, MSE_adj1]
 
-File [1;32m~\anaconda3\lib\site-packages\pyreadr\pyreadr.py:65[0m, in [0;36mread_r[1;34m(path, use_objects, timezone)[0m
-[0;32m     63[0m filename_bytes [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mexpanduser(filename_bytes)
-[0;32m     64[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m os[38;5;241m.[39mpath[38;5;241m.[39misfile(filename_bytes):
-[1;32m---> 65[0m     [38;5;28;01mraise[39;00m PyreadrError([38;5;124m"[39m[38;5;124mFile [39m[38;5;132;01m{0}[39;00m[38;5;124m does not exist![39m[38;5;124m"[39m[38;5;241m.[39mformat(filename_bytes))
-[0;32m     66[0m parser[38;5;241m.[39mparse(filename_bytes)
-[0;32m     68[0m result [38;5;241m=[39m OrderedDict()
-
-[1;31mPyreadrError[0m: File b'../data/wage2015_subsample_inference.Rdata' does not exist!
-PyreadrError: File b'../data/wage2015_subsample_inference.Rdata' does not exist!
+[1;31mModuleNotFoundError[0m: No module named 'array_to_latex'
+ModuleNotFoundError: No module named 'array_to_latex'
 
