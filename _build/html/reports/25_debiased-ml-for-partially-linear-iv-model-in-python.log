@@ -17,23 +17,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-rdata_read = pyreadr.read_r("../data/ajr.Rdata")
-AJR = rdata_read[ 'AJR' ]
+x_dframe2
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mPyreadrError[0m                              Traceback (most recent call last)
-Input [1;32mIn [2][0m, in [0;36m<cell line: 1>[1;34m()[0m
-[1;32m----> 1[0m rdata_read [38;5;241m=[39m [43mpyreadr[49m[38;5;241;43m.[39;49m[43mread_r[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m../data/ajr.Rdata[39;49m[38;5;124;43m"[39;49m[43m)[49m
-[0;32m      2[0m AJR [38;5;241m=[39m rdata_read[ [38;5;124m'[39m[38;5;124mAJR[39m[38;5;124m'[39m ]
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Input [1;32mIn [8][0m, in [0;36m<cell line: 1>[1;34m()[0m
+[1;32m----> 1[0m [43mx_dframe2[49m
 
-File [1;32m~\anaconda3\lib\site-packages\pyreadr\pyreadr.py:65[0m, in [0;36mread_r[1;34m(path, use_objects, timezone)[0m
-[0;32m     63[0m filename_bytes [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mexpanduser(filename_bytes)
-[0;32m     64[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m os[38;5;241m.[39mpath[38;5;241m.[39misfile(filename_bytes):
-[1;32m---> 65[0m     [38;5;28;01mraise[39;00m PyreadrError([38;5;124m"[39m[38;5;124mFile [39m[38;5;132;01m{0}[39;00m[38;5;124m does not exist![39m[38;5;124m"[39m[38;5;241m.[39mformat(filename_bytes))
-[0;32m     66[0m parser[38;5;241m.[39mparse(filename_bytes)
-[0;32m     68[0m result [38;5;241m=[39m OrderedDict()
-
-[1;31mPyreadrError[0m: File b'../data/ajr.Rdata' does not exist!
-PyreadrError: File b'../data/ajr.Rdata' does not exist!
+[1;31mNameError[0m: name 'x_dframe2' is not defined
+NameError: name 'x_dframe2' is not defined
 
