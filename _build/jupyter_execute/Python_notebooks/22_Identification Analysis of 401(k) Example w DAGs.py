@@ -18,13 +18,15 @@ import networkx as nx
 from optimaladj.CausalGraph import CausalGraph
 
 
-# ## Graphs for 401(K) Analsyis
+# Graphs for 401(K) Analsyis
 
 #  Here we have
 #   * $Y$ -- net financial assets;
 #   * $X$ -- worker characteristics (income, family size, other retirement plans; see lecture notes for details);
 #   * $F$ -- latent (unobserved) firm characteristics
 #   * $D$ -- 401(K) eligibility, deterimined by $F$ and $X$
+
+# ## State one graph (where F determines X) and plot it
 
 # In[2]:
 
@@ -49,7 +51,7 @@ nx.draw(G1, pos, with_labels = True, style = 'solid',
         node_color='white', arrowsize=30)
 
 
-# ### List minimal adjustment sets to identify causal effecs $D \to Y$
+# List minimal adjustment sets to identify causal effecs $D \to Y$
 # 
 
 # In[3]:
@@ -58,7 +60,7 @@ nx.draw(G1, pos, with_labels = True, style = 'solid',
 G1.optimal_minimal_adj_set("D", "Y", [], ["X"])
 
 
-# ### What is the underlying principle? 
+# What is the underlying principle? 
 # 
 # Here condition on X blocks backdoor paths from Y to D (Pearl).  Dagitty correctly finds X (and does many more correct decisions, when we consider more elaborate structures. Why do we want to consider more elaborate structures? The very empirical problem requires us to do so!
 
@@ -243,10 +245,3 @@ G6.optimal_minimal_adj_set("D", "Y", [], ["X"])
 
 
 # This last code show us an error because  there is no valid adustment set (among observed variables)
-
-# ## Question:
-#  
-# Given the analysis above, do you find the adjustment for workers' characteristics a credible strategy to identify the causal (total effect) of 401 (k) elligibility on net financial wealth?
-# 
-#      * If yes, click an "upvote" button at the top
-#      * If no, please click an "upvote" button at the top

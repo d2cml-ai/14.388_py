@@ -3,7 +3,7 @@
 
 # This notebook contains an example for teaching.
 
-# # The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+# # The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
 
 # In this lab, we estimate the effect of gun ownership on the homicide rate by a neural network.
 
@@ -54,7 +54,7 @@ data1 = pd.read_csv( r"../data/gun_clean.csv" )
 data1.shape[1]
 
 
-# ### Preprocessing
+# ## Preprocessing
 
 # To account for heterogeneity across counties and time trends in  all variables, we remove from them county-specific and time-specific effects in the following preprocessing.
 
@@ -133,7 +133,7 @@ for var_name in varlist2:
     rdata[f'{var_name}'] = smf.ols( formula = form , data = data1 ).fit().resid
 
 
-# # DML for neural nets
+# ## DML for neural nets
 # 
 
 # The following algorithm comsumes $Y$,$D$ and $Z$, and learns the residuals $\tilde{Y}$ and $\tilde{D}$ via a neural network, where the residuals are obtained by cross-validation (cross-fitting). Then, it prints the estimated coefficient β and the clustered standard error from the final OLS regression.
@@ -229,6 +229,8 @@ def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
     return coef_est, se, dtil, ytil, rfit
     
 
+
+# ## Estimating the effect with DML for neural nets
 
 # In[70]:
 
