@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>9. ML for wage prediction &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>7. ML for wage prediction &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Deep Neural Networks for Wage Prediction" href="14_deep_neural_networks_for_wage_prediction.html" />
-    <link rel="prev" title="8. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso" href="11_py-heterogenous-wage-effects.html" />
+    <link rel="next" title="8. Double Lasso for Testing the Convergence Hypothesis" href="10_double-lasso-for-the-convergence-hypothesis.html" />
+    <link rel="prev" title="6. Penalized Linear Regressions: A Simulation Experiment" href="07_py-notebook-linear-penalized-regs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -146,79 +146,89 @@ const thebe_selector_output = ".output, .cell_output"
    6. Penalized Linear Regressions: A Simulation Experiment
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   7. ML for wage prediction
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   7. Double Lasso for Testing the Convergence Hypothesis
+   8. Double Lasso for Testing the Convergence Hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   8. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   9. ML for wage prediction
+   9. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="14_deep_neural_networks_for_wage_prediction.html">
-   10. Deep Neural Networks for Wage Prediction
+  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
+   10. Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="15_automl-for-wage-prediction.html">
-   11. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
+   11. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="16_py-Functional-Approximation-By-NN-and-RF.html">
-   12. Functional Approximations by Trees and Neural Networks
+  <a class="reference internal" href="14_automl-for-wage-prediction.html">
+   12. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="17_notebook_dagitty.html">
-   13. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
+   13. Functional Approximations by Trees and Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="19_pm3_notebook_inference_clustering.html">
-   14. DML inference for gun ownership
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   14. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="20_pm3_notebook_inference_nn.html">
-   15. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+  <a class="reference internal" href="17_notebook-dosearch.html">
+   15. Dosearch for Causal Identification in DAGs.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="21_pm5-401k-kaggle-py.html">
-   16. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
+   16. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="22_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
-   17. Identification Analysis of 401(k) Example w DAGs
+  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
+   17. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="23_debiased-ml-for-partially-linear-model-in-python.html">
-   18. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
+   18. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="24_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   19. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
+   19. Identification Analysis of 401(k) Example w DAGs
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   20. Double/Debiased ML for Partially Linear IV Model
+  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
+   20. Double/Debiased Machine Learning for the Partially Linear Regression Model.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="27_r_weak_iv_experiments.html">
-   21. A Simple Example of Properties of IV estimator when Instruments are Weak
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   21. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   22. Double/Debiased ML for Partially Linear IV Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   23. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -280,7 +290,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/13_ML_for_wage_prediction.ipynb"
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -298,7 +308,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/13_ML_for_wage_prediction.ipynb"
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -376,7 +386,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/13_ML_for_wage_prediction.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/08_ML_for_wage_prediction.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -393,7 +403,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/13_ML_for_wage_prediction.ipynb"
+        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -421,7 +431,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/Python_notebooks/13_ML_for_wage_prediction.ipynb"
+        <a href="../_sources/Python_notebooks/08_ML_for_wage_prediction.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -482,27 +492,27 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   9.1. Data
+   7.1. Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analysis">
-   9.2. Analysis
+   7.2. Analysis
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ols">
-     9.2.1. OLS
+     7.2.1. OLS
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lasso-ridge-and-elastic-net">
-     9.2.2. Lasso, Ridge and Elastic Net
+     7.2.2. Lasso, Ridge and Elastic Net
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#estimating-the-predictions-from-rlasso-models">
-       9.2.2.1. Estimating the predictions from rlasso models
+       7.2.2.1. Estimating the predictions from rlasso models
       </a>
      </li>
     </ul>
@@ -511,29 +521,29 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-linear-models">
-   9.3. Non-linear models
+   7.3. Non-linear models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#regression-trees">
-     9.3.1. Regression Trees
+     7.3.1. Regression Trees
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#random-forest-and-boosted-trees">
-     9.3.2. Random Forest and Boosted Trees
+     7.3.2. Random Forest and Boosted Trees
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
-   9.4. Results
+   7.4. Results
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ensemble-learning">
-     9.4.1. Ensemble learning
+     7.4.1. Ensemble learning
     </a>
    </li>
   </ul>
@@ -559,27 +569,27 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   9.1. Data
+   7.1. Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#analysis">
-   9.2. Analysis
+   7.2. Analysis
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ols">
-     9.2.1. OLS
+     7.2.1. OLS
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lasso-ridge-and-elastic-net">
-     9.2.2. Lasso, Ridge and Elastic Net
+     7.2.2. Lasso, Ridge and Elastic Net
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#estimating-the-predictions-from-rlasso-models">
-       9.2.2.1. Estimating the predictions from rlasso models
+       7.2.2.1. Estimating the predictions from rlasso models
       </a>
      </li>
     </ul>
@@ -588,29 +598,29 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-linear-models">
-   9.3. Non-linear models
+   7.3. Non-linear models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#regression-trees">
-     9.3.1. Regression Trees
+     7.3.1. Regression Trees
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#random-forest-and-boosted-trees">
-     9.3.2. Random Forest and Boosted Trees
+     7.3.2. Random Forest and Boosted Trees
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
-   9.4. Results
+   7.4. Results
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#ensemble-learning">
-     9.4.1. Ensemble learning
+     7.4.1. Ensemble learning
     </a>
    </li>
   </ul>
@@ -632,11 +642,11 @@ title="Print to PDF"
 </ul>
 <p>This notebook contains an example for teaching.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="ml-for-wage-prediction">
-<h1><span class="section-number">9. </span>ML for wage prediction<a class="headerlink" href="#ml-for-wage-prediction" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">7. </span>ML for wage prediction<a class="headerlink" href="#ml-for-wage-prediction" title="Permalink to this headline">#</a></h1>
 <p>We illustrate how to predict an outcome variable Y in a high-dimensional setting, where the number of covariates <span class="math notranslate nohighlight">\(p\)</span> is large in relation to the sample size <span class="math notranslate nohighlight">\(n\)</span>. So far we have used linear prediction rules, e.g. Lasso regression, for estimation.
 Now, we also consider nonlinear prediction rules including tree-based methods.</p>
 <section id="data">
-<h2><span class="section-number">9.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
 <p>Again, we consider data from the U.S. March Supplement of the Current Population Survey (CPS) in 2015.
 The preproccessed sample consists of <span class="math notranslate nohighlight">\(5150\)</span> never-married individuals.</p>
 <div class="cell docutils container">
@@ -706,14 +716,14 @@ The preproccessed sample consists of <span class="math notranslate nohighlight">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 3000.0)
 </pre></div>
 </div>
-<img alt="../_images/13_ML_for_wage_prediction_12_1.png" src="../_images/13_ML_for_wage_prediction_12_1.png" />
+<img alt="../_images/08_ML_for_wage_prediction_12_1.png" src="../_images/08_ML_for_wage_prediction_12_1.png" />
 </div>
 </div>
 <p>Wages show a high degree of skewness. Hence, wages are transformed in almost all studies by
 the logarithm.</p>
 </section>
 <section id="analysis">
-<h2><span class="section-number">9.2. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.2. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h2>
 <p>Due to the skewness of the data, we are considering log wages which leads to the following regression model</p>
 <div class="math notranslate nohighlight">
 \[log(wage) = g(Z) + \epsilon.\]</div>
@@ -801,32 +811,9 @@ In linear models, we estimate the prediction rule of the form</p>
   </thead>
   <tbody>
     <tr>
-      <th>3378</th>
-      <td>14.423077</td>
-      <td>2.668829</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3.5</td>
-      <td>0.1225</td>
-      <td>0.042875</td>
-      <td>0.015006</td>
-      <td>710</td>
-      <td>2</td>
-      <td>8660</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>803</th>
-      <td>20.000000</td>
-      <td>2.995732</td>
+      <th>4678</th>
+      <td>17.788462</td>
+      <td>2.878550</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -835,67 +822,67 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>26.0</td>
-      <td>6.7600</td>
-      <td>17.576000</td>
-      <td>45.697600</td>
-      <td>4530</td>
-      <td>15</td>
-      <td>7070</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>3132</th>
-      <td>15.384615</td>
-      <td>2.733368</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>6.5</td>
-      <td>0.4225</td>
-      <td>0.274625</td>
-      <td>0.178506</td>
-      <td>7750</td>
+      <td>8.0</td>
+      <td>0.6400</td>
+      <td>0.512000</td>
+      <td>0.409600</td>
+      <td>8030</td>
       <td>21</td>
-      <td>3180</td>
+      <td>2670</td>
       <td>6</td>
     </tr>
     <tr>
-      <th>2177</th>
-      <td>7.836538</td>
-      <td>2.058797</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
+      <th>1673</th>
+      <td>24.038462</td>
+      <td>3.179655</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
-      <td>12.0</td>
-      <td>1.4400</td>
-      <td>1.728000</td>
-      <td>2.073600</td>
-      <td>4760</td>
-      <td>16</td>
-      <td>5275</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>29.5</td>
+      <td>8.7025</td>
+      <td>25.672375</td>
+      <td>75.733506</td>
+      <td>2900</td>
       <td>9</td>
+      <td>6690</td>
+      <td>11</td>
     </tr>
     <tr>
-      <th>731</th>
-      <td>19.230769</td>
-      <td>2.956512</td>
+      <th>3950</th>
+      <td>15.384615</td>
+      <td>2.733368</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>0.1600</td>
+      <td>0.064000</td>
+      <td>0.025600</td>
+      <td>430</td>
+      <td>1</td>
+      <td>7580</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>3565</th>
+      <td>32.211538</td>
+      <td>3.472325</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -903,17 +890,40 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>2320</td>
+      <td>0.0</td>
+      <td>37.0</td>
+      <td>13.6900</td>
+      <td>50.653000</td>
+      <td>187.416100</td>
+      <td>2400</td>
       <td>8</td>
-      <td>7860</td>
-      <td>17</td>
+      <td>8570</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>1963</th>
+      <td>21.153846</td>
+      <td>3.051822</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>30.5</td>
+      <td>9.3025</td>
+      <td>28.372625</td>
+      <td>86.536506</td>
+      <td>8220</td>
+      <td>21</td>
+      <td>2590</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>...</th>
@@ -939,107 +949,61 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>4555</th>
-      <td>6.868132</td>
-      <td>1.926892</td>
-      <td>1.0</td>
+      <th>2010</th>
+      <td>83.333333</td>
+      <td>4.422849</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>5.0</td>
       <td>0.2500</td>
       <td>0.125000</td>
       <td>0.062500</td>
-      <td>4760</td>
-      <td>16</td>
-      <td>5790</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>4428</th>
-      <td>12.019231</td>
-      <td>2.486508</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>14.0</td>
-      <td>1.9600</td>
-      <td>2.744000</td>
-      <td>3.841600</td>
-      <td>5220</td>
-      <td>17</td>
-      <td>9470</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>2778</th>
-      <td>51.282051</td>
-      <td>3.937341</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>7.0</td>
-      <td>0.4900</td>
-      <td>0.343000</td>
-      <td>0.240100</td>
-      <td>110</td>
+      <td>120</td>
       <td>1</td>
-      <td>7380</td>
+      <td>6870</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>5071</th>
+      <td>50.363462</td>
+      <td>3.919266</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>0.1600</td>
+      <td>0.064000</td>
+      <td>0.025600</td>
+      <td>530</td>
+      <td>2</td>
+      <td>7460</td>
       <td>14</td>
     </tr>
     <tr>
-      <th>4706</th>
-      <td>11.538462</td>
-      <td>2.445686</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
+      <th>748</th>
+      <td>41.208791</td>
+      <td>3.718652</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>5.5</td>
-      <td>0.3025</td>
-      <td>0.166375</td>
-      <td>0.091506</td>
-      <td>4700</td>
-      <td>16</td>
-      <td>4970</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>513</th>
-      <td>29.059829</td>
-      <td>3.369357</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1048,10 +1012,56 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.1600</td>
       <td>0.064000</td>
       <td>0.025600</td>
-      <td>2000</td>
-      <td>6</td>
-      <td>7870</td>
+      <td>840</td>
+      <td>2</td>
+      <td>7070</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>2434</th>
+      <td>16.346154</td>
+      <td>2.793993</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>6.5</td>
+      <td>0.4225</td>
+      <td>0.274625</td>
+      <td>0.178506</td>
+      <td>5400</td>
       <td>17</td>
+      <td>7480</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>3186</th>
+      <td>15.680473</td>
+      <td>2.752416</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>14.0</td>
+      <td>1.9600</td>
+      <td>2.744000</td>
+      <td>3.841600</td>
+      <td>9000</td>
+      <td>22</td>
+      <td>7790</td>
+      <td>16</td>
     </tr>
   </tbody>
 </table>
@@ -1146,7 +1156,55 @@ In linear models, we estimate the prediction rule of the form</p>
   </thead>
   <tbody>
     <tr>
-      <th>3378</th>
+      <th>4678</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>0.6400</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1673</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>29.5</td>
+      <td>8.7025</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3950</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1159,8 +1217,8 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>...</td>
       <td>1.0</td>
-      <td>3.5</td>
-      <td>0.1225</td>
+      <td>4.0</td>
+      <td>0.1600</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1170,31 +1228,7 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>803</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>26.0</td>
-      <td>6.7600</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3132</th>
+      <th>3565</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1206,43 +1240,19 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
-      <td>0.0</td>
-      <td>6.5</td>
-      <td>0.4225</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
+      <td>37.0</td>
+      <td>13.6900</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>2177</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>12.0</td>
-      <td>1.4400</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>731</th>
+      <th>1963</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1254,14 +1264,14 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
+      <td>30.5</td>
+      <td>9.3025</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
@@ -1290,7 +1300,7 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>4555</th>
+      <th>2010</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1298,95 +1308,23 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>5.0</td>
       <td>0.2500</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>4428</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>...</td>
-      <td>1.0</td>
-      <td>14.0</td>
-      <td>1.9600</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2778</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>1.0</td>
-      <td>7.0</td>
-      <td>0.4900</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>4706</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>5.5</td>
-      <td>0.3025</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>513</th>
+      <th>5071</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1407,6 +1345,78 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>748</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>0.1600</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2434</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>6.5</td>
+      <td>0.4225</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3186</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>14.0</td>
+      <td>1.9600</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
     </tr>
   </tbody>
@@ -1438,7 +1448,7 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 <p>As known from our first lab, the basic model consists of <span class="math notranslate nohighlight">\(10\)</span> regressors and the flexible model of <span class="math notranslate nohighlight">\(246\)</span> regressors. Let us fit our models to the training sample using the two different model specifications. We are starting by running a simple ols regression.</p>
 <section id="ols">
-<h3><span class="section-number">9.2.1. </span>OLS<a class="headerlink" href="#ols" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.1. </span>OLS<a class="headerlink" href="#ols" title="Permalink to this headline">#</a></h3>
 <p>We fit the basic model to our training data by running an ols regression and compute the mean squared error on the test sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1453,7 +1463,7 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean squared error (MSE) using the basic model is equal to , 0.23552960710534965 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean squared error (MSE) using the basic model is equal to , 0.2215677468338738 
 </pre></div>
 </div>
 </div>
@@ -1469,8 +1479,8 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.235530
-Std.Err.    0.015112
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.221568
+Std.Err.    0.014480
 Name: const, dtype: float64
 </pre></div>
 </div>
@@ -1485,7 +1495,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to, 0.2936040073674949
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to, 0.2829470612608479
 </pre></div>
 </div>
 </div>
@@ -1510,7 +1520,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the flex model is equal to, 0.26816802939411755
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the flex model is equal to, 0.2550720704173395
 </pre></div>
 </div>
 </div>
@@ -1518,7 +1528,7 @@ Name: const, dtype: float64
 <p>We observe that ols regression works better for the basic model with smaller <span class="math notranslate nohighlight">\(p/n\)</span> ratio. We are proceeding by running lasso regressions and its versions.</p>
 </section>
 <section id="lasso-ridge-and-elastic-net">
-<h3><span class="section-number">9.2.2. </span>Lasso, Ridge and Elastic Net<a class="headerlink" href="#lasso-ridge-and-elastic-net" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.2. </span>Lasso, Ridge and Elastic Net<a class="headerlink" href="#lasso-ridge-and-elastic-net" title="Permalink to this headline">#</a></h3>
 <p>Considering the basic model, we run a lasso/post-lasso regression first and then we compute the measures for the out-of-sample performance. Note that applying the package <em>hdm</em> and the function <em>rlasso</em> we rely on a theoretical based choice of the penalty level <span class="math notranslate nohighlight">\(\lambda\)</span> in the lasso regression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1551,13 +1561,13 @@ C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: Runti
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[None, :]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
+C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[None, :]
-C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[None, :]
@@ -1578,7 +1588,7 @@ C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: Runti
 </div>
 </div>
 <section id="estimating-the-predictions-from-rlasso-models">
-<h4><span class="section-number">9.2.2.1. </span>Estimating the predictions from rlasso models<a class="headerlink" href="#estimating-the-predictions-from-rlasso-models" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.2.2.1. </span>Estimating the predictions from rlasso models<a class="headerlink" href="#estimating-the-predictions-from-rlasso-models" title="Permalink to this headline">#</a></h4>
 <p>We have to know that the residuals output come from this formula:</p>
 <ul class="simple">
 <li><p>x1 = x - np.ones( (x.shape[1] , 1) ) &#64; x.mean( axis = 0 )</p></li>
@@ -1648,7 +1658,7 @@ C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: Runti
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.26462964239946374,for lasso and 0.2736341773904908 for post-lasso
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.2550796633203902,for lasso and 0.2615572314654303 for post-lasso
 </pre></div>
 </div>
 </div>
@@ -1700,12 +1710,6 @@ C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: Runti
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[None, :]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
@@ -1722,9 +1726,7 @@ C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: Runti
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[None, :]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
+C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2691: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[:, None]
 C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: RuntimeWarning: invalid value encountered in true_divide
   c /= stddev[None, :]
@@ -1793,7 +1795,7 @@ C:\Users\User\anaconda3\lib\site-packages\numpy\lib\function_base.py:2692: Runti
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.26462964239946374,for lasso and 0.26162813073578806 for post-lasso
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.2550796633203902,for lasso and 0.24212452703031007 for post-lasso
 </pre></div>
 </div>
 </div>
@@ -1925,8 +1927,8 @@ Set parameter alpha to original_alpha * np.sqrt(n_samples) if l1_ratio is 1, and
 <span class="g g-Whitespace">    </span><span class="mi">777</span> <span class="k">if</span> <span class="n">dtype_numeric</span> <span class="ow">and</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="s2">&quot;OUSV&quot;</span><span class="p">:</span>
 
 <span class="ne">ValueError</span>: Expected 2D array, got 1D array instead:
-<span class="n">array</span><span class="o">=</span><span class="p">[</span> <span class="mf">0.77410362</span> <span class="o">-</span><span class="mf">0.36404169</span> <span class="o">-</span><span class="mf">0.57438108</span> <span class="o">...</span> <span class="o">-</span><span class="mf">0.35976299</span>  <span class="mf">0.15043687</span>
-<span class="g g-Whitespace">  </span><span class="mi">0</span><span class="mf">.74976935</span><span class="p">]</span><span class="o">.</span>
+<span class="n">array</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.12382722</span> <span class="o">-</span><span class="mf">0.34389605</span> <span class="o">-</span><span class="mf">0.46880731</span> <span class="o">...</span>  <span class="mf">0.21872773</span> <span class="o">-</span><span class="mf">0.90061425</span>
+ <span class="o">-</span><span class="mf">0.06072653</span><span class="p">]</span><span class="o">.</span>
 <span class="n">Reshape</span> <span class="n">your</span> <span class="n">data</span> <span class="n">either</span> <span class="n">using</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">your</span> <span class="n">data</span> <span class="n">has</span> <span class="n">a</span> <span class="n">single</span> <span class="n">feature</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">it</span> <span class="n">contains</span> <span class="n">a</span> <span class="n">single</span> <span class="n">sample</span><span class="o">.</span>
 </pre></div>
 </div>
@@ -2264,11 +2266,11 @@ C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: Data
 </section>
 </section>
 <section id="non-linear-models">
-<h2><span class="section-number">9.3. </span>Non-linear models<a class="headerlink" href="#non-linear-models" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.3. </span>Non-linear models<a class="headerlink" href="#non-linear-models" title="Permalink to this headline">#</a></h2>
 <p>Besides linear regression models, we consider nonlinear regression models to build a predictive model. We are applying regression trees, random forests, boosted trees and neural nets to estimate the regression function <span class="math notranslate nohighlight">\(g(X)\)</span>. First, we load the relevant libraries</p>
 <p>and we illustrate the application of regression trees.</p>
 <section id="regression-trees">
-<h3><span class="section-number">9.3.1. </span>Regression Trees<a class="headerlink" href="#regression-trees" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.3.1. </span>Regression Trees<a class="headerlink" href="#regression-trees" title="Permalink to this headline">#</a></h3>
 <p>We fit a regression tree to the training data using the basic model. The variable <em>cp</em> controls the complexity of the regression tree, i.e. how deep we build the tree.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2516,7 +2518,7 @@ Xerror = Cross-Validated Error Rate</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/13_ML_for_wage_prediction_76_0.png" src="../_images/13_ML_for_wage_prediction_76_0.png" />
+<img alt="../_images/08_ML_for_wage_prediction_76_0.png" src="../_images/08_ML_for_wage_prediction_76_0.png" />
 </div>
 </div>
 <p>An important method to improve predictive performance is called “Pruning the Tree”. This
@@ -2533,17 +2535,17 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 <p>Finally, we calculate the mean-squared error and the <span class="math notranslate nohighlight">\(R^2\)</span> on the test sample to evaluate the out-of-sample performance of the pruned tree.</p>
 </section>
 <section id="random-forest-and-boosted-trees">
-<h3><span class="section-number">9.3.2. </span>Random Forest and Boosted Trees<a class="headerlink" href="#random-forest-and-boosted-trees" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.3.2. </span>Random Forest and Boosted Trees<a class="headerlink" href="#random-forest-and-boosted-trees" title="Permalink to this headline">#</a></h3>
 <p>In the next step, we apply the more advanced tree-based methods random forest and boosted trees.</p>
 <p>To conclude, let us have a look at our results.</p>
 </section>
 </section>
 <section id="results">
-<h2><span class="section-number">9.4. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.4. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
 <p>Above, we displayed the results for a single split of data into the training and testing part. The table shows the test MSE in column 1 as well as the standard error in column 2 and the test <span class="math notranslate nohighlight">\(R^2\)</span>
 in column 3. We see that the prediction rule produced by Elastic Net using the flexible model performs the best here, giving the lowest test MSE. Cross-Validated Lasso and Ridge, perform nearly as well. For any two of these methods, their testing MSEs are within one standard error of each other. Remarkably, OLS on a simple model performs extremely well, almost as well as best tree based method Random Forest. On the other hand, OLS on a flexible model with many regressors performs very poorly giving the highest test MSE. It is worth to notice that the nonlinear models, e.g. Random Forest, are not tuned. Thus, there is a lot of potential to improve the performance of the nonlinear methods we used in the analysis.</p>
 <section id="ensemble-learning">
-<h3><span class="section-number">9.4.1. </span>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.4.1. </span>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this headline">#</a></h3>
 <p>In the final step, we can build a prediction model by combing the strengths of the models we considered so far. This ensemble method is of the form
 $<span class="math notranslate nohighlight">\( f(x) = \sum_{k=1}^K \alpha_k f_k(x) \)</span><span class="math notranslate nohighlight">\(
 where the \)</span>f_k<span class="math notranslate nohighlight">\('s denote our prediction rules from the table above and the \)</span>\alpha_k$’s are the corresponding weights.</p>
@@ -2754,17 +2756,17 @@ where the \)</span>f_k<span class="math notranslate nohighlight">\('s denote our
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="11_py-heterogenous-wage-effects.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="07_py-notebook-linear-penalized-regs.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8. </span>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Penalized Linear Regressions: A Simulation Experiment</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="14_deep_neural_networks_for_wage_prediction.html" title="next page">
+    <a class='right-next' id="next-link" href="10_double-lasso-for-the-convergence-hypothesis.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Deep Neural Networks for Wage Prediction</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Double Lasso for Testing the Convergence Hypothesis</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
