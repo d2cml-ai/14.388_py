@@ -9,7 +9,7 @@
 # $$
 # can be easily approximated by a tree-based methods (Trees, Random Forest) and a neural network (2 Layered Neural Network)
 
-# # Functional Approximation by a Tree
+# ## Functional Approximation by a Tree
 # 
 
 # In[1]:
@@ -80,7 +80,7 @@ plt.ylabel( "g(z)" )
 plt.show()
 
 
-# # Functional Approximation by RF
+# ## Functional Approximation by RF
 
 # Here we show how the function
 # $$
@@ -127,7 +127,7 @@ plt.ylabel( "g(z)" )
 plt.show()
 
 
-# # Boosted Trees
+# ## Boosted Trees
 
 # In[5]:
 
@@ -164,7 +164,7 @@ plt.ylabel( "g(z)" )
 plt.show()
 
 
-# # Same Example with a Neural Network
+# ## Same Example with a Neural Network
 
 # In[7]:
 

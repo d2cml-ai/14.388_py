@@ -1,6 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Double/Debiased Machine Learning for the Partially Linear Regression Model.
+# 
+# This is a simple implementation of Debiased Machine Learning for the Partially Linear Regression Model.
+# 
+# Reference: 
+# 
+# https://arxiv.org/abs/1608.00060
+# 
+# 
+# https://www.amazon.com/Business-Data-Science-Combining-Accelerate/dp/1260452778
+# 
+# The code is based on the book.
+
 # In[1]:
 
 
@@ -42,20 +55,7 @@ from statsmodels.tools import add_constant
 from sklearn.linear_model import ElasticNet
 
 
-# # Double/Debiased Machine Learning for the Partially Linear Regression Model.
-# 
-# This is a simple implementation of Debiased Machine Learning for the Partially Linear Regression Model.
-# 
-# Reference: 
-# 
-# https://arxiv.org/abs/1608.00060
-# 
-# 
-# https://www.amazon.com/Business-Data-Science-Combining-Accelerate/dp/1260452778
-# 
-# The code is based on the book.
-
-# # DML algorithm
+# ## DML algorithm
 # 
 # Here we perform estimation and inference of predictive coefficient $\alpha$ in the partially linear statistical model, 
 # $$

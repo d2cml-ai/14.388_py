@@ -12,14 +12,14 @@
 
 # ![image.png](attachment:image.png)
 
-# ## We will 
+# We will 
 # 
-# ## * mimic the partialling out procedure with machine learning tools, 
+# * mimic the partialling out procedure with machine learning tools, 
 # 
-# ## * and invoke Sensmakr to compute $\phi^2$ and plot sensitivity results.
+# * and invoke Sensmakr to compute $\phi^2$ and plot sensitivity results.
 # 
 
-# ### We will use the sensemakr package adapted in python (PySensemakr) by Brian Hill and Nathan LaPierre [ink](https://github.com/nlapier2/PySensemakr)
+# We will use the sensemakr package adapted in python (PySensemakr) by Brian Hill and Nathan LaPierre [ink](https://github.com/nlapier2/PySensemakr)
 
 # In[1]:
 
@@ -51,7 +51,7 @@ darfur.shape
 # There is also a village indicator, which we will treat as fixed effect and partial it out before conducting
 # the analysis. The standard errors will be clustered at the village level.
 
-# # Take out village fixed effects and run basic linear analysis
+# ## Take out village fixed effects and run basic linear analysis
 
 # In[5]:
 
@@ -124,7 +124,7 @@ linear_model_3_table = linear_model_3.summary2().tables[1]
 linear_model_3_table
 
 
-# # We first use Lasso for Partilling Out Controls
+# ## We first use Lasso for Partilling Out Controls
 
 # In[12]:
 
@@ -177,7 +177,7 @@ dml_darfur_model_table = dml_darfur_model.summary2().tables[1]
 dml_darfur_model_table
 
 
-# # Manual Bias Analysis
+# ## Manual Bias Analysis
 
 # In[18]:
 
@@ -230,7 +230,7 @@ plt.plot(gridR2_DC,gridR2_YC)
 plt.show()
 
 
-# # Bias Analysis with Sensemakr
+# ## Bias Analysis with Sensemakr
 
 # In[22]:
 
@@ -286,7 +286,7 @@ model.summary()
 model.plot()
 
 
-# # Next We use Random Forest as ML tool for Partialling Out
+# ## Next We use Random Forest as ML tool for Partialling Out
 
 # The following code does DML with clsutered standard errors by ClusterID
 

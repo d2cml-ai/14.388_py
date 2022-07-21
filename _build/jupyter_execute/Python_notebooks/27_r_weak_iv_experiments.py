@@ -63,7 +63,7 @@ IV_res.summary2().tables[1]["Coef."][0]
 
 # Note that the instrument is weak here (contolled by $\beta$) -- the t-stat is less than 4.
 
-# # Run 1000 trials to evaluate distribution of the IV estimator
+# ## Run 1000 trials to evaluate distribution of the IV estimator
 
 # In[5]:
 
@@ -93,7 +93,7 @@ for i in range( 0, B ):
 IVEst
 
 
-# # Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
+# ## Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
 
 # In[7]:
 
@@ -118,10 +118,4 @@ plt.xlim(-5,5)
 
 rejection_frequency = np.sum(( np.abs(IVEst-1)/sd > 1.96))/B
 print("Rejection Frequency is {} ,while we expect it to be .05".format(rejection_frequency))
-
-
-# In[ ]:
-
-
-
 

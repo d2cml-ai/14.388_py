@@ -3,6 +3,8 @@
 
 # Replication of this [kaggle notebook](https://www.kaggle.com/janniskueck/pm3-notebook-inference-clustering)
 
+# # DML inference for gun ownership
+
 # In[1]:
 
 
@@ -48,7 +50,7 @@ from sklearn.feature_selection import SelectFromModel
 
 # This notebook contains an example for teaching.
 
-# # A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+# ## A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
 
 # We consider the problem of estimating the effect of gun
 # ownership on the homicide rate. For this purpose, we estimate the following partially
@@ -160,7 +162,7 @@ data = rdata_read[ 'data' ]
 n = data.shape[0]
 
 
-# ## We check that our results are equal to R results at 6 decimals
+# ### We check that our results are equal to R results at 6 decimals
 
 # In[48]:
 
@@ -279,7 +281,7 @@ control_ols_table.loc[['PPQ110D', 'PPQ120D'], :]
 
 # After controlling for a rich set of characteristics, the point estimate of gun ownership reduces to $0.19$.
 
-# # DML algorithm
+# ### DML algorithm
 # 
 # Here we perform inference of the predictive coefficient $\beta$ in our partially linear statistical model, 
 # 
@@ -393,7 +395,7 @@ z = Z.to_numpy()
 clu = clu.to_numpy().reshape( len(Y) , 1 )
 
 
-# # Lasso 
+# ### Lasso 
 
 # In[22]:
 

@@ -10,7 +10,7 @@
 # 
 # One can argue that eligibility for enrolling in a 401(k) plan in this data can be taken as exogenous after conditioning on a few observables of which the most important for their argument is income. The basic idea is that, at least around the time 401(k)’s initially became available, people were unlikely to be basing their employment decisions on whether an employer offered a 401(k) but would instead focus on income and other aspects of the job. 
 
-# ### Data
+# ## Data
 # 
 # The data set can be loaded from the `hdm` package for R by typing
 # 
@@ -129,7 +129,7 @@ data[['p401', 'net_tfa']].groupby('p401').mean().diff()
 
 # We can not use np.log in `inc` variable since it has negative values. As a result, we got a column with some `None` values. Those observations have problems with `poly.fit_transform` function since it does not admit `NaN` values **(uncomment and run the code below for a example)**. I decided to low down the degree of the polynomial to **6** for some estimations: random forest, decision trees, etc. So, we are going to use create datasets: **data_ml** (8 degree `inc`) and **data_ml_aux** (6 degree `inc`).
 
-# #### Main Data
+# ### Main Data
 
 # In[10]:
 
@@ -162,7 +162,7 @@ p = model_flex.shape[1] - 2
 print(p)
 
 
-# #### Auxiliary data
+# ### Auxiliary data
 # We are going to use this data since sklearn has some problems with values greater than `float32`.
 
 # In[11]:

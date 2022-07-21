@@ -14,7 +14,7 @@
 # 
 
 # 
-# # Partially Linear IV Model
+# ## Partially Linear IV Model
 # 
 # We consider the partially linear structural equation model:
 # \begin{eqnarray}
@@ -41,7 +41,7 @@
 # 
 # ---
 # 
-# # Example
+# **Example**
 # 
 # A simple contextual example is from biostatistics, where $Y$ is a health outcome and $D$ is indicator of smoking.  Thus, $\theta_0$ is captures the effect of smoking on health.  Health outcome $Y$ and smoking behavior $D$ are treated as being jointly determined.  $X$ represents patient characteristics, and $Z$ could be a doctor's advice not to smoke (or another behavioral treatment) that may affect the outcome $Y$ only through shifting the behavior $D$, conditional on characteristics $X$.   
 # 
@@ -49,7 +49,7 @@
 # 
 # 
 # 
-# # PLIVM in Residualized Form
+# **PLIVM in Residualized Form**
 # 
 # The PLIV model above can be rewritten in the following residualized form:
 # $$
@@ -70,7 +70,7 @@
 # 
 # -----
 # 
-# # DML for PLIV Model
+# **DML for PLIV Model**
 # 
 # Given identification, DML  proceeds as follows
 # 
@@ -226,7 +226,7 @@ def DML2_for_PLIVM(x, d, z , y, dreg, yreg, zreg, nfold = 2 ):
 
 # -----
 # 
-# # Emprical Example:  Acemoglu, Jonsohn, Robinson (AER).
+# ## Emprical Example:  Acemoglu, Jonsohn, Robinson (AER).
 # 
 # 
 # * Y is log GDP;
@@ -423,7 +423,7 @@ comp_tab = pd.DataFrame( comp_tab_numpy , columns = [ 'RF' ,'LASSO' ] , index = 
 comp_tab
 
 
-# # Examine if we have weak instruments
+# ## Examine if we have weak instruments
 
 # In[234]:
 
@@ -437,7 +437,7 @@ sm.OLS( DML2_lasso[ 'dtil' ] , DML2_lasso[ 'ztil' ] ).fit( cov_type = 'HC1', use
 sm.OLS( DML2_RF[ 'dtil' ] , DML2_RF[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = True ).summary()
 
 
-# #  We do have weak instruments, because t-stats in regression $\tilde D \sim \tilde Z$ are less than 4 in absolute value
+# ##  We do have weak instruments, because t-stats in regression $\tilde D \sim \tilde Z$ are less than 4 in absolute value
 
 # So let's carry out DML inference combined with Anderson-Rubin Idea
 

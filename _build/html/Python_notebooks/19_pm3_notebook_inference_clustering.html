@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>33. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>14. DML inference for gun ownership &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="36. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding" href="20_pm3_notebook_inference_nn.html" />
-    <link rel="prev" title="32. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests" href="17_notebook_dagitty.html" />
+    <link rel="next" title="15. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets" href="20_pm3_notebook_inference_nn.html" />
+    <link rel="prev" title="13. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests" href="17_notebook_dagitty.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,133 +117,108 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="01_Python_Notebook_%20Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+   1. OLS and lasso for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_PM1_Notebook1_Prediction_newdata.html">
-   2. Introduction
+  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+   2. An inferential problem: The Gender Wage Gap
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_PM1_Notebook_Inference.html">
-   5. An inferential problem: The Gender Wage Gap
+  <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
+   3. Vaccine RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="04_py-notebook-vaccine-rcts.html">
-   6. Vaccine RCT Examples
+  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
+   4. Analyzing RCT with Precision by Adjusting for Baseline Covariates
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="05_Analyzing_RCT_with_Precision.html">
-   10. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
+   5. Analyzing RCT data with Precision Adjustment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="06_Analyzing_rct_reemployment_experiment.html">
-   15. Analyzing RCT data with Precision Adjustment
+  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
+   6. Penalized Linear Regressions: A Simulation Experiment
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="07_python_notebook_linear_penalized_regs.html">
-   19. Penalized Linear Regressions: A Simulation Experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_python_notebook_experiment_on_orthogonal_learning.html">
-   20. Simulation Design
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_pm2_notebook_jannis.html">
-   21. Testing the Convergence Hypothesis
+  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
+   7. Double Lasso for Testing the Convergence Hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   22. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   8. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="13_pm3-notebook-newdata.html">
-   23. A Simple Case Study using Wage Data from 2015
+  <a class="reference internal" href="13_ML_for_wage_prediction.html">
+   9. ML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="14_pm3_notebook_newdata_nn.html">
-   24. A Simple Case Study using Wage Data from 2015 - proceeding
+  <a class="reference internal" href="14_deep_neural_networks_for_wage_prediction.html">
+   10. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="15_automl_for_wage_prediction.html">
-   26. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  <a class="reference internal" href="15_automl-for-wage-prediction.html">
+   11. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_py-Functional-Approximation-By-NN-and-RF.html">
-   27. Functional Approximations by Trees and Neural Networks
+   12. Functional Approximations by Trees and Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook_dagitty.html">
-   32. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   13. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   33. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+   14. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm3_notebook_inference_nn.html">
-   36. The Effect of Gun Ownership on Gun-Homicide Rates - proceeding
+   15. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="21_pm5-401k-kaggle-py.html">
-   38. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   16. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
-   39. Identification Analysis of 401(k) Example w DAGs
+   17. Identification Analysis of 401(k) Example w DAGs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_debiased-ml-for-partially-linear-model-in-python.html">
-   40. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   18. Double/Debiased Machine Learning for the Partially Linear Regression Model.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   42. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   19. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   48. Double/Debiased ML for Partially Linear IV Model
+   20. Double/Debiased ML for Partially Linear IV Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="27_r_weak_iv_experiments.html">
-   56. A Simple Example of Properties of IV estimator when Instruments are Weak
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="average_treatment_effect_1.html">
-   59. 1. ATE I: Binary treatment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Double_Machine_Learning.html">
-   60. 1.0 The basics of double/debiased machine learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="py_double_ml_pension.html">
-   67. Python: Impact of 401(k) on Financial Wealth
+   21. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -505,75 +480,73 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   33. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates">
+   14.1. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data">
-     33.1. Data
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   14.2. Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing">
+     14.2.1. Preprocessing
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#preprocessing">
-       33.1.1. Preprocessing
-      </a>
-     </li>
-    </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals">
-     33.2. We check that our results are equal to R results at 6 decimals
+     14.2.2. We check that our results are equal to R results at 6 decimals
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-effect-of-gun-ownership">
-     33.3. The effect of gun ownership
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#ols">
-       33.3.1. OLS
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dml-algorithm">
-   34. DML algorithm
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-effect-of-gun-ownership">
+   14.3. The effect of gun ownership
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lasso">
-   35. Lasso
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does">
-     35.1. We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ols">
+     14.3.1. OLS
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hdmy">
-     35.2. hdmy
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dml-algorithm">
+     14.3.2. DML algorithm
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cv-glmnet-curiosities">
-     35.3. cv.glmnet curiosities
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-forest">
-     35.4. Random Forest
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lasso">
+     14.3.3. Lasso
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does">
+       14.3.3.1. We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdmy">
+     14.3.4. hdmy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cv-glmnet-curiosities">
+     14.3.5. cv.glmnet curiosities
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-forest">
+     14.3.6. Random Forest
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#this-verfies-that-the-function-dml2-for-plm-has-no-errors">
-       35.4.1. This verfies that the function DML2_for_PLM has no errors
+       14.3.6.1. This verfies that the function DML2_for_PLM has no errors
       </a>
      </li>
     </ul>
@@ -589,7 +562,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates</h1>
+                <h1>DML inference for gun ownership</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -599,75 +572,73 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   33. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates">
+   14.1. A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data">
-     33.1. Data
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   14.2. Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing">
+     14.2.1. Preprocessing
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#preprocessing">
-       33.1.1. Preprocessing
-      </a>
-     </li>
-    </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals">
-     33.2. We check that our results are equal to R results at 6 decimals
+     14.2.2. We check that our results are equal to R results at 6 decimals
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-effect-of-gun-ownership">
-     33.3. The effect of gun ownership
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#ols">
-       33.3.1. OLS
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dml-algorithm">
-   34. DML algorithm
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-effect-of-gun-ownership">
+   14.3. The effect of gun ownership
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lasso">
-   35. Lasso
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does">
-     35.1. We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ols">
+     14.3.1. OLS
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hdmy">
-     35.2. hdmy
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dml-algorithm">
+     14.3.2. DML algorithm
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cv-glmnet-curiosities">
-     35.3. cv.glmnet curiosities
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-forest">
-     35.4. Random Forest
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lasso">
+     14.3.3. Lasso
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does">
+       14.3.3.1. We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hdmy">
+     14.3.4. hdmy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cv-glmnet-curiosities">
+     14.3.5. cv.glmnet curiosities
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-forest">
+     14.3.6. Random Forest
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#this-verfies-that-the-function-dml2-for-plm-has-no-errors">
-       35.4.1. This verfies that the function DML2_for_PLM has no errors
+       14.3.6.1. This verfies that the function DML2_for_PLM has no errors
       </a>
      </li>
     </ul>
@@ -685,6 +656,8 @@ title="Print to PDF"
               <div>
                 
   <p>Replication of this <a class="reference external" href="https://www.kaggle.com/janniskueck/pm3-notebook-inference-clustering">kaggle notebook</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="dml-inference-for-gun-ownership">
+<h1><span class="section-number">14. </span>DML inference for gun ownership<a class="headerlink" href="#dml-inference-for-gun-ownership" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import relevant packages</span>
@@ -731,8 +704,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>This notebook contains an example for teaching.</p>
-<section class="tex2jax_ignore mathjax_ignore" id="a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates">
-<h1><span class="section-number">33. </span>A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates<a class="headerlink" href="#a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates" title="Permalink to this headline">#</a></h1>
+<section id="a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates">
+<h2><span class="section-number">14.1. </span>A Case Study: The Effect of Gun Ownership on Gun-Homicide Rates<a class="headerlink" href="#a-case-study-the-effect-of-gun-ownership-on-gun-homicide-rates" title="Permalink to this headline">#</a></h2>
 <p>We consider the problem of estimating the effect of gun
 ownership on the homicide rate. For this purpose, we estimate the following partially
 linear model</p>
@@ -740,8 +713,9 @@ linear model</p>
 \[
  Y_{j,t} = \beta D_{j,(t-1)} + g(Z_{j,t}) + \epsilon_{j,t}.
 \]</div>
+</section>
 <section id="data">
-<h2><span class="section-number">33.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
 <p><span class="math notranslate nohighlight">\(Y_{j,t}\)</span> is log homicide rate in county <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(D_{j, t-1}\)</span> is log  fraction of suicides committed with a firearm in county <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t-1\)</span>, which we use as a proxy for gun ownership,  and  <span class="math notranslate nohighlight">\(Z_{j,t}\)</span> is a set of demographic and economic characteristics of county <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>. The parameter <span class="math notranslate nohighlight">\(\beta\)</span> is the effect of gun ownership on the
 homicide rates, controlling for county-level demographic and economic characteristics.</p>
 <p>The sample covers 195 large United States counties between the years 1980 through 1999, giving us 3900 observations.</p>
@@ -759,7 +733,7 @@ homicide rates, controlling for county-level demographic and economic characteri
 </div>
 </div>
 <section id="preprocessing">
-<h3><span class="section-number">33.1.1. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h3>
 <p>To account for heterogeneity across counties and time trends in  all variables, we remove from them county-specific and time-specific effects in the following preprocessing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -849,9 +823,8 @@ homicide rates, controlling for county-level demographic and economic characteri
 </div>
 </div>
 </section>
-</section>
 <section id="we-check-that-our-results-are-equal-to-r-results-at-6-decimals">
-<h2><span class="section-number">33.2. </span>We check that our results are equal to R results at 6 decimals<a class="headerlink" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">14.2.2. </span>We check that our results are equal to R results at 6 decimals<a class="headerlink" href="#we-check-that-our-results-are-equal-to-r-results-at-6-decimals" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">column_names</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
@@ -1103,10 +1076,11 @@ Column CountyCode are equal at 6 decimals.
 </div>
 </div>
 </section>
+</section>
 <section id="the-effect-of-gun-ownership">
-<h2><span class="section-number">33.3. </span>The effect of gun ownership<a class="headerlink" href="#the-effect-of-gun-ownership" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.3. </span>The effect of gun ownership<a class="headerlink" href="#the-effect-of-gun-ownership" title="Permalink to this headline">#</a></h2>
 <section id="ols">
-<h3><span class="section-number">33.3.1. </span>OLS<a class="headerlink" href="#ols" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.3.1. </span>OLS<a class="headerlink" href="#ols" title="Permalink to this headline">#</a></h3>
 <p>After preprocessing the data, we first look at simple regression of <span class="math notranslate nohighlight">\(Y_{j,t}\)</span> on <span class="math notranslate nohighlight">\(D_{j,t-1}\)</span> without controls as a baseline model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1267,10 +1241,8 @@ Name: logfssl, dtype: float64
 </div>
 <p>After controlling for a rich set of characteristics, the point estimate of gun ownership reduces to <span class="math notranslate nohighlight">\(0.19\)</span>.</p>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="dml-algorithm">
-<h1><span class="section-number">34. </span>DML algorithm<a class="headerlink" href="#dml-algorithm" title="Permalink to this headline">#</a></h1>
+<section id="dml-algorithm">
+<h3><span class="section-number">14.3.2. </span>DML algorithm<a class="headerlink" href="#dml-algorithm" title="Permalink to this headline">#</a></h3>
 <p>Here we perform inference of the predictive coefficient <span class="math notranslate nohighlight">\(\beta\)</span> in our partially linear statistical model,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1379,8 +1351,8 @@ estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="lasso">
-<h1><span class="section-number">35. </span>Lasso<a class="headerlink" href="#lasso" title="Permalink to this headline">#</a></h1>
+<section id="lasso">
+<h3><span class="section-number">14.3.3. </span>Lasso<a class="headerlink" href="#lasso" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
@@ -1494,7 +1466,7 @@ Coefficient is 0.21902799507356002, SE is equal to 0.05647222214737849
 </div>
 </div>
 <section id="we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does">
-<h2><span class="section-number">35.1. </span>We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.<a class="headerlink" href="#we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does" title="Permalink to this headline">#</a></h2>
+<h4><span class="section-number">14.3.3.1. </span>We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.<a class="headerlink" href="#we-use-selectfrommodel-to-select-variables-which-do-not-have-a-zero-coefficient-it-is-done-because-we-want-to-reduce-dimensionality-as-rlasso-post-t-does" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Lasso_post</span><span class="p">:</span>
@@ -1685,8 +1657,9 @@ Coefficient is 0.2027267624623706, SE is equal to 0.05334688387506558
 </div>
 </div>
 </section>
+</section>
 <section id="hdmy">
-<h2><span class="section-number">35.2. </span>hdmy<a class="headerlink" href="#hdmy" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">14.3.4. </span>hdmy<a class="headerlink" href="#hdmy" title="Permalink to this headline">#</a></h3>
 <p>We are going to replicate the above regressions but using <code class="docutils literal notranslate"><span class="pre">hmdpy</span></code> library.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1792,7 +1765,7 @@ Coefficient is 0.2188657479450557, SE is equal to 0.055130910289828
 <p>We found out that the results are close. However, there are not a big differences between the Sklearn and the Hdmpy lasso function.</p>
 </section>
 <section id="cv-glmnet-curiosities">
-<h2><span class="section-number">35.3. </span>cv.glmnet curiosities<a class="headerlink" href="#cv-glmnet-curiosities" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">14.3.5. </span>cv.glmnet curiosities<a class="headerlink" href="#cv-glmnet-curiosities" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>According to <a class="reference external" href="https://stackoverflow.com/questions/24098212/what-does-the-option-normalize-true-in-lasso-sklearn-do">link1</a> and <a class="reference external" href="https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/">link2</a>, It standardize <strong>X</strong> variables before estimation. In sklearn we have an option named <strong>normalize</strong>. It normalizes <strong>X</strong> by subtracting the mean and dividing by the l2-norm. Based on <a class="reference external" href="https://stackoverflow.com/questions/59846325/confusion-about-standardize-option-of-glmnet-package-in-r">link3</a>, <strong>cv.glmnet (standardize = TRUE)</strong> and <strong>sklearn (normlize = True)</strong> are not the same. We decided to use <strong>StandardScaler</strong> that meets suggestions made in <strong>link3</strong>. We proved this in the commented code below.</p></li>
 </ol>
@@ -5122,7 +5095,7 @@ Coefficient is 0.26919099159534066, SE is equal to 0.06275356958550346
 <p>Next, we also apply Random Forest for comparison purposes.</p>
 </section>
 <section id="random-forest">
-<h2><span class="section-number">35.4. </span>Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">14.3.6. </span>Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
@@ -5249,7 +5222,7 @@ of the methods works better.</p>
 </div></div></div>
 </div>
 <section id="this-verfies-that-the-function-dml2-for-plm-has-no-errors">
-<h3><span class="section-number">35.4.1. </span>This verfies that the function DML2_for_PLM has no errors<a class="headerlink" href="#this-verfies-that-the-function-dml2-for-plm-has-no-errors" title="Permalink to this headline">#</a></h3>
+<h4><span class="section-number">14.3.6.1. </span>This verfies that the function DML2_for_PLM has no errors<a class="headerlink" href="#this-verfies-that-the-function-dml2-for-plm-has-no-errors" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">DML2_lasso_post</span><span class="p">[</span> <span class="s1">&#39;ytil&#39;</span> <span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
@@ -5961,6 +5934,7 @@ Coefficient is 0.19505928109230525, SE is equal to 0.050922452616913125
 </section>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -5993,13 +5967,13 @@ Coefficient is 0.19505928109230525, SE is equal to 0.050922452616913125
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">32. </span>Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests</p>
+            <p class="prev-next-title"><span class="section-number">13. </span>Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="20_pm3_notebook_inference_nn.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">36. </span>The Effect of Gun Ownership on Gun-Homicide Rates - proceeding</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
