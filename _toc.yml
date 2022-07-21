@@ -3,6 +3,8 @@
 
 format: jb-book
 root: intro
+options:  # The options key will be applied to all chapters, but not sub-sections
+  numbered: True
 chapters:
 - file: Python_notebooks/01_Python_Notebook_ Linear_Model_Overfitting
 - file: Python_notebooks/02_PM1_Notebook1_Prediction_newdata
@@ -22,6 +24,7 @@ chapters:
 - file: Python_notebooks/19_pm3_notebook_inference_clustering
 - file: Python_notebooks/20_pm3_notebook_inference_nn
 - file: Python_notebooks/21_pm5-401k-kaggle-py
+- file: Python_notebooks/22_Identification Analysis of 401(k) Example w DAGs
 - file: Python_notebooks/23_debiased-ml-for-partially-linear-model-in-python
 - file: Python_notebooks/24_sensitivity_analysis_with_sensmakr_and_debiased_ml
 - file: Python_notebooks/25_debiased-ml-for-partially-linear-iv-model-in-python

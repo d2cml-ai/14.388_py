@@ -293,7 +293,7 @@ table[1,0:5] = [p2, R2_2, MSE2, R2_adj2, MSE_adj2]
 table[2,0:5] = [pL, R2_L, MSEL, R2_adjL, MSE_adjL]
 
 
-# In[28]:
+# In[21]:
 
 
 table = pd.DataFrame(table, columns = ["p","$R^2_{sample}$","$MSE_{sample}$","$R^2_{adjusted}$", "$MSE_{adjusted}$"],                       index = ["basic reg","flexible reg", "lasso flex"])
@@ -313,7 +313,7 @@ table
 # - Use the testing sample for evaluation. Predict the $\mathtt{wage}$  of every observation in the testing sample based on the estimated parameters in the training sample.
 # - Calculate the Mean Squared Prediction Error $MSE_{test}$ based on the testing sample for both prediction models. 
 
-# In[29]:
+# In[22]:
 
 
 # Import relevant packages for splitting data
@@ -328,14 +328,14 @@ data["random"] = random
 random    # the array does not change 
 
 
-# In[30]:
+# In[23]:
 
 
 data_2 = data.sort_values(by=['random'])
 data_2.head()
 
 
-# In[31]:
+# In[24]:
 
 
 # Create training and testing sample 
@@ -345,7 +345,7 @@ print(train.shape)
 print(test.shape)
 
 
-# In[32]:
+# In[25]:
 
 
 # Basic Model
@@ -357,7 +357,7 @@ flex = 'lwage ~ sex + shs+hsg+scl+clg+occ2+ind2+mw+so+we + (exp1+exp2+exp3+exp4)
 flex_results = smf.ols(flex , data=data).fit()
 
 
-# In[33]:
+# In[26]:
 
 
 # basic model
@@ -366,7 +366,7 @@ basic_results = smf.ols(basic , data=train).fit()
 print(basic_results.summary())
 
 
-# In[34]:
+# In[27]:
 
 
 lwage_test = test["lwage"].values
@@ -374,7 +374,7 @@ lwage_test = test["lwage"].values
 #test
 
 
-# In[35]:
+# In[28]:
 
 
 # calculating the out-of-sample MSE
@@ -384,7 +384,7 @@ lwage_pred =  basic_results.predict(test) # predict out of sample
 print(lwage_pred)
 
 
-# In[36]:
+# In[29]:
 
 
 MSE_test1 = np.sum((lwage_test-lwage_pred)**2)/len(lwage_test)
@@ -396,7 +396,7 @@ print("Test R2 for the basic model: ", R2_test1)
 
 # In the basic model, the $MSE_{test}$ is quite closed to the $MSE_{sample}$.
 
-# In[37]:
+# In[30]:
 
 
 # Flexible model
@@ -425,7 +425,7 @@ print("Test R2 for the flexible model: ", R2_test2)
 # 
 # Note that the out-of-sample $MSE$ on the test sample can be computed for any other black-box prediction method as well. Thus, let us finally compare the performance of lasso regression in the flexible model to ols regression.
 
-# In[38]:
+# In[31]:
 
 
 # flexible model using lasso
@@ -439,7 +439,7 @@ lwage_train = train["lwage"]
 print(lwage_train.shape)
 
 
-# In[39]:
+# In[32]:
 
 
 # flexible model using lasso
@@ -453,7 +453,7 @@ lwage_test = test["lwage"]
 print(lwage_test.shape)
 
 
-# In[40]:
+# In[33]:
 
 
 # calculating the out-of-sample MSE
@@ -469,7 +469,7 @@ print("Test R2 for the flexible model: ", R2_lasso)
 
 # Finally, let us summarize the results:
 
-# In[42]:
+# In[34]:
 
 
 # Package for latex table 

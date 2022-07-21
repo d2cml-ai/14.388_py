@@ -6,30 +6,32 @@ root: intro
 options:  # The options key will be applied to all chapters, but not sub-sections
   numbered: True
 chapters:
-- file: 01_Python_Notebook_ Linear_Model_Overfitting
-- file: 02_PM1_Notebook1_Prediction_newdata
-- file: 03_PM1_Notebook_Inference
-- file: 04_py-notebook-vaccine-rcts
-- file: 05_Analyzing_RCT_with_Precision
-- file: 06_Analyzing_rct_reemployment_experiment
-- file: 07_python_notebook_linear_penalized_regs
-- file: 09_python_notebook_experiment_on_orthogonal_learning
-- file: 10_pm2_notebook_jannis
-- file: 11_py-heterogenous-wage-effects
-- file: 13_pm3-notebook-newdata
-- file: 14_pm3_notebook_newdata_nn
-- file: 15_automl_for_wage_prediction
-- file: 16_py-Functional-Approximation-By-NN-and-RF
-- file: 17_notebook_dagitty
-- file: 19_pm3_notebook_inference_clustering
-- file: 20_pm3_notebook_inference_nn
-- file: 21_pm5-401k-kaggle-py
-- file: 23_debiased-ml-for-partially-linear-model-in-python
-- file: 24_sensitivity_analysis_with_sensmakr_and_debiased_ml
-- file: 25_debiased-ml-for-partially-linear-iv-model-in-python
-- file: 27_r_weak_iv_experiments
-- file: average_treatment_effect_1
-- file: dml_for_conditional_average_treatment_effect
-- file: Double_Machine_Learning
-- file: example_PySensemakr
-- file: py_double_ml_pension
+- file: Python_notebooks/01_Python_Notebook_ Linear_Model_Overfitting
+- file: Python_notebooks/02_PM1_Notebook1_Prediction_newdata
+- file: Python_notebooks/03_PM1_Notebook_Inference
+- file: Python_notebooks/04_py-notebook-vaccine-rcts
+- file: Python_notebooks/05_Analyzing_RCT_with_Precision
+- file: Python_notebooks/06_Analyzing_rct_reemployment_experiment
+- file: Python_notebooks/07_python_notebook_linear_penalized_regs
+- file: Python_notebooks/09_python_notebook_experiment_on_orthogonal_learning
+- file: Python_notebooks/10_pm2_notebook_jannis
+- file: Python_notebooks/11_py-heterogenous-wage-effects
+- file: Python_notebooks/13_pm3-notebook-newdata
+- file: Python_notebooks/14_pm3_notebook_newdata_nn
+- file: Python_notebooks/15_automl_for_wage_prediction
+- file: Python_notebooks/16_py-Functional-Approximation-By-NN-and-RF
+- file: Python_notebooks/17_notebook_dagitty
+- file: Python_notebooks/19_pm3_notebook_inference_clustering
+- file: Python_notebooks/20_pm3_notebook_inference_nn
+- file: Python_notebooks/21_pm5-401k-kaggle-py
+- file: Python_notebooks/22_Identification Analysis of 401(k) Example w DAGs
+- file: Python_notebooks/23_debiased-ml-for-partially-linear-model-in-python
+- file: Python_notebooks/24_sensitivity_analysis_with_sensmakr_and_debiased_ml
+- file: Python_notebooks/25_debiased-ml-for-partially-linear-iv-model-in-python
+- file: Python_notebooks/27_r_weak_iv_experiments
+- file: Python_notebooks/average_treatment_effect_1
+- file: Python_notebooks/dml_for_conditional_average_treatment_effect
+- file: Python_notebooks/Double_Machine_Learning
+- file: Python_notebooks/example_PySensemakr
+- file: Python_notebooks/py_double_ml_pension
+
