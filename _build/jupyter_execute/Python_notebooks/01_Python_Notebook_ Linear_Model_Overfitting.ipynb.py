@@ -5,7 +5,6 @@
 # - Created by: Alexander Quispe
 
 # # Simple Exercise on Overfitting
-# 
 
 # ## First set p=n
 # 

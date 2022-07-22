@@ -152,9 +152,3 @@ axs[1].title.set_text('Naive')
 axs[0].set_xlabel( 'Orhtogonal - True' )
 axs[1].set_xlabel( 'Naive - True' )
 
-
-# In[ ]:
-
-
-
-

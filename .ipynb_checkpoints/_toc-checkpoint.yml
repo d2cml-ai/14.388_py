@@ -6,28 +6,28 @@ root: intro
 options:  # The options key will be applied to all chapters, but not sub-sections
   numbered: True
 chapters:
-- file: Python_notebooks/01_Python_Notebook_ Linear_Model_Overfitting
+- file: Python_notebooks/01_Python_Notebook_Linear_Model_Overfitting
 - file: Python_notebooks/02_ols-and-lasso-for-wage-prediction
 - file: Python_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference
 - file: Python_notebooks/04_py-notebook-some-rct-examples
 - file: Python_notebooks/05_py-notebook-analyzing-rct-with-precision
 - file: Python_notebooks/06_analyzing-rct-reemployment-experiment
 - file: Python_notebooks/07_py-notebook-linear-penalized-regs
-- file: Python_notebooks/09_py-notebook-experiment-on-orthogonal-learning 
+- file: Python_notebooks/08_ML_for_wage_prediction
+- file: Python_notebooks/09_py-notebook-experiment-on-orthogonal-learning
 - file: Python_notebooks/10_double-lasso-for-the-convergence-hypothesis
 - file: Python_notebooks/11_py-heterogenous-wage-effects
-- file: Python_notebooks/13_ML_for_wage_prediction
-- file: Python_notebooks/14_deep_neural_networks_for_wage_prediction
-- file: Python_notebooks/15_automl-for-wage-prediction
-- file: Python_notebooks/16_py-Functional-Approximation-By-NN-and-RF
-- file: Python_notebooks/17_notebook_dagitty
-- file: Python_notebooks/19_pm3_notebook_inference_clustering
-- file: Python_notebooks/20_pm3_notebook_inference_nn
-- file: Python_notebooks/21_pm5-401k-kaggle-py
-- file: Python_notebooks/22_Identification Analysis of 401(k) Example w DAGs
-- file: Python_notebooks/23_debiased-ml-for-partially-linear-model-in-python
-- file: Python_notebooks/24_sensitivity_analysis_with_sensmakr_and_debiased_ml
-- file: Python_notebooks/25_debiased-ml-for-partially-linear-iv-model-in-python
-- file: Python_notebooks/27_r_weak_iv_experiments
-
-
+- file: Python_notebooks/12_py-colliderbias-hollywood
+- file: Python_notebooks/13_deep_neural_networks_for_wage_prediction
+- file: Python_notebooks/14_automl-for-wage-prediction
+- file: Python_notebooks/15_py-Functional-Approximation-By-NN-and-RF
+- file: Python_notebooks/16_notebook_dagitty
+- file: Python_notebooks/17_notebook-dosearch
+- file: Python_notebooks/18_pm3_notebook_inference_clustering
+- file: Python_notebooks/19_pm3_notebook_inference_nn
+- file: Python_notebooks/20_pm5-401k-kaggle-py
+- file: Python_notebooks/21_Identification Analysis of 401(k) Example w DAGs
+- file: Python_notebooks/22_debiased-ml-for-partially-linear-model-in-python
+- file: Python_notebooks/23_sensitivity_analysis_with_sensmakr_and_debiased_ml
+- file: Python_notebooks/24_debiased-ml-for-partially-linear-iv-model-in-python
+- file: Python_notebooks/25_r_weak_iv_experiments
