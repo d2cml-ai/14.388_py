@@ -72,11 +72,11 @@ File [1;32m~\anaconda3\lib\site-packages\sklearn\utils\validation.py:769[0m, i
 [0;32m    777[0m [38;5;28;01mif[39;00m dtype_numeric [38;5;129;01mand[39;00m array[38;5;241m.[39mdtype[38;5;241m.[39mkind [38;5;129;01min[39;00m [38;5;124m"[39m[38;5;124mOUSV[39m[38;5;124m"[39m:
 
 [1;31mValueError[0m: Expected 2D array, got 1D array instead:
-array=[-0.15966965 -0.81025685 -1.06502686 ... -0.31925488  0.38533024
- -0.1694818 ].
+array=[ 0.36903614 -0.89170958 -0.0803449  ...  0.38469475 -0.67119573
+  0.76443467].
 Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
 ValueError: Expected 2D array, got 1D array instead:
-array=[-0.15966965 -0.81025685 -1.06502686 ... -0.31925488  0.38533024
- -0.1694818 ].
+array=[ 0.36903614 -0.89170958 -0.0803449  ...  0.38469475 -0.67119573
+  0.76443467].
 Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
 
