@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>23. Sensitivity Analysis with Sensmakr and Debiased ML &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="24. Double/Debiased ML for Partially Linear IV Model" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" />
-    <link rel="prev" title="22. Double/Debiased Machine Learning for the Partially Linear Regression Model." href="22_debiased-ml-for-partially-linear-model-in-python.html" />
+    <link rel="next" title="24. Debiased ML for Partially Linear IV Model in Python" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" />
+    <link rel="prev" title="22. Debiased ML for Partially Linear Model in Python" href="22_debiased-ml-for-partially-linear-model-in-python.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -128,27 +128,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -183,22 +183,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -208,12 +208,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,22 +223,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -501,8 +501,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml">
-   23.1. Here we experiment with using package “sensemakr” in conjunction with debiased ML
+  <a class="reference internal nav-link" href="#sensititivy-analysis-for-unobserved-confounder-with-dml-and-sensmakr">
+   23.1. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -539,7 +539,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr</h1>
+                <h1>Sensitivity Analysis with Sensmakr and Debiased ML</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -550,8 +550,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml">
-   23.1. Here we experiment with using package “sensemakr” in conjunction with debiased ML
+  <a class="reference internal nav-link" href="#sensititivy-analysis-for-unobserved-confounder-with-dml-and-sensmakr">
+   23.1. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -589,10 +589,11 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="sensititivy-analysis-for-unobserved-confounder-with-dml-and-sensmakr">
-<h1><span class="section-number">23. </span>Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr<a class="headerlink" href="#sensititivy-analysis-for-unobserved-confounder-with-dml-and-sensmakr" title="Permalink to this headline">#</a></h1>
-<section id="here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml">
-<h2><span class="section-number">23.1. </span>Here we experiment with using package “sensemakr” in conjunction with debiased ML<a class="headerlink" href="#here-we-experiment-with-using-package-sensemakr-in-conjunction-with-debiased-ml" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="sensitivity-analysis-with-sensmakr-and-debiased-ml">
+<h1><span class="section-number">23. </span>Sensitivity Analysis with Sensmakr and Debiased ML<a class="headerlink" href="#sensitivity-analysis-with-sensmakr-and-debiased-ml" title="Permalink to this headline">#</a></h1>
+<section id="sensititivy-analysis-for-unobserved-confounder-with-dml-and-sensmakr">
+<h2><span class="section-number">23.1. </span>Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr<a class="headerlink" href="#sensititivy-analysis-for-unobserved-confounder-with-dml-and-sensmakr" title="Permalink to this headline">#</a></h2>
+<p>Here we experiment with using package “sensemakr” in conjunction with debiased ML</p>
 <p><img alt="image-4.png" src="Python_notebooks/attachment:image-4.png" /></p>
 <p><img alt="image.png" src="Python_notebooks/attachment:image.png" /></p>
 <p><img alt="image.png" src="Python_notebooks/attachment:image.png" /></p>
@@ -604,6 +605,13 @@ title="Print to PDF"
 <p>We will use the sensemakr package adapted in python (PySensemakr) by Brian Hill and Nathan LaPierre <a class="reference external" href="https://github.com/nlapier2/PySensemakr">ink</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install PySensemakr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sensemakr</span> <span class="k">as</span> <span class="nn">smkr</span>
 <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
@@ -611,18 +619,6 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">sensemakr</span> <span class="k">as</span> <span class="nn">smkr</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sensemakr&#39;
 </pre></div>
 </div>
 </div>
@@ -718,26 +714,26 @@ the analysis. The standard errors will be clustered at the village level.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.109113e-13</td>
-      <td>-1.026537e-14</td>
-      <td>-1.604777e-13</td>
-      <td>7.567280e-12</td>
-      <td>6.247762e-14</td>
-      <td>-6.723013e-14</td>
-      <td>-1.036948e-13</td>
-      <td>2.128075e-12</td>
+      <td>1.310063e-14</td>
+      <td>5.171073e-14</td>
+      <td>-1.353145e-13</td>
+      <td>2.749800e-12</td>
+      <td>-8.823583e-14</td>
+      <td>-7.293814e-15</td>
+      <td>-6.172840e-14</td>
+      <td>1.431744e-12</td>
       <td>Abdel Khair</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-1.304512e-13</td>
-      <td>8.579137e-14</td>
-      <td>1.058043e-13</td>
-      <td>1.730172e-12</td>
-      <td>1.794120e-13</td>
-      <td>3.419368e-14</td>
-      <td>-6.217249e-14</td>
-      <td>-2.845724e-12</td>
+      <td>-9.903189e-14</td>
+      <td>7.581381e-14</td>
+      <td>7.049916e-14</td>
+      <td>9.912071e-13</td>
+      <td>1.043610e-13</td>
+      <td>2.568140e-14</td>
+      <td>-4.152234e-14</td>
+      <td>-1.957545e-12</td>
       <td>Abdi Dar</td>
     </tr>
     <tr>
@@ -747,7 +743,7 @@ the analysis. The standard errors will be clustered at the village level.</p>
       <td>-3.333333e-01</td>
       <td>6.666667e-01</td>
       <td>3.333333e-01</td>
-      <td>-3.126185e-15</td>
+      <td>6.646498e-17</td>
       <td>-6.666667e-01</td>
       <td>4.666667e+00</td>
       <td>Abu Sorog</td>
@@ -822,26 +818,26 @@ the analysis. The standard errors will be clustered at the village level.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.109113e-13</td>
-      <td>-1.026537e-14</td>
-      <td>-1.604777e-13</td>
-      <td>7.567280e-12</td>
-      <td>6.247762e-14</td>
-      <td>-6.723013e-14</td>
-      <td>-1.036948e-13</td>
-      <td>2.128075e-12</td>
+      <td>1.310063e-14</td>
+      <td>5.171073e-14</td>
+      <td>-1.353145e-13</td>
+      <td>2.749800e-12</td>
+      <td>-8.823583e-14</td>
+      <td>-7.293814e-15</td>
+      <td>-6.172840e-14</td>
+      <td>1.431744e-12</td>
       <td>Abdel Khair</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-1.304512e-13</td>
-      <td>8.579137e-14</td>
-      <td>1.058043e-13</td>
-      <td>1.730172e-12</td>
-      <td>1.794120e-13</td>
-      <td>3.419368e-14</td>
-      <td>-6.217249e-14</td>
-      <td>-2.845724e-12</td>
+      <td>-9.903189e-14</td>
+      <td>7.581381e-14</td>
+      <td>7.049916e-14</td>
+      <td>9.912071e-13</td>
+      <td>1.043610e-13</td>
+      <td>2.568140e-14</td>
+      <td>-4.152234e-14</td>
+      <td>-1.957545e-12</td>
       <td>Abdi Dar</td>
     </tr>
     <tr>
@@ -851,7 +847,7 @@ the analysis. The standard errors will be clustered at the village level.</p>
       <td>-3.333333e-01</td>
       <td>6.666667e-01</td>
       <td>3.333333e-01</td>
-      <td>-3.126185e-15</td>
+      <td>6.646498e-17</td>
       <td>-6.666667e-01</td>
       <td>4.666667e+00</td>
       <td>Abu Sorog</td>
@@ -925,12 +921,12 @@ the analysis. The standard errors will be clustered at the village level.</p>
   <tbody>
     <tr>
       <th>Intercept</th>
-      <td>7.866971e-16</td>
-      <td>6.983425e-16</td>
-      <td>1.126520</td>
-      <td>2.605024e-01</td>
-      <td>-5.854533e-16</td>
-      <td>2.158848e-15</td>
+      <td>-2.538768e-15</td>
+      <td>2.685827e-15</td>
+      <td>-0.945246</td>
+      <td>3.450038e-01</td>
+      <td>-7.816060e-15</td>
+      <td>2.738525e-15</td>
     </tr>
     <tr>
       <th>directlyharmedR</th>
@@ -1039,12 +1035,12 @@ the analysis. The standard errors will be clustered at the village level.</p>
   <tbody>
     <tr>
       <th>Intercept</th>
-      <td>6.852158e-16</td>
-      <td>6.560936e-16</td>
-      <td>1.044387</td>
-      <td>2.968265e-01</td>
-      <td>-6.039210e-16</td>
-      <td>1.974353e-15</td>
+      <td>-2.465909e-15</td>
+      <td>2.453072e-15</td>
+      <td>-1.005233</td>
+      <td>3.152858e-01</td>
+      <td>-7.285870e-15</td>
+      <td>2.354052e-15</td>
     </tr>
     <tr>
       <th>femaleR</th>
@@ -1144,12 +1140,12 @@ the analysis. The standard errors will be clustered at the village level.</p>
   <tbody>
     <tr>
       <th>Intercept</th>
-      <td>-1.024354e-15</td>
-      <td>5.250775e-16</td>
-      <td>-1.950863</td>
-      <td>0.051649</td>
-      <td>-2.056062e-15</td>
-      <td>7.353468e-18</td>
+      <td>8.380883e-16</td>
+      <td>2.459246e-15</td>
+      <td>0.340791</td>
+      <td>0.733409</td>
+      <td>-3.994003e-15</td>
+      <td>5.670179e-15</td>
     </tr>
     <tr>
       <th>femaleR</th>
@@ -1237,46 +1233,6 @@ the analysis. The standard errors will be clustered at the village level.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2829: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[:, None]
-C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function_base.py:2830: RuntimeWarning: invalid value encountered in true_divide
-  c /= stddev[None, :]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1289,8 +1245,8 @@ C:\Users\Anzony\AppData\Roaming\Python\Python38\site-packages\numpy\lib\function
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0.1250576742178683
-Controls explain the following fraction of variance of treatment 0.01193955805050917
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0.12505767421787006
+Controls explain the following fraction of variance of treatment 0.011939558050506838
 </pre></div>
 </div>
 </div>
@@ -1343,7 +1299,7 @@ Controls explain the following fraction of variance of treatment 0.0119395580505
   <tbody>
     <tr>
       <th>Intercept</th>
-      <td>-6.357940e-10</td>
+      <td>-6.357952e-10</td>
       <td>0.000159</td>
       <td>-0.000004</td>
       <td>0.999997</td>
@@ -1405,9 +1361,9 @@ Controls explain the following fraction of variance of treatment 0.0119395580505
   <tbody>
     <tr>
       <th>Intercept</th>
-      <td>-6.357940e-10</td>
+      <td>-6.357952e-10</td>
       <td>0.006843</td>
-      <td>-9.291176e-08</td>
+      <td>-9.291193e-08</td>
       <td>9.999999e-01</td>
       <td>-0.013425</td>
       <td>0.013425</td>
@@ -1433,7 +1389,7 @@ Controls explain the following fraction of variance of treatment 0.0119395580505
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10034379376801962
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.10034379376801948
 </pre></div>
 </div>
 </div>
@@ -1478,11 +1434,7 @@ Controls explain the following fraction of variance of treatment 0.0119395580505
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04020151261036848
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-21-b4042622d416&gt;:17: RuntimeWarning: divide by zero encountered in true_divide
-  gridR2_YC =  kappa*(1 - gridR2_DC)/gridR2_DC
-</pre></div>
-</div>
-<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_28_2.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_28_2.png" />
+<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_30_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_30_1.png" />
 </div>
 </div>
 </section>
@@ -1584,7 +1536,7 @@ Verbal interpretation of sensitivity statistics:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_36_0.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_36_0.png" />
+<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_38_0.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_38_0.png" />
 </div>
 </div>
 </section>
@@ -1731,6 +1683,26 @@ Verbal interpretation of sensitivity statistics:
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1746,8 +1718,8 @@ Verbal interpretation of sensitivity statistics:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0.7383845794109611
-Controls explain the following fraction of variance of treatment 0.9428734308592603
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0.7720440463205693
+Controls explain the following fraction of variance of treatment 0.953141725326003
 </pre></div>
 </div>
 </div>
@@ -1776,10 +1748,6 @@ Controls explain the following fraction of variance of treatment 0.9428734308592
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\python\python38\lib\site-packages\sensemakr\sensitivity_bounds.py:287: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  bounds = bounds.append({&#39;bound_label&#39;: bound_label, &#39;r2dz_x&#39;: r2dz_x, &#39;r2yz_dx&#39;: r2yz_dx},
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sensitivity Analysis to Unobserved Confounding
 
 Model Formula: resY_rf~ resD_rf
@@ -1790,34 +1758,34 @@ Null hypothesis: q = 1 and reduce = True
 -- The null hypothesis deemed problematic is H0:tau = 0.0 
 
 Unadjusted Estimates of &#39; resD_rf &#39;:
-  Coef. estimate: 0.235
-  Standard Error: 0.04
-  t-value: 5.883 
+  Coef. estimate: 0.194
+  Standard Error: 0.043
+  t-value: 4.514 
 
 Sensitivity Statistics:
-  Partial R2 of treatment with outcome: 0.026
-  Robustness Value, q = 1 : 0.152
-  Robustness Value, q = 1 alpha = 0.05 : 0.104 
+  Partial R2 of treatment with outcome: 0.016
+  Robustness Value, q = 1 : 0.119
+  Robustness Value, q = 1 alpha = 0.05 : 0.069 
 
 Verbal interpretation of sensitivity statistics:
 
--- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 2.645 % of the residual variance of the treatment to fully account for the observed estimated effect.
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 1.574 % of the residual variance of the treatment to fully account for the observed estimated effect.
 
--- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 15.179 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 15.179 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
+-- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 11.873 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 11.873 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
 
--- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 10.397 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 10.397 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
+-- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 6.898 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 6.898 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
 
 Bounds on omitted variable bias:
 --The table below shows the maximum strength of unobserved confounders with association with the treatment and the outcome bounded by a multiple of the observed explanatory power of the chosen benchmark covariate(s).
 
     bound_label    r2dz_x   r2yz_dx treatment  adjusted_estimate  adjusted_se  \
-0  1x Intercept  0.000247  0.001558   resD_rf           0.234225     0.039955   
+0  1x Intercept  0.000466  0.000006   resD_rf           0.193995     0.043018   
 
    adjusted_t  adjusted_lower_CI  adjusted_upper_CI  
-0    5.862299           0.155842           0.312609  
+0    4.509639           0.109601           0.278389  
 </pre></div>
 </div>
-<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_48_2.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_48_2.png" />
+<img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_50_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_50_1.png" />
 </div>
 </div>
 </section>
@@ -1854,13 +1822,13 @@ Bounds on omitted variable bias:
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">22. </span>Double/Debiased Machine Learning for the Partially Linear Regression Model.</p>
+            <p class="prev-next-title"><span class="section-number">22. </span>Debiased ML for Partially Linear Model in Python</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">24. </span>Double/Debiased ML for Partially Linear IV Model</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Debiased ML for Partially Linear IV Model in Python</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

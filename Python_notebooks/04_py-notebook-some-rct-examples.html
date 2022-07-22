@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Vaccine RCT Examples &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>4. Some RCT Examples &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_py-notebook-analyzing-rct-with-precision.html" />
-    <link rel="prev" title="3. An inferential problem: The Gender Wage Gap" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
+    <link rel="next" title="5. Analyzing RCT reemployment experiment" href="05_py-notebook-analyzing-rct-with-precision.html" />
+    <link rel="prev" title="3. OLS and lasso for gender wage gap inference" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -128,27 +128,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -183,22 +183,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -208,12 +208,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,22 +223,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -524,7 +524,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Vaccine RCT Examples</h1>
+                <h1>Some RCT Examples</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -559,9 +559,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="vaccine-rct-examples">
-<h1><span class="section-number">4. </span>Vaccine RCT Examples<a class="headerlink" href="#vaccine-rct-examples" title="Permalink to this headline">#</a></h1>
-<p>Victor Chernozhukov. This notebook contains some RCT examples that I will be using for teaching.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="some-rct-examples">
+<h1><span class="section-number">4. </span>Some RCT Examples<a class="headerlink" href="#some-rct-examples" title="Permalink to this headline">#</a></h1>
 <section id="polio-rct">
 <h2><span class="section-number">4.1. </span>Polio RCT<a class="headerlink" href="#polio-rct" title="Permalink to this headline">#</a></h2>
 <p>One of the earliest randomized experiments were the Polio vaccination trias conducted by the Public Health Service in 1954.  The question was whether Salk vaccine prevented polio.  Children in the study were randomly assigned either a treatment (polio vaccine shot) or a placebo (saline solution shot), without knowing which one they received. The doctors in the study, making the diagnosis, did not know whether a child received a vaccine or not. In other words, the trial was a double-blind, randomized control trial.  The trial had to be large, because the rate at which Polio occured in the population was 50 per 100,000.  The treatment group saw 33 polio cases per 200,745; the control group saw 115 cases per 201,229. The estimated avearage treatment effect is about
@@ -676,10 +675,10 @@ Estimate TE of occurances per 100,000 -40.71005489989265
 Standard deviation for ATE6.047412320702958
 95 % confidence interval is [-52.56298304847044,-28.85712675131485]
 Overall VE is 0.7123516206478694
-95 % confidence interval is [0.5878951736200028 , 0.816741174471475 ]
+95 % confidence interval is [0.5928267987346911 , 0.8189474412266248 ]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x234128b91f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x26404803790&gt;
 </pre></div>
 </div>
 <img alt="../_images/04_py-notebook-some-rct-examples_2_2.png" src="../_images/04_py-notebook-some-rct-examples_2_2.png" />
@@ -747,10 +746,10 @@ Overall VE is 0.7123516206478694
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9461934124362605
-95 % confidence interval is [0.9085067874337177 , 0.9808938005791812 ]
+95 % confidence interval is [0.9085409246733451 , 0.9811309906702067 ]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x234129c30a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x26404905fd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/04_py-notebook-some-rct-examples_5_2.png" src="../_images/04_py-notebook-some-rct-examples_5_2.png" />
@@ -820,11 +819,11 @@ Overall VE is 0.7123516206478694
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9470690822010516
-95 % confidence interval is [0.8189000885606396 , 1.0522561951710196 ]
-95 % confidence interval is [0.8440703684720557 , 1 ]
+95 % confidence interval is [0.8142453794309239 , 1.0514982883898916 ]
+95 % confidence interval is [0.8414443339290628 , 1 ]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x23412a2aa00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x2640497da60&gt;
 </pre></div>
 </div>
 <img alt="../_images/04_py-notebook-some-rct-examples_7_2.png" src="../_images/04_py-notebook-some-rct-examples_7_2.png" />
@@ -886,7 +885,7 @@ Overall VE is 0.7123516206478694
 95 % confidence interval is [0.8333333333333334 , 1 ]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x23412a9f1f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x264049ef160&gt;
 </pre></div>
 </div>
 <img alt="../_images/04_py-notebook-some-rct-examples_8_2.png" src="../_images/04_py-notebook-some-rct-examples_8_2.png" />
@@ -990,13 +989,13 @@ Overall VE is 0.7123516206478694
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>An inferential problem: The Gender Wage Gap</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>OLS and lasso for gender wage gap inference</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="05_py-notebook-analyzing-rct-with-precision.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Analyzing RCT reemployment experiment</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

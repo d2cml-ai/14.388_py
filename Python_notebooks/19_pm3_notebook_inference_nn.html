@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>19. DML inference using NN for gun ownership &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models" href="20_pm5-401k-kaggle-py.html" />
+    <link rel="next" title="20. DML for ATE and LATE of 401(k) on Wealth" href="20_pm5-401k-kaggle-py.html" />
     <link rel="prev" title="18. DML inference for gun ownership" href="18_pm3_notebook_inference_clustering.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -128,27 +128,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -183,22 +183,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -208,12 +208,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,22 +223,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -501,18 +501,23 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-effect-of-gun-ownership-on-gun-homicide-rates-using-dml-for-neural-nets">
+   19.1. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#preprocessing">
-   19.1. Preprocessing
+   19.2. Preprocessing
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dml-for-neural-nets">
-   19.2. DML for neural nets
+   19.3. DML for neural nets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#estimating-the-effect-with-dml-for-neural-nets">
-   19.3. Estimating the effect with DML for neural nets
+   19.4. Estimating the effect with DML for neural nets
   </a>
  </li>
 </ul>
@@ -524,7 +529,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets</h1>
+                <h1>DML inference using NN for gun ownership</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -535,18 +540,23 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-effect-of-gun-ownership-on-gun-homicide-rates-using-dml-for-neural-nets">
+   19.1. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#preprocessing">
-   19.1. Preprocessing
+   19.2. Preprocessing
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dml-for-neural-nets">
-   19.2. DML for neural nets
+   19.3. DML for neural nets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#estimating-the-effect-with-dml-for-neural-nets">
-   19.3. Estimating the effect with DML for neural nets
+   19.4. Estimating the effect with DML for neural nets
   </a>
  </li>
 </ul>
@@ -559,9 +569,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>This notebook contains an example for teaching.</p>
-<section class="tex2jax_ignore mathjax_ignore" id="the-effect-of-gun-ownership-on-gun-homicide-rates-using-dml-for-neural-nets">
-<h1><span class="section-number">19. </span>The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets<a class="headerlink" href="#the-effect-of-gun-ownership-on-gun-homicide-rates-using-dml-for-neural-nets" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="dml-inference-using-nn-for-gun-ownership">
+<h1><span class="section-number">19. </span>DML inference using NN for gun ownership<a class="headerlink" href="#dml-inference-using-nn-for-gun-ownership" title="Permalink to this headline">#</a></h1>
+<section id="the-effect-of-gun-ownership-on-gun-homicide-rates-using-dml-for-neural-nets">
+<h2><span class="section-number">19.1. </span>The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets<a class="headerlink" href="#the-effect-of-gun-ownership-on-gun-homicide-rates-using-dml-for-neural-nets" title="Permalink to this headline">#</a></h2>
 <p>In this lab, we estimate the effect of gun ownership on the homicide rate by a neural network.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -583,6 +594,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -618,8 +631,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="preprocessing">
-<h2><span class="section-number">19.1. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.2. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
 <p>To account for heterogeneity across counties and time trends in  all variables, we remove from them county-specific and time-specific effects in the following preprocessing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -698,363 +712,40 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 62&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">varlist2</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span>     <span class="n">form</span> <span class="o">=</span> <span class="n">var_name</span> <span class="o">+</span> <span class="s2">&quot; ~ &quot;</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">year</span> <span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">fixed</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">64</span>     <span class="n">rdata</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">form</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data1</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span>
 
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
+<span class="nn">File ~\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:306,</span> in <span class="ni">RegressionModel.fit</span><span class="nt">(self, method, cov_type, cov_kwds, use_t, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;pinv&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span>     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pinv_wexog&#39;</span><span class="p">)</span> <span class="ow">and</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span>             <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;normalized_cov_params&#39;</span><span class="p">)</span> <span class="ow">and</span>
+<span class="g g-Whitespace">    </span><span class="mi">304</span>             <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;rank&#39;</span><span class="p">)):</span>
+<span class="ne">--&gt; </span><span class="mi">306</span>         <span class="bp">self</span><span class="o">.</span><span class="n">pinv_wexog</span><span class="p">,</span> <span class="n">singular_values</span> <span class="o">=</span> <span class="n">pinv_extended</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wexog</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>             <span class="bp">self</span><span class="o">.</span><span class="n">pinv_wexog</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinv_wexog</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>         <span class="c1"># Cache these singular values for use later.</span>
 
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
+<span class="nn">File ~\anaconda3\lib\site-packages\statsmodels\tools\tools.py:349,</span> in <span class="ni">pinv_extended</span><span class="nt">(x, rcond)</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">348</span>         <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="ne">--&gt; </span><span class="mi">349</span> <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">vt</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">s</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">350</span>                                            <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+<span class="g g-Whitespace">    </span><span class="mi">351</span> <span class="k">return</span> <span class="n">res</span><span class="p">,</span> <span class="n">s_orig</span>
 
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
+<span class="nn">File &lt;__array_function__ internals&gt;:5,</span> in <span class="ni">dot</span><span class="nt">(*args, **kwargs)</span>
 
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_12204\36369032.py:64: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  rdata[f&#39;{var_name}&#39;] = smf.ols( formula = form , data = data1 ).fit().resid
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="dml-for-neural-nets">
-<h2><span class="section-number">19.2. </span>DML for neural nets<a class="headerlink" href="#dml-for-neural-nets" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.3. </span>DML for neural nets<a class="headerlink" href="#dml-for-neural-nets" title="Permalink to this headline">#</a></h2>
 <p>The following algorithm comsumes <span class="math notranslate nohighlight">\(Y\)</span>,<span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(Z\)</span>, and learns the residuals <span class="math notranslate nohighlight">\(\tilde{Y}\)</span> and <span class="math notranslate nohighlight">\(\tilde{D}\)</span> via a neural network, where the residuals are obtained by cross-validation (cross-fitting). Then, it prints the estimated coefficient β and the clustered standard error from the final OLS regression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1152,7 +843,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </section>
 <section id="estimating-the-effect-with-dml-for-neural-nets">
-<h2><span class="section-number">19.3. </span>Estimating the effect with DML for neural nets<a class="headerlink" href="#estimating-the-effect-with-dml-for-neural-nets" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.4. </span>Estimating the effect with DML for neural nets<a class="headerlink" href="#estimating-the-effect-with-dml-for-neural-nets" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create main variables</span>
@@ -1224,7 +915,7 @@ Coefficient is 0.230760284445633, SE is equal to 0.09054080195401883
     <a class='right-next' id="next-link" href="20_pm5-401k-kaggle-py.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">20. </span>Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>DML for ATE and LATE of 401(k) on Wealth</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

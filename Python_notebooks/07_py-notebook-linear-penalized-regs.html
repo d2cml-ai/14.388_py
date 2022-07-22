@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>7. Penalized Linear Regressions: A Simulation Experiment &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>7. Linear Penalized Regs &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="8. ML for wage prediction" href="08_ML_for_wage_prediction.html" />
-    <link rel="prev" title="6. Analyzing RCT data with Precision Adjustment" href="06_analyzing-rct-reemployment-experiment.html" />
+    <link rel="prev" title="6. Analyzing RCT reemployment experiment" href="06_analyzing-rct-reemployment-experiment.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -128,27 +128,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -183,22 +183,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -208,12 +208,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,22 +223,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -501,13 +501,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#penalized-linear-regressions-a-simulation-experiment">
+   7.1. Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
-   7.1. Data Generating Process: Approximately Sparse
+   7.2. Data Generating Process: Approximately Sparse
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse-small-dense-part">
-   7.2. Data Generating Process: Approximately Sparse + Small Dense Part
+   7.3. Data Generating Process: Approximately Sparse + Small Dense Part
   </a>
  </li>
 </ul>
@@ -519,7 +524,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Penalized Linear Regressions: A Simulation Experiment</h1>
+                <h1>Linear Penalized Regs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -530,13 +535,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#penalized-linear-regressions-a-simulation-experiment">
+   7.1. Penalized Linear Regressions: A Simulation Experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse">
-   7.1. Data Generating Process: Approximately Sparse
+   7.2. Data Generating Process: Approximately Sparse
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-generating-process-approximately-sparse-small-dense-part">
-   7.2. Data Generating Process: Approximately Sparse + Small Dense Part
+   7.3. Data Generating Process: Approximately Sparse + Small Dense Part
   </a>
  </li>
 </ul>
@@ -549,10 +559,13 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="penalized-linear-regressions-a-simulation-experiment">
-<h1><span class="section-number">7. </span>Penalized Linear Regressions: A Simulation Experiment<a class="headerlink" href="#penalized-linear-regressions-a-simulation-experiment" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-penalized-regs">
+<h1><span class="section-number">7. </span>Linear Penalized Regs<a class="headerlink" href="#linear-penalized-regs" title="Permalink to this headline">#</a></h1>
+<section id="penalized-linear-regressions-a-simulation-experiment">
+<h2><span class="section-number">7.1. </span>Penalized Linear Regressions: A Simulation Experiment<a class="headerlink" href="#penalized-linear-regressions-a-simulation-experiment" title="Permalink to this headline">#</a></h2>
+</section>
 <section id="data-generating-process-approximately-sparse">
-<h2><span class="section-number">7.1. </span>Data Generating Process: Approximately Sparse<a class="headerlink" href="#data-generating-process-approximately-sparse" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.2. </span>Data Generating Process: Approximately Sparse<a class="headerlink" href="#data-generating-process-approximately-sparse" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -560,6 +573,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -602,11 +617,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07_py-notebook-linear-penalized-regs_3_0.png" src="../_images/07_py-notebook-linear-penalized-regs_3_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.85643750276953
+<img alt="../_images/07_py-notebook-linear-penalized-regs_4_0.png" src="../_images/07_py-notebook-linear-penalized-regs_4_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.8157075844450093
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.85643750276953
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8157075844450093
 </pre></div>
 </div>
 </div>
@@ -640,123 +655,9 @@ The parameter <strong>l1_ratio</strong> corresponds to <strong>alpha</strong> in
 <span class="n">fit_elnet</span> <span class="o">=</span> <span class="n">ElasticNetCV</span><span class="p">(</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">l1_ratio</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">100000</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">std_Y</span> <span class="p">)</span>
 
 <span class="c1"># Predictions</span>
-<span class="n">yhat_lasso_cv</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_lasso_cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
-<span class="n">yhat_ridge</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
-<span class="n">yhat_elnet</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_elnet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:1571: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  y = column_or_1d(y, warn=True)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\sklearn\linear_model\_base.py:141: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2.
-If you wish to scale the data, use Pipeline with a StandardScaler in a preprocessing stage. To reproduce the previous behavior:
-
-from sklearn.pipeline import make_pipeline
-
-model = make_pipeline(StandardScaler(with_mean=False), Lasso())
-
-If you wish to pass a sample_weight parameter, you need to pass it as a fit parameter to each step of the pipeline as follows:
-
-kwargs = {s[0] + &#39;__sample_weight&#39;: sample_weight for s in model.steps}
-model.fit(X, y, **kwargs)
-
-Set parameter alpha to: original_alpha * np.sqrt(n_samples). 
-  warnings.warn(
-C:\Users\User\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:1571: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  y = column_or_1d(y, warn=True)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\sklearn\linear_model\_base.py:141: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2.
-If you wish to scale the data, use Pipeline with a StandardScaler in a preprocessing stage. To reproduce the previous behavior:
-
-from sklearn.pipeline import make_pipeline
-
-model = make_pipeline(StandardScaler(with_mean=False), ElasticNet())
-
-If you wish to pass a sample_weight parameter, you need to pass it as a fit parameter to each step of the pipeline as follows:
-
-kwargs = {s[0] + &#39;__sample_weight&#39;: sample_weight for s in model.steps}
-model.fit(X, y, **kwargs)
-
-Set parameter alpha to original_alpha * np.sqrt(n_samples) if l1_ratio is 1, and to original_alpha * n_samples if l1_ratio is 0. For other values of l1_ratio, no analytic formula is available.
-  warnings.warn(
-C:\Users\User\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:1571: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  y = column_or_1d(y, warn=True)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\anaconda3\lib\site-packages\sklearn\linear_model\_base.py:141: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2.
-If you wish to scale the data, use Pipeline with a StandardScaler in a preprocessing stage. To reproduce the previous behavior:
-
-from sklearn.pipeline import make_pipeline
-
-model = make_pipeline(StandardScaler(with_mean=False), ElasticNet())
-
-If you wish to pass a sample_weight parameter, you need to pass it as a fit parameter to each step of the pipeline as follows:
-
-kwargs = {s[0] + &#39;__sample_weight&#39;: sample_weight for s in model.steps}
-model.fit(X, y, **kwargs)
-
-Set parameter alpha to original_alpha * np.sqrt(n_samples) if l1_ratio is 1, and to original_alpha * n_samples if l1_ratio is 0. For other values of l1_ratio, no analytic formula is available.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">Input In [4],</span> in <span class="ni">&lt;cell line: 15&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">fit_elnet</span> <span class="o">=</span> <span class="n">ElasticNetCV</span><span class="p">(</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">l1_ratio</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">100000</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">std_Y</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># Predictions</span>
-<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">yhat_lasso_cv</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_lasso_cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">yhat_ridge</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">yhat_elnet</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_elnet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\preprocessing\_data.py:1016,</span> in <span class="ni">StandardScaler.inverse_transform</span><span class="nt">(self, X, copy)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1015</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">copy</span> <span class="k">if</span> <span class="n">copy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span>
-<span class="ne">-&gt; </span><span class="mi">1016</span> <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1017</span>     <span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1018</span>     <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1019</span>     <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1020</span>     <span class="n">estimator</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1021</span>     <span class="n">dtype</span><span class="o">=</span><span class="n">FLOAT_DTYPES</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">force_all_finite</span><span class="o">=</span><span class="s2">&quot;allow-nan&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1025</span> <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1026</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_mean</span><span class="p">:</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\utils\validation.py:769,</span> in <span class="ni">check_array</span><span class="nt">(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator)</span>
-<span class="g g-Whitespace">    </span><span class="mi">767</span>     <span class="c1"># If input is 1D raise error</span>
-<span class="g g-Whitespace">    </span><span class="mi">768</span>     <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">769</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">770</span>             <span class="s2">&quot;Expected 2D array, got 1D array instead:</span><span class="se">\n</span><span class="s2">array=</span><span class="si">{}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">771</span>             <span class="s2">&quot;Reshape your data either using array.reshape(-1, 1) if &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">772</span>             <span class="s2">&quot;your data has a single feature or array.reshape(1, -1) &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">773</span>             <span class="s2">&quot;if it contains a single sample.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">774</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">776</span> <span class="c1"># make sure we actually converted to numeric:</span>
-<span class="g g-Whitespace">    </span><span class="mi">777</span> <span class="k">if</span> <span class="n">dtype_numeric</span> <span class="ow">and</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="s2">&quot;OUSV&quot;</span><span class="p">:</span>
-
-<span class="ne">ValueError</span>: Expected 2D array, got 1D array instead:
-<span class="n">array</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.54558852</span> <span class="o">-</span><span class="mf">0.48725355</span> <span class="o">-</span><span class="mf">0.5131954</span>   <span class="mf">2.20874683</span> <span class="o">-</span><span class="mf">0.50964494</span>  <span class="mf">1.05621257</span>
- <span class="o">-</span><span class="mf">0.40905092</span> <span class="o">-</span><span class="mf">0.44818542</span> <span class="o">-</span><span class="mf">0.23866506</span> <span class="o">-</span><span class="mf">0.498472</span>    <span class="mf">0.2125739</span>  <span class="o">-</span><span class="mf">0.25465543</span>
- <span class="o">-</span><span class="mf">0.3905919</span>   <span class="mf">1.18300595</span> <span class="o">-</span><span class="mf">0.46824847</span>  <span class="mf">0.00317715</span> <span class="o">-</span><span class="mf">0.00272899</span> <span class="o">-</span><span class="mf">0.41866381</span>
-<span class="g g-Whitespace">  </span><span class="mi">0</span><span class="mf">.60683618</span> <span class="o">-</span><span class="mf">0.2301423</span>   <span class="mf">0.34744964</span>  <span class="mf">1.03560766</span> <span class="o">-</span><span class="mf">0.28308379</span>  <span class="mf">1.08291998</span>
- <span class="o">-</span><span class="mf">0.4358707</span>   <span class="mf">1.30281243</span> <span class="o">-</span><span class="mf">0.22643978</span> <span class="o">-</span><span class="mf">0.43820617</span> <span class="o">-</span><span class="mf">0.6561745</span>  <span class="o">-</span><span class="mf">0.53206673</span>
- <span class="o">-</span><span class="mf">0.94607787</span> <span class="o">-</span><span class="mf">0.50732427</span>  <span class="mf">1.47767745</span> <span class="o">-</span><span class="mf">0.3806804</span>  <span class="o">-</span><span class="mf">0.56871133</span>  <span class="mf">1.40357209</span>
- <span class="o">-</span><span class="mf">0.44490783</span>  <span class="mf">1.21472392</span> <span class="o">-</span><span class="mf">0.05876005</span> <span class="o">-</span><span class="mf">0.41204034</span> <span class="o">-</span><span class="mf">0.45339045</span> <span class="o">-</span><span class="mf">1.02237409</span>
-<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.60520204</span> <span class="o">-</span><span class="mf">0.50818772</span> <span class="o">-</span><span class="mf">0.44881819</span>  <span class="mf">2.06035266</span> <span class="o">-</span><span class="mf">0.54665275</span>  <span class="mf">0.46246911</span>
- <span class="o">-</span><span class="mf">0.25512505</span> <span class="o">-</span><span class="mf">0.6514907</span>   <span class="mf">0.42161092</span>  <span class="mf">1.0909722</span>  <span class="o">-</span><span class="mf">0.38309847</span> <span class="o">-</span><span class="mf">0.03910151</span>
- <span class="o">-</span><span class="mf">0.01386956</span> <span class="o">-</span><span class="mf">0.11584695</span> <span class="o">-</span><span class="mf">0.20991093</span>  <span class="mf">0.22402227</span> <span class="o">-</span><span class="mf">0.05965879</span>  <span class="mf">1.43245075</span>
-<span class="g g-Whitespace">  </span><span class="mi">0</span><span class="mf">.93847604</span> <span class="o">-</span><span class="mf">0.47940833</span> <span class="o">-</span><span class="mf">0.47757688</span> <span class="o">-</span><span class="mf">0.51128534</span> <span class="o">-</span><span class="mf">0.34769404</span> <span class="o">-</span><span class="mf">0.43650543</span>
- <span class="o">-</span><span class="mf">0.06595629</span> <span class="o">-</span><span class="mf">0.83177355</span> <span class="o">-</span><span class="mf">0.29183549</span> <span class="o">-</span><span class="mf">0.38047229</span>  <span class="mf">0.21556901</span> <span class="o">-</span><span class="mf">0.43629462</span>
- <span class="o">-</span><span class="mf">0.72463527</span> <span class="o">-</span><span class="mf">0.53671336</span>  <span class="mf">0.2358132</span>   <span class="mf">1.32769996</span>  <span class="mf">1.42167585</span>  <span class="mf">0.01419552</span>
-<span class="g g-Whitespace">  </span><span class="mi">0</span><span class="mf">.08556225</span> <span class="o">-</span><span class="mf">0.58588982</span> <span class="o">-</span><span class="mf">1.05079495</span>  <span class="mf">0.60930928</span> <span class="o">-</span><span class="mf">0.50525185</span> <span class="o">-</span><span class="mf">0.39793378</span>
- <span class="o">-</span><span class="mf">0.39302559</span> <span class="o">-</span><span class="mf">0.52509579</span> <span class="o">-</span><span class="mf">0.54837102</span> <span class="o">-</span><span class="mf">0.1457348</span>  <span class="o">-</span><span class="mf">0.39489693</span> <span class="o">-</span><span class="mf">0.85491932</span>
-<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.96953348</span>  <span class="mf">0.77889483</span> <span class="o">-</span><span class="mf">0.34746633</span> <span class="o">-</span><span class="mf">0.43457048</span> <span class="o">-</span><span class="mf">0.43122866</span>  <span class="mf">1.16973855</span>
- <span class="o">-</span><span class="mf">0.77160248</span> <span class="o">-</span><span class="mf">0.07359089</span> <span class="o">-</span><span class="mf">0.49183385</span>  <span class="mf">0.28644943</span><span class="p">]</span><span class="o">.</span>
-<span class="n">Reshape</span> <span class="n">your</span> <span class="n">data</span> <span class="n">either</span> <span class="n">using</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">your</span> <span class="n">data</span> <span class="n">has</span> <span class="n">a</span> <span class="n">single</span> <span class="n">feature</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">it</span> <span class="n">contains</span> <span class="n">a</span> <span class="n">single</span> <span class="n">sample</span><span class="o">.</span>
+<span class="n">yhat_lasso_cv</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_lasso_cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">yhat_ridge</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">yhat_elnet</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_elnet</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,9 +671,9 @@ Set parameter alpha to original_alpha * np.sqrt(n_samples) if l1_ratio is 1, and
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MSE_lasso_cv</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_lasso_cv</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_lasso_cv</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">MSE_ridge</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_ridge</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_ridge</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">MSE_elnet</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_elnet</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_elnet</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MSE_lasso_cv</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yhat_lasso_cv</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_lasso_cv</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">MSE_ridge</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yhat_ridge</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_ridge</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">MSE_elnet</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yhat_elnet</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_elnet</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="c1"># our coefficient of MSE_elnet are far from r output</span>
 </pre></div>
 </div>
@@ -852,24 +753,174 @@ We find a Python code that tries to replicate the main function of hdm r-package
 <p>Next we code up lava, which alternates the fitting of lasso and ridge</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 403)
+(100,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat_lava</span> <span class="o">=</span> <span class="n">lava_predict</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">yhat_lava</span> <span class="o">=</span> <span class="n">lava_predict</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nn">Input In [9],</span> in <span class="ni">lava_predict</span><span class="nt">(x, y, iteration)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">new_dep_var_vec</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">std_new_dep_var_vec</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span> <span class="n">new_dep_var_vec</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">fit_ridge_m1</span> <span class="o">=</span> <span class="n">ElasticNetCV</span><span class="p">(</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">l1_ratio</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">])</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">std_new_dep_var_vec</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_ridge_m1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:1564,</span> in <span class="ni">LinearModelCV.fit</span><span class="nt">(self, X, y, sample_weight)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1559</span>     <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1560</span>         <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">validate_separately</span><span class="o">=</span><span class="p">(</span><span class="n">check_X_params</span><span class="p">,</span> <span class="n">check_y_params</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1561</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1562</span>     <span class="n">copy_X</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">-&gt; </span><span class="mi">1564</span> <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1566</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_multitask</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">1567</span>     <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\utils\validation.py:332,</span> in <span class="ni">check_consistent_length</span><span class="nt">(*arrays)</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="n">uniques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniques</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">332</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">333</span>         <span class="s2">&quot;Found input variables with inconsistent numbers of samples: </span><span class="si">%r</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">334</span>         <span class="o">%</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lengths</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">335</span>     <span class="p">)</span>
+
+<span class="ne">ValueError</span>: Found input variables with inconsistent numbers of samples: [100, 10000]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat_lava</span> <span class="o">=</span> <span class="n">lava_predict</span><span class="p">(</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">Input In [24],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">yhat_lava</span> <span class="o">=</span> <span class="n">lava_predict</span><span class="p">(</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nn">Input In [9],</span> in <span class="ni">lava_predict</span><span class="nt">(x, y, iteration)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">new_dep_var_vec</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">std_new_dep_var_vec</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span> <span class="n">new_dep_var_vec</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">fit_ridge_m1</span> <span class="o">=</span> <span class="n">ElasticNetCV</span><span class="p">(</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">l1_ratio</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">])</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">std_new_dep_var_vec</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_ridge_m1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:1564,</span> in <span class="ni">LinearModelCV.fit</span><span class="nt">(self, X, y, sample_weight)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1559</span>     <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1560</span>         <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">validate_separately</span><span class="o">=</span><span class="p">(</span><span class="n">check_X_params</span><span class="p">,</span> <span class="n">check_y_params</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1561</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1562</span>     <span class="n">copy_X</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">-&gt; </span><span class="mi">1564</span> <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1566</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_multitask</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">1567</span>     <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\utils\validation.py:332,</span> in <span class="ni">check_consistent_length</span><span class="nt">(*arrays)</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="n">uniques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniques</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">332</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">333</span>         <span class="s2">&quot;Found input variables with inconsistent numbers of samples: </span><span class="si">%r</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">334</span>         <span class="o">%</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lengths</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">335</span>     <span class="p">)</span>
+
+<span class="ne">ValueError</span>: Found input variables with inconsistent numbers of samples: [100, 10000]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat_lava</span> <span class="o">=</span> <span class="n">lava_predict</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="p">)</span>
 <span class="n">MSE_lava</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_lava</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_lava</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return f(**kwargs)
-C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return f(**kwargs)
-C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return f(**kwargs)
-C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return f(**kwargs)
-C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return f(**kwargs)
-C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return f(**kwargs)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">Input In [79],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">yhat_lava</span> <span class="o">=</span> <span class="n">lava_predict</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">MSE_lava</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="p">((</span><span class="n">gX</span> <span class="o">-</span> <span class="n">yhat_lava</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">yhat_lava</span><span class="o">.</span><span class="n">size</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nn">Input In [78],</span> in <span class="ni">lava_predict</span><span class="nt">(x, y, iteration)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">std_new_dep_var_vec</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span> <span class="n">new_dep_var_vec</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">fit_ridge_m1</span> <span class="o">=</span> <span class="n">ElasticNetCV</span><span class="p">(</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">l1_ratio</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">])</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">std_new_dep_var_vec</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span> <span class="n">fit_ridge_m1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">iteration</span><span class="p">:</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\preprocessing\_data.py:1016,</span> in <span class="ni">StandardScaler.inverse_transform</span><span class="nt">(self, X, copy)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">copy</span> <span class="k">if</span> <span class="n">copy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span>
+<span class="ne">-&gt; </span><span class="mi">1016</span> <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1017</span>     <span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1018</span>     <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csr&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1019</span>     <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1020</span>     <span class="n">estimator</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1021</span>     <span class="n">dtype</span><span class="o">=</span><span class="n">FLOAT_DTYPES</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">force_all_finite</span><span class="o">=</span><span class="s2">&quot;allow-nan&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1025</span> <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1026</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_mean</span><span class="p">:</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\sklearn\utils\validation.py:769,</span> in <span class="ni">check_array</span><span class="nt">(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator)</span>
+<span class="g g-Whitespace">    </span><span class="mi">767</span>     <span class="c1"># If input is 1D raise error</span>
+<span class="g g-Whitespace">    </span><span class="mi">768</span>     <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">769</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">770</span>             <span class="s2">&quot;Expected 2D array, got 1D array instead:</span><span class="se">\n</span><span class="s2">array=</span><span class="si">{}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">771</span>             <span class="s2">&quot;Reshape your data either using array.reshape(-1, 1) if &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">772</span>             <span class="s2">&quot;your data has a single feature or array.reshape(1, -1) &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">773</span>             <span class="s2">&quot;if it contains a single sample.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">774</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">776</span> <span class="c1"># make sure we actually converted to numeric:</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span> <span class="k">if</span> <span class="n">dtype_numeric</span> <span class="ow">and</span> <span class="n">array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="s2">&quot;OUSV&quot;</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Expected 2D array, got 1D array instead:
+<span class="n">array</span><span class="o">=</span><span class="p">[</span> <span class="mf">1.31925564e-04</span> <span class="o">-</span><span class="mf">2.78839475e-03</span> <span class="o">-</span><span class="mf">1.68320499e-03</span> <span class="o">-</span><span class="mf">9.86061094e-04</span>
+ <span class="o">-</span><span class="mf">6.09981926e-04</span> <span class="o">-</span><span class="mf">9.65894525e-04</span> <span class="o">-</span><span class="mf">4.63284613e-04</span> <span class="o">-</span><span class="mf">1.86797011e-03</span>
+ <span class="o">-</span><span class="mf">3.97059470e-03</span>  <span class="mf">1.33980212e-03</span>  <span class="mf">4.18719814e-03</span>  <span class="mf">2.72843430e-04</span>
+ <span class="o">-</span><span class="mf">2.49896203e-03</span> <span class="o">-</span><span class="mf">2.20497766e-04</span>  <span class="mf">4.98730992e-04</span> <span class="o">-</span><span class="mf">2.57469264e-03</span>
+<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.29635781e-04</span> <span class="o">-</span><span class="mf">1.07971041e-03</span> <span class="o">-</span><span class="mf">2.43211984e-03</span>  <span class="mf">4.84705955e-04</span>
+<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.64541374e-03</span> <span class="o">-</span><span class="mf">1.42337862e-03</span>  <span class="mf">3.66813776e-03</span>  <span class="mf">1.14128324e-03</span>
+ <span class="o">-</span><span class="mf">3.37015422e-03</span> <span class="o">-</span><span class="mf">8.25208105e-04</span> <span class="o">-</span><span class="mf">2.94022157e-03</span> <span class="o">-</span><span class="mf">6.64163862e-04</span>
+ <span class="o">-</span><span class="mf">5.30186274e-04</span>  <span class="mf">4.58853580e-04</span>  <span class="mf">1.23865430e-03</span> <span class="o">-</span><span class="mf">2.47826652e-03</span>
+<span class="g g-Whitespace">  </span><span class="mi">7</span><span class="mf">.66564851e-04</span> <span class="o">-</span><span class="mf">2.65006223e-04</span> <span class="o">-</span><span class="mf">1.66809556e-03</span>  <span class="mf">1.03621871e-03</span>
+ <span class="o">-</span><span class="mf">2.48415901e-04</span>  <span class="mf">1.96616609e-03</span> <span class="o">-</span><span class="mf">3.50636159e-03</span> <span class="o">-</span><span class="mf">8.38534525e-05</span>
+<span class="g g-Whitespace">  </span><span class="mi">4</span><span class="mf">.65818188e-03</span> <span class="o">-</span><span class="mf">3.54523907e-03</span>  <span class="mf">1.36174951e-03</span>  <span class="mf">2.24974736e-03</span>
+ <span class="o">-</span><span class="mf">4.53832909e-04</span> <span class="o">-</span><span class="mf">5.44984425e-05</span> <span class="o">-</span><span class="mf">2.23070348e-03</span>  <span class="mf">1.69157993e-03</span>
+ <span class="o">-</span><span class="mf">1.13473036e-03</span> <span class="o">-</span><span class="mf">9.77185673e-04</span>  <span class="mf">1.50540068e-03</span>  <span class="mf">4.67934176e-04</span>
+ <span class="o">-</span><span class="mf">2.65827305e-03</span>  <span class="mf">2.22059526e-03</span>  <span class="mf">4.48838171e-03</span> <span class="o">-</span><span class="mf">1.98035964e-03</span>
+<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.71256910e-03</span> <span class="o">-</span><span class="mf">1.20203438e-03</span>  <span class="mf">4.56793534e-04</span> <span class="o">-</span><span class="mf">1.26105292e-03</span>
+ <span class="o">-</span><span class="mf">1.36733032e-03</span>  <span class="mf">9.70161389e-04</span>  <span class="mf">1.80147656e-03</span>  <span class="mf">2.93587216e-03</span>
+<span class="g g-Whitespace">  </span><span class="mi">4</span><span class="mf">.66138416e-03</span>  <span class="mf">1.21822944e-03</span>  <span class="mf">1.94528278e-03</span>  <span class="mf">2.07148746e-03</span>
+ <span class="o">-</span><span class="mf">5.14311643e-04</span>  <span class="mf">3.01601999e-04</span>  <span class="mf">1.20089862e-03</span> <span class="o">-</span><span class="mf">3.88437169e-04</span>
+<span class="g g-Whitespace">  </span><span class="mi">9</span><span class="mf">.13293484e-04</span>  <span class="mf">7.62634598e-04</span> <span class="o">-</span><span class="mf">4.04671854e-04</span> <span class="o">-</span><span class="mf">1.59235251e-04</span>
+ <span class="o">-</span><span class="mf">4.11963455e-03</span>  <span class="mf">3.82823717e-03</span> <span class="o">-</span><span class="mf">3.92173087e-03</span>  <span class="mf">5.18125232e-04</span>
+ <span class="o">-</span><span class="mf">1.53081362e-04</span>  <span class="mf">2.95436086e-03</span> <span class="o">-</span><span class="mf">1.98988426e-04</span> <span class="o">-</span><span class="mf">2.40096108e-04</span>
+<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.36462428e-03</span> <span class="o">-</span><span class="mf">6.17562432e-04</span> <span class="o">-</span><span class="mf">6.65999005e-04</span>  <span class="mf">5.60859346e-04</span>
+<span class="g g-Whitespace">  </span><span class="mi">1</span><span class="mf">.30314057e-03</span> <span class="o">-</span><span class="mf">3.02589155e-04</span> <span class="o">-</span><span class="mf">1.23167525e-03</span> <span class="o">-</span><span class="mf">3.34420713e-04</span>
+<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.25021215e-04</span>  <span class="mf">1.20222913e-03</span> <span class="o">-</span><span class="mf">4.70889652e-04</span> <span class="o">-</span><span class="mf">2.03044053e-04</span>
+<span class="g g-Whitespace">  </span><span class="mi">2</span><span class="mf">.84814526e-04</span> <span class="o">-</span><span class="mf">2.31718605e-04</span> <span class="o">-</span><span class="mf">1.00252299e-03</span> <span class="o">-</span><span class="mf">2.32271723e-04</span><span class="p">]</span><span class="o">.</span>
+<span class="n">Reshape</span> <span class="n">your</span> <span class="n">data</span> <span class="n">either</span> <span class="n">using</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">your</span> <span class="n">data</span> <span class="n">has</span> <span class="n">a</span> <span class="n">single</span> <span class="n">feature</span> <span class="ow">or</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">it</span> <span class="n">contains</span> <span class="n">a</span> <span class="n">single</span> <span class="n">sample</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
@@ -1014,12 +1065,12 @@ C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: Data
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07_py-notebook-linear-penalized-regs_22_0.png" src="../_images/07_py-notebook-linear-penalized-regs_22_0.png" />
+<img alt="../_images/07_py-notebook-linear-penalized-regs_26_0.png" src="../_images/07_py-notebook-linear-penalized-regs_26_0.png" />
 </div>
 </div>
 </section>
 <section id="data-generating-process-approximately-sparse-small-dense-part">
-<h2><span class="section-number">7.2. </span>Data Generating Process: Approximately Sparse + Small Dense Part<a class="headerlink" href="#data-generating-process-approximately-sparse-small-dense-part" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.3. </span>Data Generating Process: Approximately Sparse + Small Dense Part<a class="headerlink" href="#data-generating-process-approximately-sparse-small-dense-part" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1055,7 +1106,7 @@ C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: Data
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07_py-notebook-linear-penalized-regs_24_0.png" src="../_images/07_py-notebook-linear-penalized-regs_24_0.png" />
+<img alt="../_images/07_py-notebook-linear-penalized-regs_28_0.png" src="../_images/07_py-notebook-linear-penalized-regs_28_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.7852348130924549
 </pre></div>
 </div>
@@ -1290,7 +1341,7 @@ C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: Data
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/07_py-notebook-linear-penalized-regs_32_0.png" src="../_images/07_py-notebook-linear-penalized-regs_32_0.png" />
+<img alt="../_images/07_py-notebook-linear-penalized-regs_36_0.png" src="../_images/07_py-notebook-linear-penalized-regs_36_0.png" />
 </div>
 </div>
 </section>
@@ -1327,7 +1378,7 @@ C:\Users\MSI-NB\anaconda3\lib\site-packages\sklearn\utils\validation.py:72: Data
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">6. </span>Analyzing RCT data with Precision Adjustment</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Analyzing RCT reemployment experiment</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="08_ML_for_wage_prediction.html" title="next page">

@@ -17,26 +17,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-table_1 = np.zeros( (1, 4) )
-
-table_1[0,0] = est_ols  
-table_1[0,1] = std_ols   
-table_1[0,2] = lower_ci
-table_1[0,3] = upper_ci    
-
-
-table_1_pandas = pd.DataFrame( table_1, columns = [ "Estimator","Std. Error", "lower bound CI", "upper bound CI"  ])
-table_1_pandas.index = [ "OLS" ]
-table_1_html
+table_1_pandas
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mNameError[0m                                 Traceback (most recent call last)
-Input [1;32mIn [8][0m, in [0;36m<cell line: 11>[1;34m()[0m
-[0;32m      9[0m table_1_pandas [38;5;241m=[39m pd[38;5;241m.[39mDataFrame( table_1, columns [38;5;241m=[39m [ [38;5;124m"[39m[38;5;124mEstimator[39m[38;5;124m"[39m,[38;5;124m"[39m[38;5;124mStd. Error[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mlower bound CI[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mupper bound CI[39m[38;5;124m"[39m  ])
-[0;32m     10[0m table_1_pandas[38;5;241m.[39mindex [38;5;241m=[39m [ [38;5;124m"[39m[38;5;124mOLS[39m[38;5;124m"[39m ]
-[1;32m---> 11[0m [43mtable_1_html[49m
+Input [1;32mIn [8][0m, in [0;36m<cell line: 1>[1;34m()[0m
+[1;32m----> 1[0m [43mtable_1_pandas[49m
 
-[1;31mNameError[0m: name 'table_1_html' is not defined
-NameError: name 'table_1_html' is not defined
+[1;31mNameError[0m: name 'table_1_pandas' is not defined
+NameError: name 'table_1_pandas' is not defined
 

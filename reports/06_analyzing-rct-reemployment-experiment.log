@@ -17,82 +17,74 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# model = "T4~(female+black+othrace+C(dep)+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2"
-model_results = sm.OLS( y, X_vars ).fit().get_robustcov_results(cov_type = "HC1")
+table2 = np.zeros((2, 4))
+table2[0,0] = ols_cl.summary2().tables[1]['Coef.']['T4']
+table2[0,1] = ols_cra.summary2().tables[1]['Coef.']['T4TRUE']
+table2[0,2] = ols_ira.summary2().tables[1]['Coef.']['T4']
+table2[0,3] = rlasso_ira['Coef.']['T4']
 
-print(model_results.summary())
-print( "Number of regressors in the basic model:",len(model_results.params), '\n')
+table2[1,0] = ols_cl.summary2().tables[1]['Std.Err.']['T4']
+table2[1,1] = ols_cra.summary2().tables[1]['Std.Err.']['T4TRUE']
+table2[1,2] = ols_ira.summary2().tables[1]['Std.Err.']['T4']
+table2[1,3] = rlasso_ira['Std.Err.']['T4']
+
+table2 = pd.DataFrame(table2, columns = ["$CL$", "$CRA$", "$IRA$", "$IRA Lasso$"], \
+                      index = ["estimate","standard error"])
+table2
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mValueError[0m                                Traceback (most recent call last)
-Input [1;32mIn [9][0m, in [0;36m<cell line: 2>[1;34m()[0m
-[0;32m      1[0m [38;5;66;03m# model = "T4~(female+black+othrace+C(dep)+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2"[39;00m
-[1;32m----> 2[0m model_results [38;5;241m=[39m [43msm[49m[38;5;241;43m.[39;49m[43mOLS[49m[43m([49m[43m [49m[43my[49m[43m,[49m[43m [49m[43mX_vars[49m[43m [49m[43m)[49m[38;5;241m.[39mfit()[38;5;241m.[39mget_robustcov_results(cov_type [38;5;241m=[39m [38;5;124m"[39m[38;5;124mHC1[39m[38;5;124m"[39m)
-[0;32m      4[0m [38;5;28mprint[39m(model_results[38;5;241m.[39msummary())
-[0;32m      5[0m [38;5;28mprint[39m( [38;5;124m"[39m[38;5;124mNumber of regressors in the basic model:[39m[38;5;124m"[39m,[38;5;28mlen[39m(model_results[38;5;241m.[39mparams), [38;5;124m'[39m[38;5;130;01m\n[39;00m[38;5;124m'[39m)
+[1;31mKeyError[0m                                  Traceback (most recent call last)
+File [1;32m~\anaconda3\lib\site-packages\pandas\core\indexes\base.py:3621[0m, in [0;36mIndex.get_loc[1;34m(self, key, method, tolerance)[0m
+[0;32m   3620[0m [38;5;28;01mtry[39;00m:
+[1;32m-> 3621[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_engine[49m[38;5;241;43m.[39;49m[43mget_loc[49m[43m([49m[43mcasted_key[49m[43m)[49m
+[0;32m   3622[0m [38;5;28;01mexcept[39;00m [38;5;167;01mKeyError[39;00m [38;5;28;01mas[39;00m err:
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:890[0m, in [0;36mOLS.__init__[1;34m(self, endog, exog, missing, hasconst, **kwargs)[0m
-[0;32m    887[0m     msg [38;5;241m=[39m ([38;5;124m"[39m[38;5;124mWeights are not supported in OLS and will be ignored[39m[38;5;124m"[39m
-[0;32m    888[0m            [38;5;124m"[39m[38;5;124mAn exception will be raised in the next version.[39m[38;5;124m"[39m)
-[0;32m    889[0m     warnings[38;5;241m.[39mwarn(msg, ValueWarning)
-[1;32m--> 890[0m [38;5;28msuper[39m(OLS, [38;5;28mself[39m)[38;5;241m.[39m[38;5;21m__init__[39m(endog, exog, missing[38;5;241m=[39mmissing,
-[0;32m    891[0m                           hasconst[38;5;241m=[39mhasconst, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m    892[0m [38;5;28;01mif[39;00m [38;5;124m"[39m[38;5;124mweights[39m[38;5;124m"[39m [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39m_init_keys:
-[0;32m    893[0m     [38;5;28mself[39m[38;5;241m.[39m_init_keys[38;5;241m.[39mremove([38;5;124m"[39m[38;5;124mweights[39m[38;5;124m"[39m)
+File [1;32m~\anaconda3\lib\site-packages\pandas\_libs\index.pyx:136[0m, in [0;36mpandas._libs.index.IndexEngine.get_loc[1;34m()[0m
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:717[0m, in [0;36mWLS.__init__[1;34m(self, endog, exog, weights, missing, hasconst, **kwargs)[0m
-[0;32m    715[0m [38;5;28;01melse[39;00m:
-[0;32m    716[0m     weights [38;5;241m=[39m weights[38;5;241m.[39msqueeze()
-[1;32m--> 717[0m [38;5;28msuper[39m(WLS, [38;5;28mself[39m)[38;5;241m.[39m[38;5;21m__init__[39m(endog, exog, missing[38;5;241m=[39mmissing,
-[0;32m    718[0m                           weights[38;5;241m=[39mweights, hasconst[38;5;241m=[39mhasconst, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m    719[0m nobs [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mexog[38;5;241m.[39mshape[[38;5;241m0[39m]
-[0;32m    720[0m weights [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mweights
+File [1;32m~\anaconda3\lib\site-packages\pandas\_libs\index.pyx:163[0m, in [0;36mpandas._libs.index.IndexEngine.get_loc[1;34m()[0m
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:191[0m, in [0;36mRegressionModel.__init__[1;34m(self, endog, exog, **kwargs)[0m
-[0;32m    190[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, endog, exog, [38;5;241m*[39m[38;5;241m*[39mkwargs):
-[1;32m--> 191[0m     [38;5;28msuper[39m(RegressionModel, [38;5;28mself[39m)[38;5;241m.[39m[38;5;21m__init__[39m(endog, exog, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m    192[0m     [38;5;28mself[39m[38;5;241m.[39m_data_attr[38;5;241m.[39mextend([[38;5;124m'[39m[38;5;124mpinv_wexog[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mwendog[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mwexog[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mweights[39m[38;5;124m'[39m])
+File [1;32mpandas\_libs\hashtable_class_helper.pxi:5198[0m, in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[1;34m()[0m
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\base\model.py:267[0m, in [0;36mLikelihoodModel.__init__[1;34m(self, endog, exog, **kwargs)[0m
-[0;32m    266[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, endog, exog[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
-[1;32m--> 267[0m     [38;5;28msuper[39m()[38;5;241m.[39m[38;5;21m__init__[39m(endog, exog, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m    268[0m     [38;5;28mself[39m[38;5;241m.[39minitialize()
+File [1;32mpandas\_libs\hashtable_class_helper.pxi:5206[0m, in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[1;34m()[0m
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\base\model.py:92[0m, in [0;36mModel.__init__[1;34m(self, endog, exog, **kwargs)[0m
-[0;32m     90[0m missing [38;5;241m=[39m kwargs[38;5;241m.[39mpop([38;5;124m'[39m[38;5;124mmissing[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mnone[39m[38;5;124m'[39m)
-[0;32m     91[0m hasconst [38;5;241m=[39m kwargs[38;5;241m.[39mpop([38;5;124m'[39m[38;5;124mhasconst[39m[38;5;124m'[39m, [38;5;28;01mNone[39;00m)
-[1;32m---> 92[0m [38;5;28mself[39m[38;5;241m.[39mdata [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_handle_data(endog, exog, missing, hasconst,
-[0;32m     93[0m                               [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m     94[0m [38;5;28mself[39m[38;5;241m.[39mk_constant [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mdata[38;5;241m.[39mk_constant
-[0;32m     95[0m [38;5;28mself[39m[38;5;241m.[39mexog [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mdata[38;5;241m.[39mexog
+[1;31mKeyError[0m: 'T4'
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\base\model.py:132[0m, in [0;36mModel._handle_data[1;34m(self, endog, exog, missing, hasconst, **kwargs)[0m
-[0;32m    131[0m [38;5;28;01mdef[39;00m [38;5;21m_handle_data[39m([38;5;28mself[39m, endog, exog, missing, hasconst, [38;5;241m*[39m[38;5;241m*[39mkwargs):
-[1;32m--> 132[0m     data [38;5;241m=[39m handle_data(endog, exog, missing, hasconst, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m    133[0m     [38;5;66;03m# kwargs arrays could have changed, easier to just attach here[39;00m
-[0;32m    134[0m     [38;5;28;01mfor[39;00m key [38;5;129;01min[39;00m kwargs:
+The above exception was the direct cause of the following exception:
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\base\data.py:673[0m, in [0;36mhandle_data[1;34m(endog, exog, missing, hasconst, **kwargs)[0m
-[0;32m    670[0m     exog [38;5;241m=[39m np[38;5;241m.[39masarray(exog)
-[0;32m    672[0m klass [38;5;241m=[39m handle_data_class_factory(endog, exog)
-[1;32m--> 673[0m [38;5;28;01mreturn[39;00m klass(endog, exog[38;5;241m=[39mexog, missing[38;5;241m=[39mmissing, hasconst[38;5;241m=[39mhasconst,
-[0;32m    674[0m              [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[1;31mKeyError[0m                                  Traceback (most recent call last)
+Input [1;32mIn [16][0m, in [0;36m<cell line: 4>[1;34m()[0m
+[0;32m      2[0m table2[[38;5;241m0[39m,[38;5;241m0[39m] [38;5;241m=[39m ols_cl[38;5;241m.[39msummary2()[38;5;241m.[39mtables[[38;5;241m1[39m][[38;5;124m'[39m[38;5;124mCoef.[39m[38;5;124m'[39m][[38;5;124m'[39m[38;5;124mT4[39m[38;5;124m'[39m]
+[0;32m      3[0m table2[[38;5;241m0[39m,[38;5;241m1[39m] [38;5;241m=[39m ols_cra[38;5;241m.[39msummary2()[38;5;241m.[39mtables[[38;5;241m1[39m][[38;5;124m'[39m[38;5;124mCoef.[39m[38;5;124m'[39m][[38;5;124m'[39m[38;5;124mT4TRUE[39m[38;5;124m'[39m]
+[1;32m----> 4[0m table2[[38;5;241m0[39m,[38;5;241m2[39m] [38;5;241m=[39m [43mols_ira[49m[38;5;241;43m.[39;49m[43msummary2[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mtables[49m[43m[[49m[38;5;241;43m1[39;49m[43m][49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mCoef.[39;49m[38;5;124;43m'[39;49m[43m][49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mT4[39;49m[38;5;124;43m'[39;49m[43m][49m
+[0;32m      5[0m table2[[38;5;241m0[39m,[38;5;241m3[39m] [38;5;241m=[39m rlasso_ira[[38;5;124m'[39m[38;5;124mCoef.[39m[38;5;124m'[39m][[38;5;124m'[39m[38;5;124mT4[39m[38;5;124m'[39m]
+[0;32m      7[0m table2[[38;5;241m1[39m,[38;5;241m0[39m] [38;5;241m=[39m ols_cl[38;5;241m.[39msummary2()[38;5;241m.[39mtables[[38;5;241m1[39m][[38;5;124m'[39m[38;5;124mStd.Err.[39m[38;5;124m'[39m][[38;5;124m'[39m[38;5;124mT4[39m[38;5;124m'[39m]
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\base\data.py:87[0m, in [0;36mModelData.__init__[1;34m(self, endog, exog, missing, hasconst, **kwargs)[0m
-[0;32m     85[0m [38;5;28mself[39m[38;5;241m.[39mk_constant [38;5;241m=[39m [38;5;241m0[39m
-[0;32m     86[0m [38;5;28mself[39m[38;5;241m.[39m_handle_constant(hasconst)
-[1;32m---> 87[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_check_integrity[49m[43m([49m[43m)[49m
-[0;32m     88[0m [38;5;28mself[39m[38;5;241m.[39m_cache [38;5;241m=[39m {}
+File [1;32m~\anaconda3\lib\site-packages\pandas\core\series.py:958[0m, in [0;36mSeries.__getitem__[1;34m(self, key)[0m
+[0;32m    955[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_values[key]
+[0;32m    957[0m [38;5;28;01melif[39;00m key_is_scalar:
+[1;32m--> 958[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_get_value[49m[43m([49m[43mkey[49m[43m)[49m
+[0;32m    960[0m [38;5;28;01mif[39;00m is_hashable(key):
+[0;32m    961[0m     [38;5;66;03m# Otherwise index.get_value will raise InvalidIndexError[39;00m
+[0;32m    962[0m     [38;5;28;01mtry[39;00m:
+[0;32m    963[0m         [38;5;66;03m# For labels that don't resolve as scalars like tuples and frozensets[39;00m
 
-File [1;32m~\anaconda3\lib\site-packages\statsmodels\base\data.py:531[0m, in [0;36mPandasData._check_integrity[1;34m(self)[0m
-[0;32m    527[0m [38;5;66;03m# exog can be None and we could be upcasting one or the other[39;00m
-[0;32m    528[0m [38;5;28;01mif[39;00m (exog [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m
-[0;32m    529[0m         ([38;5;28mhasattr[39m(endog, [38;5;124m'[39m[38;5;124mindex[39m[38;5;124m'[39m) [38;5;129;01mand[39;00m [38;5;28mhasattr[39m(exog, [38;5;124m'[39m[38;5;124mindex[39m[38;5;124m'[39m)) [38;5;129;01mand[39;00m
-[0;32m    530[0m         [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39morig_endog[38;5;241m.[39mindex[38;5;241m.[39mequals([38;5;28mself[39m[38;5;241m.[39morig_exog[38;5;241m.[39mindex)):
-[1;32m--> 531[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m"[39m[38;5;124mThe indices for endog and exog are not aligned[39m[38;5;124m"[39m)
-[0;32m    532[0m [38;5;28msuper[39m(PandasData, [38;5;28mself[39m)[38;5;241m.[39m_check_integrity()
+File [1;32m~\anaconda3\lib\site-packages\pandas\core\series.py:1069[0m, in [0;36mSeries._get_value[1;34m(self, label, takeable)[0m
+[0;32m   1066[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_values[label]
+[0;32m   1068[0m [38;5;66;03m# Similar to Index.get_value, but we do not fall back to positional[39;00m
+[1;32m-> 1069[0m loc [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mindex[49m[38;5;241;43m.[39;49m[43mget_loc[49m[43m([49m[43mlabel[49m[43m)[49m
+[0;32m   1070[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39mindex[38;5;241m.[39m_get_values_for_loc([38;5;28mself[39m, loc, label)
 
-[1;31mValueError[0m: The indices for endog and exog are not aligned
-ValueError: The indices for endog and exog are not aligned
+File [1;32m~\anaconda3\lib\site-packages\pandas\core\indexes\base.py:3623[0m, in [0;36mIndex.get_loc[1;34m(self, key, method, tolerance)[0m
+[0;32m   3621[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_engine[38;5;241m.[39mget_loc(casted_key)
+[0;32m   3622[0m [38;5;28;01mexcept[39;00m [38;5;167;01mKeyError[39;00m [38;5;28;01mas[39;00m err:
+[1;32m-> 3623[0m     [38;5;28;01mraise[39;00m [38;5;167;01mKeyError[39;00m(key) [38;5;28;01mfrom[39;00m [38;5;21;01merr[39;00m
+[0;32m   3624[0m [38;5;28;01mexcept[39;00m [38;5;167;01mTypeError[39;00m:
+[0;32m   3625[0m     [38;5;66;03m# If we have a listlike key, _check_indexing_error will raise[39;00m
+[0;32m   3626[0m     [38;5;66;03m#  InvalidIndexError. Otherwise we fall through and re-raise[39;00m
+[0;32m   3627[0m     [38;5;66;03m#  the TypeError.[39;00m
+[0;32m   3628[0m     [38;5;28mself[39m[38;5;241m.[39m_check_indexing_error(key)
+
+[1;31mKeyError[0m: 'T4'
+KeyError: 'T4'
 

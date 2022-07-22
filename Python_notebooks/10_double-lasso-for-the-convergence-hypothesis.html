@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso" href="11_py-heterogenous-wage-effects.html" />
+    <link rel="next" title="11. Heterogenous Wage Effects" href="11_py-heterogenous-wage-effects.html" />
     <link rel="prev" title="9. Experiment on orthogonal Learning" href="09_py-notebook-experiment-on-orthogonal-learning.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -128,27 +128,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -183,22 +183,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -208,12 +208,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,22 +223,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -501,40 +501,45 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-lasso-for-the-convergence-hypothesis">
+   10.1. Double Lasso for the convergence hypothesis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   10.1. Introduction
+   10.2. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-analysis">
-   10.2. Data analysis
+   10.3. Data analysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#summarize-ols-results">
-   10.3. Summarize OLS results
+   10.4. Summarize OLS results
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#method-1-using-sklearn">
-   10.4. Method 1 - Using Sklearn
+   10.5. Method 1 - Using Sklearn
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#summary-lasso-results">
-     10.4.1. Summary LASSO results
+     10.5.1. Summary LASSO results
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#method-2-hdmpy">
-   10.5. Method 2 - HDMPY
+   10.6. Method 2 - HDMPY
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#method-3-hdmpy-direct">
-   10.6. Method 3 - HDMPY Direct
+   10.7. Method 3 - HDMPY Direct
   </a>
  </li>
 </ul>
@@ -557,40 +562,45 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-lasso-for-the-convergence-hypothesis">
+   10.1. Double Lasso for the convergence hypothesis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   10.1. Introduction
+   10.2. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data-analysis">
-   10.2. Data analysis
+   10.3. Data analysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#summarize-ols-results">
-   10.3. Summarize OLS results
+   10.4. Summarize OLS results
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#method-1-using-sklearn">
-   10.4. Method 1 - Using Sklearn
+   10.5. Method 1 - Using Sklearn
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#summary-lasso-results">
-     10.4.1. Summary LASSO results
+     10.5.1. Summary LASSO results
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#method-2-hdmpy">
-   10.5. Method 2 - HDMPY
+   10.6. Method 2 - HDMPY
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#method-3-hdmpy-direct">
-   10.6. Method 3 - HDMPY Direct
+   10.7. Method 3 - HDMPY Direct
   </a>
  </li>
 </ul>
@@ -603,16 +613,13 @@ title="Print to PDF"
                 
               <div>
                 
-  <ul class="simple">
-<li><p>Python code replication of:
-” <a class="reference external" href="https://www.kaggle.com/janniskueck/pm2-notebook-jannis">https://www.kaggle.com/janniskueck/pm2-notebook-jannis</a> “</p></li>
-<li><p>Created by: Alexander Quispe and Anzony Quispe</p></li>
-</ul>
-<p>This notebook contains an example for teaching.</p>
-<section class="tex2jax_ignore mathjax_ignore" id="double-lasso-for-testing-the-convergence-hypothesis">
+  <section class="tex2jax_ignore mathjax_ignore" id="double-lasso-for-testing-the-convergence-hypothesis">
 <h1><span class="section-number">10. </span>Double Lasso for Testing the Convergence Hypothesis<a class="headerlink" href="#double-lasso-for-testing-the-convergence-hypothesis" title="Permalink to this headline">#</a></h1>
+<section id="double-lasso-for-the-convergence-hypothesis">
+<h2><span class="section-number">10.1. </span>Double Lasso for the convergence hypothesis<a class="headerlink" href="#double-lasso-for-the-convergence-hypothesis" title="Permalink to this headline">#</a></h2>
+</section>
 <section id="introduction">
-<h2><span class="section-number">10.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>We provide an additional empirical example of partialling-out with Lasso to estimate the regression coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> in the high-dimensional linear regression model:
 $<span class="math notranslate nohighlight">\(
   Y = \beta_1 D +  \beta_2'W + \epsilon.
@@ -622,7 +629,7 @@ $<span class="math notranslate nohighlight">\(
 <p>The outcome <span class="math notranslate nohighlight">\(Y\)</span> is the realized annual growth rate of a country’s wealth  (Gross Domestic Product per capita). The target regressor (<span class="math notranslate nohighlight">\(D\)</span>) is the initial level of the country’s wealth. The target parameter <span class="math notranslate nohighlight">\(\beta_1\)</span> is the speed of convergence, which measures the speed at which poor countries catch up with rich countries. The controls (<span class="math notranslate nohighlight">\(W\)</span>) include measures of education levels, quality of institutions, trade openness, and political stability in the country.</p>
 </section>
 <section id="data-analysis">
-<h2><span class="section-number">10.2. </span>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.3. </span>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">#</a></h2>
 <p>We consider the data set GrowthData which is included in the package <em>hdm</em>. First, let us load the data set to get familiar with the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -633,6 +640,8 @@ $<span class="math notranslate nohighlight">\(
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -679,12 +688,6 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_10672\2440018862.py:3: FutureWarning: In a future version of pandas all arguments of DataFrame.drop except for the argument &#39;labels&#39; will be keyword-only.
-  X = growth.drop(&#39;Outcome&#39;, 1)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -700,8 +703,8 @@ $<span class="math notranslate nohighlight">\(
 Dep. Variable:                Outcome   R-squared:                       0.887
 Model:                            OLS   Adj. R-squared:                  0.641
 Method:                 Least Squares   F-statistic:                     3.607
-Date:                Thu, 21 Jul 2022   Prob (F-statistic):           0.000200
-Time:                        19:45:04   Log-Likelihood:                 238.24
+Date:                Fri, 22 Jul 2022   Prob (F-statistic):           0.000200
+Time:                        18:44:42   Log-Likelihood:                 238.24
 No. Observations:                  90   AIC:                            -352.5
 Df Residuals:                      28   BIC:                            -197.5
 Df Model:                          61                                         
@@ -803,10 +806,28 @@ strong multicollinearity or other numerical problems.
 </div>
 </section>
 <section id="summarize-ols-results">
-<h2><span class="section-number">10.3. </span>Summarize OLS results<a class="headerlink" href="#summarize-ols-results" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.4. </span>Summarize OLS results<a class="headerlink" href="#summarize-ols-results" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table_1_pandas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">table_1_pandas</span>
+
+<span class="ne">NameError</span>: name &#39;table_1_pandas&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<span class="n">table_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="p">)</span>
 
 <span class="n">table_1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">est_ols</span>  
 <span class="n">table_1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">std_ols</span>   
@@ -816,29 +837,55 @@ strong multicollinearity or other numerical problems.
 
 <span class="n">table_1_pandas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">table_1</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;Estimator&quot;</span><span class="p">,</span><span class="s2">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="s2">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="s2">&quot;upper bound CI&quot;</span>  <span class="p">])</span>
 <span class="n">table_1_pandas</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;OLS&quot;</span> <span class="p">]</span>
-<span class="n">table_1_html</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_1_pandas</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 11&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">table_1_pandas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">table_1</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;Estimator&quot;</span><span class="p">,</span><span class="s2">&quot;Std. Error&quot;</span><span class="p">,</span> <span class="s2">&quot;lower bound CI&quot;</span><span class="p">,</span> <span class="s2">&quot;upper bound CI&quot;</span>  <span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">table_1_pandas</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;OLS&quot;</span> <span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">table_1_html</span>
-
-<span class="ne">NameError</span>: name &#39;table_1_html&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr style=&quot;text-align: right;&quot;&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Estimator&lt;/th&gt;
+      &lt;th&gt;Std. Error&lt;/th&gt;
+      &lt;th&gt;lower bound CI&lt;/th&gt;
+      &lt;th&gt;upper bound CI&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;OLS&lt;/th&gt;
+      &lt;td&gt;-0.009378&lt;/td&gt;
+      &lt;td&gt;0.029888&lt;/td&gt;
+      &lt;td&gt;-0.0706&lt;/td&gt;
+      &lt;td&gt;0.051844&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Tue Jan 19 10:23:32 2021 -->
-<table border=1>
-<tr> <th>  </th> <th> estimator </th> <th> standard error </th> <th> lower bound CI </th> <th> upper bound CI </th>  </tr>
-  <tr> <td align="right"> OLS </td> <td align="right"> -0.009 </td> <td align="right"> 0.030 </td> <td align="right"> -0.071 </td> <td align="right"> 0.052 </td> </tr>
-   </table><p>Least squares provides a rather noisy estimate (high standard error) of the
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimator</th>
+      <th>Std. Error</th>
+      <th>lower bound CI</th>
+      <th>upper bound CI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>OLS</th>
+      <td>-0.009378</td>
+      <td>0.029888</td>
+      <td>-0.0706</td>
+      <td>0.051844</td>
+    </tr>
+  </tbody>
+</table><p>Least squares provides a rather noisy estimate (high standard error) of the
 speed of convergence, and does not allow us to answer the question
 about the convergence hypothesis since the confidence interval includes zero.</p>
 <p>In contrast, we can use the partialling-out approach based on lasso regression (“Double Lasso”).</p>
@@ -851,16 +898,10 @@ about the convergence hypothesis since the confidence interval includes zero.</p
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_36264/798758678.py:3: FutureWarning: In a future version of pandas all arguments of DataFrame.drop except for the argument &#39;labels&#39; will be keyword-only
-  W = growth.drop([&#39;Outcome&#39;,&#39;intercept&#39;, &#39;gdpsh465&#39;], 1 )
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="method-1-using-sklearn">
-<h2><span class="section-number">10.4. </span>Method 1 - Using Sklearn<a class="headerlink" href="#method-1-using-sklearn" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.5. </span>Method 1 - Using Sklearn<a class="headerlink" href="#method-1-using-sklearn" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
@@ -884,14 +925,6 @@ about the convergence hypothesis since the confidence interval includes zero.</p
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Alexander\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:530: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.005828894477391114, tolerance: 2.343497697571603e-05
-  model = cd_fast.enet_coordinate_descent(
-C:\Users\Alexander\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:530: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.997244700077635, tolerance: 0.007147912790119585
-  model = cd_fast.enet_coordinate_descent(
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,7 +937,7 @@ C:\Users\Alexander\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out using lasso -0.04774655653302119
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient for D via partialling-out using lasso -0.04774655653302118
 </pre></div>
 </div>
 </div>
@@ -925,7 +958,7 @@ C:\Users\Alexander\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_
 </div>
 </div>
 <section id="summary-lasso-results">
-<h3><span class="section-number">10.4.1. </span>Summary LASSO results<a class="headerlink" href="#summary-lasso-results" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">10.5.1. </span>Summary LASSO results<a class="headerlink" href="#summary-lasso-results" title="Permalink to this headline">#</a></h3>
 <p>Finally, let us have a look at the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1062,7 +1095,7 @@ C:\Users\Alexander\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_
 </table></section>
 </section>
 <section id="method-2-hdmpy">
-<h2><span class="section-number">10.5. </span>Method 2 - HDMPY<a class="headerlink" href="#method-2-hdmpy" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.6. </span>Method 2 - HDMPY<a class="headerlink" href="#method-2-hdmpy" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_Y</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span> <span class="n">W</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span><span class="o">.</span><span class="n">est</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">]</span>
@@ -1088,8 +1121,8 @@ C:\Users\Alexander\anaconda3\lib\site-packages\sklearn\linear_model\_coordinate_
 Dep. Variable:                    r_Y   R-squared (uncentered):                   0.127
 Model:                            OLS   Adj. R-squared (uncentered):              0.117
 Method:                 Least Squares   F-statistic:                              12.92
-Date:                Wed, 16 Mar 2022   Prob (F-statistic):                    0.000533
-Time:                        18:04:10   Log-Likelihood:                          152.68
+Date:                Fri, 22 Jul 2022   Prob (F-statistic):                    0.000533
+Time:                        16:43:54   Log-Likelihood:                          152.68
 No. Observations:                  90   AIC:                                     -303.4
 Df Residuals:                      89   BIC:                                     -300.9
 Df Model:                           1                                                  
@@ -1182,275 +1215,10 @@ Notes:
 </div>
 </section>
 <section id="method-3-hdmpy-direct">
-<h2><span class="section-number">10.6. </span>Method 3 - HDMPY Direct<a class="headerlink" href="#method-3-hdmpy-direct" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">10.7. </span>Method 3 - HDMPY Direct<a class="headerlink" href="#method-3-hdmpy-direct" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lasso_direct</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlassoEffect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">W</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">D</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;partialling out&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alpha&#39;: -0.049811444837338334,
- &#39;se&#39;: array([0.01539133]),
- &#39;t&#39;: array([-3.23633167]),
- &#39;pval&#39;: array([0.00121077]),
- &#39;coefficients&#39;: -0.049811444837338334,
- &#39;coefficient&#39;: -0.049811444837338334,
- &#39;coefficients_reg&#39;:                     0
- (Intercept)  0.058101
- x0          -0.075565
- x1           0.000000
- x2           0.000000
- x3           0.000000
- ...               ...
- x55          0.000000
- x56          0.000000
- x57          0.000000
- x58          0.000000
- x59          0.000000
- 
- [61 rows x 1 columns],
- &#39;selection_index&#39;: array([[ True],
-        [False],
-        [ True],
-        [False],
-        [ True],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [ True],
-        [False],
-        [False],
-        [ True],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [ True],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [ True],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False],
-        [False]]),
- &#39;residuals&#39;: {&#39;epsilon&#39;: array([[-3.49848290e-02],
-         [ 9.52657707e-02],
-         [ 1.25530270e-02],
-         [ 1.45051157e-02],
-         [-1.21212956e-02],
-         [ 6.10442897e-03],
-         [ 2.38808615e-02],
-         [ 2.35925129e-02],
-         [-2.51882039e-02],
-         [-3.28317379e-03],
-         [ 3.26116159e-02],
-         [ 7.84400354e-02],
-         [-2.39374185e-02],
-         [ 3.69879313e-02],
-         [ 6.49582648e-02],
-         [-1.98036065e-02],
-         [ 1.49731491e-02],
-         [-2.35299549e-02],
-         [-3.60085919e-02],
-         [ 3.51316929e-03],
-         [ 1.61620376e-02],
-         [ 6.07508356e-02],
-         [ 1.15639372e-01],
-         [ 4.34356056e-02],
-         [ 5.66148392e-03],
-         [ 2.69169427e-05],
-         [ 7.00477269e-02],
-         [ 1.76262552e-02],
-         [ 3.34778871e-02],
-         [ 2.07315008e-02],
-         [ 3.30063634e-02],
-         [ 8.17543261e-03],
-         [ 2.73186289e-02],
-         [-1.67216885e-02],
-         [ 1.06653033e-02],
-         [ 1.55816825e-02],
-         [ 1.59537137e-02],
-         [ 3.11297929e-02],
-         [ 2.30954424e-03],
-         [-8.12063106e-03],
-         [-8.71695816e-03],
-         [ 5.98383821e-04],
-         [-7.34579243e-03],
-         [ 1.82278148e-02],
-         [-1.16687675e-01],
-         [-6.37801362e-02],
-         [-1.12363965e-02],
-         [-3.06850578e-02],
-         [-6.03443804e-02],
-         [-3.47115122e-02],
-         [ 5.24599190e-02],
-         [-3.68484872e-02],
-         [ 1.13668751e-03],
-         [-4.48824215e-02],
-         [-6.64123390e-02],
-         [-6.81015576e-02],
-         [-7.44072496e-02],
-         [-2.98153308e-02],
-         [-8.19576069e-03],
-         [-3.66941527e-02],
-         [-6.98023480e-02],
-         [-5.31157210e-02],
-         [ 2.87182891e-02],
-         [-1.93314850e-02],
-         [ 5.00891034e-03],
-         [ 4.85815925e-03],
-         [-1.24003980e-02],
-         [-1.34087606e-01],
-         [ 4.70689433e-02],
-         [ 3.83224267e-02],
-         [ 6.37296176e-03],
-         [ 4.03832896e-03],
-         [-3.39895257e-02],
-         [ 7.51715850e-02],
-         [ 3.80763871e-02],
-         [ 3.14365455e-02],
-         [-6.36548178e-02],
-         [ 1.37748516e-01],
-         [ 6.28427939e-02],
-         [-3.41575056e-03],
-         [-3.78134362e-03],
-         [-1.48340027e-02],
-         [-2.14625294e-02],
-         [-3.48767519e-02],
-         [-3.17420299e-02],
-         [-2.11805603e-02],
-         [-2.79231134e-02],
-         [-1.18551528e-02],
-         [-1.40056746e-02],
-         [-1.31492060e-02]]),
-  &#39;v&#39;: array([[ 0.52224775],
-         [ 0.13027854],
-         [ 0.07232197],
-         [-0.13196876],
-         [ 0.09840476],
-         [ 0.35730564],
-         [ 0.29409786],
-         [ 0.79778407],
-         [-0.01281871],
-         [ 0.08948357],
-         [ 0.24792072],
-         [-0.15386794],
-         [ 0.51916609],
-         [ 0.08095357],
-         [-0.07419893],
-         [-0.4272166 ],
-         [ 0.7020042 ],
-         [ 0.06546644],
-         [ 1.1780591 ],
-         [ 0.2131817 ],
-         [-0.42767423],
-         [-0.30375461],
-         [-0.70061133],
-         [-0.1908735 ],
-         [ 0.23665682],
-         [-0.52678542],
-         [ 0.21266098],
-         [-0.36917503],
-         [ 0.1646763 ],
-         [ 0.0521761 ],
-         [ 0.14220512],
-         [ 0.26772109],
-         [-0.64441088],
-         [-0.53145383],
-         [-0.10316275],
-         [-0.00779027],
-         [ 0.16496099],
-         [-0.11283308],
-         [ 0.15468537],
-         [ 0.05620812],
-         [ 0.20798022],
-         [ 0.20738542],
-         [-0.18652253],
-         [-0.73279207],
-         [-0.4562576 ],
-         [-0.5075765 ],
-         [-0.34768807],
-         [-0.43713094],
-         [ 0.11552148],
-         [-0.93281805],
-         [ 0.18193425],
-         [-0.02894488],
-         [ 0.170249  ],
-         [-0.18685441],
-         [-0.09797129],
-         [ 0.16775064],
-         [-0.15108181],
-         [ 0.28165299],
-         [ 0.49664435],
-         [-0.25627972],
-         [-0.03672719],
-         [ 0.30348206],
-         [ 0.1539853 ],
-         [-0.06556942],
-         [ 0.13924958],
-         [-0.20928515],
-         [ 0.40570607],
-         [ 0.50044004],
-         [-0.13422303],
-         [ 0.03624017],
-         [-0.16286397],
-         [-0.06729083],
-         [-0.02076426],
-         [-0.32382142],
-         [-0.02041192],
-         [ 0.04473323],
-         [-0.43936259],
-         [ 0.1996553 ],
-         [ 0.39777497],
-         [-0.21166601],
-         [ 0.32571938],
-         [ 0.18176374],
-         [-0.37870359],
-         [-0.30497948],
-         [-0.11113707],
-         [ 0.11492087],
-         [-0.08623875],
-         [-0.01314347],
-         [ 0.08676469],
-         [ 0.08652982]])},
- &#39;samplesize&#39;: 90}
 </pre></div>
 </div>
 </div>
@@ -1558,7 +1326,7 @@ Notes:
     <a class='right-next' id="next-link" href="11_py-heterogenous-wage-effects.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Application: Heterogeneous Effect of Gender on Wage Using Double Lasso</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Heterogenous Wage Effects</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

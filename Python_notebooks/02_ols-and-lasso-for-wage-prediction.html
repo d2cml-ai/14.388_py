@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. An inferential problem: The Gender Wage Gap" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
-    <link rel="prev" title="1. Simple Exercise on Overfitting" href="01_Python_Notebook_Linear_Model_Overfitting.html" />
+    <link rel="next" title="3. OLS and lasso for gender wage gap inference" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
+    <link rel="prev" title="1. Linear Model Overfiting" href="01_Python_Notebook_Linear_Model_Overfitting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,14 +111,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -128,27 +128,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -183,22 +183,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -208,12 +208,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -223,22 +223,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -611,11 +611,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <ul class="simple">
-<li><p>Python code replication of: ” <a class="reference external" href="https://www.kaggle.com/janniskueck/pm1-notebook1-prediction-newdata">https://www.kaggle.com/janniskueck/pm1-notebook1-prediction-newdata</a> “</p></li>
-<li><p>Created by: Alexander Quispe</p></li>
-</ul>
-<section class="tex2jax_ignore mathjax_ignore" id="ols-and-lasso-for-wage-prediction">
+  <section class="tex2jax_ignore mathjax_ignore" id="ols-and-lasso-for-wage-prediction">
 <h1><span class="section-number">2. </span>OLS and lasso for wage prediction<a class="headerlink" href="#ols-and-lasso-for-wage-prediction" title="Permalink to this headline">#</a></h1>
 <p>This notebook contains an example for teaching.</p>
 <section id="introduction">
@@ -642,6 +638,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1084,8 +1082,8 @@ more complex regression model and therefore to reduce the bias. The <strong>Flex
 Dep. Variable:                  lwage   R-squared:                       0.310
 Model:                            OLS   Adj. R-squared:                  0.303
 Method:                 Least Squares   F-statistic:                     45.83
-Date:                Thu, 21 Jul 2022   Prob (F-statistic):               0.00
-Time:                        19:42:24   Log-Likelihood:                -3459.9
+Date:                Fri, 22 Jul 2022   Prob (F-statistic):               0.00
+Time:                        18:40:22   Log-Likelihood:                -3459.9
 No. Observations:                5150   AIC:                             7022.
 Df Residuals:                    5099   BIC:                             7356.
 Df Model:                          50                                         
@@ -1177,8 +1175,8 @@ Number of regressors in the basic model: 51
 Dep. Variable:                  lwage   R-squared:                       0.351
 Model:                            OLS   Adj. R-squared:                  0.319
 Method:                 Least Squares   F-statistic:                     10.83
-Date:                Thu, 21 Jul 2022   Prob (F-statistic):          2.69e-305
-Time:                        19:42:25   Log-Likelihood:                -3301.9
+Date:                Fri, 22 Jul 2022   Prob (F-statistic):          2.69e-305
+Time:                        18:40:23   Log-Likelihood:                -3301.9
 No. Observations:                5150   AIC:                             7096.
 Df Residuals:                    4904   BIC:                             8706.
 Df Model:                         245                                         
@@ -1982,8 +1980,8 @@ adjusted MSE for LASSO model:  0.2867742260968095
 Dep. Variable:                  lwage   R-squared:                       0.316
 Model:                            OLS   Adj. R-squared:                  0.308
 Method:                 Least Squares   F-statistic:                     37.65
-Date:                Thu, 21 Jul 2022   Prob (F-statistic):          4.85e-293
-Time:                        19:42:27   Log-Likelihood:                -2784.1
+Date:                Fri, 22 Jul 2022   Prob (F-statistic):          4.85e-293
+Time:                        18:40:26   Log-Likelihood:                -2784.1
 No. Observations:                4120   AIC:                             5670.
 Df Residuals:                    4069   BIC:                             5993.
 Df Model:                          50                                         
@@ -2300,13 +2298,13 @@ Test R2 for the flexible model:  0.1612620821455767
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Simple Exercise on Overfitting</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Linear Model Overfiting</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>An inferential problem: The Gender Wage Gap</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>OLS and lasso for gender wage gap inference</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
