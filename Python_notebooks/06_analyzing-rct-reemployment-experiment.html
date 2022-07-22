@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. Analyzing RCT data with Precision Adjustment &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>6. Analyzing RCT data with Precision Adjustment &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Penalized Linear Regressions: A Simulation Experiment" href="07_py-notebook-linear-penalized-regs.html" />
-    <link rel="prev" title="4. Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_py-notebook-analyzing-rct-with-precision.html" />
+    <link rel="next" title="7. Penalized Linear Regressions: A Simulation Experiment" href="07_py-notebook-linear-penalized-regs.html" />
+    <link rel="prev" title="5. Analyzing RCT with Precision by Adjusting for Baseline Covariates" href="05_py-notebook-analyzing-rct-with-precision.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,118 +117,128 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
+   1. Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
-   1. OLS and lasso for wage prediction
+   2. OLS and lasso for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   2. An inferential problem: The Gender Wage Gap
+   3. An inferential problem: The Gender Wage Gap
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   3. Vaccine RCT Examples
+   4. Vaccine RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   4. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   5. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT data with Precision Adjustment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   6. Penalized Linear Regressions: A Simulation Experiment
+   7. Penalized Linear Regressions: A Simulation Experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="08_ML_for_wage_prediction.html">
-   7. ML for wage prediction
+   8. ML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
+   9. Experiment on orthogonal Learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   8. Double Lasso for Testing the Convergence Hypothesis
+   10. Double Lasso for Testing the Convergence Hypothesis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   9. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   10. Collider Bias
+   12. Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
-   11. Deep Neural Networks for Wage Prediction
+   13. Deep Neural Networks for Wage Prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   12. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   13. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximations by Trees and Neural Networks
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   14. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   15. Dosearch for Causal Identification in DAGs.
+   17. Dosearch for Causal Identification in DAGs.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
-   16. DML inference for gun ownership
+   18. DML inference for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   17. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   18. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
-   19. Identification Analysis of 401(k) Example w DAGs
+   21. Identification Analysis of 401(k) Example w DAGs
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   20. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   21. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   22. Double/Debiased ML for Partially Linear IV Model
+   24. Double/Debiased ML for Partially Linear IV Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   23. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. A Simple Example of Properties of IV estimator when Instruments are Weak
   </a>
  </li>
 </ul>
@@ -492,34 +502,34 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   5.1. Data
+   6.1. Data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model">
-     5.1.1. Model
+     6.1.1. Model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#analysis">
-     5.1.2. Analysis
+     6.1.2. Analysis
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
-   5.2. Carry out covariate balance check
+   6.2. Carry out covariate balance check
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-specification">
-   5.3. Model Specification
+   6.3. Model Specification
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
-   5.4. Results
+   6.4. Results
   </a>
  </li>
 </ul>
@@ -543,34 +553,34 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   5.1. Data
+   6.1. Data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model">
-     5.1.1. Model
+     6.1.1. Model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#analysis">
-     5.1.2. Analysis
+     6.1.2. Analysis
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#carry-out-covariate-balance-check">
-   5.2. Carry out covariate balance check
+   6.2. Carry out covariate balance check
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-specification">
-   5.3. Model Specification
+   6.3. Model Specification
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
-   5.4. Results
+   6.4. Results
   </a>
  </li>
 </ul>
@@ -589,9 +599,9 @@ title="Print to PDF"
 <li><p>Created by: Alexander Quispe and Anzony Quispe</p></li>
 </ul>
 <section class="tex2jax_ignore mathjax_ignore" id="analyzing-rct-data-with-precision-adjustment">
-<h1><span class="section-number">5. </span>Analyzing RCT data with Precision Adjustment<a class="headerlink" href="#analyzing-rct-data-with-precision-adjustment" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">6. </span>Analyzing RCT data with Precision Adjustment<a class="headerlink" href="#analyzing-rct-data-with-precision-adjustment" title="Permalink to this headline">#</a></h1>
 <section id="data">
-<h2><span class="section-number">5.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
 <p>In this lab, we analyze the Pennsylvania re-employment bonus experiment, which was previously studied in “Sequential testing of duration data: the case of the Pennsylvania ‘reemployment bonus’ experiment” (Bilias, 2000), among others. These experiments were conducted in the 1980s by the U.S. Department of Labor to test the incentive effects of alternative compensation schemes for unemployment insurance (UI). In these experiments, UI claimants were randomly assigned either to a control group or one of five treatment groups. Actually, there are six treatment groups in the experiments. Here we focus on treatment group 4, but feel free to explore other treatment groups. In the control group the current rules of the UI applied. Individuals in the treatment groups were offered a cash bonus if they found a job within some pre-specified period of time (qualification period), provided that the job was retained for a specified duration. The treatments differed in the level of the bonus, the length of the qualification period, and whether the bonus was declining over time in the qualification period; see <a class="reference external" href="http://qed.econ.queensu.ca/jae/2000-v15.6/bilias/readme.b.txt">http://qed.econ.queensu.ca/jae/2000-v15.6/bilias/readme.b.txt</a> for further details on data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -817,7 +827,7 @@ Categories (3, int64): [0, 1, 2]
 </div>
 </div>
 <section id="model">
-<h3><span class="section-number">5.1.1. </span>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h3>
 <p>To evaluate the impact of the treatments on unemployment duration, we consider the linear regression model:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -840,7 +850,7 @@ However we do add covariates in an effort to improve the
 precision of our estimates of the average treatment effect.</p>
 </section>
 <section id="analysis">
-<h3><span class="section-number">5.1.2. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.1.2. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h3>
 <p>We consider</p>
 <ul class="simple">
 <li><p>classical 2-sample approach, no adjustment (CL)</p></li>
@@ -851,7 +861,7 @@ precision of our estimates of the average treatment effect.</p>
 </section>
 </section>
 <section id="carry-out-covariate-balance-check">
-<h2><span class="section-number">5.2. </span>Carry out covariate balance check<a class="headerlink" href="#carry-out-covariate-balance-check" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.2. </span>Carry out covariate balance check<a class="headerlink" href="#carry-out-covariate-balance-check" title="Permalink to this headline">#</a></h2>
 <p>This is done using “lm_robust” command which unlike “lm” in the base command automatically does the correct Eicher-Huber-White standard errors, instead othe classical non-robus formula based on the homoscdedasticity command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -971,7 +981,7 @@ precision of our estimates of the average treatment effect.</p>
 <p>We see that that even though this is a randomized experiment, balance conditions are failed.</p>
 </section>
 <section id="model-specification">
-<h2><span class="section-number">5.3. </span>Model Specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.3. </span>Model Specification<a class="headerlink" href="#model-specification" title="Permalink to this headline">#</a></h2>
 <p>I use data from R.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1449,7 +1459,7 @@ Notes:
 </div>
 </section>
 <section id="results">
-<h2><span class="section-number">5.4. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.4. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -1518,13 +1528,13 @@ standard error &amp;  0.035856 &amp;  0.035591 &amp;  0.035605 &amp;     0.03553
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4. </span>Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
+            <p class="prev-next-title"><span class="section-number">5. </span>Analyzing RCT with Precision by Adjusting for Baseline Covariates</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="07_py-notebook-linear-penalized-regs.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Penalized Linear Regressions: A Simulation Experiment</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Penalized Linear Regressions: A Simulation Experiment</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
