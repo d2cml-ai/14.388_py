@@ -631,18 +631,30 @@ title="Print to PDF"
 <h2><span class="section-number">22.2. </span>DML algorithm<a class="headerlink" href="#dml-algorithm" title="Permalink to this headline">#</a></h2>
 <p>Here we perform estimation and inference of predictive coefficient <span class="math notranslate nohighlight">\(\alpha\)</span> in the partially linear statistical model,
 $<span class="math notranslate nohighlight">\(
+\begin{align}
 Y = D\alpha + g(X) + U, \quad E (U | D, X) = 0. 
+\end{align}
 \)</span><span class="math notranslate nohighlight">\(
 For \)</span>\tilde Y = Y- E(Y|X)<span class="math notranslate nohighlight">\( and \)</span>\tilde D= D- E(D|X)<span class="math notranslate nohighlight">\(, we can write
 \)</span><span class="math notranslate nohighlight">\(
+\begin{align}
 \tilde Y = \alpha \tilde D + U, \quad E (U |\tilde D) =0.
+\end{align}
 \)</span><span class="math notranslate nohighlight">\(
 Parameter \)</span>\alpha<span class="math notranslate nohighlight">\( is then estimated using cross-fitting approach to obtain the residuals \)</span>\tilde D<span class="math notranslate nohighlight">\( and \)</span>\tilde Y<span class="math notranslate nohighlight">\(.
 The algorithm comsumes \)</span>Y, D, X<span class="math notranslate nohighlight">\(, and machine learning methods for learning the residuals \)</span>\tilde Y<span class="math notranslate nohighlight">\( and \)</span>\tilde D$, where
 the residuals are obtained by cross-validation (cross-fitting).</p>
-<p>The statistical parameter <span class="math notranslate nohighlight">\(\alpha\)</span> has a causal intertpreation of being the effect of <span class="math notranslate nohighlight">\(D\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> in the causal DAG $<span class="math notranslate nohighlight">\( D\to Y, \quad X\to (D,Y)\)</span><span class="math notranslate nohighlight">\( or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment \)</span>D<span class="math notranslate nohighlight">\( given \)</span>X<span class="math notranslate nohighlight">\(:
+<p>The statistical parameter <span class="math notranslate nohighlight">\(\alpha\)</span> has a causal intertpreation of being the effect of <span class="math notranslate nohighlight">\(D\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> in the causal DAG
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+D\to Y, \quad X\to (D,Y)
+\end{align}
 \)</span><span class="math notranslate nohighlight">\(
+or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment \)</span>D<span class="math notranslate nohighlight">\( given \)</span>X<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(
+\begin{align}
 Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \quad U = U(D).
+\end{align}
 \)</span>$</p>
 <section id="clases-needed-for-regression">
 <h3><span class="section-number">22.2.1. </span>Clases needed for regression<a class="headerlink" href="#clases-needed-for-regression" title="Permalink to this headline">#</a></h3>
@@ -876,16 +888,16 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 1  
 2  
 3  
-4  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4  
+5  
 6  
 7  
 8  
 9  
 
- Coefficient (se) = -6.792003223394052e-05 (0.010842022156267962)
+ Coefficient (se) = -0.012907494474282584 (0.00961837318380766)
 
  DML with Lasso 
 </pre></div>
@@ -917,14 +929,58 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [7],</span> in <span class="ni">&lt;cell line: 37&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="k">return</span> <span class="n">result</span>
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="n">DML2_lasso</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with Random Forest </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="c1">#DML with cross-validated Lasso:</span>
 
- Coefficient (se) = -0.037747751491760746 (0.015757180996854202)
+<span class="nn">Input In [4],</span> in <span class="ni">DML2_for_PLM</span><span class="nt">(x, d, y, dreg, yreg, nfold)</span>
+<span class="nn">     29 mask = np.array([(i in include_idx) for i</span> in <span class="ni">range(len</span><span class="nt">(x))])</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="c1"># Lasso regression, excluding folds selected </span>
+<span class="ne">---&gt; </span><span class="mi">32</span> <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">d</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="c1"># predict estimates using the </span>
 
- DML with Random Forest 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
+<span class="nn">Input In [7],</span> in <span class="ni">dreg</span><span class="nt">(x, d)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">def</span> <span class="nf">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">Input In [3],</span> in <span class="ni">rlasso_sklearn.fit</span><span class="nt">(self, X, Y)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="c1"># Standarization of X and Y</span>
+<span class="ne">----&gt; </span><span class="mi">9</span>     <span class="bp">self</span><span class="o">.</span><span class="n">rlasso_model</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">Y</span> <span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span> <span class="p">)</span>                
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">return</span> <span class="bp">self</span>
+
+<span class="nn">File ~\Documents\GitHub\hdmpy\rlasso.py:295,</span> in <span class="ni">rlasso.__init__</span><span class="nt">(self, x, y, colnames, post, intercept, model, homoskedastic, X_dependent_lambda, lambda_start, c, gamma, numSim, numIter, tol, threshold, par, corecap, fix_seed)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="n">coefTemp</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="n">LassoShooting_fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">lmbda</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">XX</span><span class="o">=</span><span class="n">XX</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>                           <span class="n">Xy</span><span class="o">=</span><span class="n">Xy</span><span class="p">)[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">292</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">coefTemp</span> <span class="o">=</span> <span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">295</span>         <span class="n">LassoShooting_fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">lmbda</span><span class="p">,</span> <span class="n">XX</span><span class="o">=</span><span class="n">XX</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>                           <span class="n">Xy</span><span class="o">=</span><span class="n">Xy</span><span class="p">)[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span> <span class="n">coefTemp</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">coefTemp</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="n">ind1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coefTemp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nn">File ~\Documents\GitHub\hdmpy\LassoShooting_fit.py:103,</span> in <span class="ni">LassoShooting_fit</span><span class="nt">(x, y, lmbda, maxIter, optTol, zeroThreshold, XX, Xy, beta_start)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>         <span class="n">beta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="c1"># Add the updated weights to the history of weights</span>
+<span class="ne">--&gt; </span><span class="mi">103</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">wp</span><span class="p">,</span> <span class="n">beta</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="c1"># Check whether the weights are within tolerance</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">beta</span> <span class="o">-</span> <span class="n">beta_old</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">optTol</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="c1"># If so, break the while loop</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:5,</span> in <span class="ni">concatenate</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

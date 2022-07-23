@@ -830,6 +830,112 @@ homicide rates, controlling for county-level demographic and economic characteri
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 62&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">varlist2</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span>     <span class="n">form</span> <span class="o">=</span> <span class="n">var_name</span> <span class="o">+</span> <span class="s2">&quot; ~ &quot;</span>  <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">year</span> <span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">fixed</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">64</span>     <span class="n">rdata</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">form</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data1</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\statsmodels\base\model.py:200,</span> in <span class="ni">Model.from_formula</span><span class="nt">(cls, formula, data, subset, drop_cols, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="k">if</span> <span class="n">missing</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>  <span class="c1"># with patsy it&#39;s drop or raise. let&#39;s raise.</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>     <span class="n">missing</span> <span class="o">=</span> <span class="s1">&#39;raise&#39;</span>
+<span class="ne">--&gt; </span><span class="mi">200</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">handle_formula_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">eval_env</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>                           <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span> <span class="p">((</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">),</span> <span class="n">missing_idx</span><span class="p">,</span> <span class="n">design_info</span><span class="p">)</span> <span class="o">=</span> <span class="n">tmp</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span> <span class="n">max_endog</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_formula_max_endog</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\statsmodels\formula\formulatools.py:63,</span> in <span class="ni">handle_formula_data</span><span class="nt">(Y, X, formula, depth, missing)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="k">if</span> <span class="n">data_util</span><span class="o">.</span><span class="n">_is_using_pandas</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">63</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>                            <span class="n">NA_action</span><span class="o">=</span><span class="n">na_action</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">dmatrices</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="s1">&#39;dataframe&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>                            <span class="n">NA_action</span><span class="o">=</span><span class="n">na_action</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\highlevel.py:309,</span> in <span class="ni">dmatrices</span><span class="nt">(formula_like, data, eval_env, NA_action, return_type)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span> <span class="sd">&quot;&quot;&quot;Construct two design matrices given a formula_like and data.</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span><span class="sd"> This function is identical to :func:`dmatrix`, except that it requires</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span><span class="sd"> See :func:`dmatrix` for details.</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span> <span class="n">eval_env</span> <span class="o">=</span> <span class="n">EvalEnvironment</span><span class="o">.</span><span class="n">capture</span><span class="p">(</span><span class="n">eval_env</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">309</span> <span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span> <span class="o">=</span> <span class="n">_do_highlevel_design</span><span class="p">(</span><span class="n">formula_like</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">eval_env</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                                   <span class="n">NA_action</span><span class="p">,</span> <span class="n">return_type</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span> <span class="k">if</span> <span class="n">lhs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="k">raise</span> <span class="n">PatsyError</span><span class="p">(</span><span class="s2">&quot;model is missing required outcome variables&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\highlevel.py:164,</span> in <span class="ni">_do_highlevel_design</span><span class="nt">(formula_like, data, eval_env, NA_action, return_type)</span>
+<span class="g g-Whitespace">    </span><span class="mi">162</span> <span class="k">def</span> <span class="nf">data_iter_maker</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span>     <span class="k">return</span> <span class="nb">iter</span><span class="p">([</span><span class="n">data</span><span class="p">])</span>
+<span class="ne">--&gt; </span><span class="mi">164</span> <span class="n">design_infos</span> <span class="o">=</span> <span class="n">_try_incr_builders</span><span class="p">(</span><span class="n">formula_like</span><span class="p">,</span> <span class="n">data_iter_maker</span><span class="p">,</span> <span class="n">eval_env</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>                                   <span class="n">NA_action</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="k">if</span> <span class="n">design_infos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="k">return</span> <span class="n">build_design_matrices</span><span class="p">(</span><span class="n">design_infos</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span>                                  <span class="n">NA_action</span><span class="o">=</span><span class="n">NA_action</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span>                                  <span class="n">return_type</span><span class="o">=</span><span class="n">return_type</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\highlevel.py:66,</span> in <span class="ni">_try_incr_builders</span><span class="nt">(formula_like, data_iter_maker, eval_env, NA_action)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formula_like</span><span class="p">,</span> <span class="n">ModelDesc</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eval_env</span><span class="p">,</span> <span class="n">EvalEnvironment</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">66</span>     <span class="k">return</span> <span class="n">design_matrix_builders</span><span class="p">([</span><span class="n">formula_like</span><span class="o">.</span><span class="n">lhs_termlist</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>                                    <span class="n">formula_like</span><span class="o">.</span><span class="n">rhs_termlist</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>                                   <span class="n">data_iter_maker</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>                                   <span class="n">eval_env</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>                                   <span class="n">NA_action</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="k">return</span> <span class="kc">None</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\build.py:689,</span> in <span class="ni">design_matrix_builders</span><span class="nt">(termlists, data_iter_maker, eval_env, NA_action)</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span>     <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">termlist</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">688</span>         <span class="n">all_factors</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">factors</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">689</span> <span class="n">factor_states</span> <span class="o">=</span> <span class="n">_factors_memorize</span><span class="p">(</span><span class="n">all_factors</span><span class="p">,</span> <span class="n">data_iter_maker</span><span class="p">,</span> <span class="n">eval_env</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span> <span class="c1"># Now all the factors have working eval methods, so we can evaluate them</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span> <span class="c1"># on some data to find out what type of data they return.</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span> <span class="p">(</span><span class="n">num_column_counts</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">693</span>  <span class="n">cat_levels_contrasts</span><span class="p">)</span> <span class="o">=</span> <span class="n">_examine_factor_types</span><span class="p">(</span><span class="n">all_factors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span>                                                <span class="n">factor_states</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span>                                                <span class="n">data_iter_maker</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">696</span>                                                <span class="n">NA_action</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\build.py:354,</span> in <span class="ni">_factors_memorize</span><span class="nt">(factors, data_iter_maker, eval_env)</span>
+<span class="g g-Whitespace">    </span><span class="mi">352</span> <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">353</span>     <span class="n">state</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="ne">--&gt; </span><span class="mi">354</span>     <span class="n">which_pass</span> <span class="o">=</span> <span class="n">factor</span><span class="o">.</span><span class="n">memorize_passes_needed</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">eval_env</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="n">factor_states</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span>     <span class="n">passes_needed</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span> <span class="o">=</span> <span class="n">which_pass</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\eval.py:474,</span> in <span class="ni">EvalFactor.memorize_passes_needed</span><span class="nt">(self, state, eval_env)</span>
+<span class="g g-Whitespace">    </span><span class="mi">472</span> <span class="n">eval_env</span> <span class="o">=</span> <span class="n">eval_env</span><span class="o">.</span><span class="n">with_outer_namespace</span><span class="p">(</span><span class="n">_builtins_dict</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">473</span> <span class="n">env_namespace</span> <span class="o">=</span> <span class="n">eval_env</span><span class="o">.</span><span class="n">namespace</span>
+<span class="nn">--&gt; 474 subset_names = [name for name</span> in <span class="ni">ast_names</span><span class="nt">(self.code)</span>
+<span class="g g-Whitespace">    </span><span class="mi">475</span>                 <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">env_namespace</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="n">eval_env</span> <span class="o">=</span> <span class="n">eval_env</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">subset_names</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eval_env&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eval_env</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\eval.py:474,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">472</span> <span class="n">eval_env</span> <span class="o">=</span> <span class="n">eval_env</span><span class="o">.</span><span class="n">with_outer_namespace</span><span class="p">(</span><span class="n">_builtins_dict</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">473</span> <span class="n">env_namespace</span> <span class="o">=</span> <span class="n">eval_env</span><span class="o">.</span><span class="n">namespace</span>
+<span class="nn">--&gt; 474 subset_names = [name for name</span> in <span class="ni">ast_names</span><span class="nt">(self.code)</span>
+<span class="g g-Whitespace">    </span><span class="mi">475</span>                 <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">env_namespace</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="n">eval_env</span> <span class="o">=</span> <span class="n">eval_env</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">subset_names</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;eval_env&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eval_env</span>
+
+<span class="nn">File ~\anaconda3\lib\site-packages\patsy\eval.py:105,</span> in <span class="ni">ast_names</span><span class="nt">(code)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="n">disallowed_ast_nodes</span> <span class="o">+=</span> <span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">DictComp</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">SetComp</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">105</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">code</span><span class="p">)):</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">disallowed_ast_nodes</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span>         <span class="k">raise</span> <span class="n">PatsyError</span><span class="p">(</span><span class="s2">&quot;Lambda, list/dict/set comprehension, generator &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>                          <span class="s2">&quot;expression in patsy formula not currently supported.&quot;</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

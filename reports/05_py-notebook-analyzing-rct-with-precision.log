@@ -32,7 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-yhat_lava = lava_predict( X, Y )
-MSE_lava = sm.OLS( ((gX.reshape(-1,1) - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
+['np.random.seed(12345676)     # set MC seed', 'n = 1000', 'B = 1000', '', '# numpy format of data = float32']
+...
+['# check  standard deviations', 'print("Standard deviations for estimators")', 'print(np.sqrt(np.mean(CLs**2)))', 'print(np.sqrt(np.mean(CRAs**2)))', 'print(np.sqrt(np.mean(IRAs**2)))']
 -------------------
 

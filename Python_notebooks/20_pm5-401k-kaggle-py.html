@@ -969,10 +969,10 @@ Y = D \alpha + f(X)’\beta+ \epsilon,
 <section id="partially-linear-regression-models-plr">
 <h2><span class="section-number">20.6. </span>Partially Linear Regression Models (PLR)<a class="headerlink" href="#partially-linear-regression-models-plr" title="Permalink to this headline">#</a></h2>
 <p>We start using lasso to estimate the function <span class="math notranslate nohighlight">\(g_0\)</span> and <span class="math notranslate nohighlight">\(m_0\)</span> in the following PLR model:</p>
-<p>\begin{eqnarray}
+<p>\begin{align}
 &amp;  Y = D\theta_0 + g_0(X) + \zeta,  &amp;  E[\zeta \mid D,X]= 0,\
 &amp; D = m_0(X) +  V,   &amp;  E[V \mid X] = 0.
-\end{eqnarray}</p>
+\end{align}</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize learners</span>
