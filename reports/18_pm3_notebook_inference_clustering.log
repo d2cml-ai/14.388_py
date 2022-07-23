@@ -28,12 +28,19 @@ Traceback (most recent call last):
     await self._async_handle_timeout(timeout, cell)
   File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 801, in _async_handle_timeout
     raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 500 seconds.
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['#################################  Find Variable Names from Dataset ########################', '', 'def varlist( df = None, type_dataframe = [ \'numeric\' , \'categorical\' , \'string\' ],  pattern = "", exclude = None ):', '    varrs = []', '    ']
-...
-['', '# Partial out Variables in varlist from year and county fixed effect', 'for var_name in varlist2:', '    form = var_name + " ~ "  + " + ".join( year ) + "+" + " + ".join( fixed )', "    rdata[f'{var_name}'] = smf.ols( formula = form , data = data1 ).fit().resid"]
+# DML with cross-validated Lasso:
+def dreg(z,d):
+    result = standard_skl_model( ElasticNetCV( cv = 10 , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ) ).fit( z, d )
+    return result
+
+def yreg(z,y):
+    result = standard_skl_model( ElasticNetCV( cv = 10 , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ) ).fit( z, y )
+    return result
+
+DML2_elnet = DML2_for_PLM(z, d, y, dreg, yreg, 2 , clu)
 -------------------
 

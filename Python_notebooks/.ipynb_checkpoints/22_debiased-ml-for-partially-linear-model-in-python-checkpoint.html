@@ -886,18 +886,21 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 
 0  
 1  
-2  
-3  
-4  
+2
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  
+3  
+4  
+5  
 6  
 7  
-8  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8  
 9  
 
- Coefficient (se) = -0.0008965488887290639 (0.009850467746375454)
+ Coefficient (se) = -0.027705587920389234 (0.01218318109889944)
 
  DML with Lasso 
 </pre></div>
@@ -905,53 +908,29 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">Input In [7],</span> in <span class="ni">&lt;cell line: 37&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="k">return</span> <span class="n">result</span>
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="n">DML2_lasso</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with Random Forest </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="c1">#DML with cross-validated Lasso:</span>
 
- Coefficient (se) = -0.04309424661146798 (0.015676565923097192)
+<span class="nn">Input In [4],</span> in <span class="ni">DML2_for_PLM</span><span class="nt">(x, d, y, dreg, yreg, nfold)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="c1"># predict estimates using the </span>
+<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1"># save errors  </span>
 
- DML with Random Forest 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
+<span class="nn">Input In [3],</span> in <span class="ni">rlasso_sklearn.predict</span><span class="nt">(self, X)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span> <span class="bp">self</span> <span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rlasso_model</span><span class="o">.</span><span class="n">est</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">prediction</span> <span class="o">=</span> <span class="p">(</span> <span class="n">add_constant</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="o">@</span> <span class="n">beta</span> <span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">return</span> <span class="n">prediction</span>
 
- Coefficient (se) = -0.02355300568583363 (0.013731913286445907)
-
- DML with Lasso/Random Forest 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-
- Coefficient (se) = -0.042539686036234085 (0.013628638203308185)
+<span class="nn">ValueError: matmul: Input operand 1 has a mismatch</span> in <span class="ni">its core dimension 0, with gufunc signature (n?,k),(k,m?)-&gt;(n?,m?) </span><span class="nt">(size 61 is different from 60)</span>
 </pre></div>
 </div>
 </div>
@@ -1015,14 +994,14 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
     <tr>
       <th>RMSEY</th>
       <td>0.0</td>
-      <td>0.000198</td>
-      <td>0.000055</td>
+      <td>0.000029</td>
+      <td>0.000978</td>
     </tr>
     <tr>
       <th>RMSED</th>
       <td>0.0</td>
-      <td>0.011683</td>
-      <td>0.052780</td>
+      <td>0.012986</td>
+      <td>0.040936</td>
     </tr>
   </tbody>
 </table>
