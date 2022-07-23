@@ -75,7 +75,7 @@ index_gender = np.where( X.columns.str.contains('female'))[0]
 effect_female = hdmpy.rlassoEffects( x = X , y = y , index = index_gender )
 
 
-# In[25]:
+# In[6]:
 
 
 result_coeff = pd.concat( [ effect_female.res.get( 'coefficients' ).rename(columns = { 0 : "Estimate." }) ,              effect_female.res.get( 'se' ).rename( columns = { 0 : "Std. Error" } ) ,              effect_female.res.get( 't' ).rename( columns = { 0 : "t value" } ) ,              effect_female.res.get( 'pval' ).rename( columns = { 0 : "Pr(>|t|)" } ) ] ,             axis = 1 )
@@ -83,20 +83,20 @@ result_coeff = pd.concat( [ effect_female.res.get( 'coefficients' ).rename(colum
 print( result_coeff )
 
 
-# In[26]:
+# In[7]:
 
 
 t_value = stats.t.ppf(1-0.05, 29217 - 116 -1 )
 
 
-# In[27]:
+# In[8]:
 
 
 pointwise_CI = pd.DataFrame({ '5%' : result_coeff.iloc[ : , 0 ]                                      - result_coeff.iloc[ : , 1 ] * t_value ,                              '95%' : result_coeff.iloc[ : , 0 ]                              + result_coeff.iloc[ : , 1 ] * t_value })
 pointwise_CI
 
 
-# In[28]:
+# In[9]:
 
 
 result_coeff = result_coeff.sort_values('Estimate.')
@@ -116,13 +116,13 @@ plt.show()
 
 # Now, we estimate and plot confident intervals, first "pointwise" and then the joint confidence intervals.
 
-# In[31]:
+# In[10]:
 
 
 effect_female.res.get( 'coefficients' ).iloc[ :, 0 ].to_list()
 
 
-# In[32]:
+# In[11]:
 
 
 def confint_joint_python( rlassomodel , level = 0.95 ):
@@ -172,7 +172,7 @@ def confint_joint_python( rlassomodel , level = 0.95 ):
     return ( table, sd_tstat )
 
 
-# In[33]:
+# In[12]:
 
 
 def mvrnorm( mu , Sigma , n = 1 ):
@@ -194,27 +194,27 @@ def mvrnorm( mu , Sigma , n = 1 ):
 
 # Finally, we compare the pointwise confidence intervals to joint confidence intervals.
 
-# In[34]:
+# In[13]:
 
 
 from statsmodels.sandbox.stats.multicomp import multipletests
 import scipy.stats as st
 
 
-# In[35]:
+# In[14]:
 
 
 joint_CI =  confint_joint_python( effect_female, level = 0.9 )[0]
 size_err =  confint_joint_python( effect_female, level = 0.9 )[1]
 
 
-# In[36]:
+# In[15]:
 
 
 joint_CI
 
 
-# In[37]:
+# In[16]:
 
 
 x = joint_CI.index

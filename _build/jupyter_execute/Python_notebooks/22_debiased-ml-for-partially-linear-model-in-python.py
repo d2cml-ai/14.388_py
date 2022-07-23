@@ -299,7 +299,7 @@ def yreg( x , y ):
 DML2_RF = DML2_for_PLM( x , d , y , dreg , yreg , 2 )   # set to 2 due to computation time
 
 
-# In[18]:
+# In[8]:
 
 
 mods = [ DML2_ols, DML2_lasso, DML2_RF ]
@@ -316,13 +316,13 @@ def mdl( model , model_name ):
 RES = [ mdl( model , name ) for model, name in zip( mods , mods_name ) ]
 
 
-# In[19]:
+# In[9]:
 
 
 pr_Res = pd.concat( RES, axis = 1)
 
 
-# In[20]:
+# In[10]:
 
 
 pr_Res.round( 7 )

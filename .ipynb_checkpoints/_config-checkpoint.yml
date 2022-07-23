@@ -8,6 +8,7 @@ logo: figs/main_logo_ai_light.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
+  timeout: 500
   execute_notebooks: force
 
 html:
