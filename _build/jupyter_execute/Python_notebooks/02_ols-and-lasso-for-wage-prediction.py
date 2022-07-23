@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of: " https://www.kaggle.com/janniskueck/pm1-notebook1-prediction-newdata "
-# * Created by: Alexander Quispe
-
 # # OLS and lasso for wage prediction
 
 # This notebook contains an example for teaching.
@@ -38,6 +35,8 @@
 import pandas as pd
 import numpy as np
 import pyreadr
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:

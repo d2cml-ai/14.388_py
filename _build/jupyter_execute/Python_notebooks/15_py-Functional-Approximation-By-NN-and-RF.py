@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Functional Approximations by Trees and Neural Networks
+# # Functional Approximation By NN and RF
+
+# ## Functional Approximations by Trees and Neural Networks
 # 
 # Here we show how the function
 # $$
@@ -26,6 +28,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from keras.models import Sequential
 from keras.layers import Dense
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:

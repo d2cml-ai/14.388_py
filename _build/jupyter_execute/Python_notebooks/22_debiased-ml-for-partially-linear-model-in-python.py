@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Double/Debiased Machine Learning for the Partially Linear Regression Model.
+# # Debiased ML for Partially Linear Model in Python
+
+# ## Double/Debiased Machine Learning for the Partially Linear Regression Model.
 # 
 # This is a simple implementation of Debiased Machine Learning for the Partially Linear Regression Model.
 # 
@@ -53,25 +55,39 @@ import statsmodels.formula.api as smf
 from sklearn.feature_selection import SelectFromModel
 from statsmodels.tools import add_constant
 from sklearn.linear_model import ElasticNet
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # ## DML algorithm
 # 
 # Here we perform estimation and inference of predictive coefficient $\alpha$ in the partially linear statistical model, 
 # $$
+# \begin{align}
 # Y = D\alpha + g(X) + U, \quad E (U | D, X) = 0. 
+# \end{align}
 # $$
 # For $\tilde Y = Y- E(Y|X)$ and $\tilde D= D- E(D|X)$, we can write
 # $$
+# \begin{align}
 # \tilde Y = \alpha \tilde D + U, \quad E (U |\tilde D) =0.
+# \end{align}
 # $$
 # Parameter $\alpha$ is then estimated using cross-fitting approach to obtain the residuals $\tilde D$ and $\tilde Y$.
 # The algorithm comsumes $Y, D, X$, and machine learning methods for learning the residuals $\tilde Y$ and $\tilde D$, where
 # the residuals are obtained by cross-validation (cross-fitting).
 # 
-# The statistical parameter $\alpha$ has a causal intertpreation of being the effect of $D$ on $Y$ in the causal DAG $$ D\to Y, \quad X\to (D,Y)$$ or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment $D$ given $X$:
+# The statistical parameter $\alpha$ has a causal intertpreation of being the effect of $D$ on $Y$ in the causal DAG 
 # $$
+# \begin{align}
+# D\to Y, \quad X\to (D,Y)
+# \end{align}
+# $$
+# or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment $D$ given $X$:
+# $$
+# \begin{align}
 # Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \quad U = U(D).
+# \end{align}
 # $$
 # 
 
@@ -283,7 +299,7 @@ def yreg( x , y ):
 DML2_RF = DML2_for_PLM( x , d , y , dreg , yreg , 2 )   # set to 2 due to computation time
 
 
-# In[224]:
+# In[18]:
 
 
 mods = [ DML2_ols, DML2_lasso, DML2_RF ]
@@ -300,13 +316,13 @@ def mdl( model , model_name ):
 RES = [ mdl( model , name ) for model, name in zip( mods , mods_name ) ]
 
 
-# In[225]:
+# In[19]:
 
 
 pr_Res = pd.concat( RES, axis = 1)
 
 
-# In[230]:
+# In[20]:
 
 
 pr_Res.round( 7 )

@@ -1,25 +1,29 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of:
-# " https://www.kaggle.com/victorchernozhukov/r-notebook-analyzing-rct-with-precision "
-# * Created by: Alexander Quispe and Anzony Quispe 
+# # Analyzing RCT reemployment experiment
 
-# # Analyzing RCT with Precision by Adjusting for Baseline Covariates
+# ## Analyzing RCT with Precision by Adjusting for Baseline Covariates
 
-# ## Jonathan Roth's DGP
+# ### Jonathan Roth's DGP
 # 
-# Here we set up a DGP with heterogenous effects. In this example, with is due to Jonathan Roth, we have
+# Here we set up a DGP with heterogenous effects. In this example, with is due to Jonathan Roth, we have:
 # $$
+# \begin{align}
 # E [Y(0) | Z] = - Z, \quad E [Y(1) |Z] = Z, \quad Z \sim N(0,1).
+# \end{align}
 # $$
 # The CATE is
 # $$
+# \begin{align}
 # E [Y(1) - Y(0) | Z ]= 2 Z.
+# \end{align}
 # $$
 # and the ATE is
 # $$
+# \begin{align}
 # 2 E Z = 0.
+# \end{align}
 # $$
 # 
 # We would like to estimate ATE as precisely as possible.
@@ -36,7 +40,8 @@ import numpy as np
 import random
 import math
 import pandas as pd
-
+import warnings
+warnings.filterwarnings('ignore')
 # Set Seed
 # to make the results replicable (generating random numbers)
 np.random.seed(12345676)     # set MC seed

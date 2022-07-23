@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+# # Heterogenous Wage Effects
+
+# ## Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
 # 
 #  We use US census data from the year 2012 to analyse the effect of gender and interaction effects of other variables with gender on wage jointly. The dependent variable is the logarithm of the wage, the target variable is *female* (in combination with other variables). All other variables denote some other socio-economic characteristics, e.g. marital status, education, and experience.  For a detailed description of the variables we refer to the help page.
 # 
@@ -24,6 +26,8 @@ from matplotlib.pyplot import figure
 from scipy import stats
 import numpy as np
 import scipy.linalg as sci_lag
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:

@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# 
-# 
-# This notebook contains an example for teaching.
-# 
-
 # # Deep Neural Networks for Wage Prediction
 
 # So far we considered many machine learning method, e.g Lasso and Random Forests, to build a predictive model. In this lab, we extend our toolbox by predicting wages by a neural network.
@@ -40,6 +35,8 @@ import patsy
 from numpy import loadtxt
 from keras.models import Sequential
 from keras.layers import Dense
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:

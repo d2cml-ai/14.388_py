@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Dosearch for Causal Identification in DAGs.
+# # Notebook-Dosearch
 
 # In progress

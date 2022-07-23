@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Double/Debiased ML for Partially Linear IV Model
+# # Debiased ML for Partially Linear IV Model in Python
+
+# ## Double/Debiased ML for Partially Linear IV Model
 # 
 # References: 
 # 
@@ -17,10 +19,10 @@
 # ## Partially Linear IV Model
 # 
 # We consider the partially linear structural equation model:
-# \begin{eqnarray}
+# \begin{align}
 #  &  Y - D\theta_0 = g_0(X) + \zeta,  & E[\zeta \mid Z,X]= 0,\\
 #   & Z = m_0(X) +  V,   &  E[V \mid X] = 0. 
-# \end{eqnarray}
+# \end{align}
 # 
 # 
 # Note that this model is not a regression model unless $Z=D$.  The model  is a canonical
@@ -99,7 +101,7 @@
 # In[1]:
 
 
-# Import relevant packages
+# Import packages
 import pandas as pd
 import numpy as np
 import pyreadr
@@ -268,21 +270,21 @@ xraw = np.asarray( xraw_dframe , dtype = np.float64 )
 x = np.asarray( x_dframe , dtype = np.float64)
 
 
-# In[8]:
-
-
-x_dframe2
-
-
 # Information from random Forest [link1](https://stackoverflow.com/questions/35578041/why-do-i-get-different-randomforest-outcomes-between-r-and-python), [link2](https://stackoverflow.com/questions/45612922/random-forest-in-r-and-sklearn)
 
-# In[183]:
+# In[8]:
 
 
 y_model, x_dframe2 = patsy.dmatrices( x_formula, AJR , return_type='dataframe')
 
 
-# In[39]:
+# In[9]:
+
+
+x_dframe2
+
+
+# In[10]:
 
 
 def dreg( x_1 , d_1 ):
@@ -330,19 +332,19 @@ def zreg( x_1 , z_1 ):
     return result
 
 
-# In[40]:
+# In[11]:
 
 
 print( "\n DML with Post-Lasso \n" )
 
 
-# In[41]:
+# In[12]:
 
 
 DML2_RF = DML2_for_PLIVM(xraw, d, z, y, dreg, yreg, zreg, nfold=20)
 
 
-# In[227]:
+# In[15]:
 
 
 class rlasso_sklearn:
@@ -372,7 +374,7 @@ class rlasso_sklearn:
         return prediction
 
 
-# In[228]:
+# In[16]:
 
 
 # DML with PostLasso
@@ -390,20 +392,20 @@ def zreg(x,z):
     return result
 
 
-# In[229]:
+# In[17]:
 
 
 DML2_lasso = DML2_for_PLIVM(x, d, z, y, dreg, yreg, zreg, nfold = 20 )
 
 
-# In[230]:
+# In[18]:
 
 
 # Compare Forest vs Lasso
 comp_tab_numpy = np.zeros( ( 3 , 2 ) )
 
 
-# In[231]:
+# In[19]:
 
 
 comp_tab_numpy[ 0 , : ] = [ np.sqrt( np.mean( DML2_RF['ytil'] ** 2 ) ) , np.sqrt( np.mean( DML2_lasso['ytil'] ** 2 ) ) ]
@@ -411,13 +413,13 @@ comp_tab_numpy[ 1 , : ] = [ np.sqrt( np.mean( DML2_RF['dtil'] ** 2 ) ) , np.sqrt
 comp_tab_numpy[ 2 , : ] = [ np.sqrt( np.mean( DML2_RF['ztil'] ** 2 ) ) , np.sqrt( np.mean( DML2_lasso['ztil'] ** 2 ) ) ]
 
 
-# In[232]:
+# In[20]:
 
 
 comp_tab = pd.DataFrame( comp_tab_numpy , columns = [ 'RF' ,'LASSO' ] , index = [ "RMSE for Y:", "RMSE for D:", "RMSE for Z:" ] )
 
 
-# In[233]:
+# In[21]:
 
 
 comp_tab
@@ -425,13 +427,13 @@ comp_tab
 
 # ## Examine if we have weak instruments
 
-# In[234]:
+# In[22]:
 
 
 sm.OLS( DML2_lasso[ 'dtil' ] , DML2_lasso[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = True ).summary()
 
 
-# In[235]:
+# In[23]:
 
 
 sm.OLS( DML2_RF[ 'dtil' ] , DML2_RF[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = True ).summary()
@@ -441,30 +443,7 @@ sm.OLS( DML2_RF[ 'dtil' ] , DML2_RF[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = T
 
 # So let's carry out DML inference combined with Anderson-Rubin Idea
 
-# In[ ]:
-
-
-
-
-DML.AR.PLIV<- function(rY, rD, rZ, grid, alpha=.05){
-    n = length(rY)
-    Cstat = rep(0, length(grid))
-    for (i in 1:length(grid)) {
-    Cstat[i] <-  n* (mean( (rY - grid[i]*rD)*rZ)  )^2/var ( (rY - grid[i]*rD) * rZ )
-    };
-    LB<- min(grid[ Cstat < qchisq(1-alpha,1)]);
-    UB <- max(grid[ Cstat < qchisq(1-alpha,1)]); 
-    plot(range(grid),range(c( Cstat)) , type="n",xlab="Effect of institutions", ylab="Statistic", main=" ");  
-    lines(grid, Cstat,   lty = 1, col = 1);       
-    abline(h=qchisq(1-alpha,1), lty = 3, col = 4);
-    abline(v=LB, lty = 3, col = 2);
-    abline(v=UB, lty = 3, col = 2);
-
-    return(list(UB=UB, LB=LB))
-    }
-
-
-# In[296]:
+# In[24]:
 
 
 # DML-AR (DML with Anderson-Rubin) 
@@ -496,14 +475,14 @@ def DML_AR_PLIV( rY, rD, rZ, grid, alpha = 0.05 ):
     return final_result
 
 
-# In[297]:
+# In[25]:
 
 
 DML_AR_PLIV(rY = DML2_lasso['ytil'], rD= DML2_lasso['dtil'], rZ= DML2_lasso['ztil'],
            grid = np.arange( -2, 2.001, 0.01 ) )
 
 
-# In[298]:
+# In[26]:
 
 
 DML_AR_PLIV(rY = DML2_RF['ytil'], rD= DML2_RF['dtil'], rZ= DML2_RF['ztil'],

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015 &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    <title>14. AutoML for wage prediction &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Functional Approximations by Trees and Neural Networks" href="15_py-Functional-Approximation-By-NN-and-RF.html" />
+    <link rel="next" title="15. Functional Approximation By NN and RF" href="15_py-Functional-Approximation-By-NN-and-RF.html" />
     <link rel="prev" title="13. Deep Neural Networks for Wage Prediction" href="13_deep_neural_networks_for_wage_prediction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -109,14 +109,14 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Machine Learning and Causal Inference
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Simple Exercise on Overfitting
+   1. Linear Model Overfiting
   </a>
  </li>
  <li class="toctree-l1">
@@ -126,27 +126,27 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. An inferential problem: The Gender Wage Gap
+   3. OLS and lasso for gender wage gap inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Vaccine RCT Examples
+   4. Some RCT Examples
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT with Precision by Adjusting for Baseline Covariates
+   5. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT data with Precision Adjustment
+   6. Analyzing RCT reemployment experiment
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Penalized Linear Regressions: A Simulation Experiment
+   7. Linear Penalized Regs
   </a>
  </li>
  <li class="toctree-l1">
@@ -166,12 +166,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Application: Heterogeneous Effect of Gender on Wage Using Double Lasso
+   11. Heterogenous Wage Effects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. Collider Bias
+   12. ColliderBias Hollywood# Collider Bias
   </a>
  </li>
  <li class="toctree-l1">
@@ -181,22 +181,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   14. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+   14. AutoML for wage prediction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximations by Trees and Neural Networks
+   15. Functional Approximation By NN and RF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Causal Identification in DAGs using Backdoor and Swigs, Equivalence Classes, Falsifiability Tests
+   16. Notebook-DAGitty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Dosearch for Causal Identification in DAGs.
+   17. Notebook-Dosearch
   </a>
  </li>
  <li class="toctree-l1">
@@ -206,12 +206,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+   19. DML inference using NN for gun ownership
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+   20. DML for ATE and LATE of 401(k) on Wealth
   </a>
  </li>
  <li class="toctree-l1">
@@ -221,22 +221,22 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+   22. Debiased ML for Partially Linear Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Double/Debiased ML for Partially Linear IV Model
+   24. Debiased ML for Partially Linear IV Model in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. A Simple Example of Properties of IV estimator when Instruments are Weak
+   25. Weak IV Experiments
   </a>
  </li>
 </ul>
@@ -499,13 +499,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-machine-learning-with-h2o-automl-using-wage-data-from-2015">
+   14.1. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generating-predictions-using-leader-model">
-   14.1. Generating Predictions Using Leader Model
+   14.2. Generating Predictions Using Leader Model
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#by-using-model-performance">
-     14.1.1. By using model_performance()
+     14.2.1. By using model_performance()
     </a>
    </li>
   </ul>
@@ -519,7 +524,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Automatic Machine Learning with H2O AutoML using Wage Data from 2015</h1>
+                <h1>AutoML for wage prediction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -530,13 +535,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-machine-learning-with-h2o-automl-using-wage-data-from-2015">
+   14.1. Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generating-predictions-using-leader-model">
-   14.1. Generating Predictions Using Leader Model
+   14.2. Generating Predictions Using Leader Model
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#by-using-model-performance">
-     14.1.1. By using model_performance()
+     14.2.1. By using model_performance()
     </a>
    </li>
   </ul>
@@ -551,9 +561,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <p>This notebook contains an example for teaching.</p>
-<section class="tex2jax_ignore mathjax_ignore" id="automatic-machine-learning-with-h2o-automl-using-wage-data-from-2015">
-<h1><span class="section-number">14. </span>Automatic Machine Learning with H2O AutoML using Wage Data from 2015<a class="headerlink" href="#automatic-machine-learning-with-h2o-automl-using-wage-data-from-2015" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="automl-for-wage-prediction">
+<h1><span class="section-number">14. </span>AutoML for wage prediction<a class="headerlink" href="#automl-for-wage-prediction" title="Permalink to this headline">#</a></h1>
+<section id="automatic-machine-learning-with-h2o-automl-using-wage-data-from-2015">
+<h2><span class="section-number">14.1. </span>Automatic Machine Learning with H2O AutoML using Wage Data from 2015<a class="headerlink" href="#automatic-machine-learning-with-h2o-automl-using-wage-data-from-2015" title="Permalink to this headline">#</a></h2>
 <p>We illustrate how to predict an outcome variable Y in a high-dimensional setting, using the AutoML package <em>H2O</em> that covers the complete pipeline from the raw dataset to the deployable machine learning model. In last few years, AutoML or automated machine learning has become widely popular among data science community.</p>
 <p>We can use AutoML as a benchmark and compare it to the methods that we used in the previous notebook where we applied one machine learning method after the other.</p>
 <div class="cell docutils container">
@@ -564,10 +575,20 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pyreadr</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="kn">import</span> <span class="nn">patsy</span>
+<span class="kn">from</span> <span class="nn">h2o.automl</span> <span class="kn">import</span> <span class="n">H2OAutoML</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span>
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install h2o</span>
 </pre></div>
 </div>
 </div>
@@ -583,18 +604,42 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load the H2O package</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">h2o</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># start h2o cluster</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">h2o</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;h2o&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Checking whether there is an H2O instance running at http://localhost:54321 .
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> connected.
+</pre></div>
 </div>
+<div class="output text_html"><div style="overflow:auto"><table style="width:50%"><tr><td>H2O_cluster_uptime:</td>
+<td>28 mins 19 secs</td></tr>
+<tr><td>H2O_cluster_timezone:</td>
+<td>America/Bogota</td></tr>
+<tr><td>H2O_data_parsing_timezone:</td>
+<td>UTC</td></tr>
+<tr><td>H2O_cluster_version:</td>
+<td>3.36.1.3</td></tr>
+<tr><td>H2O_cluster_version_age:</td>
+<td>14 days, 20 hours and 39 minutes </td></tr>
+<tr><td>H2O_cluster_name:</td>
+<td>H2O_from_python_User_ixwr5m</td></tr>
+<tr><td>H2O_cluster_total_nodes:</td>
+<td>1</td></tr>
+<tr><td>H2O_cluster_free_memory:</td>
+<td>2.448 Gb</td></tr>
+<tr><td>H2O_cluster_total_cores:</td>
+<td>4</td></tr>
+<tr><td>H2O_cluster_allowed_cores:</td>
+<td>4</td></tr>
+<tr><td>H2O_cluster_status:</td>
+<td>locked, healthy</td></tr>
+<tr><td>H2O_connection_url:</td>
+<td>http://localhost:54321</td></tr>
+<tr><td>H2O_connection_proxy:</td>
+<td>{"http": null, "https": null}</td></tr>
+<tr><td>H2O_internal_security:</td>
+<td>False</td></tr>
+<tr><td>Python_version:</td>
+<td>3.9.12 final</td></tr></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -604,6 +649,11 @@ title="Print to PDF"
 <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.frame.DataFrame
 </pre></div>
 </div>
 </div>
@@ -630,8 +680,14 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create training and testing sample </span>
 <span class="n">train</span> <span class="o">=</span> <span class="n">data_2</span><span class="p">[</span> <span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)]</span>    <span class="c1"># training sample</span>
 <span class="n">test</span> <span class="o">=</span>  <span class="n">data_2</span><span class="p">[</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="p">:</span> <span class="p">]</span>   <span class="c1"># testing sample</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3862, 21)
+(1288, 21)
 </pre></div>
 </div>
 </div>
@@ -643,6 +699,43 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Checking whether there is an H2O instance running at http://localhost:54321 .
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> connected.
+</pre></div>
+</div>
+<div class="output text_html"><div style="overflow:auto"><table style="width:50%"><tr><td>H2O_cluster_uptime:</td>
+<td>28 mins 33 secs</td></tr>
+<tr><td>H2O_cluster_timezone:</td>
+<td>America/Bogota</td></tr>
+<tr><td>H2O_data_parsing_timezone:</td>
+<td>UTC</td></tr>
+<tr><td>H2O_cluster_version:</td>
+<td>3.36.1.3</td></tr>
+<tr><td>H2O_cluster_version_age:</td>
+<td>14 days, 20 hours and 40 minutes </td></tr>
+<tr><td>H2O_cluster_name:</td>
+<td>H2O_from_python_User_ixwr5m</td></tr>
+<tr><td>H2O_cluster_total_nodes:</td>
+<td>1</td></tr>
+<tr><td>H2O_cluster_free_memory:</td>
+<td>2.448 Gb</td></tr>
+<tr><td>H2O_cluster_total_cores:</td>
+<td>4</td></tr>
+<tr><td>H2O_cluster_allowed_cores:</td>
+<td>4</td></tr>
+<tr><td>H2O_cluster_status:</td>
+<td>locked, healthy</td></tr>
+<tr><td>H2O_connection_url:</td>
+<td>http://localhost:54321</td></tr>
+<tr><td>H2O_connection_proxy:</td>
+<td>{"http": null, "https": null}</td></tr>
+<tr><td>H2O_internal_security:</td>
+<td>False</td></tr>
+<tr><td>Python_version:</td>
+<td>3.9.12 final</td></tr></table></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -655,6 +748,41 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parse progress: |████████████████████████████████████████████████████████████████| (done) 100%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parse progress: |████████████████████████████████████████████████████████████████| (done) 100%
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows:3862
+Cols:21
+</pre></div>
+</div>
+<div class="output text_html"><table>
+<thead>
+<tr><th>       </th><th>wage              </th><th>lwage             </th><th>sex               </th><th>shs                 </th><th>hsg                </th><th>scl                </th><th>clg                </th><th>ad                 </th><th>mw                </th><th>so                 </th><th>we                 </th><th>ne                 </th><th>exp1              </th><th>exp2              </th><th>exp3              </th><th>exp4              </th><th>occ              </th><th>occ2              </th><th>ind              </th><th>ind2              </th><th>random            </th></tr>
+</thead>
+<tbody>
+<tr><td>type   </td><td>real              </td><td>real              </td><td>int               </td><td>int                 </td><td>int                </td><td>int                </td><td>int                </td><td>int                </td><td>int               </td><td>int                </td><td>int                </td><td>int                </td><td>real              </td><td>real              </td><td>real              </td><td>real              </td><td>int              </td><td>int               </td><td>int              </td><td>int               </td><td>int               </td></tr>
+<tr><td>mins   </td><td>3.021978021978022 </td><td>1.1059115911497213</td><td>0.0               </td><td>0.0                 </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>0.0               </td><td>0.0               </td><td>0.0               </td><td>10.0             </td><td>1.0               </td><td>370.0            </td><td>2.0               </td><td>0.0               </td></tr>
+<tr><td>mean   </td><td>23.465417731467202</td><td>2.969427791239379 </td><td>0.446918694976696 </td><td>0.023562920766442258</td><td>0.24702226825479026</td><td>0.2780942516830658 </td><td>0.3125323666494045 </td><td>0.13878819264629724</td><td>0.2553081305023304</td><td>0.29829104091144487</td><td>0.21569135163127914</td><td>0.23070947695494562</td><td>13.672190574831728</td><td>2.9923032107716137</td><td>8.15417316157433  </td><td>24.849760334671146</td><td>5243.418436043504</td><td>11.69135163127914 </td><td>6667.996116002073</td><td>13.333764888658706</td><td>1914.2263076126374</td></tr>
+<tr><td>maxs   </td><td>528.845673076923  </td><td>6.270696655981913 </td><td>1.0               </td><td>1.0                 </td><td>1.0                </td><td>1.0                </td><td>1.0                </td><td>1.0                </td><td>1.0               </td><td>1.0                </td><td>1.0                </td><td>1.0                </td><td>47.0              </td><td>22.09             </td><td>103.823           </td><td>487.9681          </td><td>100000.0         </td><td>22.0              </td><td>100000.0         </td><td>22.0              </td><td>3825.0            </td></tr>
+<tr><td>sigma  </td><td>21.430085743506766</td><td>0.5750893708933925</td><td>0.4972387709704293</td><td>0.15170256601034887 </td><td>0.4313356487428773 </td><td>0.44811810407097313</td><td>0.46358551980855045</td><td>0.3457701367976389 </td><td>0.436090737870262 </td><td>0.45756716236312467</td><td>0.4113543571812672 </td><td>0.4213414081729523 </td><td>10.598613687032655</td><td>3.987480265404191 </td><td>14.424744487903597</td><td>53.27996156215637 </td><td>11579.91114662104</td><td>6.9783416585657125</td><td>5588.264282354911</td><td>5.691380293915183 </td><td>1104.7025392074318</td></tr>
+<tr><td>zeros  </td><td>0                 </td><td>0                 </td><td>2136              </td><td>3771                </td><td>2908               </td><td>2788               </td><td>2655               </td><td>3326               </td><td>2876              </td><td>2710               </td><td>3029               </td><td>2971               </td><td>48                </td><td>48                </td><td>48                </td><td>48                </td><td>0                </td><td>0                 </td><td>0                </td><td>0                 </td><td>3                 </td></tr>
+<tr><td>missing</td><td>0                 </td><td>0                 </td><td>0                 </td><td>0                   </td><td>0                  </td><td>0                  </td><td>0                  </td><td>0                  </td><td>0                 </td><td>0                  </td><td>0                  </td><td>0                  </td><td>0                 </td><td>0                 </td><td>0                 </td><td>0                 </td><td>0                </td><td>0                 </td><td>0                </td><td>0                 </td><td>0                 </td></tr>
+<tr><td>0      </td><td>26.442307692307693</td><td>3.274965291519244 </td><td>1.0               </td><td>0.0                 </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>0.0                </td><td>0.0                </td><td>1.0                </td><td>29.0              </td><td>8.41              </td><td>24.389            </td><td>70.7281           </td><td>340.0            </td><td>1.0               </td><td>8660.0           </td><td>20.0              </td><td>0.0               </td></tr>
+<tr><td>1      </td><td>19.23076923076923 </td><td>2.9565115604007097</td><td>0.0               </td><td>0.0                 </td><td>0.0                </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>0.0                </td><td>0.0                </td><td>1.0                </td><td>33.5              </td><td>11.2225           </td><td>37.595375         </td><td>125.94450625      </td><td>9620.0           </td><td>22.0              </td><td>1870.0           </td><td>5.0               </td><td>0.0               </td></tr>
+<tr><td>2      </td><td>48.07692307692308 </td><td>3.872802292274865 </td><td>1.0               </td><td>0.0                 </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>1.0                </td><td>1.0               </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>2.0               </td><td>0.04              </td><td>0.008             </td><td>0.0016            </td><td>3060.0           </td><td>10.0              </td><td>8190.0           </td><td>18.0              </td><td>0.0               </td></tr>
+<tr><td>3      </td><td>12.01923076923077 </td><td>2.486507931154974 </td><td>0.0               </td><td>0.0                 </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>29.0              </td><td>8.41              </td><td>24.389            </td><td>70.7281           </td><td>6440.0           </td><td>19.0              </td><td>770.0            </td><td>4.0               </td><td>2.0               </td></tr>
+<tr><td>4      </td><td>39.90384615384615 </td><td>3.6864727140833713</td><td>1.0               </td><td>0.0                 </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>1.0                </td><td>0.0               </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>12.0              </td><td>1.44              </td><td>1.728             </td><td>2.0736            </td><td>1820.0           </td><td>5.0               </td><td>7860.0           </td><td>17.0              </td><td>2.0               </td></tr>
+<tr><td>5      </td><td>13.157894736842104</td><td>2.5770219386958058</td><td>0.0               </td><td>0.0                 </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>11.0              </td><td>1.21              </td><td>1.331             </td><td>1.4641            </td><td>8810.0           </td><td>21.0              </td><td>3895.0           </td><td>6.0               </td><td>3.0               </td></tr>
+<tr><td>6      </td><td>20.192307692307693</td><td>3.005301724570142 </td><td>0.0               </td><td>1.0                 </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>0.0                </td><td>1.0                </td><td>0.0                </td><td>17.0              </td><td>2.89              </td><td>4.913             </td><td>8.3521            </td><td>7200.0           </td><td>20.0              </td><td>8770.0           </td><td>21.0              </td><td>4.0               </td></tr>
+<tr><td>7      </td><td>12.01923076923077 </td><td>2.486507931154974 </td><td>0.0               </td><td>0.0                 </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>7.0               </td><td>0.49              </td><td>0.343             </td><td>0.2401            </td><td>5610.0           </td><td>17.0              </td><td>4265.0           </td><td>7.0               </td><td>5.0               </td></tr>
+<tr><td>8      </td><td>28.846153846153847</td><td>3.361976668508874 </td><td>1.0               </td><td>1.0                 </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>0.0                </td><td>0.0                </td><td>1.0                </td><td>8.0               </td><td>0.64              </td><td>0.512             </td><td>0.4096            </td><td>5240.0           </td><td>17.0              </td><td>6970.0           </td><td>12.0              </td><td>7.0               </td></tr>
+<tr><td>9      </td><td>34.13461538461539 </td><td>3.530311983328089 </td><td>0.0               </td><td>0.0                 </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>0.0                </td><td>0.0               </td><td>1.0                </td><td>0.0                </td><td>0.0                </td><td>38.0              </td><td>14.44             </td><td>54.872            </td><td>208.5136          </td><td>5550.0           </td><td>17.0              </td><td>6370.0           </td><td>10.0              </td><td>7.0               </td></tr>
+</tbody>
+</table></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -679,12 +807,53 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AutoML progress: |█
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14:13:23.430: AutoML: XGBoost is not available; skipping it.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>██
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>██
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>████
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> (cancelled)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># AutoML Leaderboard</span>
 <span class="n">lb</span> <span class="o">=</span> <span class="n">aml</span><span class="o">.</span><span class="n">leaderboard</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<thead>
+<tr><th>model_id                                               </th><th style="text-align: right;">    rmse</th><th style="text-align: right;">     mse</th><th style="text-align: right;">     mae</th><th style="text-align: right;">   rmsle</th><th style="text-align: right;">  mean_residual_deviance</th></tr>
+</thead>
+<tbody>
+<tr><td>StackedEnsemble_AllModels_1_AutoML_1_20220722_170939   </td><td style="text-align: right;">0.47064 </td><td style="text-align: right;">0.221502</td><td style="text-align: right;">0.353943</td><td style="text-align: right;">0.120368</td><td style="text-align: right;">                0.221502</td></tr>
+<tr><td>GBM_2_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.471849</td><td style="text-align: right;">0.222642</td><td style="text-align: right;">0.355941</td><td style="text-align: right;">0.12074 </td><td style="text-align: right;">                0.222642</td></tr>
+<tr><td>GBM_5_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.47191 </td><td style="text-align: right;">0.222699</td><td style="text-align: right;">0.35582 </td><td style="text-align: right;">0.120501</td><td style="text-align: right;">                0.222699</td></tr>
+<tr><td>StackedEnsemble_BestOfFamily_1_AutoML_1_20220722_170939</td><td style="text-align: right;">0.473798</td><td style="text-align: right;">0.224484</td><td style="text-align: right;">0.357598</td><td style="text-align: right;">0.121491</td><td style="text-align: right;">                0.224484</td></tr>
+<tr><td>GBM_3_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.474585</td><td style="text-align: right;">0.22523 </td><td style="text-align: right;">0.359309</td><td style="text-align: right;">0.121264</td><td style="text-align: right;">                0.22523 </td></tr>
+<tr><td>GBM_1_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.478149</td><td style="text-align: right;">0.228626</td><td style="text-align: right;">0.362211</td><td style="text-align: right;">0.122278</td><td style="text-align: right;">                0.228626</td></tr>
+<tr><td>GBM_4_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.479072</td><td style="text-align: right;">0.22951 </td><td style="text-align: right;">0.362916</td><td style="text-align: right;">0.122456</td><td style="text-align: right;">                0.22951 </td></tr>
+<tr><td>GBM_grid_1_AutoML_1_20220722_170939_model_1            </td><td style="text-align: right;">0.48001 </td><td style="text-align: right;">0.23041 </td><td style="text-align: right;">0.36381 </td><td style="text-align: right;">0.122671</td><td style="text-align: right;">                0.23041 </td></tr>
+<tr><td>XRT_1_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.491218</td><td style="text-align: right;">0.241295</td><td style="text-align: right;">0.375089</td><td style="text-align: right;">0.125318</td><td style="text-align: right;">                0.241295</td></tr>
+<tr><td>DRF_1_AutoML_1_20220722_170939                         </td><td style="text-align: right;">0.50224 </td><td style="text-align: right;">0.252245</td><td style="text-align: right;">0.382606</td><td style="text-align: right;">0.12847 </td><td style="text-align: right;">                0.252245</td></tr>
+</tbody>
+</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -696,11 +865,180 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.22150159010610537
+</pre></div>
+</div>
+</div>
 </div>
 <p>The in-sample performance can be evaluated by</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aml</span><span class="o">.</span><span class="n">leader</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
+=============
+H2OStackedEnsembleEstimator :  Stacked Ensemble
+Model Key:  StackedEnsemble_AllModels_1_AutoML_1_20220722_170939
+
+No model summary for this model
+
+ModelMetricsRegressionGLM: stackedensemble
+** Reported on train data. **
+
+MSE: 0.15027004489538795
+RMSE: 0.38764680431468534
+MAE: 0.2955371675604367
+RMSLE: 0.09990016533775842
+R^2: 0.5455206039510314
+Mean Residual Deviance: 0.15027004489538795
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3854
+Null deviance: 1276.9399854672324
+Residual deviance: 580.3429133859883
+AIC: 3658.1503537307485
+
+ModelMetricsRegressionGLM: stackedensemble
+** Reported on cross-validation data. **
+
+MSE: 0.2185070080606413
+RMSE: 0.46744733185744175
+MAE: 0.35554501482828577
+RMSLE: 0.11935774800872184
+R^2: 0.3391435190891413
+Mean Residual Deviance: 0.2185070080606413
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3853
+Null deviance: 1277.1043650451534
+Residual deviance: 843.8740651301968
+AIC: 5106.021797066896
+
+Cross-Validation Metrics Summary: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>cv_1_valid</th>
+      <th>cv_2_valid</th>
+      <th>cv_3_valid</th>
+      <th>cv_4_valid</th>
+      <th>cv_5_valid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>mae</td>
+      <td>0.355575</td>
+      <td>0.011150</td>
+      <td>0.358694</td>
+      <td>0.365597</td>
+      <td>0.336775</td>
+      <td>0.355430</td>
+      <td>0.361377</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean_residual_deviance</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mse</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>null_deviance</td>
+      <td>255.420870</td>
+      <td>18.944805</td>
+      <td>270.143950</td>
+      <td>279.337650</td>
+      <td>235.192600</td>
+      <td>252.053120</td>
+      <td>240.377060</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>r2</td>
+      <td>0.339071</td>
+      <td>0.024654</td>
+      <td>0.332108</td>
+      <td>0.343113</td>
+      <td>0.367360</td>
+      <td>0.351331</td>
+      <td>0.301443</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>residual_deviance</td>
+      <td>168.764340</td>
+      <td>13.983558</td>
+      <td>180.424550</td>
+      <td>183.458680</td>
+      <td>148.757460</td>
+      <td>163.370830</td>
+      <td>167.810170</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>rmse</td>
+      <td>0.467306</td>
+      <td>0.019674</td>
+      <td>0.481878</td>
+      <td>0.475618</td>
+      <td>0.437551</td>
+      <td>0.457364</td>
+      <td>0.484120</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>rmsle</td>
+      <td>0.119310</td>
+      <td>0.004632</td>
+      <td>0.122437</td>
+      <td>0.121279</td>
+      <td>0.111271</td>
+      <td>0.119514</td>
+      <td>0.122048</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -721,11 +1059,180 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;StackedEnsemble_AllModels_1_AutoML_1_20220722_170939&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">se</span> <span class="o">=</span> <span class="n">h2o</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;StackedEnsemble_AllModels_AutoML_20210420_101446&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">se</span> <span class="o">=</span> <span class="n">h2o</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">model_id</span><span class="p">)</span>
 <span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
+=============
+H2OStackedEnsembleEstimator :  Stacked Ensemble
+Model Key:  StackedEnsemble_AllModels_1_AutoML_1_20220722_170939
+
+No model summary for this model
+
+ModelMetricsRegressionGLM: stackedensemble
+** Reported on train data. **
+
+MSE: 0.15027004489538795
+RMSE: 0.38764680431468534
+MAE: 0.2955371675604367
+RMSLE: 0.09990016533775842
+R^2: 0.5455206039510314
+Mean Residual Deviance: 0.15027004489538795
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3854
+Null deviance: 1276.9399854672324
+Residual deviance: 580.3429133859883
+AIC: 3658.1503537307485
+
+ModelMetricsRegressionGLM: stackedensemble
+** Reported on cross-validation data. **
+
+MSE: 0.2185070080606413
+RMSE: 0.46744733185744175
+MAE: 0.35554501482828577
+RMSLE: 0.11935774800872184
+R^2: 0.3391435190891413
+Mean Residual Deviance: 0.2185070080606413
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3853
+Null deviance: 1277.1043650451534
+Residual deviance: 843.8740651301968
+AIC: 5106.021797066896
+
+Cross-Validation Metrics Summary: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>cv_1_valid</th>
+      <th>cv_2_valid</th>
+      <th>cv_3_valid</th>
+      <th>cv_4_valid</th>
+      <th>cv_5_valid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>mae</td>
+      <td>0.355575</td>
+      <td>0.011150</td>
+      <td>0.358694</td>
+      <td>0.365597</td>
+      <td>0.336775</td>
+      <td>0.355430</td>
+      <td>0.361377</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean_residual_deviance</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mse</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>null_deviance</td>
+      <td>255.420870</td>
+      <td>18.944805</td>
+      <td>270.143950</td>
+      <td>279.337650</td>
+      <td>235.192600</td>
+      <td>252.053120</td>
+      <td>240.377060</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>r2</td>
+      <td>0.339071</td>
+      <td>0.024654</td>
+      <td>0.332108</td>
+      <td>0.343113</td>
+      <td>0.367360</td>
+      <td>0.351331</td>
+      <td>0.301443</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>residual_deviance</td>
+      <td>168.764340</td>
+      <td>13.983558</td>
+      <td>180.424550</td>
+      <td>183.458680</td>
+      <td>148.757460</td>
+      <td>163.370830</td>
+      <td>167.810170</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>rmse</td>
+      <td>0.467306</td>
+      <td>0.019674</td>
+      <td>0.481878</td>
+      <td>0.475618</td>
+      <td>0.437551</td>
+      <td>0.457364</td>
+      <td>0.484120</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>rmsle</td>
+      <td>0.119310</td>
+      <td>0.004632</td>
+      <td>0.122437</td>
+      <td>0.121279</td>
+      <td>0.111271</td>
+      <td>0.119514</td>
+      <td>0.122048</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -738,12 +1245,740 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
+=============
+H2OGeneralizedLinearEstimator :  Generalized Linear Modeling
+Model Key:  metalearner_AUTO_StackedEnsemble_AllModels_1_AutoML_1_20220722_170939
+
+
+GLM Model: summary
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>family</th>
+      <th>link</th>
+      <th>regularization</th>
+      <th>lambda_search</th>
+      <th>number_of_predictors_total</th>
+      <th>number_of_active_predictors</th>
+      <th>number_of_iterations</th>
+      <th>training_frame</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td></td>
+      <td>gaussian</td>
+      <td>identity</td>
+      <td>Elastic Net (alpha = 0.5, lambda = 0.002551 )</td>
+      <td>nlambda = 100, lambda.max = 0.2219, lambda.min = 0.002551, lambda....</td>
+      <td>10</td>
+      <td>7</td>
+      <td>49</td>
+      <td>levelone_training_StackedEnsemble_AllModels_1_AutoML_1_20220722_17...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelMetricsRegressionGLM: glm
+** Reported on train data. **
+
+MSE: 0.21727419974117612
+RMSE: 0.4661268065035266
+MAE: 0.35448759076481845
+RMSLE: 0.11902010738109643
+R^2: 0.3428720464937892
+Mean Residual Deviance: 0.21727419974117612
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3854
+Null deviance: 1276.9399854672324
+Residual deviance: 839.1129594004221
+AIC: 5082.170839083037
+
+ModelMetricsRegressionGLM: glm
+** Reported on cross-validation data. **
+
+MSE: 0.2185070080606413
+RMSE: 0.46744733185744175
+MAE: 0.35554501482828577
+RMSLE: 0.11935774800872184
+R^2: 0.3391435190891413
+Mean Residual Deviance: 0.2185070080606413
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3853
+Null deviance: 1277.1043650451534
+Residual deviance: 843.8740651301968
+AIC: 5106.021797066896
+
+Cross-Validation Metrics Summary: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>cv_1_valid</th>
+      <th>cv_2_valid</th>
+      <th>cv_3_valid</th>
+      <th>cv_4_valid</th>
+      <th>cv_5_valid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>mae</td>
+      <td>0.355575</td>
+      <td>0.011150</td>
+      <td>0.358694</td>
+      <td>0.365597</td>
+      <td>0.336775</td>
+      <td>0.355430</td>
+      <td>0.361377</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean_residual_deviance</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mse</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>null_deviance</td>
+      <td>255.420870</td>
+      <td>18.944805</td>
+      <td>270.143950</td>
+      <td>279.337650</td>
+      <td>235.192600</td>
+      <td>252.053120</td>
+      <td>240.377060</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>r2</td>
+      <td>0.339071</td>
+      <td>0.024654</td>
+      <td>0.332108</td>
+      <td>0.343113</td>
+      <td>0.367360</td>
+      <td>0.351331</td>
+      <td>0.301443</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>residual_deviance</td>
+      <td>168.764340</td>
+      <td>13.983558</td>
+      <td>180.424550</td>
+      <td>183.458680</td>
+      <td>148.757460</td>
+      <td>163.370830</td>
+      <td>167.810170</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>rmse</td>
+      <td>0.467306</td>
+      <td>0.019674</td>
+      <td>0.481878</td>
+      <td>0.475618</td>
+      <td>0.437551</td>
+      <td>0.457364</td>
+      <td>0.484120</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>rmsle</td>
+      <td>0.119310</td>
+      <td>0.004632</td>
+      <td>0.122437</td>
+      <td>0.121279</td>
+      <td>0.111271</td>
+      <td>0.119514</td>
+      <td>0.122048</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring History: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>timestamp</th>
+      <th>duration</th>
+      <th>iteration</th>
+      <th>lambda</th>
+      <th>predictors</th>
+      <th>deviance_train</th>
+      <th>deviance_xval</th>
+      <th>deviance_se</th>
+      <th>alpha</th>
+      <th>iterations</th>
+      <th>training_rmse</th>
+      <th>training_deviance</th>
+      <th>training_mae</th>
+      <th>training_r2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>1</td>
+      <td>,22E0</td>
+      <td>1</td>
+      <td>0.330642</td>
+      <td>0.330652</td>
+      <td>0.008216</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>2</td>
+      <td>,2E0</td>
+      <td>5</td>
+      <td>0.316066</td>
+      <td>0.330609</td>
+      <td>0.008220</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>3</td>
+      <td>,18E0</td>
+      <td>6</td>
+      <td>0.302049</td>
+      <td>0.330627</td>
+      <td>0.008216</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>4</td>
+      <td>,17E0</td>
+      <td>6</td>
+      <td>0.289848</td>
+      <td>0.322157</td>
+      <td>0.008512</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>5</td>
+      <td>,15E0</td>
+      <td>7</td>
+      <td>0.279287</td>
+      <td>0.307694</td>
+      <td>0.008407</td>
+      <td>0.5</td>
+      <td>5.0</td>
+      <td>0.528476</td>
+      <td>0.279287</td>
+      <td>0.407732</td>
+      <td>0.155318</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>6</td>
+      <td>,14E0</td>
+      <td>7</td>
+      <td>0.270007</td>
+      <td>0.294801</td>
+      <td>0.008323</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>7</td>
+      <td>,13E0</td>
+      <td>7</td>
+      <td>0.262086</td>
+      <td>0.283621</td>
+      <td>0.008253</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>8</td>
+      <td>,12E0</td>
+      <td>7</td>
+      <td>0.255335</td>
+      <td>0.273875</td>
+      <td>0.008226</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>9</td>
+      <td>,11E0</td>
+      <td>8</td>
+      <td>0.249586</td>
+      <td>0.265471</td>
+      <td>0.008206</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>10</td>
+      <td>,96E-1</td>
+      <td>8</td>
+      <td>0.244598</td>
+      <td>0.258304</td>
+      <td>0.008188</td>
+      <td>0.5</td>
+      <td>10.0</td>
+      <td>0.494568</td>
+      <td>0.244598</td>
+      <td>0.377588</td>
+      <td>0.260234</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>11</td>
+      <td>,88E-1</td>
+      <td>8</td>
+      <td>0.240460</td>
+      <td>0.252204</td>
+      <td>0.008175</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>12</td>
+      <td>,8E-1</td>
+      <td>8</td>
+      <td>0.236926</td>
+      <td>0.246950</td>
+      <td>0.008189</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>13</td>
+      <td>,73E-1</td>
+      <td>8</td>
+      <td>0.233943</td>
+      <td>0.242530</td>
+      <td>0.008194</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>14</td>
+      <td>,66E-1</td>
+      <td>8</td>
+      <td>0.231423</td>
+      <td>0.238774</td>
+      <td>0.008196</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>15</td>
+      <td>,6E-1</td>
+      <td>8</td>
+      <td>0.229293</td>
+      <td>0.235608</td>
+      <td>0.008204</td>
+      <td>0.5</td>
+      <td>15.0</td>
+      <td>0.478846</td>
+      <td>0.229293</td>
+      <td>0.364087</td>
+      <td>0.306521</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>16</td>
+      <td>,55E-1</td>
+      <td>8</td>
+      <td>0.227495</td>
+      <td>0.232935</td>
+      <td>0.008210</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>17</td>
+      <td>,5E-1</td>
+      <td>8</td>
+      <td>0.226154</td>
+      <td>0.230682</td>
+      <td>0.008216</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.047 sec</td>
+      <td>18</td>
+      <td>,46E-1</td>
+      <td>8</td>
+      <td>0.224642</td>
+      <td>0.228783</td>
+      <td>0.008220</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.047 sec</td>
+      <td>19</td>
+      <td>,42E-1</td>
+      <td>8</td>
+      <td>0.223737</td>
+      <td>0.227337</td>
+      <td>0.008211</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.047 sec</td>
+      <td>20</td>
+      <td>,38E-1</td>
+      <td>8</td>
+      <td>0.222642</td>
+      <td>0.225825</td>
+      <td>0.008238</td>
+      <td>0.5</td>
+      <td>20.0</td>
+      <td>0.471849</td>
+      <td>0.222642</td>
+      <td>0.358377</td>
+      <td>0.326639</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>See the whole table with table.as_data_frame()
+
+Variable Importances: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>relative_importance</th>
+      <th>scaled_importance</th>
+      <th>percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>GBM_5_AutoML_1_20220722_170939</td>
+      <td>0.156444</td>
+      <td>1.000000</td>
+      <td>0.459637</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>GBM_3_AutoML_1_20220722_170939</td>
+      <td>0.064177</td>
+      <td>0.410220</td>
+      <td>0.188552</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>GBM_1_AutoML_1_20220722_170939</td>
+      <td>0.045077</td>
+      <td>0.288132</td>
+      <td>0.132436</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GBM_grid_1_AutoML_1_20220722_170939_model_1</td>
+      <td>0.042987</td>
+      <td>0.274777</td>
+      <td>0.126298</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>GBM_4_AutoML_1_20220722_170939</td>
+      <td>0.022251</td>
+      <td>0.142227</td>
+      <td>0.065373</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>DeepLearning_1_AutoML_1_20220722_170939</td>
+      <td>0.009429</td>
+      <td>0.060268</td>
+      <td>0.027701</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DRF_1_AutoML_1_20220722_170939</td>
+      <td>0.000001</td>
+      <td>0.000007</td>
+      <td>0.000003</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>GBM_2_AutoML_1_20220722_170939</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>XRT_1_AutoML_1_20220722_170939</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GLM_1_AutoML_1_20220722_170939</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Examine the variable importance of the metalearner (combiner) algorithm in the ensemble. This shows us how much each base learner is contributing to the ensemble. The AutoML Stacked Ensembles use the default metalearner algorithm (GLM with non-negative weights), so the variable importance of the metalearner is actually the standardized coefficient magnitudes of the GLM.</p>
 <p>The table above gives us the variable importance of the metalearner in the ensemble. The AutoML Stacked Ensembles use the default metalearner algorithm (GLM with non-negative weights), so the variable importance of the metalearner is actually the standardized coefficient magnitudes of the GLM.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metalearner</span><span class="o">.</span><span class="n">coef_norm</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Intercept&#39;: 2.969427791239395,
+ &#39;GBM_2_AutoML_1_20220722_170939&#39;: 0.0,
+ &#39;GBM_5_AutoML_1_20220722_170939&#39;: 0.1564442116943833,
+ &#39;GBM_3_AutoML_1_20220722_170939&#39;: 0.06417658529927933,
+ &#39;GBM_1_AutoML_1_20220722_170939&#39;: 0.04507655475235933,
+ &#39;GBM_4_AutoML_1_20220722_170939&#39;: 0.02225052417703666,
+ &#39;GBM_grid_1_AutoML_1_20220722_170939_model_1&#39;: 0.0429872925804153,
+ &#39;XRT_1_AutoML_1_20220722_170939&#39;: 0.0,
+ &#39;DRF_1_AutoML_1_20220722_170939&#39;: 1.1143189727895769e-06,
+ &#39;GLM_1_AutoML_1_20220722_170939&#39;: 0.0,
+ &#39;DeepLearning_1_AutoML_1_20220722_170939&#39;: 0.009428554928469175}
 </pre></div>
 </div>
 </div>
@@ -754,6 +1989,12 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;h2o.plot._plot_result._MObject at 0x265c10daf70&gt;
+</pre></div>
+</div>
+<img alt="../_images/14_automl-for-wage-prediction_27_1.png" src="../_images/14_automl-for-wage-prediction_27_1.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -761,14 +2002,752 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
+=============
+H2OGeneralizedLinearEstimator :  Generalized Linear Modeling
+Model Key:  metalearner_AUTO_StackedEnsemble_AllModels_1_AutoML_1_20220722_170939
+
+
+GLM Model: summary
+</pre></div>
 </div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>family</th>
+      <th>link</th>
+      <th>regularization</th>
+      <th>lambda_search</th>
+      <th>number_of_predictors_total</th>
+      <th>number_of_active_predictors</th>
+      <th>number_of_iterations</th>
+      <th>training_frame</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td></td>
+      <td>gaussian</td>
+      <td>identity</td>
+      <td>Elastic Net (alpha = 0.5, lambda = 0.002551 )</td>
+      <td>nlambda = 100, lambda.max = 0.2219, lambda.min = 0.002551, lambda....</td>
+      <td>10</td>
+      <td>7</td>
+      <td>49</td>
+      <td>levelone_training_StackedEnsemble_AllModels_1_AutoML_1_20220722_17...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelMetricsRegressionGLM: glm
+** Reported on train data. **
+
+MSE: 0.21727419974117612
+RMSE: 0.4661268065035266
+MAE: 0.35448759076481845
+RMSLE: 0.11902010738109643
+R^2: 0.3428720464937892
+Mean Residual Deviance: 0.21727419974117612
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3854
+Null deviance: 1276.9399854672324
+Residual deviance: 839.1129594004221
+AIC: 5082.170839083037
+
+ModelMetricsRegressionGLM: glm
+** Reported on cross-validation data. **
+
+MSE: 0.2185070080606413
+RMSE: 0.46744733185744175
+MAE: 0.35554501482828577
+RMSLE: 0.11935774800872184
+R^2: 0.3391435190891413
+Mean Residual Deviance: 0.2185070080606413
+Null degrees of freedom: 3861
+Residual degrees of freedom: 3853
+Null deviance: 1277.1043650451534
+Residual deviance: 843.8740651301968
+AIC: 5106.021797066896
+
+Cross-Validation Metrics Summary: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>cv_1_valid</th>
+      <th>cv_2_valid</th>
+      <th>cv_3_valid</th>
+      <th>cv_4_valid</th>
+      <th>cv_5_valid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>mae</td>
+      <td>0.355575</td>
+      <td>0.011150</td>
+      <td>0.358694</td>
+      <td>0.365597</td>
+      <td>0.336775</td>
+      <td>0.355430</td>
+      <td>0.361377</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean_residual_deviance</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mse</td>
+      <td>0.218685</td>
+      <td>0.018149</td>
+      <td>0.232207</td>
+      <td>0.226213</td>
+      <td>0.191451</td>
+      <td>0.209182</td>
+      <td>0.234372</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>null_deviance</td>
+      <td>255.420870</td>
+      <td>18.944805</td>
+      <td>270.143950</td>
+      <td>279.337650</td>
+      <td>235.192600</td>
+      <td>252.053120</td>
+      <td>240.377060</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>r2</td>
+      <td>0.339071</td>
+      <td>0.024654</td>
+      <td>0.332108</td>
+      <td>0.343113</td>
+      <td>0.367360</td>
+      <td>0.351331</td>
+      <td>0.301443</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>residual_deviance</td>
+      <td>168.764340</td>
+      <td>13.983558</td>
+      <td>180.424550</td>
+      <td>183.458680</td>
+      <td>148.757460</td>
+      <td>163.370830</td>
+      <td>167.810170</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>rmse</td>
+      <td>0.467306</td>
+      <td>0.019674</td>
+      <td>0.481878</td>
+      <td>0.475618</td>
+      <td>0.437551</td>
+      <td>0.457364</td>
+      <td>0.484120</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>rmsle</td>
+      <td>0.119310</td>
+      <td>0.004632</td>
+      <td>0.122437</td>
+      <td>0.121279</td>
+      <td>0.111271</td>
+      <td>0.119514</td>
+      <td>0.122048</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring History: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>timestamp</th>
+      <th>duration</th>
+      <th>iteration</th>
+      <th>lambda</th>
+      <th>predictors</th>
+      <th>deviance_train</th>
+      <th>deviance_xval</th>
+      <th>deviance_se</th>
+      <th>alpha</th>
+      <th>iterations</th>
+      <th>training_rmse</th>
+      <th>training_deviance</th>
+      <th>training_mae</th>
+      <th>training_r2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>1</td>
+      <td>,22E0</td>
+      <td>1</td>
+      <td>0.330642</td>
+      <td>0.330652</td>
+      <td>0.008216</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>2</td>
+      <td>,2E0</td>
+      <td>5</td>
+      <td>0.316066</td>
+      <td>0.330609</td>
+      <td>0.008220</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>3</td>
+      <td>,18E0</td>
+      <td>6</td>
+      <td>0.302049</td>
+      <td>0.330627</td>
+      <td>0.008216</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.000 sec</td>
+      <td>4</td>
+      <td>,17E0</td>
+      <td>6</td>
+      <td>0.289848</td>
+      <td>0.322157</td>
+      <td>0.008512</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>5</td>
+      <td>,15E0</td>
+      <td>7</td>
+      <td>0.279287</td>
+      <td>0.307694</td>
+      <td>0.008407</td>
+      <td>0.5</td>
+      <td>5.0</td>
+      <td>0.528476</td>
+      <td>0.279287</td>
+      <td>0.407732</td>
+      <td>0.155318</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>6</td>
+      <td>,14E0</td>
+      <td>7</td>
+      <td>0.270007</td>
+      <td>0.294801</td>
+      <td>0.008323</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>7</td>
+      <td>,13E0</td>
+      <td>7</td>
+      <td>0.262086</td>
+      <td>0.283621</td>
+      <td>0.008253</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>8</td>
+      <td>,12E0</td>
+      <td>7</td>
+      <td>0.255335</td>
+      <td>0.273875</td>
+      <td>0.008226</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>9</td>
+      <td>,11E0</td>
+      <td>8</td>
+      <td>0.249586</td>
+      <td>0.265471</td>
+      <td>0.008206</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.016 sec</td>
+      <td>10</td>
+      <td>,96E-1</td>
+      <td>8</td>
+      <td>0.244598</td>
+      <td>0.258304</td>
+      <td>0.008188</td>
+      <td>0.5</td>
+      <td>10.0</td>
+      <td>0.494568</td>
+      <td>0.244598</td>
+      <td>0.377588</td>
+      <td>0.260234</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>11</td>
+      <td>,88E-1</td>
+      <td>8</td>
+      <td>0.240460</td>
+      <td>0.252204</td>
+      <td>0.008175</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>12</td>
+      <td>,8E-1</td>
+      <td>8</td>
+      <td>0.236926</td>
+      <td>0.246950</td>
+      <td>0.008189</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>13</td>
+      <td>,73E-1</td>
+      <td>8</td>
+      <td>0.233943</td>
+      <td>0.242530</td>
+      <td>0.008194</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>14</td>
+      <td>,66E-1</td>
+      <td>8</td>
+      <td>0.231423</td>
+      <td>0.238774</td>
+      <td>0.008196</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>15</td>
+      <td>,6E-1</td>
+      <td>8</td>
+      <td>0.229293</td>
+      <td>0.235608</td>
+      <td>0.008204</td>
+      <td>0.5</td>
+      <td>15.0</td>
+      <td>0.478846</td>
+      <td>0.229293</td>
+      <td>0.364087</td>
+      <td>0.306521</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>16</td>
+      <td>,55E-1</td>
+      <td>8</td>
+      <td>0.227495</td>
+      <td>0.232935</td>
+      <td>0.008210</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.032 sec</td>
+      <td>17</td>
+      <td>,5E-1</td>
+      <td>8</td>
+      <td>0.226154</td>
+      <td>0.230682</td>
+      <td>0.008216</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.047 sec</td>
+      <td>18</td>
+      <td>,46E-1</td>
+      <td>8</td>
+      <td>0.224642</td>
+      <td>0.228783</td>
+      <td>0.008220</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.047 sec</td>
+      <td>19</td>
+      <td>,42E-1</td>
+      <td>8</td>
+      <td>0.223737</td>
+      <td>0.227337</td>
+      <td>0.008211</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td></td>
+      <td>2022-07-22 17:10:18</td>
+      <td>0.047 sec</td>
+      <td>20</td>
+      <td>,38E-1</td>
+      <td>8</td>
+      <td>0.222642</td>
+      <td>0.225825</td>
+      <td>0.008238</td>
+      <td>0.5</td>
+      <td>20.0</td>
+      <td>0.471849</td>
+      <td>0.222642</td>
+      <td>0.358377</td>
+      <td>0.326639</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>See the whole table with table.as_data_frame()
+
+Variable Importances: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>relative_importance</th>
+      <th>scaled_importance</th>
+      <th>percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>GBM_5_AutoML_1_20220722_170939</td>
+      <td>0.156444</td>
+      <td>1.000000</td>
+      <td>0.459637</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>GBM_3_AutoML_1_20220722_170939</td>
+      <td>0.064177</td>
+      <td>0.410220</td>
+      <td>0.188552</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>GBM_1_AutoML_1_20220722_170939</td>
+      <td>0.045077</td>
+      <td>0.288132</td>
+      <td>0.132436</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GBM_grid_1_AutoML_1_20220722_170939_model_1</td>
+      <td>0.042987</td>
+      <td>0.274777</td>
+      <td>0.126298</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>GBM_4_AutoML_1_20220722_170939</td>
+      <td>0.022251</td>
+      <td>0.142227</td>
+      <td>0.065373</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>DeepLearning_1_AutoML_1_20220722_170939</td>
+      <td>0.009429</td>
+      <td>0.060268</td>
+      <td>0.027701</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DRF_1_AutoML_1_20220722_170939</td>
+      <td>0.000001</td>
+      <td>0.000007</td>
+      <td>0.000003</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>GBM_2_AutoML_1_20220722_170939</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>XRT_1_AutoML_1_20220722_170939</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GLM_1_AutoML_1_20220722_170939</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="generating-predictions-using-leader-model">
-<h2><span class="section-number">14.1. </span>Generating Predictions Using Leader Model<a class="headerlink" href="#generating-predictions-using-leader-model" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.2. </span>Generating Predictions Using Leader Model<a class="headerlink" href="#generating-predictions-using-leader-model" title="Permalink to this headline">#</a></h2>
 <p>We can also generate predictions on a test sample using the leader model object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred</span> <span class="o">=</span> <span class="n">aml</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_h</span><span class="p">)</span>
 <span class="n">pred</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stackedensemble prediction progress: |███████████████████████████████████████████| (done) 100%
+</pre></div>
+</div>
+<div class="output text_html"><table>
+<thead>
+<tr><th style="text-align: right;">  predict</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: right;">  2.88073</td></tr>
+<tr><td style="text-align: right;">  3.32158</td></tr>
+<tr><td style="text-align: right;">  3.08133</td></tr>
+<tr><td style="text-align: right;">  2.73111</td></tr>
+<tr><td style="text-align: right;">  2.51044</td></tr>
+<tr><td style="text-align: right;">  3.13355</td></tr>
+<tr><td style="text-align: right;">  3.18375</td></tr>
+<tr><td style="text-align: right;">  3.74316</td></tr>
+<tr><td style="text-align: right;">  2.58496</td></tr>
+<tr><td style="text-align: right;">  3.3082 </td></tr>
+</tbody>
+</table></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -806,15 +2785,43 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.221502
+Std.Err.    0.012942
+Name: const, dtype: float64
+</pre></div>
+</div>
+</div>
 </div>
 <p>We observe both a lower MSE and a lower standard error compared to our previous results (see <a class="reference external" href="https://www.kaggle.com/janniskueck/pm3-notebook-newdata">here</a>).</p>
 <section id="by-using-model-performance">
-<h3><span class="section-number">14.1.1. </span>By using model_performance()<a class="headerlink" href="#by-using-model-performance" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>By using model_performance()<a class="headerlink" href="#by-using-model-performance" title="Permalink to this headline">#</a></h3>
 <p>If needed, the standard model_performance() method can be applied to the AutoML leader model and a test set to generate an H2O model performance object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perf</span> <span class="o">=</span> <span class="n">aml</span><span class="o">.</span><span class="n">leader</span><span class="o">.</span><span class="n">model_performance</span><span class="p">(</span><span class="n">test_h</span><span class="p">)</span>
 <span class="n">perf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelMetricsRegressionGLM: stackedensemble
+** Reported on test data. **
+
+MSE: 0.22150159010610537
+RMSE: 0.4706395543365489
+MAE: 0.353942656628514
+RMSLE: 0.12036767274774818
+R^2: 0.2835426043371053
+Mean Residual Deviance: 0.22150159010610537
+Null degrees of freedom: 1287
+Residual degrees of freedom: 1280
+Null deviance: 398.23902107893576
+Residual deviance: 285.2940480566637
+AIC: 1731.7504037354604
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -860,7 +2867,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="15_py-Functional-Approximation-By-NN-and-RF.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Functional Approximations by Trees and Neural Networks</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Functional Approximation By NN and RF</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
