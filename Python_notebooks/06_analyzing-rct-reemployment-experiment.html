@@ -918,7 +918,7 @@ Dep. Variable:                     T4   R-squared:                       0.029
 Model:                            OLS   Adj. R-squared:                  0.009
 Method:                 Least Squares   F-statistic:                     29.07
 Date:                Fri, 22 Jul 2022   Prob (F-statistic):               0.00
-Time:                        18:41:53   Log-Likelihood:                -3358.5
+Time:                        20:12:06   Log-Likelihood:                -3358.5
 No. Observations:                5099   AIC:                             6923.
 Df Residuals:                    4996   BIC:                             7596.
 Df Model:                         102                                         
@@ -1084,7 +1084,7 @@ Dep. Variable:           log_inuidur1   R-squared:                       0.001
 Model:                            OLS   Adj. R-squared:                  0.001
 Method:                 Least Squares   F-statistic:                     5.680
 Date:                Fri, 22 Jul 2022   Prob (F-statistic):             0.0172
-Time:                        18:41:54   Log-Likelihood:                -8223.8
+Time:                        20:12:06   Log-Likelihood:                -8223.8
 No. Observations:                5099   AIC:                         1.645e+04
 Df Residuals:                    5097   BIC:                         1.646e+04
 Df Model:                           1                                         
@@ -1103,15 +1103,13 @@ Kurtosis:                       1.877   Cond. No.                         2.41
 
 Notes:
 [1] Standard Errors are heteroscedasticity robust (HC1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:               inuidur1   R-squared:                       0.060
 Model:                            OLS   Adj. R-squared:                  0.040
 Method:                 Least Squares   F-statistic:                     16.64
 Date:                Fri, 22 Jul 2022   Prob (F-statistic):          3.84e-244
-Time:                        18:41:54   Log-Likelihood:                -8070.0
+Time:                        20:12:06   Log-Likelihood:                -8070.0
 No. Observations:                5099   AIC:                         1.635e+04
 Df Residuals:                    4995   BIC:                         1.703e+04
 Df Model:                         103                                         
@@ -1266,7 +1264,7 @@ Dep. Variable:               inuidur1   R-squared:                       0.079
 Model:                            OLS   Adj. R-squared:                  0.041
 Method:                 Least Squares   F-statistic:                     30.32
 Date:                Fri, 22 Jul 2022   Prob (F-statistic):               0.00
-Time:                        18:41:54   Log-Likelihood:                -8016.3
+Time:                        20:12:06   Log-Likelihood:                -8016.3
 No. Observations:                5099   AIC:                         1.644e+04
 Df Residuals:                    4896   BIC:                         1.777e+04
 Df Model:                         202                                         
@@ -1565,15 +1563,27 @@ Notes:
 <h2><span class="section-number">6.5. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s2">&quot;T4TRUE&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.07550054941649004
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
 <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
-<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
 <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
 
 <span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
 <span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
-<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
 <span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
 
 <span class="n">table2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table2</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;$CL$&quot;</span><span class="p">,</span> <span class="s2">&quot;$CRA$&quot;</span><span class="p">,</span> <span class="s2">&quot;$IRA$&quot;</span><span class="p">,</span> <span class="s2">&quot;$IRA Lasso$&quot;</span><span class="p">],</span> \
@@ -1583,62 +1593,48 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">File ~\anaconda3\lib\site-packages\pandas\core\indexes\base.py:3621,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3620</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3621</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3622</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~\anaconda3\lib\site-packages\pandas\_libs\index.pyx:136,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File ~\anaconda3\lib\site-packages\pandas\_libs\index.pyx:163,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5198,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">File pandas\_libs\hashtable_class_helper.pxi:5206,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;T4&#39;
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">Input In [16],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4TRUE&#39;</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T4&#39;</span><span class="p">]</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\pandas\core\series.py:958,</span> in <span class="ni">Series.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">    </span><span class="mi">955</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">957</span> <span class="k">elif</span> <span class="n">key_is_scalar</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">958</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">960</span> <span class="k">if</span> <span class="n">is_hashable</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">961</span>     <span class="c1"># Otherwise index.get_value will raise InvalidIndexError</span>
-<span class="g g-Whitespace">    </span><span class="mi">962</span>     <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">963</span>         <span class="c1"># For labels that don&#39;t resolve as scalars like tuples and frozensets</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\pandas\core\series.py:1069,</span> in <span class="ni">Series._get_value</span><span class="nt">(self, label, takeable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1066</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1068</span> <span class="c1"># Similar to Index.get_value, but we do not fall back to positional</span>
-<span class="ne">-&gt; </span><span class="mi">1069</span> <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1070</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">_get_values_for_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\pandas\core\indexes\base.py:3623,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3621</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3622</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3623</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
-<span class="g g-Whitespace">   </span><span class="mi">3624</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3625</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3626</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
-<span class="g g-Whitespace">   </span><span class="mi">3627</span>     <span class="c1">#  the TypeError.</span>
-<span class="g g-Whitespace">   </span><span class="mi">3628</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-<span class="ne">KeyError</span>: &#39;T4&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>$CL$</th>
+      <th>$CRA$</th>
+      <th>$IRA$</th>
+      <th>$IRA Lasso$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>estimate</th>
+      <td>-0.085455</td>
+      <td>-0.079680</td>
+      <td>-0.075501</td>
+      <td>-0.078886</td>
+    </tr>
+    <tr>
+      <th>standard error</th>
+      <td>0.035856</td>
+      <td>0.035591</td>
+      <td>0.035605</td>
+      <td>0.035530</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Treatment group 4 experiences an average decrease of about <span class="math notranslate nohighlight">\(7.8\%\)</span> in the length of unemployment spell.</p>
 <p>Observe that regression estimators delivers estimates that are slighly more efficient (lower standard errors) than the simple 2 mean estimator, but essentially all methods have very similar standard errors. From IRA results we also see that there is not any statistically detectable heterogeneity.  We also see the regression estimators offer slightly lower estimates – these difference occur perhaps to due minor imbalance in the treatment allocation, which the regression estimators try to correct.</p>

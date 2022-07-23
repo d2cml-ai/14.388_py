@@ -711,37 +711,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 62&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="k">for</span> <span class="n">var_name</span> <span class="ow">in</span> <span class="n">varlist2</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span>     <span class="n">form</span> <span class="o">=</span> <span class="n">var_name</span> <span class="o">+</span> <span class="s2">&quot; ~ &quot;</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">year</span> <span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">fixed</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">64</span>     <span class="n">rdata</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">form</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data1</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\statsmodels\regression\linear_model.py:306,</span> in <span class="ni">RegressionModel.fit</span><span class="nt">(self, method, cov_type, cov_kwds, use_t, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;pinv&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span>     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pinv_wexog&#39;</span><span class="p">)</span> <span class="ow">and</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>             <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;normalized_cov_params&#39;</span><span class="p">)</span> <span class="ow">and</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>             <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;rank&#39;</span><span class="p">)):</span>
-<span class="ne">--&gt; </span><span class="mi">306</span>         <span class="bp">self</span><span class="o">.</span><span class="n">pinv_wexog</span><span class="p">,</span> <span class="n">singular_values</span> <span class="o">=</span> <span class="n">pinv_extended</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wexog</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="bp">self</span><span class="o">.</span><span class="n">normalized_cov_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>             <span class="bp">self</span><span class="o">.</span><span class="n">pinv_wexog</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinv_wexog</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span>         <span class="c1"># Cache these singular values for use later.</span>
-
-<span class="nn">File ~\anaconda3\lib\site-packages\statsmodels\tools\tools.py:349,</span> in <span class="ni">pinv_extended</span><span class="nt">(x, rcond)</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">348</span>         <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
-<span class="ne">--&gt; </span><span class="mi">349</span> <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">vt</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">s</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">350</span>                                            <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span> <span class="k">return</span> <span class="n">res</span><span class="p">,</span> <span class="n">s_orig</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:5,</span> in <span class="ni">dot</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="dml-for-neural-nets">
