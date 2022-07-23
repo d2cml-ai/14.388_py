@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# This notebook contains an example for teaching.
-# 
+# # AutoML for wage prediction
 
-# # Automatic Machine Learning with H2O AutoML using Wage Data from 2015
+# ## Automatic Machine Learning with H2O AutoML using Wage Data from 2015
 
 # We illustrate how to predict an outcome variable Y in a high-dimensional setting, using the AutoML package *H2O* that covers the complete pipeline from the raw dataset to the deployable machine learning model. In last few years, AutoML or automated machine learning has become widely popular among data science community. 
 
@@ -19,13 +18,22 @@ import numpy as np
 import pyreadr
 from sklearn import preprocessing
 import patsy
+from h2o.automl import H2OAutoML
 
 from numpy import loadtxt
 from keras.models import Sequential
 from keras.layers import Dense
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:
+
+
+#pip install h2o
+
+
+# In[3]:
 
 
 # load the H2O package
@@ -35,7 +43,7 @@ import h2o
 h2o.init()
 
 
-# In[ ]:
+# In[4]:
 
 
 # load dataset
@@ -46,7 +54,7 @@ n = data.shape[0]
 type(data)
 
 
-# In[ ]:
+# In[5]:
 
 
 # Import relevant packages for splitting data
@@ -62,24 +70,24 @@ random    # the array does not change
 data_2 = data.sort_values(by=['random'])
 
 
-# In[ ]:
+# In[6]:
 
 
 # Create training and testing sample 
 train = data_2[ : math.floor(n*3/4)]    # training sample
 test =  data_2[ math.floor(n*3/4) : ]   # testing sample
-print(data_train.shape)
-print(data_test.shape)
+print(train.shape)
+print(test.shape)
 
 
-# In[ ]:
+# In[7]:
 
 
 # start h2o cluster
 h2o.init()
 
 
-# In[ ]:
+# In[8]:
 
 
 # convert data as h2o type
@@ -90,7 +98,7 @@ test_h = h2o.H2OFrame(test)
 train_h.describe()
 
 
-# In[ ]:
+# In[9]:
 
 
 # define the variables
@@ -103,7 +111,7 @@ no_relev_col = ['wage','occ2', 'ind2', 'random', 'lwage']
 x = [col for col in data_columns if col not in no_relev_col]
 
 
-# In[ ]:
+# In[10]:
 
 
 # run AutoML for 10 base models and a maximal runtime of 100 seconds
@@ -112,7 +120,7 @@ aml = H2OAutoML(max_runtime_secs = 100, max_models = 10, seed = 1)
 aml.train(x = x, y = y, training_frame = train_h, leaderboard_frame = test_h)
 
 
-# In[ ]:
+# In[22]:
 
 
 # AutoML Leaderboard
@@ -122,7 +130,7 @@ print(lb)
 
 # We see that two Stacked Ensembles are at the top of the leaderboard. Stacked Ensembles often outperform a single model. The out-of-sample (test) MSE of the leading model is given by
 
-# In[ ]:
+# In[23]:
 
 
 aml.leaderboard['mse'][0,0]
@@ -130,7 +138,7 @@ aml.leaderboard['mse'][0,0]
 
 # The in-sample performance can be evaluated by
 
-# In[ ]:
+# In[24]:
 
 
 aml.leader
@@ -138,13 +146,13 @@ aml.leader
 
 # This is in line with our previous results. To understand how the ensemble works, let's take a peek inside the Stacked Ensemble "All Models" model.  The "All Models" ensemble is an ensemble of all of the individual models in the AutoML run.  This is often the top performing model on the leaderboard.
 
-# In[ ]:
+# In[25]:
 
 
 model_ids = h2o.as_list(aml.leaderboard['model_id'][0], use_pandas=True)
 
 
-# In[ ]:
+# In[26]:
 
 
 model = model_ids[model_ids['model_id'].str.contains("StackedEnsemble_AllModels")].values.tolist()
@@ -152,14 +160,14 @@ model_id = model[0][0]
 model_id
 
 
-# In[ ]:
+# In[30]:
 
 
-se = h2o.get_model('StackedEnsemble_AllModels_AutoML_20210420_101446')
+se = h2o.get_model(model_id)
 se
 
 
-# In[ ]:
+# In[31]:
 
 
 # Get the Stacked Ensemble metalearner model
@@ -172,19 +180,19 @@ metalearner
 # The table above gives us the variable importance of the metalearner in the ensemble. The AutoML Stacked Ensembles use the default metalearner algorithm (GLM with non-negative weights), so the variable importance of the metalearner is actually the standardized coefficient magnitudes of the GLM. 
 # 
 
-# In[ ]:
+# In[32]:
 
 
 metalearner.coef_norm()
 
 
-# In[ ]:
+# In[33]:
 
 
 metalearner.std_coef_plot()
 
 
-# In[ ]:
+# In[34]:
 
 
 h2o.get_model(model_id).metalearner()
@@ -194,7 +202,7 @@ h2o.get_model(model_id).metalearner()
 # 
 # We can also generate predictions on a test sample using the leader model object.
 
-# In[ ]:
+# In[35]:
 
 
 pred = aml.predict(test_h)
@@ -203,27 +211,27 @@ pred.head()
 
 # This allows us to estimate the out-of-sample (test) MSE and the standard error as well.
 
-# In[ ]:
+# In[36]:
 
 
 pred_2 = pred.as_data_frame()
 pred_aml = pred_2.to_numpy()
 
 
-# In[ ]:
+# In[37]:
 
 
 Y_test = test_h['lwage'].as_data_frame().to_numpy()
 
 
-# In[ ]:
+# In[38]:
 
 
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 
-# In[ ]:
+# In[39]:
 
 
 resid_basic = (Y_test-pred_aml)**2
@@ -239,7 +247,7 @@ MSE_aml_basic
 # 
 # 
 
-# In[ ]:
+# In[40]:
 
 
 perf = aml.leader.model_performance(test_h)

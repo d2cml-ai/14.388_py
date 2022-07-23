@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# This notebook contains an example for teaching.
+# # DML inference using NN for gun ownership
 
-# # The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
+# ## The Effect of Gun Ownership on Gun-Homicide Rates using DML for neural nets
 
 # In this lab, we estimate the effect of gun ownership on the homicide rate by a neural network.
 
@@ -28,6 +28,8 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import colors
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:
@@ -138,7 +140,7 @@ for var_name in varlist2:
 
 # The following algorithm comsumes $Y$,$D$ and $Z$, and learns the residuals $\tilde{Y}$ and $\tilde{D}$ via a neural network, where the residuals are obtained by cross-validation (cross-fitting). Then, it prints the estimated coefficient β and the clustered standard error from the final OLS regression.
 
-# In[56]:
+# In[11]:
 
 
 import tensorflow as tf
@@ -146,7 +148,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-# In[69]:
+# In[12]:
 
 
 def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
@@ -232,7 +234,7 @@ def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
 
 # ## Estimating the effect with DML for neural nets
 
-# In[70]:
+# In[13]:
 
 
 # Create main variables

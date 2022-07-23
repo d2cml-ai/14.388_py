@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of:
-# " https://www.kaggle.com/victorchernozhukov/analyzing-rct-reemployment-experiment "
-# * Created by: Alexander Quispe and Anzony Quispe 
+# # Analyzing RCT reemployment experiment
 
-# # Analyzing RCT data with Precision Adjustment
+# ## Analyzing RCT data with Precision Adjustment
 
 # ## Data
 # 
@@ -26,7 +24,7 @@ import pyreadr
 Penn = pd.read_csv("../data/penn_jae.dat" , sep='\s', engine='python')
 n = Penn.shape[0]
 p_1 = Penn.shape[1]
-Penn = Penn[ (Penn['tg'] == 2) | (Penn['tg'] == 0) ]
+Penn = Penn[ (Penn['tg'] == 4) | (Penn['tg'] == 0) ]
 
 
 # In[3]:
@@ -187,7 +185,7 @@ print(ols_ira.summary())
 
 # Next we try out partialling out with lasso
 
-# In[6]:
+# In[13]:
 
 
 import hdmpy
@@ -195,7 +193,7 @@ import hdmpy
 
 # Next we try out partialling out with lasso
 
-# In[7]:
+# In[14]:
 
 
 # Get data from R
@@ -217,15 +215,21 @@ rlasso_ira
 # In[16]:
 
 
+ols_ira.summary2().tables[1]['Coef.']["T4TRUE"]
+
+
+# In[17]:
+
+
 table2 = np.zeros((2, 4))
 table2[0,0] = ols_cl.summary2().tables[1]['Coef.']['T4']
 table2[0,1] = ols_cra.summary2().tables[1]['Coef.']['T4TRUE']
-table2[0,2] = ols_ira.summary2().tables[1]['Coef.']['T4']
+table2[0,2] = ols_ira.summary2().tables[1]['Coef.']['T4TRUE']
 table2[0,3] = rlasso_ira['Coef.']['T4']
 
 table2[1,0] = ols_cl.summary2().tables[1]['Std.Err.']['T4']
 table2[1,1] = ols_cra.summary2().tables[1]['Std.Err.']['T4TRUE']
-table2[1,2] = ols_ira.summary2().tables[1]['Std.Err.']['T4']
+table2[1,2] = ols_ira.summary2().tables[1]['Std.Err.']['T4TRUE']
 table2[1,3] = rlasso_ira['Std.Err.']['T4']
 
 table2 = pd.DataFrame(table2, columns = ["$CL$", "$CRA$", "$IRA$", "$IRA Lasso$"],                       index = ["estimate","standard error"])

@@ -1,15 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of:
-# " https://www.kaggle.com/janniskueck/pm3-notebook-newdata "
-# * Created by: Alexander Quispe and Anzony Quispe 
-
-# 
-# 
-# This notebook contains an example for teaching.
-# 
-
 # # ML for wage prediction
 
 # We illustrate how to predict an outcome variable Y in a high-dimensional setting, where the number of covariates $p$ is large in relation to the sample size $n$. So far we have used linear prediction rules, e.g. Lasso regression, for estimation.
@@ -29,6 +20,8 @@ import pyreadr
 import math
 import matplotlib.pyplot as plt
 import random
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:
@@ -404,21 +397,21 @@ fit_ridge_basic = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , 
 fit_elnet_basic = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ).fit( model_X_basic_train , std_Y )
 
 # Predictions
-yhat_lasso_cv_basic = scaler.inverse_transform( fit_lasso_cv_basic.predict( model_X_basic_test ) )
-yhat_ridge_basic = scaler.inverse_transform( fit_ridge_basic.predict( model_X_basic_test ) )
-yhat_elnet_basic = scaler.inverse_transform( fit_elnet_basic.predict( model_X_basic_test ) )
+yhat_lasso_cv_basic = scaler.inverse_transform( fit_lasso_cv_basic.predict( model_X_basic_test ).reshape(-1,1) )
+yhat_ridge_basic = scaler.inverse_transform( fit_ridge_basic.predict( model_X_basic_test ).reshape(-1,1) )
+yhat_elnet_basic = scaler.inverse_transform( fit_elnet_basic.predict( model_X_basic_test ).reshape(-1,1) )
 
 
-# In[39]:
+# In[30]:
 
 
-MSE_lasso_cv_basic = sm.OLS( ((Y_test - yhat_lasso_cv_basic)**2 ) , np.ones( yhat_lasso_cv_basic.shape )  ).fit().summary2().tables[1].round(3)
-MSE_ridge_basic = sm.OLS( ((Y_test - yhat_ridge_basic)**2 ) , np.ones( yhat_ridge_basic.size )  ).fit().summary2().tables[1].round(3)
-MSE_elnet_basic = sm.OLS( ((Y_test - yhat_elnet_basic)**2 ) , np.ones( yhat_elnet_basic.size )  ).fit().summary2().tables[1].round(3)
+MSE_lasso_cv_basic = sm.OLS( ((Y_test.to_numpy().reshape(-1,1) - yhat_lasso_cv_basic)**2 ) , np.ones( yhat_lasso_cv_basic.shape )  ).fit().summary2().tables[1].round(3)
+MSE_ridge_basic = sm.OLS( ((Y_test.to_numpy().reshape(-1,1) - yhat_ridge_basic)**2 ) , np.ones( yhat_ridge_basic.size )  ).fit().summary2().tables[1].round(3)
+MSE_elnet_basic = sm.OLS( ((Y_test.to_numpy().reshape(-1,1) - yhat_elnet_basic)**2 ) , np.ones( yhat_elnet_basic.size )  ).fit().summary2().tables[1].round(3)
 # our coefficient of MSE_elnet are far from r output
 
 
-# In[40]:
+# In[31]:
 
 
 R2_lasso_cv_basic = 1- MSE_ridge_basic.iloc[0,0] / np.var( Y_test )
@@ -426,13 +419,13 @@ R2_ridge_basic = 1- MSE_lasso_cv_basic.iloc[0,0] / np.var( Y_test )
 R2_elnet_basic = 1- MSE_elnet_basic.iloc[0,0] / np.var( Y_test )
 
 
-# In[41]:
+# In[32]:
 
 
 print( f"R^2 using cross-validation for lasso, ridge and elastic net in the basic model: {R2_lasso_cv_basic},{R2_ridge_basic},{R2_elnet_basic}")
 
 
-# In[42]:
+# In[33]:
 
 
 # Reshaping Y variable
@@ -449,21 +442,21 @@ fit_ridge_flex = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l
 fit_elnet_flex = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ).fit( model_X_flex_train , std_Y )
 
 # Predictions
-yhat_lasso_cv_flex = scaler.inverse_transform( fit_lasso_cv_flex.predict( model_X_flex_test ) )
-yhat_ridge_flex = scaler.inverse_transform( fit_ridge_flex.predict( model_X_flex_test ) )
-yhat_elnet_flex = scaler.inverse_transform( fit_elnet_flex.predict( model_X_flex_test ) )
+yhat_lasso_cv_flex = scaler.inverse_transform( fit_lasso_cv_flex.predict( model_X_flex_test ).reshape(-1,1) )
+yhat_ridge_flex = scaler.inverse_transform( fit_ridge_flex.predict( model_X_flex_test ).reshape(-1,1) )
+yhat_elnet_flex = scaler.inverse_transform( fit_elnet_flex.predict( model_X_flex_test ).reshape(-1,1) )
 
 
-# In[43]:
+# In[34]:
 
 
-MSE_lasso_cv_flex = sm.OLS( ((Y_test - yhat_lasso_cv_flex)**2 ) , np.ones( yhat_lasso_cv_flex.shape )  ).fit().summary2().tables[1].round(3)
-MSE_ridge_flex = sm.OLS( ((Y_test - yhat_ridge_flex)**2 ) , np.ones( yhat_ridge_flex.size )  ).fit().summary2().tables[1].round(3)
-MSE_elnet_flex = sm.OLS( ((Y_test - yhat_elnet_flex)**2 ) , np.ones( yhat_elnet_flex.size )  ).fit().summary2().tables[1].round(3)
+MSE_lasso_cv_flex = sm.OLS( ((Y_test.to_numpy().reshape(-1,1) - yhat_lasso_cv_flex)**2 ) , np.ones( yhat_lasso_cv_flex.shape )  ).fit().summary2().tables[1].round(3)
+MSE_ridge_flex = sm.OLS( ((Y_test.to_numpy().reshape(-1,1) - yhat_ridge_flex)**2 ) , np.ones( yhat_ridge_flex.size )  ).fit().summary2().tables[1].round(3)
+MSE_elnet_flex = sm.OLS( ((Y_test.to_numpy().reshape(-1,1) - yhat_elnet_flex)**2 ) , np.ones( yhat_elnet_flex.size )  ).fit().summary2().tables[1].round(3)
 # our coefficient of MSE_elnet are far from r output
 
 
-# In[44]:
+# In[35]:
 
 
 R2_lasso_cv_flex = 1- MSE_ridge_flex.iloc[0,0] / np.var( Y_test )
@@ -471,7 +464,7 @@ R2_ridge_flex = 1- MSE_lasso_cv_flex.iloc[0,0] / np.var( Y_test )
 R2_elnet_flex = 1- MSE_elnet_flex.iloc[0,0] / np.var( Y_test )
 
 
-# In[45]:
+# In[36]:
 
 
 print( f"R^2 using cross-validation for lasso, ridge and elastic net in the basic model: {R2_lasso_cv_flex},{R2_ridge_flex},{R2_elnet_flex}")
@@ -489,7 +482,7 @@ print( f"R^2 using cross-validation for lasso, ridge and elastic net in the basi
 
 # We fit a regression tree to the training data using the basic model. The variable *cp* controls the complexity of the regression tree, i.e. how deep we build the tree.
 
-# In[48]:
+# In[37]:
 
 
 import os
@@ -525,25 +518,25 @@ from IPython.display import Image, display
 # cp = It is the minimum value that the R-squared should decrease in order to make the next splitting \
 # Xerror = Cross-Validated Error Rate 
 
-# In[49]:
+# In[38]:
 
 
 trees = DecisionTreeRegressor( random_state = 0, min_impurity_decrease = 0.001 )
 
 
-# In[50]:
+# In[39]:
 
 
 pd.DataFrame(trees.cost_complexity_pruning_path( y_basic_train, model_X_basic_train ))
 
 
-# In[51]:
+# In[40]:
 
 
 trees_fit =  trees.fit( y_basic_train, model_X_basic_train )
 
 
-# In[52]:
+# In[41]:
 
 
 # tree
@@ -554,7 +547,7 @@ _ = tree.plot_tree( trees_fit , filled = True , rounded = True  )
 # An important method to improve predictive performance is called "Pruning the Tree". This
 # means the process of cutting down the branches of a tree. We apply pruning to the complex tree above to reduce the depth. Initially, we determine the optimal complexity of the regression tree.
 
-# In[ ]:
+# In[75]:
 
 
 dir(trees_fit)
@@ -627,7 +620,7 @@ dir(trees_fit)
 
 # Further, the $R^2$ for the test sample gets improved from $30\%$ obtained by OLS to about $31\%$ obtained by the ensemble method. We see that it is very powerful to aggregate prediction rules into an ensemble rule. Nevertheless, it is worth to notice that we should compare the ensemble method and the single rules on an additional validation set to ensure a fair comparison.
 
-# In[219]:
+# In[76]:
 
 
 table= np.zeros( (15, 3) )

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# Replication of this [kaggle notebook](https://www.kaggle.com/janniskueck/pm3-notebook-inference-clustering)
-
 # # DML inference for gun ownership
 
 # In[1]:
@@ -153,7 +151,7 @@ for var_name in varlist2:
     rdata[f'{var_name}'] = smf.ols( formula = form , data = data1 ).fit().resid
 
 
-# In[47]:
+# In[6]:
 
 
 # load dataset
@@ -164,7 +162,7 @@ n = data.shape[0]
 
 # ### We check that our results are equal to R results at 6 decimals
 
-# In[48]:
+# In[7]:
 
 
 column_names = data.columns.to_list()
@@ -175,7 +173,7 @@ for col in column_names:
 
 # Now, we can construct the treatment variable, the outcome variable and the matrix $Z$ that includes the control variables.
 
-# In[49]:
+# In[8]:
 
 
 # Treatment Variable
@@ -192,14 +190,14 @@ Z.shape
 
 # We have in total 195 control variables. The control variables $Z_{j,t}$ are from the U.S. Census Bureau and  contain demographic and economic characteristics of the counties such as  the age distribution, the income distribution, crime rates, federal spending, home ownership rates, house prices, educational attainment, voting paterns, employment statistics, and migration rates. 
 
-# In[50]:
+# In[9]:
 
 
 clu = rdata[['CountyCode']]
 data = pd.concat([Y, D, Z, clu], axis=1)
 
 
-# In[51]:
+# In[10]:
 
 
 data.to_csv( r"../data/gun_clean2.csv" , index = False )
@@ -211,7 +209,7 @@ data.to_csv( r"../data/gun_clean2.csv" , index = False )
 
 # After preprocessing the data, we first look at simple regression of $Y_{j,t}$ on $D_{j,t-1}$ without controls as a baseline model.
 
-# In[52]:
+# In[11]:
 
 
 import statsmodels.api as sm
@@ -219,14 +217,14 @@ import statsmodels.formula.api as smf
 import patsy
 
 
-# In[53]:
+# In[12]:
 
 
 # # Run this line to avoid all the lines of code above
 # data = pd.read_csv( r"../data/gun_clean2.csv"  )
 
 
-# In[54]:
+# In[13]:
 
 
 # OLS clustering at the County level
@@ -243,7 +241,7 @@ baseline_ols_table.iloc[1, :]
 # 
 # Since our goal is to estimate the effect of gun ownership after controlling for a rich set county characteristics we next include the controls. First, we estimate the model by ols and then by an array of the modern regression methods using the double machine learning approach.
 
-# In[55]:
+# In[14]:
 
 
 # define the variables
@@ -256,13 +254,13 @@ no_relev_col = ['logfssl', 'CountyCode', 'logghomr']
 z = [col for col in data_columns if col not in no_relev_col]
 
 
-# In[56]:
+# In[15]:
 
 
 control_formula = "logghomr" + ' ~ ' + 'logfssl + ' + ' + '.join( Z.columns.to_list() )
 
 
-# In[57]:
+# In[16]:
 
 
 control_ols = smf.ols( control_formula , data=data).fit().get_robustcov_results(cov_type = "cluster", groups= data['CountyCode'])
@@ -273,7 +271,7 @@ control_ols_table.iloc[1, :]
 
 # In R, the coefficients of the bellow variables are `Null`. However, in python we got a very high value.
 
-# In[58]:
+# In[17]:
 
 
 control_ols_table.loc[['PPQ110D', 'PPQ120D'], :]
@@ -308,7 +306,7 @@ control_ols_table.loc[['PPQ110D', 'PPQ120D'], :]
 
 # The following algorithm comsumes $Y, D, Z$, and a machine learning method for learning the residuals $\tilde Y$ and $\tilde D$, where the residuals are obtained by cross-validation (cross-fitting). Then, it prints the estimated coefficient $\beta$ and the corresponding standard error from the final OLS regression.
 
-# In[59]:
+# In[18]:
 
 
 def DML2_for_PLM(z, d, y, dreg, yreg, nfold, clu):
@@ -375,7 +373,7 @@ def DML2_for_PLM(z, d, y, dreg, yreg, nfold, clu):
 
 # Let us, construct the input matrices.
 
-# In[60]:
+# In[19]:
 
 
 # Create main variables
@@ -385,7 +383,7 @@ Z = data.drop(['logghomr', 'logfssl', 'CountyCode'], axis=1)
 CLU = data['CountyCode']
 
 
-# In[61]:
+# In[20]:
 
 
 # as matrix
@@ -397,7 +395,7 @@ clu = clu.to_numpy().reshape( len(Y) , 1 )
 
 # ### Lasso 
 
-# In[22]:
+# In[21]:
 
 
 def dreg(z,d):
@@ -415,7 +413,7 @@ DML2_lasso = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 
 # #### We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.
 
-# In[62]:
+# In[22]:
 
 
 class Lasso_post:
@@ -452,7 +450,7 @@ class Lasso_post:
 
 # Run the below code to verify whether Lasso_post functions as it is expected. 
 
-# In[24]:
+# In[23]:
 
 
 def dreg(z,d):
@@ -471,14 +469,14 @@ DML2_lasso_post = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 # ### hdmy
 # We are going to replicate the above regressions but using `hmdpy` library.
 
-# In[63]:
+# In[24]:
 
 
 import hdmpy
 from statsmodels.tools import add_constant
 
 
-# In[64]:
+# In[25]:
 
 
 class rlasso_sklearn:
@@ -508,7 +506,7 @@ class rlasso_sklearn:
         return prediction
 
 
-# In[29]:
+# In[26]:
 
 
 # Post = false
@@ -523,7 +521,7 @@ def yreg(x,y):
 DML2_lasso_hdmpy = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 
 
-# In[30]:
+# In[27]:
 
 
 # Post = True
@@ -543,7 +541,7 @@ DML2_lasso_post_hdmpy = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 # ### cv.glmnet curiosities
 # 1. According to [link1](https://stackoverflow.com/questions/24098212/what-does-the-option-normalize-true-in-lasso-sklearn-do) and [link2](https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/), It standardize **X** variables before estimation. In sklearn we have an option named **normalize**. It normalizes **X** by subtracting the mean and dividing by the l2-norm. Based on [link3](https://stackoverflow.com/questions/59846325/confusion-about-standardize-option-of-glmnet-package-in-r), **cv.glmnet (standardize = TRUE)** and **sklearn (normlize = True)** are not the same. We decided to use **StandardScaler** that meets suggestions made in **link3**. We proved this in the commented code below.
 
-# In[42]:
+# In[28]:
 
 
 class standard_skl_model:

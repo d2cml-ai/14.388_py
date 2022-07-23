@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of: " https://www.kaggle.com/janniskueck/pm1-notebook-inference "
-# * Created by: Anzony Quispe & Alexander Quispe
+# # OLS and lasso for gender wage gap inference
 
-# This notebook contains an example for teaching.
-
-# # An inferential problem: The Gender Wage Gap
+# ## An inferential problem: The Gender Wage Gap
 
 # In the previous lab, we already analyzed data from the March Supplement of the U.S. Current Population Survey (2015) and answered the question how to use job-relevant characteristics, such as education and experience, to best predict wages. Now, we focus on the following inference question:
 # 
@@ -16,13 +13,15 @@
 
 # To investigate the gender wage gap, we consider the following log-linear regression model
 # 
+# $$
 # \begin{align}
 # \log(Y) &= \beta'X + \epsilon\\
 # &= \beta_1 D  + \beta_2' W + \epsilon,
 # \end{align}
+# $$
 # 
-# where $D$ is the indicator of being female ($1$ if female and $0$ otherwise) and the
-# $W$'s are controls explaining variation in wages. Considering transformed wages by the logarithm, we are analyzing the relative difference in the payment of men and women.
+# where $Y$ is hourly wage, $D$ is the indicator of being female ($1$ if female and $0$ otherwise) and the
+# $W$'s are a vector of worker characteristics explaining variation in wages. Considering transformed wages by the logarithm, we are analyzing the relative difference in the payment of men and women.
 
 # ## Data analysis
 

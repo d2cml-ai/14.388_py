@@ -1,16 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
+# # Sensitivity Analysis with Sensmakr and Debiased ML
+
+# ## Sensititivy Analysis for Unobserved Confounder with DML and Sensmakr
 # 
 # 
-# ## Here we experiment with using package "sensemakr" in conjunction with debiased ML
-
-# ![image-4.png](attachment:image-4.png)
-
-# ![image.png](attachment:image.png)
-
-# ![image.png](attachment:image.png)
+#  Here we experiment with using package "sensemakr" in conjunction with debiased ML
 
 # We will 
 # 
@@ -24,16 +20,24 @@
 # In[1]:
 
 
+#pip install PySensemakr
+
+
+# In[2]:
+
+
+#Import packages
 import sensemakr as smkr
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[4]:
+# In[3]:
 
 
 # loads data
@@ -53,7 +57,7 @@ darfur.shape
 
 # ## Take out village fixed effects and run basic linear analysis
 
-# In[5]:
+# In[4]:
 
 
 # get rid of village fixed effects
@@ -61,7 +65,7 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 
-# In[6]:
+# In[5]:
 
 
 # 1. basic model
@@ -75,7 +79,7 @@ pastvotedR = smf.ols('pastvoted~village' , data=darfur).fit().resid
 hhsizeR = smf.ols('hhsize_darfur~village' , data=darfur).fit().resid
 
 
-# In[7]:
+# In[6]:
 
 
 darfurR = pd.concat([peacefactorR, directlyharmedR, femaleR,
@@ -84,7 +88,7 @@ darfurR = pd.concat([peacefactorR, directlyharmedR, femaleR,
 darfurR.head()
 
 
-# In[8]:
+# In[7]:
 
 
 darfurR.columns = ["peacefactorR", "directlyharmedR", "femaleR",
@@ -93,7 +97,7 @@ darfurR.columns = ["peacefactorR", "directlyharmedR", "femaleR",
 darfurR.head()
 
 
-# In[9]:
+# In[8]:
 
 
 # Preliminary linear model analysis 
@@ -104,7 +108,7 @@ linear_model_1_table = linear_model_1.summary2().tables[1]
 linear_model_1_table
 
 
-# In[10]:
+# In[9]:
 
 
 # Linear model 2 
@@ -114,7 +118,7 @@ linear_model_2_table = linear_model_2.summary2().tables[1]
 linear_model_2_table
 
 
-# In[11]:
+# In[10]:
 
 
 # Linear model 3
@@ -126,7 +130,7 @@ linear_model_3_table
 
 # ## We first use Lasso for Partilling Out Controls
 
-# In[12]:
+# In[11]:
 
 
 import hdmpy
@@ -134,7 +138,7 @@ import patsy
 from patsy import ModelDesc, Term, EvalFactor
 
 
-# In[13]:
+# In[12]:
 
 
 
@@ -143,14 +147,14 @@ Y = darfurR['peacefactorR'].to_numpy()
 D = darfurR['directlyharmedR'].to_numpy()
 
 
-# In[14]:
+# In[13]:
 
 
 resY = hdmpy.rlasso(X,Y, post = False).est['residuals'].reshape( Y.size,)
 resD = hdmpy.rlasso(X,D, post = False).est['residuals'].reshape( D.size,)
 
 
-# In[15]:
+# In[14]:
 
 
 FVU_Y = 1 - np.var(resY)/np.var(peacefactorR)
@@ -160,14 +164,14 @@ print("Controls explain the following fraction of variance of Outcome", FVU_Y)
 print("Controls explain the following fraction of variance of treatment", FVU_D)
 
 
-# In[16]:
+# In[15]:
 
 
 darfurR['resY'] = resY
 darfurR['resD'] = resD
 
 
-# In[17]:
+# In[16]:
 
 
 # Filan estimation
@@ -179,7 +183,7 @@ dml_darfur_model_table
 
 # ## Manual Bias Analysis
 
-# In[18]:
+# In[17]:
 
 
 # linear model to use as input in sensemakr   
@@ -188,20 +192,14 @@ dml_darfur_model_table = dml_darfur_model.summary2().tables[1]
 dml_darfur_model_table
 
 
-# In[19]:
+# In[18]:
 
 
 beta = dml_darfur_model_table['Coef.'][1]
 beta
 
 
-# In[20]:
-
-
-import matplotlib.pyplot as plt
-
-
-# In[21]:
+# In[19]:
 
 
 # Hypothetical values of partial R2s 
@@ -232,7 +230,7 @@ plt.show()
 
 # ## Bias Analysis with Sensemakr
 
-# In[22]:
+# In[20]:
 
 
 # Imports
@@ -247,40 +245,40 @@ import numpy as np
 import pandas as pd
 
 
-# In[23]:
+# In[21]:
 
 
 a = 1
 b = 3
 
 
-# In[24]:
+# In[22]:
 
 
 if a is not None and b is not None:
     print('hola')
 
 
-# In[25]:
+# In[23]:
 
 
 import sensemakr as smkr
 
 
-# In[27]:
+# In[24]:
 
 
 # We need to double check why the function does not allow to run withour the benchmark_covariates argument
 model = smkr.Sensemakr( model = dml_darfur_model, treatment = "resD")
 
 
-# In[29]:
+# In[25]:
 
 
 model.summary()
 
 
-# In[30]:
+# In[26]:
 
 
 model.plot()
@@ -290,14 +288,14 @@ model.plot()
 
 # The following code does DML with clsutered standard errors by ClusterID
 
-# In[31]:
+# In[27]:
 
 
 import itertools
 from itertools import compress
 
 
-# In[32]:
+# In[28]:
 
 
 def DML2_for_PLM(x, d, y, dreg, yreg, nfold, clu):
@@ -360,7 +358,7 @@ def DML2_for_PLM(x, d, y, dreg, yreg, nfold, clu):
     
 
 
-# In[33]:
+# In[29]:
 
 
 from sklearn.tree import DecisionTreeRegressor
@@ -369,7 +367,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.preprocessing import LabelEncoder
 
 
-# In[34]:
+# In[30]:
 
 
 # This new matrix include intercept
@@ -378,13 +376,13 @@ y = darfurR['peacefactorR'].to_numpy().reshape( len(Y) , 1 )
 d = darfurR['directlyharmedR'].to_numpy().reshape( len(Y) , 1 )
 
 
-# In[63]:
+# In[31]:
 
 
 darfurR['village'].unique().size
 
 
-# In[35]:
+# In[32]:
 
 
 # creating instance of labelencoder
@@ -398,7 +396,7 @@ CLU = darfurR['village_clu']
 clu = CLU.to_numpy().reshape( len(Y) , 1 )
 
 
-# In[ ]:
+# In[33]:
 
 
 #DML with RF
@@ -419,7 +417,7 @@ def yreg(x,y):
 DML2_RF = DML2_for_PLM(x, d, y, dreg, yreg, 10, clu)   # set to 2 due to computation time
 
 
-# In[74]:
+# In[44]:
 
 
 resY = DML2_RF[2]
@@ -432,7 +430,7 @@ print("Controls explain the following fraction of variance of Outcome", FVU_Y)
 print("Controls explain the following fraction of variance of treatment", FVU_D)
 
 
-# In[80]:
+# In[45]:
 
 
 darfurR['resY_rf'] = resY
@@ -443,7 +441,7 @@ dml_darfur_model_rf= smf.ols('resY_rf~ resD_rf',data=darfurR ).fit()
 dml_darfur_model_rf_table = dml_darfur_model_rf.summary2().tables[1]
 
 
-# In[45]:
+# In[46]:
 
 
 # We need to double check why the function does not allow to run withour the benchmark_covariates argument

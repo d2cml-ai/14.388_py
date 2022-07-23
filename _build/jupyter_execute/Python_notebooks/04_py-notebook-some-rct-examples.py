@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Vaccine RCT Examples
-# 
-# Victor Chernozhukov. This notebook contains some RCT examples that I will be using for teaching.
+# # Some RCT Examples
 
 #   
 # ## Polio RCT

@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
+# # DML for ATE and LATE of 401(k) on Wealth
+
+# ## Inference on Predictive and Causal Effects in High-Dimensional Nonlinear Models
 
 # ## Impact of 401(k) on  Financial Wealth
 # 
@@ -17,6 +19,12 @@
 # 
 
 # In[1]:
+
+
+#pip install -U DoubleML
+
+
+# In[2]:
 
 
 import numpy as np
@@ -41,7 +49,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[6]:
+# In[3]:
 
 
 rdata_read = pyreadr.read_r("../data/pension.Rdata")
@@ -55,7 +63,7 @@ data.shape
 # See the "Details" section on the description of the data set, which can be accessed by 
 # 
 
-# In[7]:
+# In[4]:
 
 
 pension = data.copy()
@@ -65,14 +73,14 @@ pension = data.copy()
 
 # Among the $9915$ individuals, $3682$ are eligible to participate in the program. The variable *e401* indicates eligibility and *p401* indicates participation, respectively.
 
-# In[4]:
+# In[5]:
 
 
 sns.set()
 colors = sns.color_palette()
 
 
-# In[5]:
+# In[6]:
 
 
 data['e401'].value_counts().plot(kind='bar', color=colors)
@@ -83,7 +91,7 @@ _ = plt.ylabel('count')
 
 # Eligibility is highly associated with financial wealth:
 
-# In[6]:
+# In[7]:
 
 
 _ = sns.displot(data, x="net_tfa", hue="e401", col="e401",
@@ -92,7 +100,7 @@ _ = sns.displot(data, x="net_tfa", hue="e401", col="e401",
 
 # The unconditional APE of e401 is about $19559$:
 
-# In[7]:
+# In[8]:
 
 
 data[['e401', 'net_tfa']].groupby('e401').mean().diff()
@@ -100,7 +108,7 @@ data[['e401', 'net_tfa']].groupby('e401').mean().diff()
 
 # Among the $3682$ individuals that  are eligible, $2594$ decided to participate in the program. The unconditional APE of p401 is about $27372$:
 
-# In[8]:
+# In[9]:
 
 
 data[['p401', 'net_tfa']].groupby('p401').mean().diff()
@@ -204,10 +212,10 @@ data_ml_aux = dml.DoubleMLData(model_flex, y_col='net_tfa',                     
 
 # We start using lasso to estimate the function $g_0$ and $m_0$ in the following PLR model:
 
-# \begin{eqnarray}
+# \begin{align}
 #  &  Y = D\theta_0 + g_0(X) + \zeta,  &  E[\zeta \mid D,X]= 0,\\
 #  & D = m_0(X) +  V,   &  E[V \mid X] = 0.
-# \end{eqnarray}
+# \end{align}
 
 # In[13]:
 
@@ -235,15 +243,15 @@ dml_plr.summary
 
 # Let us check the predictive performance of this model.
 
-# In[15]:
+# In[14]:
 
 
 print(dml_plr.params_names)
-g_hat = dml_plr.predictions['ml_g'].flatten() # predictions of g_o
+g_hat = dml_plr.predictions['ml_l'].flatten() # predictions of g_o
 m_hat = dml_plr.predictions['ml_m'].flatten() # predictions of m_o
 
 
-# In[16]:
+# In[15]:
 
 
 y = pension.net_tfa.to_numpy()
@@ -254,7 +262,7 @@ lasso_y_rmse = np.sqrt( np.mean( ( y - predictions_y ) ** 2 ) )
 lasso_y_rmse
 
 
-# In[17]:
+# In[16]:
 
 
 # cross-fitted RMSE: treatment
@@ -287,7 +295,7 @@ np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 # We can compare the accuracy of this model to the model that has been estimated with lasso.
 
-# In[18]:
+# In[17]:
 
 
 # Random Forest

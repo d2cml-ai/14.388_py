@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# - Python code replication of: " https://www.kaggle.com/victorchernozhukov/r-notebook-linear-model-overfiting "
-# - Created by: Alexander Quispe
-
-# # Simple Exercise on Overfitting
+# # Linear Model Overfiting
 
 # ## First set p=n
 # 
@@ -15,6 +12,8 @@
 import numpy as np
 import random
 import statsmodels.api as sm
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:

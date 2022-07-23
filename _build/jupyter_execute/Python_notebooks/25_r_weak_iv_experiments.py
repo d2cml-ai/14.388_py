@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # A Simple Example of Properties of IV estimator when Instruments are Weak
+# # Weak IV Experiments
+
+# ## A Simple Example of Properties of IV estimator when Instruments are Weak
 
 # Simulation Design
 

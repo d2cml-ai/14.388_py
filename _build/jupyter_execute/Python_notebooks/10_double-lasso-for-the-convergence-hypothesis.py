@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of:
-# " https://www.kaggle.com/janniskueck/pm2-notebook-jannis "
-# * Created by: Alexander Quispe and Anzony Quispe 
-
-# This notebook contains an example for teaching.
-
 # # Double Lasso for Testing the Convergence Hypothesis
+
+# ## Double Lasso for the convergence hypothesis
 
 # ## Introduction
 
 # We provide an additional empirical example of partialling-out with Lasso to estimate the regression coefficient $\beta_1$ in the high-dimensional linear regression model:
-#   $$
-#   Y = \beta_1 D +  \beta_2'W + \epsilon.
-#   $$
+# $$
+# \begin{align}
+# Y = \beta_1 D +  \beta_2'W + \epsilon.
+# \end{align}
+# $$
 #   
 # Specifically, we are interested in how the rates  at which economies of different countries grow ($Y$) are related to the initial wealth levels in each country ($D$) controlling for country's institutional, educational, and other similar characteristics ($W$).
 #   
@@ -38,6 +36,8 @@ import pyreadr
 import math
 import matplotlib.pyplot as plt
 import random
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # In[2]:
@@ -104,6 +104,7 @@ upper_ci = reg_ols.summary2().tables[1]['0.975]']['gdpsh465']
 # In[8]:
 
 
+from tabulate import tabulate
 table_1 = np.zeros( (1, 4) )
 
 table_1[0,0] = est_ols  
@@ -114,15 +115,29 @@ table_1[0,3] = upper_ci
 
 table_1_pandas = pd.DataFrame( table_1, columns = [ "Estimator","Std. Error", "lower bound CI", "upper bound CI"  ])
 table_1_pandas.index = [ "OLS" ]
-table_1_html
+print(table_1_pandas.to_html())
 
 
-# <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-# <!-- Tue Jan 19 10:23:32 2021 -->
-# <table border=1>
-# <tr> <th>  </th> <th> estimator </th> <th> standard error </th> <th> lower bound CI </th> <th> upper bound CI </th>  </tr>
-#   <tr> <td align="right"> OLS </td> <td align="right"> -0.009 </td> <td align="right"> 0.030 </td> <td align="right"> -0.071 </td> <td align="right"> 0.052 </td> </tr>
-#    </table>
+# <table border="1" class="dataframe">
+#   <thead>
+#     <tr style="text-align: right;">
+#       <th></th>
+#       <th>Estimator</th>
+#       <th>Std. Error</th>
+#       <th>lower bound CI</th>
+#       <th>upper bound CI</th>
+#     </tr>
+#   </thead>
+#   <tbody>
+#     <tr>
+#       <th>OLS</th>
+#       <td>-0.009378</td>
+#       <td>0.029888</td>
+#       <td>-0.0706</td>
+#       <td>0.051844</td>
+#     </tr>
+#   </tbody>
+# </table>
 
 # Least squares provides a rather noisy estimate (high standard error) of the
 # speed of convergence, and does not allow us to answer the question
@@ -130,7 +145,7 @@ table_1_html
 # 
 # In contrast, we can use the partialling-out approach based on lasso regression ("Double Lasso").
 
-# In[11]:
+# In[9]:
 
 
 # Create main variables
@@ -141,7 +156,7 @@ D = growth['gdpsh465']
 
 # ## Method 1 - Using Sklearn
 
-# In[12]:
+# In[10]:
 
 
 from sklearn import linear_model
@@ -164,7 +179,7 @@ lower_ci_lasso = partial_lasso_fit.summary2().tables[1]['[0.025']['r_D']
 upper_ci_lasso = partial_lasso_fit.summary2().tables[1]['0.975]']['r_D']
 
 
-# In[14]:
+# In[11]:
 
 
 # Regress residuales
@@ -174,7 +189,7 @@ partial_lasso_est = partial_lasso_fit.summary2().tables[1]['Coef.']['r_D']
 print( f"Coefficient for D via partialling-out using lasso {partial_lasso_est}" )
 
 
-# In[15]:
+# In[12]:
 
 
 # output: estimated regression coefficient corresponding to the target regressor
@@ -193,7 +208,7 @@ upper_ci_lasso = partial_lasso_fit.summary2().tables[1]['0.975]']['r_D']
 
 # Finally, let us have a look at the results.
 
-# In[16]:
+# In[13]:
 
 
 table_2 = np.zeros( (1, 4) )
@@ -209,7 +224,7 @@ table_2_pandas.index = [ "LASSO" ]
 table_2_pandas
 
 
-# In[17]:
+# In[14]:
 
 
 table_3 = table_1_pandas.append(table_2_pandas)
@@ -250,7 +265,7 @@ table_3
 
 # ## Method 2 - HDMPY
 
-# In[19]:
+# In[15]:
 
 
 res_Y = hdmpy.rlasso( W, Y, post=True ).est['residuals']
@@ -260,7 +275,7 @@ r_Y = pd.DataFrame(res_Y, columns=['r_Y'])
 r_D = pd.DataFrame(res_D, columns=['r_D'])
 
 
-# In[20]:
+# In[16]:
 
 
 # OLS regression
@@ -268,7 +283,7 @@ reg_ols  = sm.OLS(r_Y, r_D).fit()
 print(reg_ols.summary())
 
 
-# In[21]:
+# In[17]:
 
 
 # output: estimated regression coefficient corresponding to the target regressor
@@ -282,7 +297,7 @@ lower_ci_lasso = reg_ols.summary2().tables[1]['[0.025']['r_D']
 upper_ci_lasso = reg_ols.summary2().tables[1]['0.975]']['r_D']
 
 
-# In[22]:
+# In[18]:
 
 
 table_3 = np.zeros( (1, 4) )
@@ -300,13 +315,13 @@ table_3_pandas
 
 # ## Method 3 - HDMPY Direct
 
-# In[23]:
+# In[19]:
 
 
 lasso_direct = hdmpy.rlassoEffect(x=W, y=Y, d=D, method="partialling out")
 
 
-# In[24]:
+# In[20]:
 
 
 est_lasso = lasso_direct["coefficients"]
@@ -315,7 +330,7 @@ lower_ci_lasso = est_lasso - 1.96*std_lasso
 upper_ci_lasso = est_lasso + 1.96*std_lasso
 
 
-# In[25]:
+# In[21]:
 
 
 table_4 = np.zeros( (1, 4) )

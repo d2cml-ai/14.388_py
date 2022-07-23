@@ -1,18 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Penalized Linear Regressions: A Simulation Experiment
+# # Linear Penalized Regs
+
+# ## Penalized Linear Regressions: A Simulation Experiment
 
 # ## Data Generating Process: Approximately Sparse
 
 # In[1]:
 
 
+#Imoprt relevant packages
 import random
 random.seed(1)
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import warnings
+import statsmodels.api as sm
+warnings.filterwarnings('ignore')
 
 
 # In[2]:
@@ -81,23 +87,17 @@ fit_ridge = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_rat
 fit_elnet = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ).fit( X, std_Y )
 
 # Predictions
-yhat_lasso_cv = scaler.inverse_transform( fit_lasso_cv.predict( X ) )
-yhat_ridge = scaler.inverse_transform( fit_ridge.predict( X ) )
-yhat_elnet = scaler.inverse_transform( fit_elnet.predict( X ) )
+yhat_lasso_cv = scaler.inverse_transform( fit_lasso_cv.predict( X ).reshape(-1,1) )
+yhat_ridge = scaler.inverse_transform( fit_ridge.predict( X ).reshape(-1,1) )
+yhat_elnet = scaler.inverse_transform( fit_elnet.predict( X ).reshape(-1,1) )
 
 
-# In[58]:
+# In[5]:
 
 
-import statsmodels.api as sm
-
-
-# In[59]:
-
-
-MSE_lasso_cv = sm.OLS( ((gX - yhat_lasso_cv)**2 ) , np.ones( yhat_lasso_cv.shape )  ).fit().summary2().tables[1].round(3)
-MSE_ridge = sm.OLS( ((gX - yhat_ridge)**2 ) , np.ones( yhat_ridge.size )  ).fit().summary2().tables[1].round(3)
-MSE_elnet = sm.OLS( ((gX - yhat_elnet)**2 ) , np.ones( yhat_elnet.size )  ).fit().summary2().tables[1].round(3)
+MSE_lasso_cv = sm.OLS( ((gX.reshape(-1,1) - yhat_lasso_cv)**2 ) , np.ones( yhat_lasso_cv.shape )  ).fit().summary2().tables[1].round(3)
+MSE_ridge = sm.OLS( ((gX.reshape(-1,1) - yhat_ridge)**2 ) , np.ones( yhat_ridge.size )  ).fit().summary2().tables[1].round(3)
+MSE_elnet = sm.OLS( ((gX.reshape(-1,1) - yhat_elnet)**2 ) , np.ones( yhat_elnet.size )  ).fit().summary2().tables[1].round(3)
 # our coefficient of MSE_elnet are far from r output
 
 
@@ -111,13 +111,13 @@ MSE_elnet = sm.OLS( ((gX - yhat_elnet)**2 ) , np.ones( yhat_elnet.size )  ).fit(
 
 # We need to install this package ***pip install multiprocess***.
 
-# In[61]:
+# In[6]:
 
 
 import hdmpy
 
 
-# In[62]:
+# In[7]:
 
 
 fit_rlasso = hdmpy.rlasso(X, Y, post = False)
@@ -130,24 +130,24 @@ MSE_lasso = sm.OLS( ((gX - yhat_rlasso)**2 ) , np.ones( yhat_rlasso.size )  ).fi
 MSE_lasso_post = sm.OLS( ((gX - yhat_rlasso_post)**2 ) , np.ones( yhat_rlasso_post.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[65]:
+# In[8]:
 
 
 def lava_predict( x, y, iteration = 5 ):
     
-    g1_rlasso = hdmpy.rlasso( x, y , post = False )
-    g1 = y - g1_rlasso.est['residuals'].reshape( g1_rlasso.est['residuals'].size, )
-    
-    new_dep_var = y-g1
+    g1_rlasso = hdmpy.rlasso( x, y.reshape(-1,1) , post = False )
+    g1 = y.reshape(-1,1) - g1_rlasso.est['residuals']
+
+    new_dep_var = y.reshape(-1,1)-g1
     new_dep_var_vec = new_dep_var.reshape( new_dep_var.size, 1 )
-    
+
     # Scalar distribution
     scaler = StandardScaler()
     scaler.fit( new_dep_var_vec )
     std_new_dep_var_vec = scaler.transform( new_dep_var_vec )
-    
+
     fit_ridge_m1 = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.0001, alphas = np.array([20]) ).fit( x, std_new_dep_var_vec )
-    m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ) )
+    m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ).reshape(-1,1) )
     
     i = 1
     while i <= iteration:
@@ -164,36 +164,30 @@ def lava_predict( x, y, iteration = 5 ):
         std_new_dep_var_vec = scaler.transform( new_dep_var_vec )
 
         fit_ridge_m1 = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.0001, alphas = np.array([20]) ).fit( x, std_new_dep_var_vec )
-        m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ) )
+        m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ).reshape(-1,1) )
         
         i = i + 1
         
-    return ( g1 + m1 )
+    return ( g1.reshape(-1,1) + m1.reshape(-1,1) )
         
 
 
 # Next we code up lava, which alternates the fitting of lasso and ridge
 
-# In[67]:
+# In[9]:
 
 
 yhat_lava = lava_predict( X, Y )
-MSE_lava = sm.OLS( ((gX - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
+MSE_lava = sm.OLS( ((gX.reshape(-1,1) - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[68]:
-
-
-yhat_lava
-
-
-# In[69]:
+# In[ ]:
 
 
 import pandas as pd
 
 
-# In[70]:
+# In[163]:
 
 
 table2 = np.zeros( (6, 2) )
@@ -214,13 +208,13 @@ table2_html = table2_pandas.to_html()
 table2_pandas
 
 
-# In[71]:
+# In[164]:
 
 
 import matplotlib.pyplot as plt
 
 
-# In[72]:
+# In[165]:
 
 
 fig = plt.figure()
@@ -235,7 +229,7 @@ plt.show()
 
 # ## Data Generating Process: Approximately Sparse + Small Dense Part
 
-# In[46]:
+# In[166]:
 
 
 n = 100
@@ -267,7 +261,7 @@ print( f"theoretical R2:, {np.var(gX) / np.var( Y )}" )
 np.var(gX) / np.var( Y ) #theoretical R-square in the simulation example
 
 
-# In[47]:
+# In[180]:
 
 
 # Reshaping Y variable
@@ -284,27 +278,27 @@ fit_ridge = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_rat
 fit_elnet = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.5, max_iter = 100000 ).fit( X, std_Y )
 
 # Predictions
-yhat_lasso_cv = scaler.inverse_transform( fit_lasso_cv.predict( X ) )
-yhat_ridge = scaler.inverse_transform( fit_ridge.predict( X ) )
-yhat_elnet = scaler.inverse_transform( fit_elnet.predict( X ) )
+yhat_lasso_cv = scaler.inverse_transform( fit_lasso_cv.predict( X ).reshape(-1,1) )
+yhat_ridge = scaler.inverse_transform( fit_ridge.predict( X ).reshape(-1,1) )
+yhat_elnet = scaler.inverse_transform( fit_elnet.predict( X ).reshape(-1,1) )
 
 
-# In[48]:
+# In[181]:
 
 
 import statsmodels.api as sm
 
 
-# In[49]:
+# In[188]:
 
 
-MSE_lasso_cv = sm.OLS( ((gX - yhat_lasso_cv)**2 ) , np.ones( yhat_lasso_cv.shape )  ).fit().summary2().tables[1].round(3)
-MSE_ridge = sm.OLS( ((gX - yhat_ridge)**2 ) , np.ones( yhat_ridge.size )  ).fit().summary2().tables[1].round(3)
-MSE_elnet = sm.OLS( ((gX - yhat_elnet)**2 ) , np.ones( yhat_elnet.size )  ).fit().summary2().tables[1].round(3)
+MSE_lasso_cv = sm.OLS( ((gX.reshape(-1,1) - yhat_lasso_cv)**2 ) , np.ones( yhat_lasso_cv.shape )  ).fit().summary2().tables[1].round(3)
+MSE_ridge = sm.OLS( ((gX.reshape(-1,1) - yhat_ridge)**2 ) , np.ones( yhat_ridge.size )  ).fit().summary2().tables[1].round(3)
+MSE_elnet = sm.OLS( ((gX.reshape(-1,1) - yhat_elnet)**2 ) , np.ones( yhat_elnet.size )  ).fit().summary2().tables[1].round(3)
 # our coefficient of MSE_elnet are far from r output
 
 
-# In[50]:
+# In[189]:
 
 
 fit_rlasso = hdmpy.rlasso(X, Y, post = False)
@@ -317,24 +311,24 @@ MSE_lasso = sm.OLS( ((gX - yhat_rlasso)**2 ) , np.ones( yhat_rlasso.size )  ).fi
 MSE_lasso_post = sm.OLS( ((gX - yhat_rlasso_post)**2 ) , np.ones( yhat_rlasso_post.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[51]:
+# In[190]:
 
 
 def lava_predict( x, y, iteration = 5 ):
     
-    g1_rlasso = hdmpy.rlasso( x, y , post = False )
-    g1 = y - g1_rlasso.est['residuals'].reshape( g1_rlasso.est['residuals'].size, )
-    
-    new_dep_var = y-g1
+    g1_rlasso = hdmpy.rlasso( x, y.reshape(-1,1) , post = False )
+    g1 = y.reshape(-1,1) - g1_rlasso.est['residuals']
+
+    new_dep_var = y.reshape(-1,1)-g1
     new_dep_var_vec = new_dep_var.reshape( new_dep_var.size, 1 )
-    
+
     # Scalar distribution
     scaler = StandardScaler()
     scaler.fit( new_dep_var_vec )
     std_new_dep_var_vec = scaler.transform( new_dep_var_vec )
-    
+
     fit_ridge_m1 = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.0001, alphas = np.array([20]) ).fit( x, std_new_dep_var_vec )
-    m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ) )
+    m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ).reshape(-1,1) )
     
     i = 1
     while i <= iteration:
@@ -351,22 +345,22 @@ def lava_predict( x, y, iteration = 5 ):
         std_new_dep_var_vec = scaler.transform( new_dep_var_vec )
 
         fit_ridge_m1 = ElasticNetCV( cv = 10 , normalize = True , random_state = 0 , l1_ratio = 0.0001, alphas = np.array([20]) ).fit( x, std_new_dep_var_vec )
-        m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ) )
+        m1 = scaler.inverse_transform( fit_ridge_m1.predict( x ).reshape(-1,1) )
         
         i = i + 1
         
-    return ( g1 + m1 )
+    return ( g1.reshape(-1,1) + m1.reshape(-1,1) )
         
 
 
-# In[52]:
+# In[192]:
 
 
 yhat_lava = lava_predict( X, Y )
-MSE_lava = sm.OLS( ((gX - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
+MSE_lava = sm.OLS( ((gX.reshape(-1,1) - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[53]:
+# In[193]:
 
 
 table2 = np.zeros( (6, 2) )
@@ -387,7 +381,7 @@ table2_html = table2_pandas.to_html()
 table2_pandas
 
 
-# In[54]:
+# In[194]:
 
 
 fig = plt.figure()
@@ -398,10 +392,4 @@ ax1.scatter( gX, yhat_rlasso_post , marker = '^' , c = 'green' , label = 'Post-r
 ax1.scatter( gX, yhat_lasso_cv , marker = 'o' , c = 'blue' , label = 'CV Lasso')
 plt.legend(loc='lower right')
 plt.show()
-
-
-# In[ ]:
-
-
-
 

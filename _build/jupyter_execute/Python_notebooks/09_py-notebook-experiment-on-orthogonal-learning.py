@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# * Python code replication of:
-# " https://www.kaggle.com/victorchernozhukov/r-notebook-experiment-on-orthogonal-learning "
-# * Created by: Alexander Quispe and Anzony Quispe 
-
 # # Experiment on orthogonal Learning
 
 # In[1]:
 
 
+#import packages
 import hdmpy
 import numpy as np
 import random
@@ -17,6 +14,8 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import colors
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # ## Simulation Design 1
@@ -73,14 +72,14 @@ for i in range( 0, B ):
     Orthogonal[ i ] = sm.OLS( resY , sm.add_constant( resD ) ).fit().summary2().tables[1].round(3).iloc[ 1, 0]
 
 
-# In[18]:
+# In[11]:
 
 
 Orto_breaks = [-1.2, -1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2]
 Naive_breaks = [-0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2]
 
 
-# In[14]:
+# In[12]:
 
 
 fig, axs = plt.subplots(1, 2, sharex= True, tight_layout=True)
@@ -98,7 +97,7 @@ axs[1].set_xlabel( 'Naive - True' )
 
 # ## Simulation Design 2
 
-# In[52]:
+# In[6]:
 
 
 # Set seed
@@ -137,7 +136,7 @@ for i in range( 0, B ):
     Orthogonal[ i ] = sm.OLS( resY , sm.add_constant( resD ) ).fit().summary2().tables[1].round(3).iloc[ 1, 0]
 
 
-# In[53]:
+# In[7]:
 
 
 fig, axs = plt.subplots(1, 2, sharex= True, tight_layout=True)
