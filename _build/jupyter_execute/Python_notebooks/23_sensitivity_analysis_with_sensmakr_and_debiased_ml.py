@@ -417,7 +417,7 @@ def yreg(x,y):
 DML2_RF = DML2_for_PLM(x, d, y, dreg, yreg, 10, clu)   # set to 2 due to computation time
 
 
-# In[44]:
+# In[34]:
 
 
 resY = DML2_RF[2]
@@ -430,7 +430,7 @@ print("Controls explain the following fraction of variance of Outcome", FVU_Y)
 print("Controls explain the following fraction of variance of treatment", FVU_D)
 
 
-# In[45]:
+# In[35]:
 
 
 darfurR['resY_rf'] = resY
@@ -441,7 +441,7 @@ dml_darfur_model_rf= smf.ols('resY_rf~ resD_rf',data=darfurR ).fit()
 dml_darfur_model_rf_table = dml_darfur_model_rf.summary2().tables[1]
 
 
-# In[46]:
+# In[36]:
 
 
 # We need to double check why the function does not allow to run withour the benchmark_covariates argument

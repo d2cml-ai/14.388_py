@@ -72,14 +72,14 @@ for i in range( 0, B ):
     Orthogonal[ i ] = sm.OLS( resY , sm.add_constant( resD ) ).fit().summary2().tables[1].round(3).iloc[ 1, 0]
 
 
-# In[11]:
+# In[4]:
 
 
 Orto_breaks = [-1.2, -1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2]
 Naive_breaks = [-0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2]
 
 
-# In[12]:
+# In[5]:
 
 
 fig, axs = plt.subplots(1, 2, sharex= True, tight_layout=True)

@@ -120,7 +120,7 @@ aml = H2OAutoML(max_runtime_secs = 100, max_models = 10, seed = 1)
 aml.train(x = x, y = y, training_frame = train_h, leaderboard_frame = test_h)
 
 
-# In[22]:
+# In[11]:
 
 
 # AutoML Leaderboard
@@ -130,7 +130,7 @@ print(lb)
 
 # We see that two Stacked Ensembles are at the top of the leaderboard. Stacked Ensembles often outperform a single model. The out-of-sample (test) MSE of the leading model is given by
 
-# In[23]:
+# In[12]:
 
 
 aml.leaderboard['mse'][0,0]
@@ -138,7 +138,7 @@ aml.leaderboard['mse'][0,0]
 
 # The in-sample performance can be evaluated by
 
-# In[24]:
+# In[13]:
 
 
 aml.leader
@@ -146,13 +146,13 @@ aml.leader
 
 # This is in line with our previous results. To understand how the ensemble works, let's take a peek inside the Stacked Ensemble "All Models" model.  The "All Models" ensemble is an ensemble of all of the individual models in the AutoML run.  This is often the top performing model on the leaderboard.
 
-# In[25]:
+# In[14]:
 
 
 model_ids = h2o.as_list(aml.leaderboard['model_id'][0], use_pandas=True)
 
 
-# In[26]:
+# In[15]:
 
 
 model = model_ids[model_ids['model_id'].str.contains("StackedEnsemble_AllModels")].values.tolist()
@@ -160,14 +160,14 @@ model_id = model[0][0]
 model_id
 
 
-# In[30]:
+# In[16]:
 
 
 se = h2o.get_model(model_id)
 se
 
 
-# In[31]:
+# In[17]:
 
 
 # Get the Stacked Ensemble metalearner model
@@ -180,19 +180,19 @@ metalearner
 # The table above gives us the variable importance of the metalearner in the ensemble. The AutoML Stacked Ensembles use the default metalearner algorithm (GLM with non-negative weights), so the variable importance of the metalearner is actually the standardized coefficient magnitudes of the GLM. 
 # 
 
-# In[32]:
+# In[18]:
 
 
 metalearner.coef_norm()
 
 
-# In[33]:
+# In[19]:
 
 
 metalearner.std_coef_plot()
 
 
-# In[34]:
+# In[20]:
 
 
 h2o.get_model(model_id).metalearner()
@@ -202,7 +202,7 @@ h2o.get_model(model_id).metalearner()
 # 
 # We can also generate predictions on a test sample using the leader model object.
 
-# In[35]:
+# In[21]:
 
 
 pred = aml.predict(test_h)
@@ -211,27 +211,27 @@ pred.head()
 
 # This allows us to estimate the out-of-sample (test) MSE and the standard error as well.
 
-# In[36]:
+# In[22]:
 
 
 pred_2 = pred.as_data_frame()
 pred_aml = pred_2.to_numpy()
 
 
-# In[37]:
+# In[23]:
 
 
 Y_test = test_h['lwage'].as_data_frame().to_numpy()
 
 
-# In[38]:
+# In[24]:
 
 
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 
-# In[39]:
+# In[25]:
 
 
 resid_basic = (Y_test-pred_aml)**2
@@ -247,7 +247,7 @@ MSE_aml_basic
 # 
 # 
 
-# In[40]:
+# In[26]:
 
 
 perf = aml.leader.model_performance(test_h)

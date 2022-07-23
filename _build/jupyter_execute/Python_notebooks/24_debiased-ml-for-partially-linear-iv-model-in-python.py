@@ -344,7 +344,7 @@ print( "\n DML with Post-Lasso \n" )
 DML2_RF = DML2_for_PLIVM(xraw, d, z, y, dreg, yreg, zreg, nfold=20)
 
 
-# In[15]:
+# In[13]:
 
 
 class rlasso_sklearn:
@@ -374,7 +374,7 @@ class rlasso_sklearn:
         return prediction
 
 
-# In[16]:
+# In[14]:
 
 
 # DML with PostLasso
@@ -392,20 +392,20 @@ def zreg(x,z):
     return result
 
 
-# In[17]:
+# In[15]:
 
 
 DML2_lasso = DML2_for_PLIVM(x, d, z, y, dreg, yreg, zreg, nfold = 20 )
 
 
-# In[18]:
+# In[16]:
 
 
 # Compare Forest vs Lasso
 comp_tab_numpy = np.zeros( ( 3 , 2 ) )
 
 
-# In[19]:
+# In[17]:
 
 
 comp_tab_numpy[ 0 , : ] = [ np.sqrt( np.mean( DML2_RF['ytil'] ** 2 ) ) , np.sqrt( np.mean( DML2_lasso['ytil'] ** 2 ) ) ]
@@ -413,13 +413,13 @@ comp_tab_numpy[ 1 , : ] = [ np.sqrt( np.mean( DML2_RF['dtil'] ** 2 ) ) , np.sqrt
 comp_tab_numpy[ 2 , : ] = [ np.sqrt( np.mean( DML2_RF['ztil'] ** 2 ) ) , np.sqrt( np.mean( DML2_lasso['ztil'] ** 2 ) ) ]
 
 
-# In[20]:
+# In[18]:
 
 
 comp_tab = pd.DataFrame( comp_tab_numpy , columns = [ 'RF' ,'LASSO' ] , index = [ "RMSE for Y:", "RMSE for D:", "RMSE for Z:" ] )
 
 
-# In[21]:
+# In[19]:
 
 
 comp_tab
@@ -427,13 +427,13 @@ comp_tab
 
 # ## Examine if we have weak instruments
 
-# In[22]:
+# In[20]:
 
 
 sm.OLS( DML2_lasso[ 'dtil' ] , DML2_lasso[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = True ).summary()
 
 
-# In[23]:
+# In[21]:
 
 
 sm.OLS( DML2_RF[ 'dtil' ] , DML2_RF[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = True ).summary()
@@ -443,7 +443,7 @@ sm.OLS( DML2_RF[ 'dtil' ] , DML2_RF[ 'ztil' ] ).fit( cov_type = 'HC1', use_t = T
 
 # So let's carry out DML inference combined with Anderson-Rubin Idea
 
-# In[24]:
+# In[22]:
 
 
 # DML-AR (DML with Anderson-Rubin) 
@@ -475,14 +475,14 @@ def DML_AR_PLIV( rY, rD, rZ, grid, alpha = 0.05 ):
     return final_result
 
 
-# In[25]:
+# In[23]:
 
 
 DML_AR_PLIV(rY = DML2_lasso['ytil'], rD= DML2_lasso['dtil'], rZ= DML2_lasso['ztil'],
            grid = np.arange( -2, 2.001, 0.01 ) )
 
 
-# In[26]:
+# In[24]:
 
 
 DML_AR_PLIV(rY = DML2_RF['ytil'], rD= DML2_RF['dtil'], rZ= DML2_RF['ztil'],

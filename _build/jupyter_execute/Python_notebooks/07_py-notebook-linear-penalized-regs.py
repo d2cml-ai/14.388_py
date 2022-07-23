@@ -181,13 +181,13 @@ yhat_lava = lava_predict( X, Y )
 MSE_lava = sm.OLS( ((gX.reshape(-1,1) - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[ ]:
+# In[10]:
 
 
 import pandas as pd
 
 
-# In[163]:
+# In[11]:
 
 
 table2 = np.zeros( (6, 2) )
@@ -208,13 +208,13 @@ table2_html = table2_pandas.to_html()
 table2_pandas
 
 
-# In[164]:
+# In[12]:
 
 
 import matplotlib.pyplot as plt
 
 
-# In[165]:
+# In[13]:
 
 
 fig = plt.figure()
@@ -229,7 +229,7 @@ plt.show()
 
 # ## Data Generating Process: Approximately Sparse + Small Dense Part
 
-# In[166]:
+# In[14]:
 
 
 n = 100
@@ -261,7 +261,7 @@ print( f"theoretical R2:, {np.var(gX) / np.var( Y )}" )
 np.var(gX) / np.var( Y ) #theoretical R-square in the simulation example
 
 
-# In[180]:
+# In[15]:
 
 
 # Reshaping Y variable
@@ -283,13 +283,13 @@ yhat_ridge = scaler.inverse_transform( fit_ridge.predict( X ).reshape(-1,1) )
 yhat_elnet = scaler.inverse_transform( fit_elnet.predict( X ).reshape(-1,1) )
 
 
-# In[181]:
+# In[16]:
 
 
 import statsmodels.api as sm
 
 
-# In[188]:
+# In[17]:
 
 
 MSE_lasso_cv = sm.OLS( ((gX.reshape(-1,1) - yhat_lasso_cv)**2 ) , np.ones( yhat_lasso_cv.shape )  ).fit().summary2().tables[1].round(3)
@@ -298,7 +298,7 @@ MSE_elnet = sm.OLS( ((gX.reshape(-1,1) - yhat_elnet)**2 ) , np.ones( yhat_elnet.
 # our coefficient of MSE_elnet are far from r output
 
 
-# In[189]:
+# In[18]:
 
 
 fit_rlasso = hdmpy.rlasso(X, Y, post = False)
@@ -311,7 +311,7 @@ MSE_lasso = sm.OLS( ((gX - yhat_rlasso)**2 ) , np.ones( yhat_rlasso.size )  ).fi
 MSE_lasso_post = sm.OLS( ((gX - yhat_rlasso_post)**2 ) , np.ones( yhat_rlasso_post.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[190]:
+# In[19]:
 
 
 def lava_predict( x, y, iteration = 5 ):
@@ -353,14 +353,14 @@ def lava_predict( x, y, iteration = 5 ):
         
 
 
-# In[192]:
+# In[20]:
 
 
 yhat_lava = lava_predict( X, Y )
 MSE_lava = sm.OLS( ((gX.reshape(-1,1) - yhat_lava)**2 ) , np.ones( yhat_lava.size )  ).fit().summary2().tables[1].round(3)
 
 
-# In[193]:
+# In[21]:
 
 
 table2 = np.zeros( (6, 2) )
@@ -381,7 +381,7 @@ table2_html = table2_pandas.to_html()
 table2_pandas
 
 
-# In[194]:
+# In[22]:
 
 
 fig = plt.figure()

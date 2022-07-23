@@ -547,7 +547,7 @@ _ = tree.plot_tree( trees_fit , filled = True , rounded = True  )
 # An important method to improve predictive performance is called "Pruning the Tree". This
 # means the process of cutting down the branches of a tree. We apply pruning to the complex tree above to reduce the depth. Initially, we determine the optimal complexity of the regression tree.
 
-# In[75]:
+# In[42]:
 
 
 dir(trees_fit)
@@ -620,7 +620,7 @@ dir(trees_fit)
 
 # Further, the $R^2$ for the test sample gets improved from $30\%$ obtained by OLS to about $31\%$ obtained by the ensemble method. We see that it is very powerful to aggregate prediction rules into an ensemble rule. Nevertheless, it is worth to notice that we should compare the ensemble method and the single rules on an additional validation set to ensure a fair comparison.
 
-# In[76]:
+# In[43]:
 
 
 table= np.zeros( (15, 3) )

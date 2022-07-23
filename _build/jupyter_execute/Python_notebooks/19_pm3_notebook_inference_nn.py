@@ -140,7 +140,7 @@ for var_name in varlist2:
 
 # The following algorithm comsumes $Y$,$D$ and $Z$, and learns the residuals $\tilde{Y}$ and $\tilde{D}$ via a neural network, where the residuals are obtained by cross-validation (cross-fitting). Then, it prints the estimated coefficient β and the clustered standard error from the final OLS regression.
 
-# In[11]:
+# In[6]:
 
 
 import tensorflow as tf
@@ -148,7 +148,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-# In[12]:
+# In[7]:
 
 
 def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
@@ -234,7 +234,7 @@ def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
 
 # ## Estimating the effect with DML for neural nets
 
-# In[13]:
+# In[8]:
 
 
 # Create main variables
@@ -250,7 +250,7 @@ z = Z.to_numpy()
 clu = CLU.to_numpy().reshape( len(Y) , 1 )
 
 
-# In[71]:
+# In[9]:
 
 
 DML2_nn = DML2_for_NN(z, d, y, 2, clu, 100, 10)
