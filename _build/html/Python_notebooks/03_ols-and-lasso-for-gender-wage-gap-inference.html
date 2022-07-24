@@ -937,9 +937,12 @@ title="Print to PDF"
 </div>
 <p>Note that the standard error is computed with the <em>R</em> package <em>sandwich</em> to be robust to heteroskedasticity.</p>
 <p>Next, we run an ols regression of <span class="math notranslate nohighlight">\(Y\)</span> on <span class="math notranslate nohighlight">\((D,W)\)</span> to control for the effect of covariates summarized in <span class="math notranslate nohighlight">\(W\)</span>:</p>
-<p>\begin{align}
-\log(Y) &amp;=\beta_1 D  + \beta_2’ W + \epsilon.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\log(Y) &amp;=\beta_1 D  + \beta_2' W + \epsilon.
+\end{align}
+\]</div>
 <p>Here, we are considering the flexible model from the previous lab. Hence, <span class="math notranslate nohighlight">\(W\)</span> controls for experience, education, region, and occupation and industry indicators plus transformations and two-way interactions.</p>
 <p>Let us run the ols regression with controls.</p>
 </section>

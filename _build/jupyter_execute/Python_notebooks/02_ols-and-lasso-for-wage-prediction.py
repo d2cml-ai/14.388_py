@@ -110,9 +110,11 @@ table
 
 # Now, we will construct a prediction rule for hourly wage $Y$, which depends linearly on job-relevant characteristics $X$:
 # 
+# $$
 # \begin{align}
 # Y = \beta'X+ \epsilon.
 # \end{align}
+# $$
 
 # Our goals are
 # 
@@ -306,7 +308,7 @@ table
 # One procedure to circumvent this issue is to use **data splitting** that is described and applied in the following.
 
 # ## Data Splitting
-# 
+
 # Measure the prediction quality of the two models via data splitting:
 # 
 # - Randomly split the data into one training sample and one testing sample. Here we just use a simple method (stratified splitting is a more sophisticated version of splitting that we can consider).

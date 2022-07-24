@@ -122,9 +122,11 @@ print( f'The estimated gender coefficient is {nocontrol_est} and the correspondi
 
 # Next, we run an ols regression of $Y$ on $(D,W)$ to control for the effect of covariates summarized in $W$:
 # 
+# $$
 # \begin{align}
 # \log(Y) &=\beta_1 D  + \beta_2' W + \epsilon.
 # \end{align}
+# $$
 # 
 # Here, we are considering the flexible model from the previous lab. Hence, $W$ controls for experience, education, region, and occupation and industry indicators plus transformations and two-way interactions.
 

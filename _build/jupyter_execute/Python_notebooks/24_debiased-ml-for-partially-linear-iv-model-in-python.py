@@ -20,13 +20,17 @@
 # 
 # We consider the partially linear structural equation model:
 # 
+# $$
 # \begin{align}\tag{1}
 #  &  Y - D\theta_0 = g_0(X) + \zeta,  & E[\zeta \mid Z,X]= 0,\\
-# \end{align}\
+# \end{align}
+# $$
+# 
+# $$
 # \begin{align}\tag{2}
 # & Z = m_0(X) +  V,   &  E[V \mid X] = 0. 
 # \end{align}
-# 
+# $$
 # 
 # Note that this model is not a regression model unless $Z=D$.  The model  is a canonical
 # model in causal inference, going back to P. Wright's work on IV methods for estimaing demand/supply equations, with the modern difference being that $g_0$ and $m_0$ are nonlinear, potentially complicated functions of high-dimensional $X$.  
@@ -37,9 +41,13 @@
 # 
 # 
 # The causal DAG this model corresponds to is given by:
+# 
+# $$
 # \begin{align}
 # Z \to D,  X \to (Y, Z, D),  L \to (Y,D),
 # \end{align}
+# $$
+# 
 # where $L$ is the latent confounder affecting both $Y$ and $D$, but not $Z$.
 # 
 # 
@@ -57,15 +65,23 @@
 # **PLIVM in Residualized Form**
 # 
 # The PLIV model above can be rewritten in the following residualized form:
+# 
+# $$
 # \begin{align}
 #   \tilde Y = \tilde D \theta_0 + \zeta,   \quad  E[\zeta \mid V,X]= 0,
 # \end{align}
+# $$
+# 
 # where
+# 
+# $$
 # \begin{align}
 #  \tilde Y = (Y- \ell_0(X)),  \quad \ell_0(X) = E[Y \mid X] \\
 #    \tilde D = (D - r_0(X)), \quad r_0(X) = E[D \mid X] \\
 #    \tilde Z = (Z- m_0(X)), \quad m_0(X) = E[Z \mid X].
 # \end{align}
+# $$
+# 
 #    The tilded variables above represent original variables after taking out or "partialling out"
 #   the effect of $X$.  Note that $\theta_0$ is identified from this equation if $V$ 
 #   and $U$ have non-zero correlation, which automatically means that $U$ and $V$
@@ -82,9 +98,13 @@
 # Compute the estimates $\hat \ell_0$, $\hat r_0$, and $\hat m_0$ , which amounts
 # to solving the three problems of predicting $Y$, $D$, and $Z$ using
 # $X$, using any generic  ML method, giving us estimated residuals 
+# 
+# $$
 # \begin{align}
 # \tilde Y = Y - \hat \ell_0(X), \\ \tilde D= D - \hat r_0(X), \\ \tilde Z = Z- \hat m_0(X).
 # \end{align} 
+# $$
+# 
 # The estimates should be of a cross-validated form, as detailed in the algorithm below. 
 # 
 # Estimate $\theta_0$ by the the intstrumental

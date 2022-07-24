@@ -598,9 +598,11 @@ dir(trees_fit)
 
 # In the final step, we can build a prediction model by combing the strengths of the models we considered so far. This ensemble method is of the form 
 # 
+# $$
 # \begin{align}
 # f(x) = \sum_{k=1}^K \alpha_k f_k(x) 
 # \end{align}
+# $$
 # 
 # where the $f_k$'s denote our prediction rules from the table above and the $\alpha_k$'s are the corresponding weights.
 

@@ -126,9 +126,11 @@ data[['p401', 'net_tfa']].groupby('p401').mean().diff()
 
 # We first look at the treatment effect of e401 on net total financial assets. We give estimates of the ATE and ATT that corresponds to the linear model
 # 
+# $$
 # \begin{align}
 # Y = D \alpha + f(X)'\beta+ \epsilon
 # \end{align}
+# $$
 # 
 # where $f(X)$ includes indicators of marital status, two-earner status, defined benefit pension status, IRA participation status, and home ownership status, and  orthogonal polynomials of degrees 2, 4, 6 and 8 in family size, education, age and  income, respectively. The dimensions of $f(X)$ is 25. 
 # 
@@ -212,12 +214,17 @@ data_ml_aux = dml.DoubleMLData(model_flex, y_col='net_tfa',                     
 
 # We start using lasso to estimate the function $g_0$ and $m_0$ in the following PLR model:
 
+# $$
 # \begin{align}\tag{1}
 # Y = D\theta_0 + g_0(X) + \zeta,  &  E[\zeta \mid D,X]= 0,\\
 # \end{align}
+# $$
+# 
+# $$
 # \begin{align}\tag{2}
 # D = m_0(X) +  V,   &  E[V \mid X] = 0.
 # \end{align}
+# $$
 
 # In[13]:
 
@@ -450,12 +457,17 @@ table_pd
 
 # Next, we consider estimation of average treatment effects when treatment effects are fully heterogeneous:
 
-#  \begin{align}\tag{3}
+# $$
+# \begin{align}\tag{3}
 #  & Y  = g_0(D, X) + U,  &  \quad E[U \mid X, D]= 0,\\
 # \end{align} 
-#  \begin{align}\tag{4}
+# $$
+# 
+# $$
+# \begin{align}\tag{4}
 #   & D  = m_0(X) + V,  & \quad  E[V\mid X] = 0.
 # \end{align}
+# $$
 
 # To reduce the disproportionate impact of extreme propensity score weights in the interactive model
 # we trim the propensity scores which are close to the bounds.
@@ -678,15 +690,23 @@ best_std_irm = dml_irm.se[0]
 
 # Now, we consider estimation of local average treatment effects (LATE) of participation with the binary instrument `e401`. As before, $Y$ denotes the outcome `net_tfa`, and $X$ is the vector of covariates.  Here the structural equation model is:
 # 
+# $$
 # \begin{align}\tag{5}
 # & Y = g_0(Z,X) + U, &\quad E[U\mid Z,X] = 0,\\
 # \end{align}
+# $$
+# 
+# $$
 # \begin{align}\tag{6}
 # & D = r_0(Z,X) + V, &\quad E[V\mid Z, X] = 0,\\
 # \end{align}
+# $$
+# 
+# $$
 # \begin{align}\tag{7}
 # & Z = m_0(X) + \zeta, &\quad E[\zeta \mid X] = 0.
 # \end{align}
+# $$
 
 # In[28]:
 
