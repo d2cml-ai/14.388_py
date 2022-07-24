@@ -290,9 +290,12 @@ control_ols_table.loc[['PPQ110D', 'PPQ120D'], :]
 # using the **double machine learning** approach. 
 # 
 # For $\tilde Y = Y- E(Y|Z)$ and $\tilde D= D- E(D|Z)$, we can write
+# 
+# $$
 # \begin{align}
 # \tilde Y = \alpha \tilde D + \epsilon, \quad E (\epsilon |\tilde D) =0.
 # \end{align}
+# $$
 # 
 # Using cross-fitting, we employ modern regression methods
 # to build estimators $\hat \ell(Z)$ and $\hat m(Z)$ of $\ell(Z):=E(Y|Z)$ and $m(Z):=E(D|Z)$ to obtain the estimates of the residualized quantities:

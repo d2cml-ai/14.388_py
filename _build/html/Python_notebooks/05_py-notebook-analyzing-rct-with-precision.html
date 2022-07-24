@@ -589,18 +589,27 @@ title="Print to PDF"
 <h2><span class="section-number">5.1. </span>Analyzing RCT with Precision by Adjusting for Baseline Covariates<a class="headerlink" href="#analyzing-rct-with-precision-by-adjusting-for-baseline-covariates" title="Permalink to this headline">#</a></h2>
 <section id="jonathan-roth-s-dgp">
 <h3><span class="section-number">5.1.1. </span>Jonathan Roth’s DGP<a class="headerlink" href="#jonathan-roth-s-dgp" title="Permalink to this headline">#</a></h3>
-<p>Here we set up a DGP with heterogenous effects. In this example, with is due to Jonathan Roth, we have:
+<p>Here we set up a DGP with heterogenous effects. In this example, with is due to Jonathan Roth, we have:</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 E [Y(0) | Z] = - Z, \quad E [Y(1) |Z] = Z, \quad Z \sim N(0,1).
 \end{align}
-The CATE is
+\]</div>
+<p>The CATE is</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 E [Y(1) - Y(0) | Z ]= 2 Z.
 \end{align}
-and the ATE is
+\]</div>
+<p>and the ATE is</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 2 E Z = 0.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>We would like to estimate ATE as precisely as possible.</p>
 <p>An economic motivation for this example could be provided as follows: Let D be the treatment of going to college, and <span class="math notranslate nohighlight">\(Z\)</span> academic skills.  Suppose that academic skills cause lower earnings Y(0) in jobs that don’t require college degree, and cause higher earnings  Y(1) in jobs that require college degrees. This type of scenario is reflected in the DGP set-up above.</p>
 <div class="cell docutils container">
@@ -826,7 +835,7 @@ Dep. Variable:                      Y   R-squared:                       0.001
 Model:                            OLS   Adj. R-squared:                  0.000
 Method:                 Least Squares   F-statistic:                     1.306
 Date:                Sat, 23 Jul 2022   Prob (F-statistic):              0.253
-Time:                        19:22:42   Log-Likelihood:                -1737.3
+Time:                        23:10:08   Log-Likelihood:                -1737.3
 No. Observations:                1000   AIC:                             3479.
 Df Residuals:                     998   BIC:                             3488.
 Df Model:                           1                                         
@@ -851,7 +860,7 @@ Dep. Variable:                      Y   R-squared:                       0.229
 Model:                            OLS   Adj. R-squared:                  0.228
 Method:                 Least Squares   F-statistic:                     148.3
 Date:                Sat, 23 Jul 2022   Prob (F-statistic):           4.15e-57
-Time:                        19:22:42   Log-Likelihood:                -1607.7
+Time:                        23:10:08   Log-Likelihood:                -1607.7
 No. Observations:                1000   AIC:                             3221.
 Df Residuals:                     997   BIC:                             3236.
 Df Model:                           2                                         
@@ -877,7 +886,7 @@ Dep. Variable:                      Y   R-squared:                       0.483
 Model:                            OLS   Adj. R-squared:                  0.481
 Method:                 Least Squares   F-statistic:                     310.0
 Date:                Sat, 23 Jul 2022   Prob (F-statistic):          4.01e-142
-Time:                        19:22:42   Log-Likelihood:                -1408.2
+Time:                        23:10:08   Log-Likelihood:                -1408.2
 No. Observations:                1000   AIC:                             2824.
 Df Residuals:                     996   BIC:                             2844.
 Df Model:                           3                                         
