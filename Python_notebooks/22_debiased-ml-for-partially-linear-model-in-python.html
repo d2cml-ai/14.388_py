@@ -630,24 +630,36 @@ title="Print to PDF"
 <section id="dml-algorithm">
 <h2><span class="section-number">22.2. </span>DML algorithm<a class="headerlink" href="#dml-algorithm" title="Permalink to this headline">#</a></h2>
 <p>Here we perform estimation and inference of predictive coefficient <span class="math notranslate nohighlight">\(\alpha\)</span> in the partially linear statistical model,</p>
-<p>\begin{align}
-Y = D\alpha + g(X) + U, \quad E (U | D, X) = 0.
-\end{align}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+Y = D\alpha + g(X) + U, \quad E (U | D, X) = 0. 
+\end{align}
+\]</div>
 <p>For <span class="math notranslate nohighlight">\(\tilde Y = Y- E(Y|X)\)</span> and <span class="math notranslate nohighlight">\(\tilde D= D- E(D|X)\)</span>, we can write</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 \tilde Y = \alpha \tilde D + U, \quad E (U |\tilde D) =0.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Parameter <span class="math notranslate nohighlight">\(\alpha\)</span> is then estimated using cross-fitting approach to obtain the residuals <span class="math notranslate nohighlight">\(\tilde D\)</span> and <span class="math notranslate nohighlight">\(\tilde Y\)</span>.
 The algorithm comsumes <span class="math notranslate nohighlight">\(Y, D, X\)</span>, and machine learning methods for learning the residuals <span class="math notranslate nohighlight">\(\tilde Y\)</span> and <span class="math notranslate nohighlight">\(\tilde D\)</span>, where
 the residuals are obtained by cross-validation (cross-fitting).</p>
 <p>The statistical parameter <span class="math notranslate nohighlight">\(\alpha\)</span> has a causal intertpreation of being the effect of <span class="math notranslate nohighlight">\(D\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> in the causal DAG</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 D\to Y, \quad X\to (D,Y)
-\end{align}</p>
+\end{align}
+\]</div>
 <p>or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment <span class="math notranslate nohighlight">\(D\)</span> given <span class="math notranslate nohighlight">\(X\)</span>:</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
 Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \quad U = U(D).
-\end{align}</p>
+\end{align}
+\]</div>
 <section id="clases-needed-for-regression">
 <h3><span class="section-number">22.2.1. </span>Clases needed for regression<a class="headerlink" href="#clases-needed-for-regression" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
@@ -879,18 +891,17 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 0  
 1  
 2  
+3  
+4  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
-4  
-5  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
 6  
 7  
 8  
 9  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Coefficient (se) = -0.017568731546816808 (0.009554401763938179)
+
+ Coefficient (se) = -0.017102257929990226 (0.009081195514444305)
 
  DML with Lasso 
 </pre></div>
@@ -924,7 +935,7 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
 
- Coefficient (se) = -0.03955551027414217 (0.01575383736209331)
+ Coefficient (se) = -0.038642367843547284 (0.016364333420312134)
 
  DML with Random Forest 
 </pre></div>
@@ -934,7 +945,7 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
 
- Coefficient (se) = -0.03501143060776996 (0.01341196644291359)
+ Coefficient (se) = -0.0412242091455425 (0.01208905943111754)
 
  DML with Lasso/Random Forest 
 </pre></div>
@@ -944,7 +955,7 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
 
- Coefficient (se) = -0.03833746213555947 (0.013356942647894257)
+ Coefficient (se) = -0.031228156319140225 (0.015280556986197178)
 </pre></div>
 </div>
 </div>
@@ -1008,14 +1019,14 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
     <tr>
       <th>RMSEY</th>
       <td>0.0</td>
-      <td>0.000282</td>
-      <td>0.000424</td>
+      <td>0.000172</td>
+      <td>0.000388</td>
     </tr>
     <tr>
       <th>RMSED</th>
       <td>0.0</td>
-      <td>0.009832</td>
-      <td>0.001462</td>
+      <td>0.008693</td>
+      <td>0.003898</td>
     </tr>
   </tbody>
 </table>
