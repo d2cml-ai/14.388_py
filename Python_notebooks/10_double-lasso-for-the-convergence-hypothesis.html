@@ -620,10 +620,13 @@ title="Print to PDF"
 </section>
 <section id="introduction">
 <h2><span class="section-number">10.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
-<p>We provide an additional empirical example of partialling-out with Lasso to estimate the regression coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> in the high-dimensional linear regression model:
+<p>We provide an additional empirical example of partialling-out with Lasso to estimate the regression coefficient <span class="math notranslate nohighlight">\(\beta_1\)</span> in the high-dimensional linear regression model:</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
-Y = \beta_1 D +  \beta_2’W + \epsilon.
-\end{align}</p>
+Y = \beta_1 D +  \beta_2'W + \epsilon.
+\end{align}
+\]</div>
 <p>Specifically, we are interested in how the rates  at which economies of different countries grow (<span class="math notranslate nohighlight">\(Y\)</span>) are related to the initial wealth levels in each country (<span class="math notranslate nohighlight">\(D\)</span>) controlling for country’s institutional, educational, and other similar characteristics (<span class="math notranslate nohighlight">\(W\)</span>).</p>
 <p>The relationship is captured by <span class="math notranslate nohighlight">\(\beta_1\)</span>, the <em>speed of convergence/divergence</em>, which measures the speed at which poor countries catch up <span class="math notranslate nohighlight">\((\beta_1&lt; 0)\)</span> or fall behind <span class="math notranslate nohighlight">\((\beta_1&gt; 0)\)</span> rich countries, after controlling for <span class="math notranslate nohighlight">\(W\)</span>. Our inference question here is: do poor countries grow faster than rich countries, controlling for educational and other characteristics? In other words, is the speed of convergence negative: <span class="math notranslate nohighlight">\( \beta_1 &lt;0?\)</span> This is the Convergence Hypothesis predicted by the Solow Growth Model. This is a structural economic model. Under some strong assumptions, that we won’t state here, the predictive exercise we are doing here can be given causal interpretation.</p>
 <p>The outcome <span class="math notranslate nohighlight">\(Y\)</span> is the realized annual growth rate of a country’s wealth  (Gross Domestic Product per capita). The target regressor (<span class="math notranslate nohighlight">\(D\)</span>) is the initial level of the country’s wealth. The target parameter <span class="math notranslate nohighlight">\(\beta_1\)</span> is the speed of convergence, which measures the speed at which poor countries catch up with rich countries. The controls (<span class="math notranslate nohighlight">\(W\)</span>) include measures of education levels, quality of institutions, trade openness, and political stability in the country.</p>
@@ -704,7 +707,7 @@ Dep. Variable:                Outcome   R-squared:                       0.887
 Model:                            OLS   Adj. R-squared:                  0.641
 Method:                 Least Squares   F-statistic:                     3.607
 Date:                Sat, 23 Jul 2022   Prob (F-statistic):           0.000200
-Time:                        19:30:34   Log-Likelihood:                 238.24
+Time:                        23:28:21   Log-Likelihood:                 238.24
 No. Observations:                  90   AIC:                            -352.5
 Df Residuals:                      28   BIC:                            -197.5
 Df Model:                          61                                         
@@ -1105,7 +1108,7 @@ Dep. Variable:                    r_Y   R-squared (uncentered):                 
 Model:                            OLS   Adj. R-squared (uncentered):              0.117
 Method:                 Least Squares   F-statistic:                              12.92
 Date:                Sat, 23 Jul 2022   Prob (F-statistic):                    0.000533
-Time:                        19:30:37   Log-Likelihood:                          152.68
+Time:                        23:28:25   Log-Likelihood:                          152.68
 No. Observations:                  90   AIC:                                     -303.4
 Df Residuals:                      89   BIC:                                     -300.9
 Df Model:                           1                                                  

@@ -1062,10 +1062,13 @@ Name: logfssl, dtype: float64
 Y = D\beta + g(Z) + \epsilon, \quad E (\epsilon | D, Z) = 0,
 \]</div>
 <p>using the <strong>double machine learning</strong> approach.</p>
-<p>For <span class="math notranslate nohighlight">\(\tilde Y = Y- E(Y|Z)\)</span> and <span class="math notranslate nohighlight">\(\tilde D= D- E(D|Z)\)</span>, we can write
+<p>For <span class="math notranslate nohighlight">\(\tilde Y = Y- E(Y|Z)\)</span> and <span class="math notranslate nohighlight">\(\tilde D= D- E(D|Z)\)</span>, we can write</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 \tilde Y = \alpha \tilde D + \epsilon, \quad E (\epsilon |\tilde D) =0.
-\end{align}</p>
+\end{align}
+\]</div>
 <p>Using cross-fitting, we employ modern regression methods
 to build estimators <span class="math notranslate nohighlight">\(\hat \ell(Z)\)</span> and <span class="math notranslate nohighlight">\(\hat m(Z)\)</span> of <span class="math notranslate nohighlight">\(\ell(Z):=E(Y|Z)\)</span> and <span class="math notranslate nohighlight">\(m(Z):=E(D|Z)\)</span> to obtain the estimates of the residualized quantities:</p>
 <div class="math notranslate nohighlight">
@@ -1211,7 +1214,7 @@ estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.22012546756482365, SE is equal to 0.05345044889979296
+Coefficient is 0.20558387349784107, SE is equal to 0.05446974692035762
 </pre></div>
 </div>
 </div>
@@ -1300,7 +1303,7 @@ Coefficient is 0.22012546756482365, SE is equal to 0.05345044889979296
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.21614283369699633, SE is equal to 0.05677921211987533
+Coefficient is 0.22239888611314876, SE is equal to 0.05437245431540179
 </pre></div>
 </div>
 </div>
@@ -1393,7 +1396,7 @@ Coefficient is 0.21614283369699633, SE is equal to 0.05677921211987533
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.2207763022194054, SE is equal to 0.056739596915293386
+Coefficient is 0.2256314307593294, SE is equal to 0.056912889670943684
 </pre></div>
 </div>
 </div>
@@ -1442,7 +1445,7 @@ Coefficient is 0.2207763022194054, SE is equal to 0.056739596915293386
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.2279384563742593, SE is equal to 0.05459997486182482
+Coefficient is 0.23691013333131228, SE is equal to 0.0548229559855324
 </pre></div>
 </div>
 </div>
@@ -1506,7 +1509,7 @@ Coefficient is 0.2279384563742593, SE is equal to 0.05459997486182482
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.1975368468850468, SE is equal to 0.05754760119812439
+Coefficient is 0.19369124127788218, SE is equal to 0.057532521595685227
 </pre></div>
 </div>
 </div>
@@ -1531,7 +1534,7 @@ Coefficient is 0.1975368468850468, SE is equal to 0.05754760119812439
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.18707775743040944, SE is equal to 0.05686466150300603
+Coefficient is 0.21350074509780254, SE is equal to 0.055706683884524724
 </pre></div>
 </div>
 </div>
@@ -1556,7 +1559,7 @@ Coefficient is 0.18707775743040944, SE is equal to 0.05686466150300603
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.21799898875200976, SE is equal to 0.057493830588936125
+Coefficient is 0.1952071026291554, SE is equal to 0.056566935015741115
 </pre></div>
 </div>
 </div>
@@ -1579,10 +1582,10 @@ Coefficient is 0.21799898875200976, SE is equal to 0.057493830588936125
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
-1  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient is 0.25810519781079777, SE is equal to 0.06294823554832384
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
+Coefficient is 0.1718704260108659, SE is equal to 0.07096851927516959
 </pre></div>
 </div>
 </div>
@@ -1620,7 +1623,7 @@ Coefficient is 0.21799898875200976, SE is equal to 0.057493830588936125
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.1185835120533181, SE is equal to 0.0520425367975187
+Coefficient is 0.07527084556415806, SE is equal to 0.0515601201415684
 </pre></div>
 </div>
 </div>
@@ -1682,23 +1685,23 @@ of the methods works better.</p>
   <tbody>
     <tr>
       <th>RMSEY</th>
-      <td>0.001052</td>
-      <td>0.000457</td>
-      <td>0.000781</td>
-      <td>3.302202e-18</td>
-      <td>3.074464e-18</td>
-      <td>1.480297e-18</td>
-      <td>0.000927</td>
+      <td>0.002793</td>
+      <td>0.000801</td>
+      <td>0.000646</td>
+      <td>2.049643e-18</td>
+      <td>2.732857e-18</td>
+      <td>1.423363e-18</td>
+      <td>0.008042</td>
     </tr>
     <tr>
       <th>RMSED</th>
-      <td>0.000731</td>
-      <td>0.000210</td>
-      <td>0.000111</td>
-      <td>4.981770e-19</td>
-      <td>3.985416e-19</td>
-      <td>4.697097e-19</td>
-      <td>0.000479</td>
+      <td>0.000715</td>
+      <td>0.000002</td>
+      <td>0.000328</td>
+      <td>3.273735e-19</td>
+      <td>4.270089e-20</td>
+      <td>1.024821e-18</td>
+      <td>0.000282</td>
     </tr>
   </tbody>
 </table>
@@ -1764,7 +1767,7 @@ of the methods works better.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.19383197873214908, SE is equal to 0.053317489710019324
+Coefficient is 0.1996147717022215, SE is equal to 0.051875246349124514
 </pre></div>
 </div>
 </div>
@@ -1839,38 +1842,38 @@ Coefficient is 0.19383197873214908, SE is equal to 0.053317489710019324
     </tr>
     <tr>
       <th>Lasso</th>
-      <td>0.220</td>
-      <td>0.053</td>
+      <td>0.206</td>
+      <td>0.054</td>
     </tr>
     <tr>
       <th>Post-Lasso</th>
-      <td>0.216</td>
-      <td>0.057</td>
+      <td>0.222</td>
+      <td>0.054</td>
     </tr>
     <tr>
       <th>CV Lasso</th>
-      <td>0.198</td>
+      <td>0.194</td>
       <td>0.058</td>
     </tr>
     <tr>
       <th>CV Elnet</th>
-      <td>0.218</td>
+      <td>0.195</td>
       <td>0.057</td>
     </tr>
     <tr>
       <th>CV Ridge</th>
-      <td>0.187</td>
-      <td>0.057</td>
+      <td>0.214</td>
+      <td>0.056</td>
     </tr>
     <tr>
       <th>Random Forest</th>
-      <td>0.119</td>
+      <td>0.075</td>
       <td>0.052</td>
     </tr>
     <tr>
       <th>Best</th>
-      <td>0.194</td>
-      <td>0.053</td>
+      <td>0.200</td>
+      <td>0.052</td>
     </tr>
   </tbody>
 </table>
