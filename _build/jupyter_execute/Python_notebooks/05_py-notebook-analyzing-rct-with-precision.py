@@ -8,23 +8,17 @@
 # ### Jonathan Roth's DGP
 # 
 # Here we set up a DGP with heterogenous effects. In this example, with is due to Jonathan Roth, we have:
-# $$
 # \begin{align}
 # E [Y(0) | Z] = - Z, \quad E [Y(1) |Z] = Z, \quad Z \sim N(0,1).
 # \end{align}
-# $$
 # The CATE is
-# $$
 # \begin{align}
 # E [Y(1) - Y(0) | Z ]= 2 Z.
 # \end{align}
-# $$
 # and the ATE is
-# $$
 # \begin{align}
 # 2 E Z = 0.
 # \end{align}
-# $$
 # 
 # We would like to estimate ATE as precisely as possible.
 # 

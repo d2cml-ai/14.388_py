@@ -8,11 +8,9 @@
 # ## Introduction
 
 # We provide an additional empirical example of partialling-out with Lasso to estimate the regression coefficient $\beta_1$ in the high-dimensional linear regression model:
-# $$
 # \begin{align}
 # Y = \beta_1 D +  \beta_2'W + \epsilon.
 # \end{align}
-# $$
 #   
 # Specifically, we are interested in how the rates  at which economies of different countries grow ($Y$) are related to the initial wealth levels in each country ($D$) controlling for country's institutional, educational, and other similar characteristics ($W$).
 #   
