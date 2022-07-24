@@ -598,9 +598,11 @@ title="Print to PDF"
 </section>
 <section id="partially-linear-iv-model">
 <h2><span class="section-number">24.2. </span>Partially Linear IV Model<a class="headerlink" href="#partially-linear-iv-model" title="Permalink to this headline">#</a></h2>
-<p>We consider the partially linear structural equation model:
-\begin{align}
+<p>We consider the partially linear structural equation model:</p>
+<p>\begin{align}\tag{1}
 &amp;  Y - D\theta_0 = g_0(X) + \zeta,  &amp; E[\zeta \mid Z,X]= 0,\
+\end{align}<br />
+\begin{align}\tag{2}
 &amp; Z = m_0(X) +  V,   &amp;  E[V \mid X] = 0.
 \end{align}</p>
 <p>Note that this model is not a regression model unless <span class="math notranslate nohighlight">\(Z=D\)</span>.  The model  is a canonical
@@ -608,28 +610,28 @@ model in causal inference, going back to P. Wright’s work on IV methods for es
 <p>The idea of this model is that there is a structural or causal relation between <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(D\)</span>, captured by <span class="math notranslate nohighlight">\(\theta_0\)</span>, and <span class="math notranslate nohighlight">\(g_0(X) + \zeta\)</span> is the stochastic error, partly explained by covariates <span class="math notranslate nohighlight">\(X\)</span>.  <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(\zeta\)</span> are stochastic errors that are not explained by <span class="math notranslate nohighlight">\(X\)</span>. Since <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are jointly determined, we need an external factor, commonly referred to as an instrument, <span class="math notranslate nohighlight">\(Z\)</span> to create exogenous variation
 in <span class="math notranslate nohighlight">\(D\)</span>.   Note that <span class="math notranslate nohighlight">\(Z\)</span> should affect <span class="math notranslate nohighlight">\(D\)</span>.  The <span class="math notranslate nohighlight">\(X\)</span> here serve again as confounding factors, so we can think of variation in <span class="math notranslate nohighlight">\(Z\)</span> as being exogenous only conditional on <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p>The causal DAG this model corresponds to is given by:
-$<span class="math notranslate nohighlight">\(
+\begin{align}
 Z \to D,  X \to (Y, Z, D),  L \to (Y,D),
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>L<span class="math notranslate nohighlight">\( is the latent confounder affecting both \)</span>Y<span class="math notranslate nohighlight">\( and \)</span>D<span class="math notranslate nohighlight">\(, but not \)</span>Z$.</p>
+\end{align}
+where <span class="math notranslate nohighlight">\(L\)</span> is the latent confounder affecting both <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(D\)</span>, but not <span class="math notranslate nohighlight">\(Z\)</span>.</p>
 <hr class="docutils" />
 <p><strong>Example</strong></p>
 <p>A simple contextual example is from biostatistics, where <span class="math notranslate nohighlight">\(Y\)</span> is a health outcome and <span class="math notranslate nohighlight">\(D\)</span> is indicator of smoking.  Thus, <span class="math notranslate nohighlight">\(\theta_0\)</span> is captures the effect of smoking on health.  Health outcome <span class="math notranslate nohighlight">\(Y\)</span> and smoking behavior <span class="math notranslate nohighlight">\(D\)</span> are treated as being jointly determined.  <span class="math notranslate nohighlight">\(X\)</span> represents patient characteristics, and <span class="math notranslate nohighlight">\(Z\)</span> could be a doctor’s advice not to smoke (or another behavioral treatment) that may affect the outcome <span class="math notranslate nohighlight">\(Y\)</span> only through shifting the behavior <span class="math notranslate nohighlight">\(D\)</span>, conditional on characteristics <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <hr class="docutils" />
 <p><strong>PLIVM in Residualized Form</strong></p>
 <p>The PLIV model above can be rewritten in the following residualized form:
-$<span class="math notranslate nohighlight">\(
-  \tilde Y = \tilde D \theta_0 + \zeta,   \quad  E[\zeta \mid V,X]= 0,
-\)</span><span class="math notranslate nohighlight">\(
+\begin{align}
+\tilde Y = \tilde D \theta_0 + \zeta,   \quad  E[\zeta \mid V,X]= 0,
+\end{align}
 where
-\)</span><span class="math notranslate nohighlight">\(
- \tilde Y = (Y- \ell_0(X)),  \quad \ell_0(X) = E[Y \mid X] \\
-   \tilde D = (D - r_0(X)), \quad r_0(X) = E[D \mid X] \\
-   \tilde Z = (Z- m_0(X)), \quad m_0(X) = E[Z \mid X].
-\)</span><span class="math notranslate nohighlight">\(
-   The tilded variables above represent original variables after taking out or &quot;partialling out&quot;
-  the effect of \)</span>X<span class="math notranslate nohighlight">\(.  Note that \)</span>\theta_0<span class="math notranslate nohighlight">\( is identified from this equation if \)</span>V<span class="math notranslate nohighlight">\( 
-  and \)</span>U<span class="math notranslate nohighlight">\( have non-zero correlation, which automatically means that \)</span>U<span class="math notranslate nohighlight">\( and \)</span>V$
+\begin{align}
+\tilde Y = (Y- \ell_0(X)),  \quad \ell_0(X) = E[Y \mid X] \
+\tilde D = (D - r_0(X)), \quad r_0(X) = E[D \mid X] \
+\tilde Z = (Z- m_0(X)), \quad m_0(X) = E[Z \mid X].
+\end{align}
+The tilded variables above represent original variables after taking out or “partialling out”
+the effect of <span class="math notranslate nohighlight">\(X\)</span>.  Note that <span class="math notranslate nohighlight">\(\theta_0\)</span> is identified from this equation if <span class="math notranslate nohighlight">\(V\)</span>
+and <span class="math notranslate nohighlight">\(U\)</span> have non-zero correlation, which automatically means that <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>
 must have non-zero variation.</p>
 <hr class="docutils" />
 <p><strong>DML for PLIV Model</strong></p>
@@ -637,9 +639,9 @@ must have non-zero variation.</p>
 <p>Compute the estimates <span class="math notranslate nohighlight">\(\hat \ell_0\)</span>, <span class="math notranslate nohighlight">\(\hat r_0\)</span>, and <span class="math notranslate nohighlight">\(\hat m_0\)</span> , which amounts
 to solving the three problems of predicting <span class="math notranslate nohighlight">\(Y\)</span>, <span class="math notranslate nohighlight">\(D\)</span>, and <span class="math notranslate nohighlight">\(Z\)</span> using
 <span class="math notranslate nohighlight">\(X\)</span>, using any generic  ML method, giving us estimated residuals
-$<span class="math notranslate nohighlight">\(
-\tilde Y = Y - \hat \ell_0(X), \\ \tilde D= D - \hat r_0(X), \\ \tilde Z = Z- \hat m_0(X).
-\)</span>$
+\begin{align}
+\tilde Y = Y - \hat \ell_0(X), \ \tilde D= D - \hat r_0(X), \ \tilde Z = Z- \hat m_0(X).
+\end{align}
 The estimates should be of a cross-validated form, as detailed in the algorithm below.</p>
 <p>Estimate <span class="math notranslate nohighlight">\(\theta_0\)</span> by the the intstrumental
 variable regression of <span class="math notranslate nohighlight">\(\tilde Y\)</span> on <span class="math notranslate nohighlight">\(\tilde D\)</span> using <span class="math notranslate nohighlight">\(\tilde Z\)</span> as an instrument.
@@ -1281,7 +1283,7 @@ quality of insitutions;</p></li>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19  
 
- Coefficient (se) = 0.8810417084734847 (0.3281167802109229)
+ Coefficient (se) = 0.7924206775468757 (0.26418864780188467)
 </pre></div>
 </div>
 </div>
@@ -1349,19 +1351,17 @@ quality of insitutions;</p></li>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
+1  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
+4  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4  
-5  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6  
@@ -1386,16 +1386,14 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13  
+14  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14  
-15  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17  
+17  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18  
@@ -1403,7 +1401,7 @@ quality of insitutions;</p></li>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19  
 
- Coefficient (se) = 0.7532474868377315 (0.16787913159969087)
+ Coefficient (se) = 0.7044827284533932 (0.16135821498685488)
 </pre></div>
 </div>
 </div>
@@ -1464,18 +1462,18 @@ quality of insitutions;</p></li>
   <tbody>
     <tr>
       <th>RMSE for Y:</th>
-      <td>0.789960</td>
-      <td>0.956996</td>
+      <td>0.802124</td>
+      <td>0.940005</td>
     </tr>
     <tr>
       <th>RMSE for D:</th>
-      <td>1.328334</td>
-      <td>1.568329</td>
+      <td>1.329055</td>
+      <td>1.596448</td>
     </tr>
     <tr>
       <th>RMSE for Z:</th>
-      <td>0.940915</td>
-      <td>1.028669</td>
+      <td>0.928385</td>
+      <td>1.009885</td>
     </tr>
   </tbody>
 </table>
@@ -1500,19 +1498,19 @@ quality of insitutions;</p></li>
   <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.159</td>
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   9.268</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   8.736</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.00340</td>
+  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.00439</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>16:55:04</td>     <th>  Log-Likelihood:    </th>          <td> -113.57</td>
+  <th>Time:</th>                 <td>20:11:23</td>     <th>  Log-Likelihood:    </th>          <td> -114.72</td>
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   229.1</td>
+  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   231.4</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   231.3</td>
+  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   233.6</td>
 </tr>
 <tr>
   <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
@@ -1526,21 +1524,21 @@ quality of insitutions;</p></li>
    <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>x1</th> <td>   -0.6326</td> <td>    0.208</td> <td>   -3.044</td> <td> 0.003</td> <td>   -1.048</td> <td>   -0.217</td>
+  <th>x1</th> <td>   -0.6551</td> <td>    0.222</td> <td>   -2.956</td> <td> 0.004</td> <td>   -1.098</td> <td>   -0.212</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td> 0.769</td> <th>  Durbin-Watson:     </th> <td>   1.702</td>
+  <th>Omnibus:</th>       <td> 0.507</td> <th>  Durbin-Watson:     </th> <td>   1.706</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.681</td> <th>  Jarque-Bera (JB):  </th> <td>   0.837</td>
+  <th>Prob(Omnibus):</th> <td> 0.776</td> <th>  Jarque-Bera (JB):  </th> <td>   0.653</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td>-0.128</td> <th>  Prob(JB):          </th> <td>   0.658</td>
+  <th>Skew:</th>          <td>-0.118</td> <th>  Prob(JB):          </th> <td>   0.721</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.502</td> <th>  Cond. No.          </th> <td>    1.00</td>
+  <th>Kurtosis:</th>      <td> 2.565</td> <th>  Cond. No.          </th> <td>    1.00</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br/>[2] Standard Errors are heteroscedasticity robust (HC1)</div></div>
 </div>
@@ -1554,25 +1552,25 @@ quality of insitutions;</p></li>
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.063</td>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.078</td>
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.049</td>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.064</td>
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   3.324</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   4.041</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0730</td> 
+  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0487</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>16:55:04</td>     <th>  Log-Likelihood:    </th>          <td> -106.89</td>
+  <th>Time:</th>                 <td>20:11:23</td>     <th>  Log-Likelihood:    </th>          <td> -106.40</td>
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   215.8</td>
+  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   214.8</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   217.9</td>
+  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   217.0</td>
 </tr>
 <tr>
   <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
@@ -1586,21 +1584,21 @@ quality of insitutions;</p></li>
    <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>x1</th> <td>   -0.3554</td> <td>    0.195</td> <td>   -1.823</td> <td> 0.073</td> <td>   -0.745</td> <td>    0.034</td>
+  <th>x1</th> <td>   -0.4009</td> <td>    0.199</td> <td>   -2.010</td> <td> 0.049</td> <td>   -0.799</td> <td>   -0.002</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td> 0.226</td> <th>  Durbin-Watson:     </th> <td>   1.600</td>
+  <th>Omnibus:</th>       <td> 0.188</td> <th>  Durbin-Watson:     </th> <td>   1.631</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.893</td> <th>  Jarque-Bera (JB):  </th> <td>   0.232</td>
+  <th>Prob(Omnibus):</th> <td> 0.910</td> <th>  Jarque-Bera (JB):  </th> <td>   0.198</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td> 0.130</td> <th>  Prob(JB):          </th> <td>   0.891</td>
+  <th>Skew:</th>          <td> 0.117</td> <th>  Prob(JB):          </th> <td>   0.906</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.860</td> <th>  Cond. No.          </th> <td>    1.00</td>
+  <th>Kurtosis:</th>      <td> 2.861</td> <th>  Cond. No.          </th> <td>    1.00</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br/>[2] Standard Errors are heteroscedasticity robust (HC1)</div></div>
 </div>
@@ -1649,11 +1647,11 @@ quality of insitutions;</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 1.9000000000000035 LB = 0.490000000000002
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 1.5500000000000034 LB = 0.42000000000000215
 </pre></div>
 </div>
 <img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_30_1.png" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_30_1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 1.9000000000000035, &#39;LB&#39;: 0.490000000000002}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 1.5500000000000034, &#39;LB&#39;: 0.42000000000000215}
 </pre></div>
 </div>
 </div>
@@ -1666,11 +1664,11 @@ quality of insitutions;</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 2.0000000000000036 LB = 0.40000000000000213
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 2.0000000000000036 LB = 0.3600000000000021
 </pre></div>
 </div>
 <img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_31_1.png" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_31_1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 2.0000000000000036, &#39;LB&#39;: 0.40000000000000213}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 2.0000000000000036, &#39;LB&#39;: 0.3600000000000021}
 </pre></div>
 </div>
 </div>
