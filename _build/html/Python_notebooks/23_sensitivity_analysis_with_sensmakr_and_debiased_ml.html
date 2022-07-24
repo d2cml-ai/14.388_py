@@ -1704,7 +1704,7 @@ Verbal interpretation of sensitivity statistics:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.15443441037623795, SE is equal to 0.09451376705523733
+Coefficient is 0.11905495724042131, SE is equal to 0.07092938599616556
 </pre></div>
 </div>
 </div>
@@ -1723,8 +1723,8 @@ Coefficient is 0.15443441037623795, SE is equal to 0.09451376705523733
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0.8015369470049768
-Controls explain the following fraction of variance of treatment 0.9607174240945154
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0.8129803148919776
+Controls explain the following fraction of variance of treatment 0.9572254448885076
 </pre></div>
 </div>
 </div>
@@ -1763,31 +1763,31 @@ Null hypothesis: q = 1 and reduce = True
 -- The null hypothesis deemed problematic is H0:tau = 0.0 
 
 Unadjusted Estimates of &#39; resD_rf &#39;:
-  Coef. estimate: 0.384
-  Standard Error: 0.043
-  t-value: 8.958 
+  Coef. estimate: 0.256
+  Standard Error: 0.04
+  t-value: 6.328 
 
 Sensitivity Statistics:
-  Partial R2 of treatment with outcome: 0.059
-  Robustness Value, q = 1 : 0.221
-  Robustness Value, q = 1 alpha = 0.05 : 0.178 
+  Partial R2 of treatment with outcome: 0.03
+  Robustness Value, q = 1 : 0.162
+  Robustness Value, q = 1 alpha = 0.05 : 0.115 
 
 Verbal interpretation of sensitivity statistics:
 
--- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 5.925 % of the residual variance of the treatment to fully account for the observed estimated effect.
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 3.048 % of the residual variance of the treatment to fully account for the observed estimated effect.
 
--- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 22.145 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 22.145 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
+-- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 16.227 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 16.227 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
 
--- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 17.772 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 17.772 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
+-- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 11.506 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 11.506 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
 
 Bounds on omitted variable bias:
 --The table below shows the maximum strength of unobserved confounders with association with the treatment and the outcome bounded by a multiple of the observed explanatory power of the chosen benchmark covariate(s).
 
-    bound_label   r2dz_x   r2yz_dx treatment  adjusted_estimate  adjusted_se  \
-0  1x Intercept  0.00103  0.000175   resD_rf           0.383039     0.042867   
+    bound_label    r2dz_x   r2yz_dx treatment  adjusted_estimate  adjusted_se  \
+0  1x Intercept  0.002617  0.002658   resD_rf           0.252165     0.040465   
 
    adjusted_t  adjusted_lower_CI  adjusted_upper_CI  
-0    8.935497           0.298941           0.467137  
+0    6.231622           0.172779           0.331551  
 </pre></div>
 </div>
 <img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_46_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_46_1.png" />

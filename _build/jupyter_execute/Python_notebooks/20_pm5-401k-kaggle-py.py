@@ -126,9 +126,9 @@ data[['p401', 'net_tfa']].groupby('p401').mean().diff()
 
 # We first look at the treatment effect of e401 on net total financial assets. We give estimates of the ATE and ATT that corresponds to the linear model
 # 
-# \begin{equation*}
-# Y = D \alpha + f(X)'\beta+ \epsilon,
-# \end{equation*}
+# \begin{align}
+# Y = D \alpha + f(X)'\beta+ \epsilon
+# \end{align}
 # 
 # where $f(X)$ includes indicators of marital status, two-earner status, defined benefit pension status, IRA participation status, and home ownership status, and  orthogonal polynomials of degrees 2, 4, 6 and 8 in family size, education, age and  income, respectively. The dimensions of $f(X)$ is 25. 
 # 
@@ -212,9 +212,11 @@ data_ml_aux = dml.DoubleMLData(model_flex, y_col='net_tfa',                     
 
 # We start using lasso to estimate the function $g_0$ and $m_0$ in the following PLR model:
 
-# \begin{align}
-#  &  Y = D\theta_0 + g_0(X) + \zeta,  &  E[\zeta \mid D,X]= 0,\\
-#  & D = m_0(X) +  V,   &  E[V \mid X] = 0.
+# \begin{align}\tag{1}
+# Y = D\theta_0 + g_0(X) + \zeta,  &  E[\zeta \mid D,X]= 0,\\
+# \end{align}
+# \begin{align}\tag{2}
+# D = m_0(X) +  V,   &  E[V \mid X] = 0.
 # \end{align}
 
 # In[13]:
@@ -246,12 +248,18 @@ dml_plr.summary
 # In[14]:
 
 
-print(dml_plr.params_names)
-g_hat = dml_plr.predictions['ml_l'].flatten() # predictions of g_o
-m_hat = dml_plr.predictions['ml_m'].flatten() # predictions of m_o
+dml_plr.params_names
 
 
 # In[15]:
+
+
+print(dml_plr.params_names)
+g_hat = dml_plr.predictions[dml_plr.params_names[0]].flatten() # predictions of g_o
+m_hat = dml_plr.predictions[dml_plr.params_names[1]].flatten() # predictions of m_o
+
+
+# In[16]:
 
 
 y = pension.net_tfa.to_numpy()
@@ -262,7 +270,7 @@ lasso_y_rmse = np.sqrt( np.mean( ( y - predictions_y ) ** 2 ) )
 lasso_y_rmse
 
 
-# In[16]:
+# In[17]:
 
 
 # cross-fitted RMSE: treatment
@@ -295,7 +303,7 @@ np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 # We can compare the accuracy of this model to the model that has been estimated with lasso.
 
-# In[17]:
+# In[18]:
 
 
 # Random Forest
@@ -316,8 +324,8 @@ forest_plr = dml_plr.coef
 forest_std_plr = dml_plr.summary[ 'std err' ]
 
 # Evaluation predictions
-g_hat = dml_plr.predictions['ml_g'].flatten() # predictions of g_o
-m_hat = dml_plr.predictions['ml_m'].flatten() # predictions of m_o
+g_hat = dml_plr.predictions[dml_plr.params_names[0]].flatten() # predictions of g_o
+m_hat = dml_plr.predictions[dml_plr.params_names[1]].flatten() # predictions of m_o
 
 y = pension.net_tfa.to_numpy()
 theta = dml_plr.coef[ 0 ]
@@ -341,7 +349,7 @@ np.mean( ( m_hat > 0.5 ) * 1 != d )
 # | min_samples_leaf = 1                               	| minbucket = round( `minsplit`/3 ) 	|
 # | ccp_alpha = 0.0                                    	| cp = 0.01 (doubts)                	|
 
-# In[26]:
+# In[19]:
 
 
 # Trees
@@ -367,8 +375,8 @@ tree_plr = dml_plr.coef
 tree_std_plr = dml_plr.summary[ 'std err' ]
 
 # Evaluation predictions
-g_hat = dml_plr.predictions['ml_g'].flatten() # predictions of g_o
-m_hat = dml_plr.predictions['ml_m'].flatten() # predictions of m_o
+g_hat = dml_plr.predictions[dml_plr.params_names[0]].flatten() # predictions of g_o
+m_hat = dml_plr.predictions[dml_plr.params_names[1]].flatten() # predictions of m_o
 
 y = pension.net_tfa.to_numpy()
 theta = dml_plr.coef[ 0 ]
@@ -383,7 +391,7 @@ print( tree_d_rmse )
 np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 
-# In[27]:
+# In[20]:
 
 
 # Boosted Trees
@@ -405,8 +413,8 @@ boost_plr = dml_plr.coef
 boost_std_plr = dml_plr.summary[ 'std err' ]
 
 # Evaluation predictions
-g_hat = dml_plr.predictions['ml_g'].flatten() # predictions of g_o
-m_hat = dml_plr.predictions['ml_m'].flatten() # predictions of m_o
+g_hat = dml_plr.predictions[dml_plr.params_names[0]].flatten() # predictions of g_o
+m_hat = dml_plr.predictions[dml_plr.params_names[1]].flatten() # predictions of m_o
 y = pension.net_tfa.to_numpy()
 theta = dml_plr.coef[ 0 ]
 predictions_y = d*theta + g_hat
@@ -424,7 +432,7 @@ np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 # Let's sum up the results:
 
-# In[28]:
+# In[21]:
 
 
 table = np.zeros( (4, 4) )
@@ -442,17 +450,19 @@ table_pd
 
 # Next, we consider estimation of average treatment effects when treatment effects are fully heterogeneous:
 
-#  \begin{eqnarray}\label{eq: HetPL1}
+#  \begin{align}\tag{3}
 #  & Y  = g_0(D, X) + U,  &  \quad E[U \mid X, D]= 0,\\
+# \end{align} 
+#  \begin{align}\tag{4}
 #   & D  = m_0(X) + V,  & \quad  E[V\mid X] = 0.
-# \end{eqnarray}
+# \end{align}
 
 # To reduce the disproportionate impact of extreme propensity score weights in the interactive model
 # we trim the propensity scores which are close to the bounds.
 
 # We have problems with the **Lasso code**. When we run the code with the main data (**data_ml**) we got a very high coefficient (30964, **uncomment and run the code below to see results**). However, when I run the code with the auxiliary data (**data_aux**), I get results similar to the R output.  I assume that `inc^7` and `inc^8` variables are making troubles in Sklearn models.
 
-# In[30]:
+# In[22]:
 
 
 # Lasso
@@ -495,7 +505,7 @@ print( lasso_d_irm )
 np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 
-# In[31]:
+# In[23]:
 
 
 # Random Forest
@@ -538,7 +548,7 @@ print( forest_d_irm )
 np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 
-# In[33]:
+# In[24]:
 
 
 # Trees
@@ -583,7 +593,7 @@ print( tree_d_irm )
 np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 
-# In[34]:
+# In[25]:
 
 
 # Boosted Trees
@@ -627,7 +637,7 @@ print( boost_d_irm )
 np.mean( ( m_hat > 0.5 ) * 1 != d )
 
 
-# In[35]:
+# In[26]:
 
 
 table2 = np.zeros( (4, 4) )
@@ -642,7 +652,7 @@ table2_pd
 
 # Here, Random Forest gives the best prediction rule for $g_0$ and Lasso the best prediction rule for $m_0$, respectively. Let us fit the IRM model using the best ML method for each equation to get a final estimate for the treatment effect of eligibility.
 
-# In[36]:
+# In[27]:
 
 
 np.random.seed(123)
@@ -668,13 +678,17 @@ best_std_irm = dml_irm.se[0]
 
 # Now, we consider estimation of local average treatment effects (LATE) of participation with the binary instrument `e401`. As before, $Y$ denotes the outcome `net_tfa`, and $X$ is the vector of covariates.  Here the structural equation model is:
 # 
-# \begin{eqnarray}
+# \begin{align}\tag{5}
 # & Y = g_0(Z,X) + U, &\quad E[U\mid Z,X] = 0,\\
+# \end{align}
+# \begin{align}\tag{6}
 # & D = r_0(Z,X) + V, &\quad E[V\mid Z, X] = 0,\\
+# \end{align}
+# \begin{align}\tag{7}
 # & Z = m_0(X) + \zeta, &\quad E[\zeta \mid X] = 0.
-# \end{eqnarray}
+# \end{align}
 
-# In[ ]:
+# In[28]:
 
 
 # # Constructing the data (as DoubleMLData)
@@ -704,7 +718,7 @@ best_std_irm = dml_irm.se[0]
 #                                x_cols = x_cols)
 
 
-# In[37]:
+# In[29]:
 
 
 # Constructing the data (as DoubleMLData)
@@ -732,7 +746,7 @@ x_cols = model_flex2.columns.to_list()[3:]
 data_IV_aux = dml.DoubleMLData(model_flex2, y_col='net_tfa',                                d_cols ='p401' , z_cols = 'e401' ,                                x_cols = x_cols)
 
 
-# In[38]:
+# In[30]:
 
 
 # Lasso
@@ -758,13 +772,13 @@ lasso_std_MLIIVM = dml_MLIIVM.se[ 0 ]
 
 # The confidence interval for the local average treatment effect of participation is given by
 
-# In[39]:
+# In[31]:
 
 
 dml_MLIIVM.confint()
 
 
-# In[40]:
+# In[32]:
 
 
 # variables
@@ -801,7 +815,7 @@ print( lasso_z_MLIIVM )
 
 # Again, we repeat the procedure for the other machine learning methods:
 
-# In[41]:
+# In[33]:
 
 
 # Random Forest
@@ -852,7 +866,7 @@ forest_z_MLIIVM = np.sqrt( np.mean( ( z - m_hat ) ** 2 ) )
 print( forest_z_MLIIVM )
 
 
-# In[42]:
+# In[34]:
 
 
 # Random tree
@@ -905,7 +919,7 @@ tree_z_MLIIVM = np.sqrt( np.mean( ( z - m_hat ) ** 2 ) )
 print( tree_z_MLIIVM )
 
 
-# In[43]:
+# In[35]:
 
 
 # Random boost
@@ -958,7 +972,7 @@ boost_z_MLIIVM = np.sqrt( np.mean( ( z - m_hat ) ** 2 ) )
 print( boost_z_MLIIVM )
 
 
-# In[44]:
+# In[36]:
 
 
 table3 = np.zeros( (5, 4) )
@@ -978,7 +992,7 @@ table3_pd
 
 # We might rerun the model using the best ML method for each equation to get a final estimate for the treatment effect of participation:
 
-# In[45]:
+# In[37]:
 
 
 # Random best

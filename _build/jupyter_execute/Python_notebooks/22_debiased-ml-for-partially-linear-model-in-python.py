@@ -62,33 +62,33 @@ warnings.filterwarnings('ignore')
 # ## DML algorithm
 # 
 # Here we perform estimation and inference of predictive coefficient $\alpha$ in the partially linear statistical model, 
-# $$
+# 
 # \begin{align}
 # Y = D\alpha + g(X) + U, \quad E (U | D, X) = 0. 
 # \end{align}
-# $$
+# 
 # For $\tilde Y = Y- E(Y|X)$ and $\tilde D= D- E(D|X)$, we can write
-# $$
+# 
 # \begin{align}
 # \tilde Y = \alpha \tilde D + U, \quad E (U |\tilde D) =0.
 # \end{align}
-# $$
+# 
 # Parameter $\alpha$ is then estimated using cross-fitting approach to obtain the residuals $\tilde D$ and $\tilde Y$.
 # The algorithm comsumes $Y, D, X$, and machine learning methods for learning the residuals $\tilde Y$ and $\tilde D$, where
 # the residuals are obtained by cross-validation (cross-fitting).
 # 
 # The statistical parameter $\alpha$ has a causal intertpreation of being the effect of $D$ on $Y$ in the causal DAG 
-# $$
+# 
 # \begin{align}
 # D\to Y, \quad X\to (D,Y)
 # \end{align}
-# $$
+# 
 # or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment $D$ given $X$:
-# $$
+# 
 # \begin{align}
 # Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \quad U = U(D).
 # \end{align}
-# $$
+# 
 # 
 
 # ### Clases needed for regression

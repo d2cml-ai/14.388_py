@@ -110,9 +110,9 @@ table
 
 # Now, we will construct a prediction rule for hourly wage $Y$, which depends linearly on job-relevant characteristics $X$:
 # 
-# \begin{equation}\label{decompose}
+# \begin{align}
 # Y = \beta'X+ \epsilon.
-# \end{equation}
+# \end{align}
 
 # Our goals are
 # 

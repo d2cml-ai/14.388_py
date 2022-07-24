@@ -596,8 +596,12 @@ dir(trees_fit)
 
 # ### Ensemble learning
 
-# In the final step, we can build a prediction model by combing the strengths of the models we considered so far. This ensemble method is of the form
-# 	$$ f(x) = \sum_{k=1}^K \alpha_k f_k(x) $$
+# In the final step, we can build a prediction model by combing the strengths of the models we considered so far. This ensemble method is of the form 
+# 
+# \begin{align}
+# f(x) = \sum_{k=1}^K \alpha_k f_k(x) 
+# \end{align}
+# 
 # where the $f_k$'s denote our prediction rules from the table above and the $\alpha_k$'s are the corresponding weights.
 
 # We focus on the prediction rules based on OLS, Post-Lasso, Elastic Net, Pruned Tree, Random Forest, Boosted Trees, and Neural Network and combine these methods into an ensemble method. The weights can be determined by a simple ols regression:

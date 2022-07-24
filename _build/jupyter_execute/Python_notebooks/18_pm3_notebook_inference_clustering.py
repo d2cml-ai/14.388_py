@@ -290,9 +290,9 @@ control_ols_table.loc[['PPQ110D', 'PPQ120D'], :]
 # using the **double machine learning** approach. 
 # 
 # For $\tilde Y = Y- E(Y|Z)$ and $\tilde D= D- E(D|Z)$, we can write
-# $$
+# \begin{align}
 # \tilde Y = \alpha \tilde D + \epsilon, \quad E (\epsilon |\tilde D) =0.
-# $$
+# \end{align}
 # 
 # Using cross-fitting, we employ modern regression methods
 # to build estimators $\hat \ell(Z)$ and $\hat m(Z)$ of $\ell(Z):=E(Y|Z)$ and $m(Z):=E(D|Z)$ to obtain the estimates of the residualized quantities:
@@ -640,7 +640,7 @@ DML2_ols = DML2_for_PLM(z, d, y, dreg, yreg, 2, clu)
 # ### Random Forest
 # 
 
-# In[36]:
+# In[33]:
 
 
 from sklearn.tree import DecisionTreeRegressor
@@ -648,7 +648,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 
 
-# In[37]:
+# In[34]:
 
 
 #DML with cross-validated Lasso:
@@ -670,7 +670,7 @@ DML2_RF = DML2_for_PLM(z, d, y, dreg, yreg, 2, clu)   # set to 2 due to computat
 # of the methods works better.
 # 
 
-# In[38]:
+# In[35]:
 
 
 mods = [DML2_ols, DML2_lasso, DML2_lasso_post , DML2_lasso_cv, DML2_ridge, DML2_elnet, DML2_RF]
@@ -694,7 +694,7 @@ pr_Res
 
 # #### This verfies that the function DML2_for_PLM has no errors
 
-# In[39]:
+# In[36]:
 
 
 np.where(DML2_lasso_post[ 'ytil' ] == 0)[0].size
@@ -702,7 +702,7 @@ np.where(DML2_lasso_post[ 'ytil' ] == 0)[0].size
 
 # It looks like the best method for predicting D is Lasso, and the best method for predicting Y is CV Ridge.
 
-# In[40]:
+# In[37]:
 
 
 #DML with cross-validated Lasso:
@@ -718,7 +718,7 @@ def yreg(z,y):
 DML2_best = DML2_for_PLM(z, d, y , dreg, yreg, 10, clu)
 
 
-# In[41]:
+# In[38]:
 
 
 table = np.zeros( ( 9 , 2 ))
@@ -742,7 +742,7 @@ table[ 7 , 1] = DML2_RF['se']
 table[ 8 , 1] = DML2_best['se']
 
 
-# In[42]:
+# In[39]:
 
 
 table = pd.DataFrame( table , index = [ "Baseline OLS", "Least Squares with controls", "Lasso",              "Post-Lasso", "CV Lasso","CV Elnet", "CV Ridge", "Random Forest", "Best" ] ,             columns = ["Estimate","Standard Error"] )
