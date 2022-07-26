@@ -712,6 +712,7 @@ stage errors.</p>
 <span class="kn">import</span> <span class="nn">hdmpy</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
@@ -736,52 +737,40 @@ stage errors.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">DML2_for_PLIVM</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">z</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="n">zreg</span><span class="p">,</span> <span class="n">nfold</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">):</span>
     
-    <span class="c1"># Num ob observations</span>
-    <span class="n">nobs</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    
-    <span class="c1"># Define folds indices </span>
-    <span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span><span class="o">*</span><span class="n">nobs</span>
-    <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span><span class="n">nobs</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="n">foldid</span> <span class="o">=</span> <span class="p">[</span><span class="n">list_1</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">]</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Here we use kfold to generate kfolds</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="c1">#To have a id vector from data</span>
+    <span class="n">train_id</span><span class="p">,</span> <span class="n">test_id</span> <span class="o">=</span>  <span class="p">[],</span> <span class="p">[]</span> <span class="c1">#arrays to store kfold&#39;s ids</span>
 
-    <span class="c1"># Create split function(similar to R)</span>
-    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">el</span> <span class="o">==</span> <span class="n">i</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">)</span> 
-
-    <span class="c1"># Split observation indices into folds </span>
-    <span class="n">list_2</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">list_2</span><span class="p">,</span> <span class="n">foldid</span><span class="p">)</span>
+    <span class="c1">#generate and store kfold&#39;s id</span>
+    <span class="k">for</span> <span class="n">kfold_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+        <span class="n">train_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kfold_index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">test_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kfold_index</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     
     <span class="c1"># Create array to save errors </span>
-    <span class="n">dtil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-    <span class="n">ytil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-    <span class="n">ztil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">dtil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">ytil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">ztil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
     
     <span class="n">total_modelos</span> <span class="o">=</span> <span class="p">[]</span>
     
     <span class="n">total_sample</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># loop to save results</span>
-    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)):</span>
-    
-        <span class="c1"># Split data - index to keep are in mask as booleans</span>
-        <span class="n">include_idx</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>  <span class="c1">#Here should go I[b] Set is more efficient, but doesn&#39;t reorder your elements if that is desireable</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">include_idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))])</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">train_id</span><span class="p">)):</span>
 
         <span class="c1"># Lasso regression, excluding folds selected </span>
-        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">d</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
-        <span class="n">zfit</span> <span class="o">=</span> <span class="n">zreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">z</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
-        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],],</span> <span class="n">d</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],])</span>
+        <span class="n">zfit</span> <span class="o">=</span> <span class="n">zreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],],</span> <span class="n">z</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],])</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],])</span>
 
         <span class="c1"># predict estimates using the </span>
-        <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
-        <span class="n">zhat</span> <span class="o">=</span> <span class="n">zfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
-        <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+        <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="p">)</span>
+        <span class="n">zhat</span> <span class="o">=</span> <span class="n">zfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="p">)</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="p">)</span>
         
         <span class="c1"># save errors  </span>
-        <span class="n">dtil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">dhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-        <span class="n">ztil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">zhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-        <span class="n">ytil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">dtil</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="o">-</span> <span class="n">dhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">ztil</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="o">-</span> <span class="n">zhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">ytil</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="o">-</span> <span class="n">yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
         
         <span class="n">total_modelos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">dfit</span> <span class="p">)</span>
         
@@ -1301,7 +1290,7 @@ quality of insitutions;</p></li>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19  
 
- Coefficient (se) = 0.8137162746656095 (0.27467198222698713)
+ Coefficient (se) = 0.8741183783725498 (0.32775653863668436)
 </pre></div>
 </div>
 </div>
@@ -1372,9 +1361,7 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
+2  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
@@ -1393,7 +1380,9 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8  
-9  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10  
@@ -1403,7 +1392,9 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12  
-13  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14  
@@ -1419,11 +1410,9 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19  
+19  
 
- Coefficient (se) = 0.9745247038316943 (0.2948330930871583)
+ Coefficient (se) = 0.7231475412149379 (0.17071501804247555)
 </pre></div>
 </div>
 </div>
@@ -1484,18 +1473,18 @@ quality of insitutions;</p></li>
   <tbody>
     <tr>
       <th>RMSE for Y:</th>
-      <td>0.788030</td>
-      <td>0.962951</td>
+      <td>0.785160</td>
+      <td>0.928944</td>
     </tr>
     <tr>
       <th>RMSE for D:</th>
-      <td>1.324941</td>
-      <td>1.508300</td>
+      <td>1.319298</td>
+      <td>1.583520</td>
     </tr>
     <tr>
       <th>RMSE for Z:</th>
-      <td>0.926348</td>
-      <td>1.039139</td>
+      <td>0.924800</td>
+      <td>0.977824</td>
     </tr>
   </tbody>
 </table>
@@ -1514,25 +1503,25 @@ quality of insitutions;</p></li>
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.108</td>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.170</td>
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.094</td>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.157</td>
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   6.494</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   8.792</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0133</td> 
+  <th>Date:</th>             <td>Tue, 26 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.00427</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>00:38:20</td>     <th>  Log-Likelihood:    </th>          <td> -113.44</td>
+  <th>Time:</th>                 <td>11:18:29</td>     <th>  Log-Likelihood:    </th>          <td> -114.26</td>
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   228.9</td>
+  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   230.5</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   231.0</td>
+  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   232.7</td>
 </tr>
 <tr>
   <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
@@ -1546,21 +1535,21 @@ quality of insitutions;</p></li>
    <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>x1</th> <td>   -0.4779</td> <td>    0.188</td> <td>   -2.548</td> <td> 0.013</td> <td>   -0.853</td> <td>   -0.103</td>
+  <th>x1</th> <td>   -0.6682</td> <td>    0.225</td> <td>   -2.965</td> <td> 0.004</td> <td>   -1.119</td> <td>   -0.218</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td> 0.239</td> <th>  Durbin-Watson:     </th> <td>   1.662</td>
+  <th>Omnibus:</th>       <td> 0.541</td> <th>  Durbin-Watson:     </th> <td>   1.725</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.888</td> <th>  Jarque-Bera (JB):  </th> <td>   0.431</td>
+  <th>Prob(Omnibus):</th> <td> 0.763</td> <th>  Jarque-Bera (JB):  </th> <td>   0.679</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td>-0.037</td> <th>  Prob(JB):          </th> <td>   0.806</td>
+  <th>Skew:</th>          <td>-0.178</td> <th>  Prob(JB):          </th> <td>   0.712</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.605</td> <th>  Cond. No.          </th> <td>    1.00</td>
+  <th>Kurtosis:</th>      <td> 2.643</td> <th>  Cond. No.          </th> <td>    1.00</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br/>[2] Standard Errors are heteroscedasticity robust (HC1)</div></div>
 </div>
@@ -1574,25 +1563,25 @@ quality of insitutions;</p></li>
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.076</td>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.061</td>
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.061</td>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.047</td>
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   4.079</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   3.203</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0477</td> 
+  <th>Date:</th>             <td>Tue, 26 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0783</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>00:38:20</td>     <th>  Log-Likelihood:    </th>          <td> -106.29</td>
+  <th>Time:</th>                 <td>11:18:29</td>     <th>  Log-Likelihood:    </th>          <td> -106.52</td>
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   214.6</td>
+  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   215.0</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   216.7</td>
+  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   217.2</td>
 </tr>
 <tr>
   <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
@@ -1606,21 +1595,21 @@ quality of insitutions;</p></li>
    <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>x1</th> <td>   -0.3946</td> <td>    0.195</td> <td>   -2.020</td> <td> 0.048</td> <td>   -0.785</td> <td>   -0.004</td>
+  <th>x1</th> <td>   -0.3536</td> <td>    0.198</td> <td>   -1.790</td> <td> 0.078</td> <td>   -0.748</td> <td>    0.041</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td> 0.354</td> <th>  Durbin-Watson:     </th> <td>   1.637</td>
+  <th>Omnibus:</th>       <td> 0.201</td> <th>  Durbin-Watson:     </th> <td>   1.621</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.838</td> <th>  Jarque-Bera (JB):  </th> <td>   0.265</td>
+  <th>Prob(Omnibus):</th> <td> 0.904</td> <th>  Jarque-Bera (JB):  </th> <td>   0.209</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td> 0.153</td> <th>  Prob(JB):          </th> <td>   0.876</td>
+  <th>Skew:</th>          <td> 0.121</td> <th>  Prob(JB):          </th> <td>   0.901</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.924</td> <th>  Cond. No.          </th> <td>    1.00</td>
+  <th>Kurtosis:</th>      <td> 2.861</td> <th>  Cond. No.          </th> <td>    1.00</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br/>[2] Standard Errors are heteroscedasticity robust (HC1)</div></div>
 </div>
@@ -1669,11 +1658,11 @@ quality of insitutions;</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 2.0000000000000036 LB = 0.490000000000002
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 1.690000000000003 LB = 0.45000000000000195
 </pre></div>
 </div>
 <img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_30_1.png" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_30_1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 2.0000000000000036, &#39;LB&#39;: 0.490000000000002}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 1.690000000000003, &#39;LB&#39;: 0.45000000000000195}
 </pre></div>
 </div>
 </div>
@@ -1686,11 +1675,11 @@ quality of insitutions;</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 2.0000000000000036 LB = 0.3800000000000021
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 2.0000000000000036 LB = 0.39000000000000234
 </pre></div>
 </div>
 <img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_31_1.png" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_31_1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 2.0000000000000036, &#39;LB&#39;: 0.3800000000000021}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 2.0000000000000036, &#39;LB&#39;: 0.39000000000000234}
 </pre></div>
 </div>
 </div>
