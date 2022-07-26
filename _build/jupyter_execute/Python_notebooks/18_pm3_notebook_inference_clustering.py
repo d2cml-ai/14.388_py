@@ -312,47 +312,41 @@ control_ols_table.loc[['PPQ110D', 'PPQ120D'], :]
 # In[18]:
 
 
+from sklearn.model_selection import KFold
+
+
+# In[19]:
+
+
 def DML2_for_PLM(z, d, y, dreg, yreg, nfold, clu):
     
-    # Num ob observations
-    nobs = z.shape[0]
-    
-    # Define folds indices 
-    list_1 = [*range(0, nfold, 1)]*nobs
-    sample = np.random.choice(nobs,nobs, replace=False).tolist()
-    foldid = [list_1[index] for index in sample]
+    kf = KFold(n_splits = nfold, shuffle=True) #Here we use kfold to generate kfolds
+    I = np.arange(0, len(d)) #To have a id vector from data
+    train_id, test_id =  [], [] #arrays to store kfold's ids
 
-    # Create split function(similar to R)
-    def split(x, f):
-        count = max(f) + 1
-        return tuple( list(itertools.compress(x, (el == i for el in f))) for i in range(count) ) 
-
-    # Split observation indices into folds 
-    list_2 = [*range(0, nobs, 1)]
-    I = split(list_2, foldid)
+    #generate and store kfold's id
+    for kfold_index in kf.split(I):
+        train_id.append(kfold_index[0])
+        test_id.append(kfold_index[1])
     
     # Create array to save errors 
     dtil = np.zeros( len(z) ).reshape( len(z) , 1 )
     ytil = np.zeros( len(z) ).reshape( len(z) , 1 )
     
     # loop to save results
-    for b in range(0,len(I)):
-    
-        # Split data - index to keep are in mask as booleans
-        include_idx = set(I[b])  #Here should go I[b] Set is more efficient, but doesn't reorder your elements if that is desireable
-        mask = np.array([(i in include_idx) for i in range(len(z))])
+    for b in range(0,len(train_id)):
 
         # Lasso regression, excluding folds selected 
-        dfit = dreg(z[~mask,], d[~mask,])
-        yfit = yreg(z[~mask,], y[~mask,])
+        dfit = dreg(z[train_id[b],], d[train_id[b],])
+        yfit = yreg(z[train_id[b],], y[train_id[b],])
 
         # predict estimates using the 
-        dhat = dfit.predict( z[mask,] )
-        yhat = yfit.predict( z[mask,] )
+        dhat = dfit.predict( z[test_id[b],] )
+        yhat = yfit.predict( z[test_id[b],] )
 
         # save errors  
-        dtil[mask] =  d[mask,] - dhat.reshape( len(I[b]) , 1 )
-        ytil[mask] = y[mask,] - yhat.reshape( len(I[b]) , 1 )
+        dtil[test_id[b]] =  d[test_id[b],] - dhat.reshape( -1 , 1 )
+        ytil[test_id[b]] = y[test_id[b],] - yhat.reshape( -1 , 1 )
         print(b, " ")
     
     # Create dataframe 
@@ -369,14 +363,13 @@ def DML2_for_PLM(z, d, y, dreg, yreg, nfold, clu):
     print("Coefficient is {}, SE is equal to {}".format(coef_est, se))
     
     return Final_result
-    
 
 
 # Now, we apply the Double Machine Learning (DML) approach with different machine learning methods. First, we load the relevant libraries.
 
 # Let us, construct the input matrices.
 
-# In[19]:
+# In[20]:
 
 
 # Create main variables
@@ -386,7 +379,7 @@ Z = data.drop(['logghomr', 'logfssl', 'CountyCode'], axis=1)
 CLU = data['CountyCode']
 
 
-# In[20]:
+# In[21]:
 
 
 # as matrix
@@ -398,7 +391,7 @@ clu = clu.to_numpy().reshape( len(Y) , 1 )
 
 # ### Lasso 
 
-# In[21]:
+# In[22]:
 
 
 def dreg(z,d):
@@ -416,7 +409,7 @@ DML2_lasso = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 
 # #### We use SelectFromModel to select variables which do not have a zero coefficient. It is done because we want to reduce dimensionality as rlasso( post = T ) does.
 
-# In[22]:
+# In[23]:
 
 
 class Lasso_post:
@@ -453,7 +446,7 @@ class Lasso_post:
 
 # Run the below code to verify whether Lasso_post functions as it is expected. 
 
-# In[23]:
+# In[24]:
 
 
 def dreg(z,d):
@@ -472,14 +465,14 @@ DML2_lasso_post = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 # ### hdmy
 # We are going to replicate the above regressions but using `hmdpy` library.
 
-# In[24]:
+# In[25]:
 
 
 import hdmpy
 from statsmodels.tools import add_constant
 
 
-# In[25]:
+# In[26]:
 
 
 class rlasso_sklearn:
@@ -509,7 +502,7 @@ class rlasso_sklearn:
         return prediction
 
 
-# In[26]:
+# In[27]:
 
 
 # Post = false
@@ -524,7 +517,7 @@ def yreg(x,y):
 DML2_lasso_hdmpy = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 
 
-# In[27]:
+# In[28]:
 
 
 # Post = True
@@ -544,7 +537,7 @@ DML2_lasso_post_hdmpy = DML2_for_PLM(z, d, y, dreg, yreg, 10, clu)
 # ### cv.glmnet curiosities
 # 1. According to [link1](https://stackoverflow.com/questions/24098212/what-does-the-option-normalize-true-in-lasso-sklearn-do) and [link2](https://statisticaloddsandends.wordpress.com/2018/11/15/a-deep-dive-into-glmnet-standardize/), It standardize **X** variables before estimation. In sklearn we have an option named **normalize**. It normalizes **X** by subtracting the mean and dividing by the l2-norm. Based on [link3](https://stackoverflow.com/questions/59846325/confusion-about-standardize-option-of-glmnet-package-in-r), **cv.glmnet (standardize = TRUE)** and **sklearn (normlize = True)** are not the same. We decided to use **StandardScaler** that meets suggestions made in **link3**. We proved this in the commented code below.
 
-# In[28]:
+# In[29]:
 
 
 class standard_skl_model:
@@ -576,7 +569,7 @@ class standard_skl_model:
 
 # Run the below code to verify whether standard_skl_model functions as it is expected. 
 
-# In[29]:
+# In[30]:
 
 
 #DML with cross-validated Lasso:
@@ -591,7 +584,7 @@ def yreg(z,y):
 DML2_lasso_cv = DML2_for_PLM(z, d, y, dreg, yreg, 2 , clu)
 
 
-# In[30]:
+# In[31]:
 
 
 # DML with cross-validated Lasso:
@@ -606,7 +599,7 @@ def yreg(z,y):
 DML2_elnet = DML2_for_PLM(z, d, y, dreg, yreg, 2 , clu)
 
 
-# In[31]:
+# In[32]:
 
 
 #DML with cross-validated Lasso:
@@ -623,7 +616,7 @@ DML2_ridge = DML2_for_PLM(z, d, y, dreg, yreg, 2, clu)
 
 # Here we also compute DML with OLS used as the ML method
 
-# In[32]:
+# In[33]:
 
 
 #DML with cross-validated Lasso:
@@ -643,7 +636,7 @@ DML2_ols = DML2_for_PLM(z, d, y, dreg, yreg, 2, clu)
 # ### Random Forest
 # 
 
-# In[33]:
+# In[34]:
 
 
 from sklearn.tree import DecisionTreeRegressor
@@ -651,7 +644,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 
 
-# In[34]:
+# In[35]:
 
 
 #DML with cross-validated Lasso:
@@ -673,7 +666,7 @@ DML2_RF = DML2_for_PLM(z, d, y, dreg, yreg, 2, clu)   # set to 2 due to computat
 # of the methods works better.
 # 
 
-# In[35]:
+# In[36]:
 
 
 mods = [DML2_ols, DML2_lasso, DML2_lasso_post , DML2_lasso_cv, DML2_ridge, DML2_elnet, DML2_RF]
@@ -697,7 +690,7 @@ pr_Res
 
 # #### This verfies that the function DML2_for_PLM has no errors
 
-# In[36]:
+# In[37]:
 
 
 np.where(DML2_lasso_post[ 'ytil' ] == 0)[0].size
@@ -705,7 +698,7 @@ np.where(DML2_lasso_post[ 'ytil' ] == 0)[0].size
 
 # It looks like the best method for predicting D is Lasso, and the best method for predicting Y is CV Ridge.
 
-# In[37]:
+# In[38]:
 
 
 #DML with cross-validated Lasso:
@@ -721,7 +714,7 @@ def yreg(z,y):
 DML2_best = DML2_for_PLM(z, d, y , dreg, yreg, 10, clu)
 
 
-# In[38]:
+# In[39]:
 
 
 table = np.zeros( ( 9 , 2 ))
@@ -745,7 +738,7 @@ table[ 7 , 1] = DML2_RF['se']
 table[ 8 , 1] = DML2_best['se']
 
 
-# In[39]:
+# In[40]:
 
 
 table = pd.DataFrame( table , index = [ "Baseline OLS", "Least Squares with controls", "Lasso",              "Post-Lasso", "CV Lasso","CV Elnet", "CV Ridge", "Random Forest", "Best" ] ,             columns = ["Estimate","Standard Error"] )

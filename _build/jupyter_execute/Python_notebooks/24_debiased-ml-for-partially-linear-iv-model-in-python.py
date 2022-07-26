@@ -163,6 +163,7 @@ from sklearn.linear_model import ElasticNet
 import hdmpy
 import pyreadr
 from scipy.stats import chi2
+from sklearn.model_selection import KFold
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -185,52 +186,40 @@ AJR = rdata_read[ 'AJR' ]
 
 def DML2_for_PLIVM(x, d, z , y, dreg, yreg, zreg, nfold = 2 ):
     
-    # Num ob observations
-    nobs = x.shape[0]
-    
-    # Define folds indices 
-    list_1 = [*range(0, nfold, 1)]*nobs
-    sample = np.random.choice(nobs,nobs, replace=False).tolist()
-    foldid = [list_1[index] for index in sample]
+    kf = KFold(n_splits = nfold, shuffle=True) #Here we use kfold to generate kfolds
+    I = np.arange(0, len(d)) #To have a id vector from data
+    train_id, test_id =  [], [] #arrays to store kfold's ids
 
-    # Create split function(similar to R)
-    def split(x, f):
-        count = max(f) + 1
-        return tuple( list(itertools.compress(x, (el == i for el in f))) for i in range(count) ) 
-
-    # Split observation indices into folds 
-    list_2 = [*range(0, nobs, 1)]
-    I = split(list_2, foldid)
+    #generate and store kfold's id
+    for kfold_index in kf.split(I):
+        train_id.append(kfold_index[0])
+        test_id.append(kfold_index[1])
     
     # Create array to save errors 
-    dtil = np.zeros( len(x) ).reshape( len(x) , 1 )
-    ytil = np.zeros( len(x) ).reshape( len(x) , 1 )
-    ztil = np.zeros( len(x) ).reshape( len(x) , 1 )
+    dtil = np.zeros( len(z) ).reshape( len(z) , 1 )
+    ytil = np.zeros( len(z) ).reshape( len(z) , 1 )
+    ztil = np.zeros( len(z) ).reshape( len(z) , 1 )
     
     total_modelos = []
     
     total_sample = 0
     # loop to save results
-    for b in range(0,len(I)):
-    
-        # Split data - index to keep are in mask as booleans
-        include_idx = set(I[b])  #Here should go I[b] Set is more efficient, but doesn't reorder your elements if that is desireable
-        mask = np.array([(i in include_idx) for i in range(len(x))])
+    for b in range(0,len(train_id)):
 
         # Lasso regression, excluding folds selected 
-        dfit = dreg(x[~mask,], d[~mask,])
-        zfit = zreg(x[~mask,], z[~mask,])
-        yfit = yreg(x[~mask,], y[~mask,])
+        dfit = dreg(x[train_id[b],], d[train_id[b],])
+        zfit = zreg(x[train_id[b],], z[train_id[b],])
+        yfit = yreg(x[train_id[b],], y[train_id[b],])
 
         # predict estimates using the 
-        dhat = dfit.predict( x[mask,] )
-        zhat = zfit.predict( x[mask,] )
-        yhat = yfit.predict( x[mask,] )
+        dhat = dfit.predict( x[test_id[b],] )
+        zhat = zfit.predict( x[test_id[b],] )
+        yhat = yfit.predict( x[test_id[b],] )
         
         # save errors  
-        dtil[mask] = d[mask,] - dhat.reshape( len(I[b]) , 1 )
-        ztil[mask] = z[mask,] - zhat.reshape( len(I[b]) , 1 )
-        ytil[mask] = y[mask,] - yhat.reshape( len(I[b]) , 1 )
+        dtil[test_id[b]] = d[test_id[b],] - dhat.reshape( -1 , 1 )
+        ztil[test_id[b]] = z[test_id[b],] - zhat.reshape( -1 , 1 )
+        ytil[test_id[b]] = y[test_id[b],] - yhat.reshape( -1 , 1 )
         
         total_modelos.append( dfit )
         

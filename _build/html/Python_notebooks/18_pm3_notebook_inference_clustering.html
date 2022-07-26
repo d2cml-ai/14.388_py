@@ -1080,47 +1080,42 @@ estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 <p>The following algorithm comsumes <span class="math notranslate nohighlight">\(Y, D, Z\)</span>, and a machine learning method for learning the residuals <span class="math notranslate nohighlight">\(\tilde Y\)</span> and <span class="math notranslate nohighlight">\(\tilde D\)</span>, where the residuals are obtained by cross-validation (cross-fitting). Then, it prints the estimated coefficient <span class="math notranslate nohighlight">\(\beta\)</span> and the corresponding standard error from the final OLS regression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">DML2_for_PLM</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">clu</span><span class="p">):</span>
     
-    <span class="c1"># Num ob observations</span>
-    <span class="n">nobs</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    
-    <span class="c1"># Define folds indices </span>
-    <span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span><span class="o">*</span><span class="n">nobs</span>
-    <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span><span class="n">nobs</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="n">foldid</span> <span class="o">=</span> <span class="p">[</span><span class="n">list_1</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">]</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="n">nfold</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Here we use kfold to generate kfolds</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="c1">#To have a id vector from data</span>
+    <span class="n">train_id</span><span class="p">,</span> <span class="n">test_id</span> <span class="o">=</span>  <span class="p">[],</span> <span class="p">[]</span> <span class="c1">#arrays to store kfold&#39;s ids</span>
 
-    <span class="c1"># Create split function(similar to R)</span>
-    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">el</span> <span class="o">==</span> <span class="n">i</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">)</span> 
-
-    <span class="c1"># Split observation indices into folds </span>
-    <span class="n">list_2</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">list_2</span><span class="p">,</span> <span class="n">foldid</span><span class="p">)</span>
+    <span class="c1">#generate and store kfold&#39;s id</span>
+    <span class="k">for</span> <span class="n">kfold_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+        <span class="n">train_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kfold_index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">test_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kfold_index</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     
     <span class="c1"># Create array to save errors </span>
     <span class="n">dtil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
     <span class="n">ytil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
     
     <span class="c1"># loop to save results</span>
-    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)):</span>
-    
-        <span class="c1"># Split data - index to keep are in mask as booleans</span>
-        <span class="n">include_idx</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>  <span class="c1">#Here should go I[b] Set is more efficient, but doesn&#39;t reorder your elements if that is desireable</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">include_idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">))])</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">train_id</span><span class="p">)):</span>
 
         <span class="c1"># Lasso regression, excluding folds selected </span>
-        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">d</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
-        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],],</span> <span class="n">d</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],])</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_id</span><span class="p">[</span><span class="n">b</span><span class="p">],])</span>
 
         <span class="c1"># predict estimates using the </span>
-        <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">z</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
-        <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">z</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+        <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">z</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="p">)</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">z</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="p">)</span>
 
         <span class="c1"># save errors  </span>
-        <span class="n">dtil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span>  <span class="n">d</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">dhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-        <span class="n">ytil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">dtil</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span> <span class="o">=</span>  <span class="n">d</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="o">-</span> <span class="n">dhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">ytil</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">test_id</span><span class="p">[</span><span class="n">b</span><span class="p">],]</span> <span class="o">-</span> <span class="n">yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
     
     <span class="c1"># Create dataframe </span>
@@ -1137,7 +1132,6 @@ estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficient is </span><span class="si">{}</span><span class="s2">, SE is equal to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">coef_est</span><span class="p">,</span> <span class="n">se</span><span class="p">))</span>
     
     <span class="k">return</span> <span class="n">Final_result</span>
-    
 </pre></div>
 </div>
 </div>
@@ -1214,7 +1208,7 @@ estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.20558387349784107, SE is equal to 0.05446974692035762
+Coefficient is 0.2110815206099772, SE is equal to 0.05492434319918081
 </pre></div>
 </div>
 </div>
@@ -1303,7 +1297,7 @@ Coefficient is 0.20558387349784107, SE is equal to 0.05446974692035762
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.22239888611314876, SE is equal to 0.05437245431540179
+Coefficient is 0.21480017853311062, SE is equal to 0.05384985764989231
 </pre></div>
 </div>
 </div>
@@ -1396,7 +1390,7 @@ Coefficient is 0.22239888611314876, SE is equal to 0.05437245431540179
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.2256314307593294, SE is equal to 0.056912889670943684
+Coefficient is 0.22489725423961418, SE is equal to 0.05676411878689732
 </pre></div>
 </div>
 </div>
@@ -1445,7 +1439,7 @@ Coefficient is 0.2256314307593294, SE is equal to 0.056912889670943684
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.23691013333131228, SE is equal to 0.0548229559855324
+Coefficient is 0.2220950619457025, SE is equal to 0.05586992358609231
 </pre></div>
 </div>
 </div>
@@ -1509,7 +1503,7 @@ Coefficient is 0.23691013333131228, SE is equal to 0.0548229559855324
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.19369124127788218, SE is equal to 0.057532521595685227
+Coefficient is 0.24419474388530726, SE is equal to 0.057078364942843955
 </pre></div>
 </div>
 </div>
@@ -1534,7 +1528,7 @@ Coefficient is 0.19369124127788218, SE is equal to 0.057532521595685227
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.21350074509780254, SE is equal to 0.055706683884524724
+Coefficient is 0.20002631735920035, SE is equal to 0.05468622716779046
 </pre></div>
 </div>
 </div>
@@ -1559,7 +1553,7 @@ Coefficient is 0.21350074509780254, SE is equal to 0.055706683884524724
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.1952071026291554, SE is equal to 0.056566935015741115
+Coefficient is 0.22295202688784138, SE is equal to 0.05552442406844609
 </pre></div>
 </div>
 </div>
@@ -1585,7 +1579,7 @@ Coefficient is 0.1952071026291554, SE is equal to 0.056566935015741115
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.1718704260108659, SE is equal to 0.07096851927516959
+Coefficient is 0.21339749285848908, SE is equal to 0.05935765063216827
 </pre></div>
 </div>
 </div>
@@ -1623,7 +1617,7 @@ Coefficient is 0.1718704260108659, SE is equal to 0.07096851927516959
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.07527084556415806, SE is equal to 0.0515601201415684
+Coefficient is 0.10704254206771102, SE is equal to 0.05667803630052885
 </pre></div>
 </div>
 </div>
@@ -1685,23 +1679,23 @@ of the methods works better.</p>
   <tbody>
     <tr>
       <th>RMSEY</th>
-      <td>0.002793</td>
-      <td>0.000801</td>
-      <td>0.000646</td>
-      <td>2.049643e-18</td>
-      <td>2.732857e-18</td>
-      <td>1.423363e-18</td>
-      <td>0.008042</td>
+      <td>0.000140</td>
+      <td>0.001180</td>
+      <td>0.000219</td>
+      <td>1.594166e-18</td>
+      <td>1.081756e-18</td>
+      <td>9.109522e-19</td>
+      <td>0.003112</td>
     </tr>
     <tr>
       <th>RMSED</th>
-      <td>0.000715</td>
-      <td>0.000002</td>
-      <td>0.000328</td>
-      <td>3.273735e-19</td>
-      <td>4.270089e-20</td>
-      <td>1.024821e-18</td>
-      <td>0.000282</td>
+      <td>0.000641</td>
+      <td>0.000047</td>
+      <td>0.000086</td>
+      <td>1.252559e-18</td>
+      <td>4.127752e-19</td>
+      <td>8.113168e-19</td>
+      <td>0.001049</td>
     </tr>
   </tbody>
 </table>
@@ -1767,7 +1761,7 @@ of the methods works better.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.1996147717022215, SE is equal to 0.051875246349124514
+Coefficient is 0.18667870576086848, SE is equal to 0.0515634922600119
 </pre></div>
 </div>
 </div>
@@ -1842,37 +1836,37 @@ Coefficient is 0.1996147717022215, SE is equal to 0.051875246349124514
     </tr>
     <tr>
       <th>Lasso</th>
-      <td>0.206</td>
-      <td>0.054</td>
+      <td>0.211</td>
+      <td>0.055</td>
     </tr>
     <tr>
       <th>Post-Lasso</th>
-      <td>0.222</td>
+      <td>0.215</td>
       <td>0.054</td>
     </tr>
     <tr>
       <th>CV Lasso</th>
-      <td>0.194</td>
-      <td>0.058</td>
-    </tr>
-    <tr>
-      <th>CV Elnet</th>
-      <td>0.195</td>
+      <td>0.244</td>
       <td>0.057</td>
     </tr>
     <tr>
-      <th>CV Ridge</th>
-      <td>0.214</td>
+      <th>CV Elnet</th>
+      <td>0.223</td>
       <td>0.056</td>
     </tr>
     <tr>
+      <th>CV Ridge</th>
+      <td>0.200</td>
+      <td>0.055</td>
+    </tr>
+    <tr>
       <th>Random Forest</th>
-      <td>0.075</td>
-      <td>0.052</td>
+      <td>0.107</td>
+      <td>0.057</td>
     </tr>
     <tr>
       <th>Best</th>
-      <td>0.200</td>
+      <td>0.187</td>
       <td>0.052</td>
     </tr>
   </tbody>
