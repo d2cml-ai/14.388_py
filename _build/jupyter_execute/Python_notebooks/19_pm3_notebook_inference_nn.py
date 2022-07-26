@@ -146,6 +146,7 @@ for var_name in varlist2:
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+from sklearn.model_selection import KFold
 
 
 # In[7]:
@@ -153,43 +154,30 @@ from tensorflow.keras import layers
 
 def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
     
-    # Num ob observations
-    nobs = z.shape[0]
-    
-    # Define folds indices 
-    list_1 = [*range(0, nfold, 1)]*nobs
-    sample = np.random.choice(nobs,nobs, replace=False).tolist()
-    foldid = [list_1[index] for index in sample]
+    kf = KFold(n_splits = nfold, shuffle=True) #Here we use kfold to generate kfolds
+    I = np.arange(0, len(d)) #To have a id vector from data
+    train_id, test_id =  [], [] #arrays to store kfold's ids
 
-    # Create split function(similar to R)
-    def split(x, f):
-        count = max(f) + 1
-        return tuple( list(itertools.compress(x, (el == i for el in f))) for i in range(count) ) 
+    #generate and store kfold's id
+    for kfold_index in kf.split(I):
+        train_id.append(kfold_index[0])
+        test_id.append(kfold_index[1])
 
-    # Split observation indices into folds 
-    list_2 = [*range(0, nobs, 1)]
-    I = split(list_2, foldid)
-    
     # loop to save results
-    for b in range(0,len(I)):
-    
-        # Split data - index to keep are in mask as booleans
-        include_idx = set(I[b])  #Here should go I[b] Set is more efficient, but doesn't reorder your elements if that is desireable
-        mask = np.array([(i in include_idx) for i in range(len(z))])
-
+    for b in range(0,len(train_id)):
         # Normalize the data
         scaler = StandardScaler()
         
-        scaler.fit( z[~mask,] )
-        z[~mask,] = scaler.transform( z[~mask,] )
+        scaler.fit( z[train_id[b],] )
+        z[train_id[b],] = scaler.transform( z[train_id[b],] )
 
-        scaler.fit( z[mask,] )
-        z[mask,] = scaler.transform( z[mask,] )
+        scaler.fit( z[test_id[b],] )
+        z[test_id[b],] = scaler.transform( z[test_id[b],] )
         
         # building the model
         # define the keras model
         model = Sequential()
-        model.add(Dense(16, input_dim = z[~mask,].shape[1], activation = 'relu'))
+        model.add(Dense(16, input_dim = z[train_id[b],].shape[1], activation = 'relu'))
         model.add(Dense(16, activation = 'relu'))
         model.add(Dense(1))
         
@@ -200,20 +188,20 @@ def DML2_for_NN(z, d, y, nfold, clu, num_epochs, batch_size):
         model.compile(loss=mse, optimizer= opt , metrics=mae)
 
         # Fit and predict dhat
-        model.fit(z[~mask,], d[~mask,], epochs=num_epochs, batch_size=batch_size, verbose = 0)
-        dhat = model.predict(z[mask,])
+        model.fit(z[train_id[b],], d[train_id[b],], epochs=num_epochs, batch_size=batch_size, verbose = 0)
+        dhat = model.predict(z[test_id[b],])
         
         # Fit and predict yhat
-        model.fit(z[~mask,], y[~mask,], epochs=num_epochs, batch_size=batch_size, verbose = 0)
-        yhat = model.predict(z[mask,])
+        model.fit(z[train_id[b],], y[train_id[b],], epochs=num_epochs, batch_size=batch_size, verbose = 0)
+        yhat = model.predict(z[test_id[b],])
 
         # Create array to save errors 
         dtil = np.zeros( len(z) ).reshape( len(z) , 1 )
         ytil = np.zeros( len(z) ).reshape( len(z) , 1 )
 
         # save errors  
-        dtil[mask] =  d[mask,] - dhat.reshape( len(I[b]) , 1 )
-        ytil[mask] = y[mask,] - yhat.reshape( len(I[b]) , 1 )
+        dtil[test_id[b]] =  d[test_id[b],] - dhat.reshape( -1 , 1 )
+        ytil[test_id[b]] = y[test_id[b],] - yhat.reshape( -1 , 1 )
         print(b, " ")
     
     # Create dataframe 
