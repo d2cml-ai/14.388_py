@@ -683,6 +683,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="kn">import</span> <span class="nn">patsy</span>
 
@@ -740,7 +742,7 @@ homicide rates, controlling for county-level demographic and economic characteri
 <p>The sample covers 195 large United States counties between the years 1980 through 1999, giving us 3900 observations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="sa">r</span><span class="s2">&quot;../data/gun_clean.csv&quot;</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/gun_clean.csv&quot;</span><span class="p">)</span>
 <span class="n">data1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -833,9 +835,17 @@ homicide rates, controlling for county-level demographic and economic characteri
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load dataset</span>
-<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/gun_clean.RData&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/gun_clean.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;gun_clean.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;gun_clean.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;gun_clean.RData&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extracting the data frame from rdata_read</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1208,7 +1218,7 @@ estimate of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.2110815206099772, SE is equal to 0.05492434319918081
+Coefficient is 0.22734726258700383, SE is equal to 0.056469136851469974
 </pre></div>
 </div>
 </div>
@@ -1297,7 +1307,7 @@ Coefficient is 0.2110815206099772, SE is equal to 0.05492434319918081
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.21480017853311062, SE is equal to 0.05384985764989231
+Coefficient is 0.2249193762734201, SE is equal to 0.05537361355161452
 </pre></div>
 </div>
 </div>
@@ -1390,7 +1400,7 @@ Coefficient is 0.21480017853311062, SE is equal to 0.05384985764989231
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.22489725423961418, SE is equal to 0.05676411878689732
+Coefficient is 0.22601549560193218, SE is equal to 0.05646205847453879
 </pre></div>
 </div>
 </div>
@@ -1439,7 +1449,7 @@ Coefficient is 0.22489725423961418, SE is equal to 0.05676411878689732
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.2220950619457025, SE is equal to 0.05586992358609231
+Coefficient is 0.22308314435620857, SE is equal to 0.055585287821077016
 </pre></div>
 </div>
 </div>
@@ -1503,7 +1513,7 @@ Coefficient is 0.2220950619457025, SE is equal to 0.05586992358609231
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.24419474388530726, SE is equal to 0.057078364942843955
+Coefficient is 0.2063548048948447, SE is equal to 0.056795338374318466
 </pre></div>
 </div>
 </div>
@@ -1528,7 +1538,7 @@ Coefficient is 0.24419474388530726, SE is equal to 0.057078364942843955
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.20002631735920035, SE is equal to 0.05468622716779046
+Coefficient is 0.2066362043455428, SE is equal to 0.05616843600669518
 </pre></div>
 </div>
 </div>
@@ -1553,7 +1563,7 @@ Coefficient is 0.20002631735920035, SE is equal to 0.05468622716779046
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.22295202688784138, SE is equal to 0.05552442406844609
+Coefficient is 0.2050312768745431, SE is equal to 0.05597826387079384
 </pre></div>
 </div>
 </div>
@@ -1579,7 +1589,7 @@ Coefficient is 0.22295202688784138, SE is equal to 0.05552442406844609
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.21339749285848908, SE is equal to 0.05935765063216827
+Coefficient is 0.23842949596585386, SE is equal to 0.06318531201895097
 </pre></div>
 </div>
 </div>
@@ -1617,7 +1627,7 @@ Coefficient is 0.21339749285848908, SE is equal to 0.05935765063216827
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-Coefficient is 0.10704254206771102, SE is equal to 0.05667803630052885
+Coefficient is 0.13927030763751846, SE is equal to 0.05885541257194376
 </pre></div>
 </div>
 </div>
@@ -1679,23 +1689,23 @@ of the methods works better.</p>
   <tbody>
     <tr>
       <th>RMSEY</th>
-      <td>0.000140</td>
-      <td>0.001180</td>
-      <td>0.000219</td>
-      <td>1.594166e-18</td>
-      <td>1.081756e-18</td>
-      <td>9.109522e-19</td>
-      <td>0.003112</td>
+      <td>0.000830</td>
+      <td>6.521741e-07</td>
+      <td>0.000115</td>
+      <td>2.448184e-18</td>
+      <td>2.846726e-18</td>
+      <td>6.832142e-19</td>
+      <td>0.002018</td>
     </tr>
     <tr>
       <th>RMSED</th>
-      <td>0.000641</td>
-      <td>0.000047</td>
-      <td>0.000086</td>
-      <td>1.252559e-18</td>
-      <td>4.127752e-19</td>
-      <td>8.113168e-19</td>
-      <td>0.001049</td>
+      <td>0.000159</td>
+      <td>1.402056e-04</td>
+      <td>0.000193</td>
+      <td>2.846726e-19</td>
+      <td>4.697097e-19</td>
+      <td>3.131398e-19</td>
+      <td>0.001293</td>
     </tr>
   </tbody>
 </table>
@@ -1761,7 +1771,7 @@ of the methods works better.</p>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.18667870576086848, SE is equal to 0.0515634922600119
+Coefficient is 0.20307851592184067, SE is equal to 0.05235026247496894
 </pre></div>
 </div>
 </div>
@@ -1836,37 +1846,37 @@ Coefficient is 0.18667870576086848, SE is equal to 0.0515634922600119
     </tr>
     <tr>
       <th>Lasso</th>
-      <td>0.211</td>
-      <td>0.055</td>
+      <td>0.227</td>
+      <td>0.056</td>
     </tr>
     <tr>
       <th>Post-Lasso</th>
-      <td>0.215</td>
-      <td>0.054</td>
+      <td>0.225</td>
+      <td>0.055</td>
     </tr>
     <tr>
       <th>CV Lasso</th>
-      <td>0.244</td>
+      <td>0.206</td>
       <td>0.057</td>
     </tr>
     <tr>
       <th>CV Elnet</th>
-      <td>0.223</td>
+      <td>0.205</td>
       <td>0.056</td>
     </tr>
     <tr>
       <th>CV Ridge</th>
-      <td>0.200</td>
-      <td>0.055</td>
+      <td>0.207</td>
+      <td>0.056</td>
     </tr>
     <tr>
       <th>Random Forest</th>
-      <td>0.107</td>
-      <td>0.057</td>
+      <td>0.139</td>
+      <td>0.059</td>
     </tr>
     <tr>
       <th>Best</th>
-      <td>0.187</td>
+      <td>0.203</td>
       <td>0.052</td>
     </tr>
   </tbody>

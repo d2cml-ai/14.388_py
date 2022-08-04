@@ -658,6 +658,8 @@ The preproccessed sample consists of <span class="math notranslate nohighlight">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -669,11 +671,17 @@ The preproccessed sample consists of <span class="math notranslate nohighlight">
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/wage2015_subsample_inference.Rdata&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;wage2015_subsample_inference.Rdata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
 
 <span class="c1"># Extracting the data frame from rdata_read</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
-
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
 <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -817,9 +825,32 @@ In linear models, we estimate the prediction rule of the form</p>
   </thead>
   <tbody>
     <tr>
-      <th>331</th>
-      <td>36.324786</td>
-      <td>3.592500</td>
+      <th>4600</th>
+      <td>17.788462</td>
+      <td>2.878550</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>0.2500</td>
+      <td>0.125000</td>
+      <td>0.062500</td>
+      <td>1240</td>
+      <td>3</td>
+      <td>7580</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>944</th>
+      <td>16.827885</td>
+      <td>2.823037</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -830,19 +861,19 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>30.0</td>
-      <td>9.00</td>
-      <td>27.000</td>
-      <td>81.0000</td>
+      <td>5.0</td>
+      <td>0.2500</td>
+      <td>0.125000</td>
+      <td>0.062500</td>
       <td>6260</td>
       <td>19</td>
       <td>770</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>4642</th>
-      <td>14.423077</td>
-      <td>2.668829</td>
+      <th>598</th>
+      <td>24.725275</td>
+      <td>3.207826</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -851,85 +882,62 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>23.0</td>
+      <td>5.2900</td>
+      <td>12.167000</td>
+      <td>27.984100</td>
+      <td>6660</td>
+      <td>19</td>
+      <td>9570</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>4535</th>
+      <td>14.338731</td>
+      <td>2.662964</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>14.0</td>
-      <td>1.96</td>
-      <td>2.744</td>
-      <td>3.8416</td>
-      <td>140</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0100</td>
+      <td>0.001000</td>
+      <td>0.000100</td>
+      <td>340</td>
       <td>1</td>
-      <td>3190</td>
-      <td>6</td>
+      <td>8660</td>
+      <td>20</td>
     </tr>
     <tr>
-      <th>271</th>
-      <td>25.480769</td>
-      <td>3.237924</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>4.0</td>
-      <td>0.16</td>
-      <td>0.064</td>
-      <td>0.0256</td>
-      <td>1050</td>
-      <td>3</td>
-      <td>7380</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>482</th>
-      <td>6.496503</td>
-      <td>1.871264</td>
+      <th>1680</th>
+      <td>13.846154</td>
+      <td>2.628007</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>3.0</td>
-      <td>0.09</td>
-      <td>0.027</td>
-      <td>0.0081</td>
-      <td>7800</td>
-      <td>21</td>
-      <td>1190</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>4948</th>
-      <td>40.865385</td>
-      <td>3.710283</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>32.0</td>
-      <td>10.24</td>
-      <td>32.768</td>
-      <td>104.8576</td>
-      <td>1020</td>
-      <td>3</td>
-      <td>6490</td>
-      <td>11</td>
+      <td>10.5</td>
+      <td>1.1025</td>
+      <td>1.157625</td>
+      <td>1.215506</td>
+      <td>9130</td>
+      <td>22</td>
+      <td>6170</td>
+      <td>10</td>
     </tr>
     <tr>
       <th>...</th>
@@ -955,56 +963,11 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>3250</th>
-      <td>25.000000</td>
-      <td>3.218876</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>3611</th>
+      <td>37.393162</td>
+      <td>3.621488</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>37.0</td>
-      <td>13.69</td>
-      <td>50.653</td>
-      <td>187.4161</td>
-      <td>9130</td>
-      <td>22</td>
-      <td>6170</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>830</th>
-      <td>37.500000</td>
-      <td>3.624341</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>34.0</td>
-      <td>11.56</td>
-      <td>39.304</td>
-      <td>133.6336</td>
-      <td>2010</td>
-      <td>6</td>
-      <td>8190</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>1939</th>
-      <td>31.730769</td>
-      <td>3.457287</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -1013,61 +976,106 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>18.0</td>
-      <td>3.24</td>
-      <td>5.832</td>
-      <td>10.4976</td>
-      <td>4830</td>
-      <td>16</td>
-      <td>7670</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>217</th>
-      <td>15.384615</td>
-      <td>2.733368</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>3.0</td>
-      <td>0.09</td>
-      <td>0.027</td>
-      <td>0.0081</td>
-      <td>8540</td>
+      <td>4.5</td>
+      <td>0.2025</td>
+      <td>0.091125</td>
+      <td>0.041006</td>
+      <td>8600</td>
       <td>21</td>
-      <td>3875</td>
-      <td>6</td>
+      <td>570</td>
+      <td>3</td>
     </tr>
     <tr>
-      <th>2423</th>
-      <td>15.576923</td>
-      <td>2.745791</td>
+      <th>3409</th>
+      <td>16.826923</td>
+      <td>2.822980</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>7.0</td>
-      <td>0.49</td>
-      <td>0.343</td>
-      <td>0.2401</td>
-      <td>5100</td>
+      <td>5.0</td>
+      <td>0.2500</td>
+      <td>0.125000</td>
+      <td>0.062500</td>
+      <td>5000</td>
       <td>17</td>
-      <td>7470</td>
-      <td>14</td>
+      <td>9370</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>3017</th>
+      <td>17.307692</td>
+      <td>2.851151</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>2.8900</td>
+      <td>4.913000</td>
+      <td>8.352100</td>
+      <td>4920</td>
+      <td>16</td>
+      <td>7070</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>4444</th>
+      <td>11.639676</td>
+      <td>2.454420</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>13.0</td>
+      <td>1.6900</td>
+      <td>2.197000</td>
+      <td>2.856100</td>
+      <td>4020</td>
+      <td>13</td>
+      <td>8680</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>1829</th>
+      <td>28.311154</td>
+      <td>3.343256</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>0.8100</td>
+      <td>0.729000</td>
+      <td>0.656100</td>
+      <td>2200</td>
+      <td>8</td>
+      <td>7870</td>
+      <td>17</td>
     </tr>
   </tbody>
 </table>
@@ -1162,7 +1170,7 @@ In linear models, we estimate the prediction rule of the form</p>
   </thead>
   <tbody>
     <tr>
-      <th>331</th>
+      <th>4600</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1175,8 +1183,32 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>30.0</td>
-      <td>9.00</td>
+      <td>5.0</td>
+      <td>0.2500</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>944</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>0.2500</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -1186,7 +1218,7 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>4642</th>
+      <th>598</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1199,66 +1231,18 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>14.0</td>
-      <td>1.96</td>
+      <td>23.0</td>
+      <td>5.2900</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>271</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>4.0</td>
-      <td>0.16</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>482</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>0.09</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>4948</th>
+      <th>4535</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1271,8 +1255,8 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>32.0</td>
-      <td>10.24</td>
+      <td>1.0</td>
+      <td>0.0100</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1280,6 +1264,30 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1680</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>10.5</td>
+      <td>1.1025</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1306,7 +1314,7 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>...</td>
     </tr>
     <tr>
-      <th>3250</th>
+      <th>3611</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1318,19 +1326,19 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
+      <td>1.0</td>
+      <td>4.5</td>
+      <td>0.2025</td>
       <td>0.0</td>
-      <td>37.0</td>
-      <td>13.69</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>830</th>
+      <th>3409</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1339,22 +1347,22 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>0.2500</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>1.0</td>
-      <td>34.0</td>
-      <td>11.56</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1939</th>
+      <th>3017</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1366,24 +1374,24 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
-      <td>1.0</td>
-      <td>18.0</td>
-      <td>3.24</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>17.0</td>
+      <td>2.8900</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>217</th>
+      <th>4444</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1391,18 +1399,18 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>3.0</td>
-      <td>0.09</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>13.0</td>
+      <td>1.6900</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
-      <th>2423</th>
+      <th>1829</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1411,16 +1419,16 @@ In linear models, we estimate the prediction rule of the form</p>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>7.0</td>
-      <td>0.49</td>
+      <td>9.0</td>
+      <td>0.8100</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1469,7 +1477,7 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean squared error (MSE) using the basic model is equal to , 0.23258562003779792 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean squared error (MSE) using the basic model is equal to , 0.23027270224522275 
 </pre></div>
 </div>
 </div>
@@ -1485,8 +1493,8 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.232586
-Std.Err.    0.014177
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.230273
+Std.Err.    0.014667
 Name: const, dtype: float64
 </pre></div>
 </div>
@@ -1501,7 +1509,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to, 0.2980017458513119
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to, 0.2920387407012123
 </pre></div>
 </div>
 </div>
@@ -1526,7 +1534,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the flex model is equal to, 0.24463728731295775
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the flex model is equal to, 0.26595449541186156
 </pre></div>
 </div>
 </div>
@@ -1622,7 +1630,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.25089590925090777,for lasso and 0.24485474722873768 for post-lasso
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.26155935409885656,for lasso and 0.2677130261480327 for post-lasso
 </pre></div>
 </div>
 </div>
@@ -1697,7 +1705,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.25089590925090777,for lasso and 0.24183416621765264 for post-lasso
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The R^2 using the basic model is equal to 0.26155935409885656,for lasso and 0.2677130261480327 for post-lasso
 </pre></div>
 </div>
 </div>
@@ -1763,7 +1771,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge and elastic net in the basic model: 0.006228847353018652,0.29922520542826847,0.2962046244171834
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge and elastic net in the basic model: 0.006181964058044276,0.2923277143447375,0.2923277143447375
 </pre></div>
 </div>
 </div>
@@ -1817,7 +1825,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge and elastic net in the basic model: 0.01227000937518885,0.2931840434060984,0.2811017193617583
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge and elastic net in the basic model: 0.012335636107220549,0.2892508783201493,0.2830972062709731
 </pre></div>
 </div>
 </div>
@@ -1902,82 +1910,147 @@ Xerror = Cross-Validated Error Rate</p>
     <tr>
       <th>0</th>
       <td>0.000000</td>
-      <td>2.439510</td>
+      <td>2.406771</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.001004</td>
-      <td>2.440514</td>
+      <td>0.001046</td>
+      <td>2.407817</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.001015</td>
-      <td>2.441529</td>
+      <td>0.001194</td>
+      <td>2.409011</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.001261</td>
-      <td>2.442791</td>
+      <td>0.001439</td>
+      <td>2.410450</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.001434</td>
-      <td>2.444225</td>
+      <td>0.001572</td>
+      <td>2.413593</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0.001558</td>
-      <td>2.445782</td>
+      <td>0.001620</td>
+      <td>2.415214</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.002037</td>
-      <td>2.447819</td>
+      <td>0.001642</td>
+      <td>2.418497</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.002146</td>
-      <td>2.464986</td>
+      <td>0.001692</td>
+      <td>2.421882</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.002349</td>
-      <td>2.467335</td>
+      <td>0.001715</td>
+      <td>2.423597</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.002466</td>
-      <td>2.477200</td>
+      <td>0.001736</td>
+      <td>2.427068</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>0.002785</td>
-      <td>2.488340</td>
+      <td>0.001980</td>
+      <td>2.429048</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>0.003182</td>
-      <td>2.491522</td>
+      <td>0.002068</td>
+      <td>2.431116</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>0.003188</td>
-      <td>2.494710</td>
+      <td>0.002071</td>
+      <td>2.435257</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>0.003331</td>
-      <td>2.501372</td>
+      <td>0.002119</td>
+      <td>2.445851</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>0.003456</td>
-      <td>2.515196</td>
+      <td>0.002162</td>
+      <td>2.448013</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>0.012453</td>
-      <td>2.527649</td>
+      <td>0.002262</td>
+      <td>2.450275</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.002281</td>
+      <td>2.454837</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.002301</td>
+      <td>2.459438</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.002563</td>
+      <td>2.467129</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.002661</td>
+      <td>2.475112</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.002708</td>
+      <td>2.480527</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.002797</td>
+      <td>2.505696</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.002955</td>
+      <td>2.508651</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.002978</td>
+      <td>2.511629</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.003560</td>
+      <td>2.532991</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.003803</td>
+      <td>2.552008</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0.004023</td>
+      <td>2.556030</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.004608</td>
+      <td>2.565247</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.012958</td>
+      <td>2.578205</td>
     </tr>
   </tbody>
 </table>
@@ -2195,75 +2268,75 @@ f(x) = \sum_{k=1}^K \alpha_k f_k(x)
   <tbody>
     <tr>
       <th>Least Squares (basic)</th>
-      <td>0.233</td>
-      <td>0.014</td>
-      <td>0.298</td>
+      <td>0.230</td>
+      <td>0.015</td>
+      <td>0.292</td>
     </tr>
     <tr>
       <th>Least Squares (flexible)</th>
-      <td>0.250</td>
-      <td>0.015</td>
-      <td>0.245</td>
+      <td>0.239</td>
+      <td>0.014</td>
+      <td>0.266</td>
     </tr>
     <tr>
       <th>Lasso</th>
-      <td>0.248</td>
+      <td>0.240</td>
       <td>0.015</td>
-      <td>0.251</td>
+      <td>0.262</td>
     </tr>
     <tr>
       <th>Post-Lasso</th>
-      <td>0.250</td>
+      <td>0.238</td>
       <td>0.015</td>
-      <td>0.245</td>
+      <td>0.268</td>
     </tr>
     <tr>
       <th>Lasso (flexible)</th>
-      <td>0.249</td>
+      <td>0.240</td>
       <td>0.015</td>
-      <td>0.251</td>
+      <td>0.262</td>
     </tr>
     <tr>
       <th>Post-Lasso (flexible)</th>
-      <td>0.251</td>
+      <td>0.238</td>
       <td>0.015</td>
-      <td>0.242</td>
+      <td>0.268</td>
     </tr>
     <tr>
       <th>Cross-Validated lasso</th>
-      <td>0.232</td>
-      <td>0.014</td>
+      <td>0.230</td>
+      <td>0.015</td>
       <td>0.006</td>
     </tr>
     <tr>
       <th>Cross-Validated ridge</th>
-      <td>0.329</td>
-      <td>0.017</td>
-      <td>0.299</td>
+      <td>0.323</td>
+      <td>0.016</td>
+      <td>0.292</td>
     </tr>
     <tr>
       <th>Cross-Validated elnet</th>
-      <td>0.233</td>
-      <td>0.014</td>
-      <td>0.296</td>
+      <td>0.230</td>
+      <td>0.015</td>
+      <td>0.292</td>
     </tr>
     <tr>
       <th>Cross-Validated lasso (flexible)</th>
-      <td>0.234</td>
-      <td>0.014</td>
+      <td>0.231</td>
+      <td>0.015</td>
       <td>0.012</td>
     </tr>
     <tr>
       <th>Cross-Validated ridge (flexible)</th>
-      <td>0.327</td>
-      <td>0.017</td>
-      <td>0.293</td>
+      <td>0.321</td>
+      <td>0.016</td>
+      <td>0.289</td>
     </tr>
     <tr>
       <th>Cross-Validated elnet (flexible)</th>
-      <td>0.238</td>
+      <td>0.233</td>
       <td>0.014</td>
-      <td>0.281</td>
+      <td>0.283</td>
     </tr>
     <tr>
       <th>Random Forest</th>

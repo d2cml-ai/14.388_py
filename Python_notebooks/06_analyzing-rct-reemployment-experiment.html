@@ -622,7 +622,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## loading the data</span>
-<span class="n">Penn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/penn_jae.dat&quot;</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<span class="n">Penn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/penn_jae.dat&quot;</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">p_1</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">Penn</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;tg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;tg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">]</span>
@@ -917,8 +917,8 @@ precision of our estimates of the average treatment effect.</p>
 Dep. Variable:                     T4   R-squared:                       0.029
 Model:                            OLS   Adj. R-squared:                  0.009
 Method:                 Least Squares   F-statistic:                     29.07
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):               0.00
-Time:                        19:23:20   Log-Likelihood:                -3358.5
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):               0.00
+Time:                        04:06:22   Log-Likelihood:                -3358.5
 No. Observations:                5099   AIC:                             6923.
 Df Residuals:                    4996   BIC:                             7596.
 Df Model:                         102                                         
@@ -1083,8 +1083,8 @@ Number of regressors in the basic model: 103
 Dep. Variable:           log_inuidur1   R-squared:                       0.001
 Model:                            OLS   Adj. R-squared:                  0.001
 Method:                 Least Squares   F-statistic:                     5.680
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):             0.0172
-Time:                        19:23:21   Log-Likelihood:                -8223.8
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):             0.0172
+Time:                        04:06:22   Log-Likelihood:                -8223.8
 No. Observations:                5099   AIC:                         1.645e+04
 Df Residuals:                    5097   BIC:                         1.646e+04
 Df Model:                           1                                         
@@ -1108,8 +1108,8 @@ Notes:
 Dep. Variable:               inuidur1   R-squared:                       0.060
 Model:                            OLS   Adj. R-squared:                  0.040
 Method:                 Least Squares   F-statistic:                     16.64
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):          3.84e-244
-Time:                        19:23:21   Log-Likelihood:                -8070.0
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):          3.84e-244
+Time:                        04:06:22   Log-Likelihood:                -8070.0
 No. Observations:                5099   AIC:                         1.635e+04
 Df Residuals:                    4995   BIC:                         1.703e+04
 Df Model:                         103                                         
@@ -1263,8 +1263,8 @@ Notes:
 Dep. Variable:               inuidur1   R-squared:                       0.079
 Model:                            OLS   Adj. R-squared:                  0.041
 Method:                 Least Squares   F-statistic:                     30.32
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):               0.00
-Time:                        19:23:21   Log-Likelihood:                -8016.3
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):               0.00
+Time:                        04:06:23   Log-Likelihood:                -8016.3
 No. Observations:                5099   AIC:                         1.644e+04
 Df Residuals:                    4896   BIC:                         1.777e+04
 Df Model:                         202                                         

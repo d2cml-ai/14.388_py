@@ -708,6 +708,8 @@ on accumulated assets. 401(k) plans are pension accounts sponsored by employers.
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">hdmpy</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
@@ -716,11 +718,17 @@ on accumulated assets. 401(k) plans are pension accounts sponsored by employers.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/pension.Rdata&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/pension.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;pension.Rdata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;pension.Rdata&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;pension.Rdata&quot;</span><span class="p">)</span>
 
 <span class="c1"># Extracting the data frame from rdata_read</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;pension&#39;</span> <span class="p">]</span>
-
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;pension&#39;</span> <span class="p">]</span>
 <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>

@@ -638,7 +638,10 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -646,9 +649,17 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/wage2015_subsample_inference.Rdata&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;wage2015_subsample_inference.Rdata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extracting the data frame from rdata_read</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
 <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -1085,8 +1096,8 @@ more complex regression model and therefore to reduce the bias. The <strong>Flex
 Dep. Variable:                  lwage   R-squared:                       0.310
 Model:                            OLS   Adj. R-squared:                  0.303
 Method:                 Least Squares   F-statistic:                     45.83
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):               0.00
-Time:                        22:52:38   Log-Likelihood:                -3459.9
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):               0.00
+Time:                        04:05:32   Log-Likelihood:                -3459.9
 No. Observations:                5150   AIC:                             7022.
 Df Residuals:                    5099   BIC:                             7356.
 Df Model:                          50                                         
@@ -1178,8 +1189,8 @@ Number of regressors in the basic model: 51
 Dep. Variable:                  lwage   R-squared:                       0.351
 Model:                            OLS   Adj. R-squared:                  0.319
 Method:                 Least Squares   F-statistic:                     10.83
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):          2.69e-305
-Time:                        22:52:38   Log-Likelihood:                -3301.9
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):          2.69e-305
+Time:                        04:05:33   Log-Likelihood:                -3301.9
 No. Observations:                5150   AIC:                             7096.
 Df Residuals:                    4904   BIC:                             8706.
 Df Model:                         245                                         
@@ -1983,8 +1994,8 @@ adjusted MSE for LASSO model:  0.2867742260968095
 Dep. Variable:                  lwage   R-squared:                       0.316
 Model:                            OLS   Adj. R-squared:                  0.308
 Method:                 Least Squares   F-statistic:                     37.65
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):          4.85e-293
-Time:                        22:52:40   Log-Likelihood:                -2784.1
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):          4.85e-293
+Time:                        04:05:35   Log-Likelihood:                -2784.1
 No. Observations:                4120   AIC:                             5670.
 Df Residuals:                    4069   BIC:                             5993.
 Df Model:                          50                                         
