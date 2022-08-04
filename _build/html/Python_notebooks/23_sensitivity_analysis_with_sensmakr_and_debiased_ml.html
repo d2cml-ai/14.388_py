@@ -625,8 +625,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loads data</span>
-<span class="n">darfur</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/darfur.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">darfur</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/darfur.csv&quot;</span><span class="p">)</span>
 <span class="n">darfur</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -1693,7 +1692,7 @@ Verbal interpretation of sensitivity statistics:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.08913809958909631, SE is equal to 0.024228649022620067
+Coefficient is 0.08892227214537948, SE is equal to 0.025496655610661587
 </pre></div>
 </div>
 </div>
@@ -1713,7 +1712,7 @@ Coefficient is 0.08913809958909631, SE is equal to 0.024228649022620067
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0
-Controls explain the following fraction of variance of treatment 0.5116692138574671
+Controls explain the following fraction of variance of treatment 0.5177756525338284
 </pre></div>
 </div>
 </div>
@@ -1754,7 +1753,7 @@ Null hypothesis: q = 1 and reduce = True
 Unadjusted Estimates of &#39; resD_rf &#39;:
   Coef. estimate: 0.21
   Standard Error: 0.043
-  t-value: 4.935 
+  t-value: 4.927 
 
 Sensitivity Statistics:
   Partial R2 of treatment with outcome: 0.019
@@ -1763,20 +1762,20 @@ Sensitivity Statistics:
 
 Verbal interpretation of sensitivity statistics:
 
--- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 1.876 % of the residual variance of the treatment to fully account for the observed estimated effect.
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 1.87 % of the residual variance of the treatment to fully account for the observed estimated effect.
 
--- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 12.904 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 12.904 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
+-- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 12.883 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 12.883 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
 
--- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 7.989 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 7.989 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
+-- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 7.967 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 7.967 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
 
 Bounds on omitted variable bias:
 --The table below shows the maximum strength of unobserved confounders with association with the treatment and the outcome bounded by a multiple of the observed explanatory power of the chosen benchmark covariate(s).
 
-    bound_label   r2dz_x   r2yz_dx treatment  adjusted_estimate  adjusted_se  \
-0  1x Intercept  0.00006  0.000035   resD_rf            0.21039     0.042661   
+    bound_label    r2dz_x   r2yz_dx treatment  adjusted_estimate  adjusted_se  \
+0  1x Intercept  0.000151  0.000183   resD_rf            0.20999     0.042691   
 
    adjusted_t  adjusted_lower_CI  adjusted_upper_CI  
-0    4.931652           0.126696           0.294083  
+0    4.918838           0.126238           0.293743  
 </pre></div>
 </div>
 <img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_46_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_46_1.png" />

@@ -588,6 +588,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="kn">import</span> <span class="nn">patsy</span>
 
@@ -774,9 +776,17 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load GrowthData</span>
-<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/GrowthData.RData&quot;</span><span class="p">)</span>
-<span class="n">GrowthData</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;GrowthData&#39;</span> <span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/GrowthData.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;GrowthData.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extracting the data frame from rdata_read</span>
+<span class="n">GrowthData</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;GrowthData&#39;</span> <span class="p">]</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -879,18 +889,20 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 
 0  
 1  
-2  
-3  
-4  
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
+3  
+4  
+5  
 6  
-7  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7  
 8  
 9  
 
- Coefficient (se) = -0.0050362873977310004 (0.007834716711977253)
+ Coefficient (se) = -0.014307044770401667 (0.01214952293892131)
 
  DML with Lasso 
 </pre></div>
@@ -924,7 +936,7 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
 
- Coefficient (se) = -0.0322573350969982 (0.01623085131339753)
+ Coefficient (se) = -0.03490372721647588 (0.016849523500313185)
 
  DML with Random Forest 
 </pre></div>
@@ -934,7 +946,7 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
 
- Coefficient (se) = -0.03355857143317291 (0.012447861872685413)
+ Coefficient (se) = -0.03156121943750576 (0.016294861310267483)
 
  DML with Lasso/Random Forest 
 </pre></div>
@@ -944,7 +956,7 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
 
- Coefficient (se) = -0.039402462986500575 (0.012538014065565418)
+ Coefficient (se) = -0.02897455507554439 (0.01469982671100582)
 </pre></div>
 </div>
 </div>
@@ -1008,14 +1020,14 @@ Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \q
     <tr>
       <th>RMSEY</th>
       <td>0.0</td>
-      <td>0.000090</td>
-      <td>0.000208</td>
+      <td>0.000172</td>
+      <td>0.001814</td>
     </tr>
     <tr>
       <th>RMSED</th>
       <td>0.0</td>
-      <td>0.006906</td>
-      <td>0.045024</td>
+      <td>0.004955</td>
+      <td>0.001121</td>
     </tr>
   </tbody>
 </table>

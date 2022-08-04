@@ -547,6 +547,8 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hdmpy</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">import</span> <span class="nn">patsy</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -563,8 +565,17 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cps2012_env</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/cps2012.Rdata&quot;</span><span class="p">)</span>
-<span class="n">cps2012</span> <span class="o">=</span> <span class="n">cps2012_env</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/cps2012.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;cps2012.Rdata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;cps2012.Rdata&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;cps2012.Rdata&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extracting the data frame from rdata_read</span>
+<span class="n">cps2012</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
 <span class="n">cps2012</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1176,98 +1187,98 @@ female:exp3           0.026512    0.008244  3.215830  1.300681e-03
   <tbody>
     <tr>
       <th>female</th>
-      <td>-0.281250</td>
-      <td>-0.027936</td>
+      <td>-0.284484</td>
+      <td>-0.024702</td>
       <td>-0.154593</td>
     </tr>
     <tr>
       <th>female:widowed</th>
-      <td>-0.109183</td>
-      <td>0.381374</td>
+      <td>-0.115446</td>
+      <td>0.387637</td>
       <td>0.136096</td>
     </tr>
     <tr>
       <th>female:divorced</th>
-      <td>0.080438</td>
-      <td>0.193441</td>
+      <td>0.078995</td>
+      <td>0.194884</td>
       <td>0.136939</td>
     </tr>
     <tr>
       <th>female:separated</th>
-      <td>-0.104007</td>
-      <td>0.150612</td>
+      <td>-0.107257</td>
+      <td>0.153863</td>
       <td>0.023303</td>
     </tr>
     <tr>
       <th>female:nevermarried</th>
-      <td>0.134486</td>
-      <td>0.239221</td>
+      <td>0.133149</td>
+      <td>0.240558</td>
       <td>0.186853</td>
     </tr>
     <tr>
       <th>female:hsd08</th>
-      <td>-0.337983</td>
-      <td>0.393603</td>
+      <td>-0.347323</td>
+      <td>0.402943</td>
       <td>0.027810</td>
     </tr>
     <tr>
       <th>female:hsd911</th>
-      <td>-0.255437</td>
-      <td>0.016767</td>
+      <td>-0.258912</td>
+      <td>0.020242</td>
       <td>-0.119335</td>
     </tr>
     <tr>
       <th>female:hsg</th>
-      <td>-0.060391</td>
-      <td>0.034622</td>
+      <td>-0.061604</td>
+      <td>0.035835</td>
       <td>-0.012885</td>
     </tr>
     <tr>
       <th>female:cg</th>
-      <td>-0.036978</td>
-      <td>0.057255</td>
+      <td>-0.038181</td>
+      <td>0.058458</td>
       <td>0.010139</td>
     </tr>
     <tr>
       <th>female:ad</th>
-      <td>-0.089903</td>
-      <td>0.028975</td>
+      <td>-0.091420</td>
+      <td>0.030493</td>
       <td>-0.030464</td>
     </tr>
     <tr>
       <th>female:mw</th>
-      <td>-0.049838</td>
-      <td>0.047712</td>
+      <td>-0.051084</td>
+      <td>0.048957</td>
       <td>-0.001063</td>
     </tr>
     <tr>
       <th>female:so</th>
-      <td>-0.057770</td>
-      <td>0.041403</td>
+      <td>-0.059036</td>
+      <td>0.042670</td>
       <td>-0.008183</td>
     </tr>
     <tr>
       <th>female:we</th>
-      <td>-0.060055</td>
-      <td>0.051603</td>
+      <td>-0.061480</td>
+      <td>0.053028</td>
       <td>-0.004226</td>
     </tr>
     <tr>
       <th>female:exp1</th>
-      <td>-0.014769</td>
-      <td>0.024235</td>
+      <td>-0.015267</td>
+      <td>0.024733</td>
       <td>0.004733</td>
     </tr>
     <tr>
       <th>female:exp2</th>
-      <td>-0.272832</td>
-      <td>-0.046207</td>
+      <td>-0.275725</td>
+      <td>-0.043313</td>
       <td>-0.159519</td>
     </tr>
     <tr>
       <th>female:exp3</th>
-      <td>0.005026</td>
-      <td>0.047998</td>
+      <td>0.004478</td>
+      <td>0.048547</td>
       <td>0.026512</td>
     </tr>
   </tbody>

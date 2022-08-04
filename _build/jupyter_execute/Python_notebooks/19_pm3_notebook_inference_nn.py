@@ -52,7 +52,7 @@ import statsmodels.formula.api as smf
 # In[3]:
 
 
-data1 = pd.read_csv( r"../data/gun_clean.csv" )
+data1 = pd.read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/gun_clean.csv")
 data1.shape[1]
 
 
