@@ -128,6 +128,8 @@
 import pandas as pd
 import numpy as np
 import pyreadr
+import os
+from urllib.request import urlopen
 from sklearn import preprocessing
 import patsy
 
@@ -161,7 +163,6 @@ from sklearn.feature_selection import SelectFromModel
 from statsmodels.tools import add_constant
 from sklearn.linear_model import ElasticNet
 import hdmpy
-import pyreadr
 from scipy.stats import chi2
 from sklearn.model_selection import KFold
 import warnings
@@ -177,8 +178,18 @@ from linearmodels.datasets import mroz
 # In[2]:
 
 
-rdata_read = pyreadr.read_r("../data/ajr.Rdata")
-AJR = rdata_read[ 'AJR' ]
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/ajr.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'ajr.Rdata', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("ajr.Rdata")
+os.remove("ajr.Rdata")
+
+# Extracting the data frame from rdata_read
+AJR = result[ 'AJR' ]
+AJR.shape
 
 
 # In[3]:

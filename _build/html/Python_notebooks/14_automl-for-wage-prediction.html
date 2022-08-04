@@ -573,6 +573,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="kn">import</span> <span class="nn">patsy</span>
 <span class="kn">from</span> <span class="nn">h2o.automl</span> <span class="kn">import</span> <span class="n">H2OAutoML</span>
@@ -611,7 +613,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <div class="output text_html"><div style="overflow:auto"><table style="width:50%"><tr><td>H2O_cluster_uptime:</td>
-<td>5 hours 51 mins</td></tr>
+<td>4 hours 17 mins</td></tr>
 <tr><td>H2O_cluster_timezone:</td>
 <td>America/Bogota</td></tr>
 <tr><td>H2O_data_parsing_timezone:</td>
@@ -619,13 +621,13 @@ title="Print to PDF"
 <tr><td>H2O_cluster_version:</td>
 <td>3.36.1.3</td></tr>
 <tr><td>H2O_cluster_version_age:</td>
-<td>15 days </td></tr>
+<td>26 days </td></tr>
 <tr><td>H2O_cluster_name:</td>
-<td>H2O_from_python_User_ixwr5m</td></tr>
+<td>H2O_from_python_User_fi8ht0</td></tr>
 <tr><td>H2O_cluster_total_nodes:</td>
 <td>1</td></tr>
 <tr><td>H2O_cluster_free_memory:</td>
-<td>2.446 Gb</td></tr>
+<td>2.574 Gb</td></tr>
 <tr><td>H2O_cluster_total_cores:</td>
 <td>4</td></tr>
 <tr><td>H2O_cluster_allowed_cores:</td>
@@ -643,11 +645,18 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load dataset</span>
-<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/wage2015_subsample_inference.Rdata&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;wage2015_subsample_inference.Rdata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
 
+<span class="c1"># Extracting the data frame from rdata_read</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;data&#39;</span> <span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -707,7 +716,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <div class="output text_html"><div style="overflow:auto"><table style="width:50%"><tr><td>H2O_cluster_uptime:</td>
-<td>5 hours 51 mins</td></tr>
+<td>4 hours 17 mins</td></tr>
 <tr><td>H2O_cluster_timezone:</td>
 <td>America/Bogota</td></tr>
 <tr><td>H2O_data_parsing_timezone:</td>
@@ -715,13 +724,13 @@ title="Print to PDF"
 <tr><td>H2O_cluster_version:</td>
 <td>3.36.1.3</td></tr>
 <tr><td>H2O_cluster_version_age:</td>
-<td>15 days </td></tr>
+<td>26 days </td></tr>
 <tr><td>H2O_cluster_name:</td>
-<td>H2O_from_python_User_ixwr5m</td></tr>
+<td>H2O_from_python_User_fi8ht0</td></tr>
 <tr><td>H2O_cluster_total_nodes:</td>
 <td>1</td></tr>
 <tr><td>H2O_cluster_free_memory:</td>
-<td>2.446 Gb</td></tr>
+<td>2.574 Gb</td></tr>
 <tr><td>H2O_cluster_total_cores:</td>
 <td>4</td></tr>
 <tr><td>H2O_cluster_allowed_cores:</td>
@@ -811,7 +820,7 @@ Cols:21
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AutoML progress: |█
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19:36:15.193: AutoML: XGBoost is not available; skipping it.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05:18:32.78: AutoML: XGBoost is not available; skipping it.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>██
@@ -826,45 +835,48 @@ Cols:21
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>███
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>████████████████████████████████████████████████████| (done) 100%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>████
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>████████████████████████████████████████████████| (done) 100%
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
 =============
 H2OStackedEnsembleEstimator :  Stacked Ensemble
-Model Key:  StackedEnsemble_AllModels_1_AutoML_4_20220723_193615
+Model Key:  StackedEnsemble_AllModels_1_AutoML_3_20220804_51832
 
 No model summary for this model
 
 ModelMetricsRegressionGLM: stackedensemble
 ** Reported on train data. **
 
-MSE: 0.14929541251941764
-RMSE: 0.38638764540215004
-MAE: 0.2946327423019559
-RMSLE: 0.09950016274009148
-R^2: 0.5484682994409018
-Mean Residual Deviance: 0.14929541251941764
+MSE: 0.14953139924291178
+RMSE: 0.38669290042993004
+MAE: 0.294832254609963
+RMSLE: 0.0995743628913442
+R^2: 0.5477545769977904
+Mean Residual Deviance: 0.14953139924291178
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3855
+Residual degrees of freedom: 3854
 Null deviance: 1276.9399854672324
-Residual deviance: 576.5788831499909
-AIC: 3631.0203300655207
+Residual deviance: 577.4902638761253
+AIC: 3639.1200565941963
 
 ModelMetricsRegressionGLM: stackedensemble
 ** Reported on cross-validation data. **
 
-MSE: 0.21841884441548665
-RMSE: 0.46735301905036053
-MAE: 0.3552791149226532
-RMSLE: 0.11935374129616676
-R^2: 0.33941016278537006
-Mean Residual Deviance: 0.21841884441548665
+MSE: 0.21847789952851338
+RMSE: 0.46741619519279964
+MAE: 0.35554760045970846
+RMSLE: 0.11935300428309502
+R^2: 0.339231555451349
+Mean Residual Deviance: 0.21847789952851338
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3854
+Residual degrees of freedom: 3853
 Null deviance: 1277.1043650451534
-Residual deviance: 843.5335771326095
-AIC: 5102.4632351265645
+Residual deviance: 843.7616479791186
+AIC: 5105.507284326104
 
 Cross-Validation Metrics Summary: 
 </pre></div>
@@ -901,34 +913,34 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td>mae</td>
-      <td>0.355486</td>
-      <td>0.011156</td>
-      <td>0.358851</td>
-      <td>0.365678</td>
+      <td>0.355541</td>
+      <td>0.011157</td>
+      <td>0.358896</td>
+      <td>0.365684</td>
       <td>0.336852</td>
-      <td>0.354673</td>
+      <td>0.354897</td>
       <td>0.361377</td>
     </tr>
     <tr>
       <th>1</th>
       <td>mean_residual_deviance</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
       <th>2</th>
       <td>mse</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
@@ -945,45 +957,45 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td>r2</td>
-      <td>0.339226</td>
-      <td>0.024750</td>
-      <td>0.331978</td>
-      <td>0.342865</td>
+      <td>0.339145</td>
+      <td>0.024715</td>
+      <td>0.331879</td>
+      <td>0.342868</td>
       <td>0.367003</td>
-      <td>0.352840</td>
+      <td>0.352533</td>
       <td>0.301443</td>
     </tr>
     <tr>
       <th>5</th>
       <td>residual_deviance</td>
-      <td>168.726040</td>
-      <td>14.016972</td>
-      <td>180.459840</td>
-      <td>183.527880</td>
+      <td>168.746690</td>
+      <td>14.014451</td>
+      <td>180.486480</td>
+      <td>183.527040</td>
       <td>148.841520</td>
-      <td>162.990810</td>
+      <td>163.068190</td>
       <td>167.810170</td>
     </tr>
     <tr>
       <th>6</th>
       <td>rmse</td>
-      <td>0.467252</td>
-      <td>0.019715</td>
-      <td>0.481925</td>
-      <td>0.475708</td>
+      <td>0.467280</td>
+      <td>0.019707</td>
+      <td>0.481961</td>
+      <td>0.475707</td>
       <td>0.437675</td>
-      <td>0.456832</td>
+      <td>0.456940</td>
       <td>0.484120</td>
     </tr>
     <tr>
       <th>7</th>
       <td>rmsle</td>
-      <td>0.119301</td>
-      <td>0.004620</td>
-      <td>0.122462</td>
-      <td>0.121305</td>
+      <td>0.119307</td>
+      <td>0.004621</td>
+      <td>0.122467</td>
+      <td>0.121303</td>
       <td>0.111312</td>
-      <td>0.119377</td>
+      <td>0.119405</td>
       <td>0.122048</td>
     </tr>
   </tbody>
@@ -1004,19 +1016,19 @@ Cross-Validation Metrics Summary:
 <div class="cell_output docutils container">
 <div class="output text_html"><table>
 <thead>
-<tr><th>model_id                                               </th><th style="text-align: right;">    rmse</th><th style="text-align: right;">     mse</th><th style="text-align: right;">     mae</th><th style="text-align: right;">   rmsle</th><th style="text-align: right;">  mean_residual_deviance</th></tr>
+<tr><th>model_id                                              </th><th style="text-align: right;">    rmse</th><th style="text-align: right;">     mse</th><th style="text-align: right;">     mae</th><th style="text-align: right;">   rmsle</th><th style="text-align: right;">  mean_residual_deviance</th></tr>
 </thead>
 <tbody>
-<tr><td>StackedEnsemble_AllModels_1_AutoML_4_20220723_193615   </td><td style="text-align: right;">0.470549</td><td style="text-align: right;">0.221416</td><td style="text-align: right;">0.353899</td><td style="text-align: right;">0.120281</td><td style="text-align: right;">                0.221416</td></tr>
-<tr><td>GBM_2_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.471849</td><td style="text-align: right;">0.222642</td><td style="text-align: right;">0.355941</td><td style="text-align: right;">0.12074 </td><td style="text-align: right;">                0.222642</td></tr>
-<tr><td>GBM_5_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.47191 </td><td style="text-align: right;">0.222699</td><td style="text-align: right;">0.35582 </td><td style="text-align: right;">0.120501</td><td style="text-align: right;">                0.222699</td></tr>
-<tr><td>StackedEnsemble_BestOfFamily_1_AutoML_4_20220723_193615</td><td style="text-align: right;">0.472905</td><td style="text-align: right;">0.223639</td><td style="text-align: right;">0.356521</td><td style="text-align: right;">0.121123</td><td style="text-align: right;">                0.223639</td></tr>
-<tr><td>GBM_3_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.474585</td><td style="text-align: right;">0.22523 </td><td style="text-align: right;">0.359309</td><td style="text-align: right;">0.121264</td><td style="text-align: right;">                0.22523 </td></tr>
-<tr><td>GBM_1_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.478149</td><td style="text-align: right;">0.228626</td><td style="text-align: right;">0.362211</td><td style="text-align: right;">0.122278</td><td style="text-align: right;">                0.228626</td></tr>
-<tr><td>GBM_4_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.479072</td><td style="text-align: right;">0.22951 </td><td style="text-align: right;">0.362916</td><td style="text-align: right;">0.122456</td><td style="text-align: right;">                0.22951 </td></tr>
-<tr><td>GBM_grid_1_AutoML_4_20220723_193615_model_1            </td><td style="text-align: right;">0.48001 </td><td style="text-align: right;">0.23041 </td><td style="text-align: right;">0.36381 </td><td style="text-align: right;">0.122671</td><td style="text-align: right;">                0.23041 </td></tr>
-<tr><td>XRT_1_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.491218</td><td style="text-align: right;">0.241295</td><td style="text-align: right;">0.375089</td><td style="text-align: right;">0.125318</td><td style="text-align: right;">                0.241295</td></tr>
-<tr><td>DRF_1_AutoML_4_20220723_193615                         </td><td style="text-align: right;">0.50224 </td><td style="text-align: right;">0.252245</td><td style="text-align: right;">0.382606</td><td style="text-align: right;">0.12847 </td><td style="text-align: right;">                0.252245</td></tr>
+<tr><td>StackedEnsemble_AllModels_1_AutoML_3_20220804_51832   </td><td style="text-align: right;">0.470537</td><td style="text-align: right;">0.221405</td><td style="text-align: right;">0.353883</td><td style="text-align: right;">0.12028 </td><td style="text-align: right;">                0.221405</td></tr>
+<tr><td>GBM_2_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.471849</td><td style="text-align: right;">0.222642</td><td style="text-align: right;">0.355941</td><td style="text-align: right;">0.12074 </td><td style="text-align: right;">                0.222642</td></tr>
+<tr><td>GBM_5_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.47191 </td><td style="text-align: right;">0.222699</td><td style="text-align: right;">0.35582 </td><td style="text-align: right;">0.120501</td><td style="text-align: right;">                0.222699</td></tr>
+<tr><td>StackedEnsemble_BestOfFamily_1_AutoML_3_20220804_51832</td><td style="text-align: right;">0.473019</td><td style="text-align: right;">0.223747</td><td style="text-align: right;">0.356456</td><td style="text-align: right;">0.12106 </td><td style="text-align: right;">                0.223747</td></tr>
+<tr><td>GBM_3_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.474585</td><td style="text-align: right;">0.22523 </td><td style="text-align: right;">0.359309</td><td style="text-align: right;">0.121264</td><td style="text-align: right;">                0.22523 </td></tr>
+<tr><td>GBM_1_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.478149</td><td style="text-align: right;">0.228626</td><td style="text-align: right;">0.362211</td><td style="text-align: right;">0.122278</td><td style="text-align: right;">                0.228626</td></tr>
+<tr><td>GBM_4_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.479072</td><td style="text-align: right;">0.22951 </td><td style="text-align: right;">0.362916</td><td style="text-align: right;">0.122456</td><td style="text-align: right;">                0.22951 </td></tr>
+<tr><td>GBM_grid_1_AutoML_3_20220804_51832_model_1            </td><td style="text-align: right;">0.48001 </td><td style="text-align: right;">0.23041 </td><td style="text-align: right;">0.36381 </td><td style="text-align: right;">0.122671</td><td style="text-align: right;">                0.23041 </td></tr>
+<tr><td>XRT_1_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.491218</td><td style="text-align: right;">0.241295</td><td style="text-align: right;">0.375089</td><td style="text-align: right;">0.125318</td><td style="text-align: right;">                0.241295</td></tr>
+<tr><td>DRF_1_AutoML_3_20220804_51832                         </td><td style="text-align: right;">0.50224 </td><td style="text-align: right;">0.252245</td><td style="text-align: right;">0.382606</td><td style="text-align: right;">0.12847 </td><td style="text-align: right;">                0.252245</td></tr>
 </tbody>
 </table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
@@ -1031,7 +1043,7 @@ Cross-Validation Metrics Summary:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2214160200865415
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2214048934829345
 </pre></div>
 </div>
 </div>
@@ -1047,42 +1059,39 @@ Cross-Validation Metrics Summary:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
 =============
 H2OStackedEnsembleEstimator :  Stacked Ensemble
-Model Key: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> StackedEnsemble_AllModels_1_AutoML_4_20220723_193615
+Model Key:  StackedEnsemble_AllModels_1_AutoML_3_20220804_51832
 
 No model summary for this model
 
 ModelMetricsRegressionGLM: stackedensemble
 ** Reported on train data. **
 
-MSE: 0.14929541251941764
-RMSE: 0.38638764540215004
-MAE: 0.2946327423019559
-RMSLE: 0.09950016274009148
-R^2: 0.5484682994409018
-Mean Residual Deviance: 0.14929541251941764
+MSE: 0.14953139924291178
+RMSE: 0.38669290042993004
+MAE: 0.294832254609963
+RMSLE: 0.0995743628913442
+R^2: 0.5477545769977904
+Mean Residual Deviance: 0.14953139924291178
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3855
+Residual degrees of freedom: 3854
 Null deviance: 1276.9399854672324
-Residual deviance: 576.5788831499909
-AIC: 3631.0203300655207
+Residual deviance: 577.4902638761253
+AIC: 3639.1200565941963
 
 ModelMetricsRegressionGLM: stackedensemble
 ** Reported on cross-validation data. **
 
-MSE: 0.21841884441548665
-RMSE: 0.46735301905036053
-MAE: 0.3552791149226532
-RMSLE: 0.11935374129616676
-R^2: 0.33941016278537006
-Mean Residual Deviance: 0.21841884441548665
+MSE: 0.21847789952851338
+RMSE: 0.46741619519279964
+MAE: 0.35554760045970846
+RMSLE: 0.11935300428309502
+R^2: 0.339231555451349
+Mean Residual Deviance: 0.21847789952851338
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3854
+Residual degrees of freedom: 3853
 Null deviance: 1277.1043650451534
-Residual deviance: 843.5335771326095
-AIC: 5102.4632351265645
+Residual deviance: 843.7616479791186
+AIC: 5105.507284326104
 
 Cross-Validation Metrics Summary: 
 </pre></div>
@@ -1119,34 +1128,34 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td>mae</td>
-      <td>0.355486</td>
-      <td>0.011156</td>
-      <td>0.358851</td>
-      <td>0.365678</td>
+      <td>0.355541</td>
+      <td>0.011157</td>
+      <td>0.358896</td>
+      <td>0.365684</td>
       <td>0.336852</td>
-      <td>0.354673</td>
+      <td>0.354897</td>
       <td>0.361377</td>
     </tr>
     <tr>
       <th>1</th>
       <td>mean_residual_deviance</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
       <th>2</th>
       <td>mse</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
@@ -1163,45 +1172,45 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td>r2</td>
-      <td>0.339226</td>
-      <td>0.024750</td>
-      <td>0.331978</td>
-      <td>0.342865</td>
+      <td>0.339145</td>
+      <td>0.024715</td>
+      <td>0.331879</td>
+      <td>0.342868</td>
       <td>0.367003</td>
-      <td>0.352840</td>
+      <td>0.352533</td>
       <td>0.301443</td>
     </tr>
     <tr>
       <th>5</th>
       <td>residual_deviance</td>
-      <td>168.726040</td>
-      <td>14.016972</td>
-      <td>180.459840</td>
-      <td>183.527880</td>
+      <td>168.746690</td>
+      <td>14.014451</td>
+      <td>180.486480</td>
+      <td>183.527040</td>
       <td>148.841520</td>
-      <td>162.990810</td>
+      <td>163.068190</td>
       <td>167.810170</td>
     </tr>
     <tr>
       <th>6</th>
       <td>rmse</td>
-      <td>0.467252</td>
-      <td>0.019715</td>
-      <td>0.481925</td>
-      <td>0.475708</td>
+      <td>0.467280</td>
+      <td>0.019707</td>
+      <td>0.481961</td>
+      <td>0.475707</td>
       <td>0.437675</td>
-      <td>0.456832</td>
+      <td>0.456940</td>
       <td>0.484120</td>
     </tr>
     <tr>
       <th>7</th>
       <td>rmsle</td>
-      <td>0.119301</td>
-      <td>0.004620</td>
-      <td>0.122462</td>
-      <td>0.121305</td>
+      <td>0.119307</td>
+      <td>0.004621</td>
+      <td>0.122467</td>
+      <td>0.121303</td>
       <td>0.111312</td>
-      <td>0.119377</td>
+      <td>0.119405</td>
       <td>0.122048</td>
     </tr>
   </tbody>
@@ -1228,7 +1237,7 @@ Cross-Validation Metrics Summary:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;StackedEnsemble_AllModels_1_AutoML_4_20220723_193615&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;StackedEnsemble_AllModels_1_AutoML_3_20220804_51832&#39;
 </pre></div>
 </div>
 </div>
@@ -1244,39 +1253,39 @@ Cross-Validation Metrics Summary:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
 =============
 H2OStackedEnsembleEstimator :  Stacked Ensemble
-Model Key:  StackedEnsemble_AllModels_1_AutoML_4_20220723_193615
+Model Key:  StackedEnsemble_AllModels_1_AutoML_3_20220804_51832
 
 No model summary for this model
 
 ModelMetricsRegressionGLM: stackedensemble
 ** Reported on train data. **
 
-MSE: 0.14929541251941764
-RMSE: 0.38638764540215004
-MAE: 0.2946327423019559
-RMSLE: 0.09950016274009148
-R^2: 0.5484682994409018
-Mean Residual Deviance: 0.14929541251941764
+MSE: 0.14953139924291178
+RMSE: 0.38669290042993004
+MAE: 0.294832254609963
+RMSLE: 0.0995743628913442
+R^2: 0.5477545769977904
+Mean Residual Deviance: 0.14953139924291178
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3855
+Residual degrees of freedom: 3854
 Null deviance: 1276.9399854672324
-Residual deviance: 576.5788831499909
-AIC: 3631.0203300655207
+Residual deviance: 577.4902638761253
+AIC: 3639.1200565941963
 
 ModelMetricsRegressionGLM: stackedensemble
 ** Reported on cross-validation data. **
 
-MSE: 0.21841884441548665
-RMSE: 0.46735301905036053
-MAE: 0.3552791149226532
-RMSLE: 0.11935374129616676
-R^2: 0.33941016278537006
-Mean Residual Deviance: 0.21841884441548665
+MSE: 0.21847789952851338
+RMSE: 0.46741619519279964
+MAE: 0.35554760045970846
+RMSLE: 0.11935300428309502
+R^2: 0.339231555451349
+Mean Residual Deviance: 0.21847789952851338
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3854
+Residual degrees of freedom: 3853
 Null deviance: 1277.1043650451534
-Residual deviance: 843.5335771326095
-AIC: 5102.4632351265645
+Residual deviance: 843.7616479791186
+AIC: 5105.507284326104
 
 Cross-Validation Metrics Summary: 
 </pre></div>
@@ -1313,34 +1322,34 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td>mae</td>
-      <td>0.355486</td>
-      <td>0.011156</td>
-      <td>0.358851</td>
-      <td>0.365678</td>
+      <td>0.355541</td>
+      <td>0.011157</td>
+      <td>0.358896</td>
+      <td>0.365684</td>
       <td>0.336852</td>
-      <td>0.354673</td>
+      <td>0.354897</td>
       <td>0.361377</td>
     </tr>
     <tr>
       <th>1</th>
       <td>mean_residual_deviance</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
       <th>2</th>
       <td>mse</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
@@ -1357,45 +1366,45 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td>r2</td>
-      <td>0.339226</td>
-      <td>0.024750</td>
-      <td>0.331978</td>
-      <td>0.342865</td>
+      <td>0.339145</td>
+      <td>0.024715</td>
+      <td>0.331879</td>
+      <td>0.342868</td>
       <td>0.367003</td>
-      <td>0.352840</td>
+      <td>0.352533</td>
       <td>0.301443</td>
     </tr>
     <tr>
       <th>5</th>
       <td>residual_deviance</td>
-      <td>168.726040</td>
-      <td>14.016972</td>
-      <td>180.459840</td>
-      <td>183.527880</td>
+      <td>168.746690</td>
+      <td>14.014451</td>
+      <td>180.486480</td>
+      <td>183.527040</td>
       <td>148.841520</td>
-      <td>162.990810</td>
+      <td>163.068190</td>
       <td>167.810170</td>
     </tr>
     <tr>
       <th>6</th>
       <td>rmse</td>
-      <td>0.467252</td>
-      <td>0.019715</td>
-      <td>0.481925</td>
-      <td>0.475708</td>
+      <td>0.467280</td>
+      <td>0.019707</td>
+      <td>0.481961</td>
+      <td>0.475707</td>
       <td>0.437675</td>
-      <td>0.456832</td>
+      <td>0.456940</td>
       <td>0.484120</td>
     </tr>
     <tr>
       <th>7</th>
       <td>rmsle</td>
-      <td>0.119301</td>
-      <td>0.004620</td>
-      <td>0.122462</td>
-      <td>0.121305</td>
+      <td>0.119307</td>
+      <td>0.004621</td>
+      <td>0.122467</td>
+      <td>0.121303</td>
       <td>0.111312</td>
-      <td>0.119377</td>
+      <td>0.119405</td>
       <td>0.122048</td>
     </tr>
   </tbody>
@@ -1417,7 +1426,7 @@ Cross-Validation Metrics Summary:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
 =============
 H2OGeneralizedLinearEstimator :  Generalized Linear Modeling
-Model Key:  metalearner_AUTO_StackedEnsemble_AllModels_1_AutoML_4_20220723_193615
+Model Key:  metalearner_AUTO_StackedEnsemble_AllModels_1_AutoML_3_20220804_51832
 
 
 GLM Model: summary
@@ -1458,44 +1467,44 @@ GLM Model: summary
       <td></td>
       <td>gaussian</td>
       <td>identity</td>
-      <td>Elastic Net (alpha = 0.5, lambda = 0.00193 )</td>
-      <td>nlambda = 100, lambda.max = 0.2219, lambda.min = 0.00193, lambda.1...</td>
+      <td>Elastic Net (alpha = 0.5, lambda = 0.002325 )</td>
+      <td>nlambda = 100, lambda.max = 0.2219, lambda.min = 0.002325, lambda....</td>
       <td>10</td>
-      <td>6</td>
-      <td>52</td>
-      <td>levelone_training_StackedEnsemble_AllModels_1_AutoML_4_20220723_19...</td>
+      <td>7</td>
+      <td>50</td>
+      <td>levelone_training_StackedEnsemble_AllModels_1_AutoML_3_20220804_51832</td>
     </tr>
   </tbody>
 </table>
 </div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelMetricsRegressionGLM: glm
 ** Reported on train data. **
 
-MSE: 0.21730440781284785
-RMSE: 0.46615920865391886
-MAE: 0.35463416050720503
-RMSLE: 0.11903845781996497
-R^2: 0.3427806846646321
-Mean Residual Deviance: 0.21730440781284785
+MSE: 0.21731487482521683
+RMSE: 0.46617043538304404
+MAE: 0.35460963491810243
+RMSLE: 0.11903948402841413
+R^2: 0.3427490280462874
+Mean Residual Deviance: 0.21731487482521683
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3855
+Residual degrees of freedom: 3854
 Null deviance: 1276.9399854672324
-Residual deviance: 839.2296229732184
-AIC: 5080.707743435697
+Residual deviance: 839.2700465749874
+AIC: 5082.893761881687
 
 ModelMetricsRegressionGLM: glm
 ** Reported on cross-validation data. **
 
-MSE: 0.21841884441548665
-RMSE: 0.46735301905036053
-MAE: 0.3552791149226532
-RMSLE: 0.11935374129616676
-R^2: 0.33941016278537006
-Mean Residual Deviance: 0.21841884441548665
+MSE: 0.21847789952851338
+RMSE: 0.46741619519279964
+MAE: 0.35554760045970846
+RMSLE: 0.11935300428309502
+R^2: 0.339231555451349
+Mean Residual Deviance: 0.21847789952851338
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3854
+Residual degrees of freedom: 3853
 Null deviance: 1277.1043650451534
-Residual deviance: 843.5335771326095
-AIC: 5102.4632351265645
+Residual deviance: 843.7616479791186
+AIC: 5105.507284326104
 
 Cross-Validation Metrics Summary: 
 </pre></div>
@@ -1532,34 +1541,34 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td>mae</td>
-      <td>0.355486</td>
-      <td>0.011156</td>
-      <td>0.358851</td>
-      <td>0.365678</td>
+      <td>0.355541</td>
+      <td>0.011157</td>
+      <td>0.358896</td>
+      <td>0.365684</td>
       <td>0.336852</td>
-      <td>0.354673</td>
+      <td>0.354897</td>
       <td>0.361377</td>
     </tr>
     <tr>
       <th>1</th>
       <td>mean_residual_deviance</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
       <th>2</th>
       <td>mse</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
@@ -1576,45 +1585,45 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td>r2</td>
-      <td>0.339226</td>
-      <td>0.024750</td>
-      <td>0.331978</td>
-      <td>0.342865</td>
+      <td>0.339145</td>
+      <td>0.024715</td>
+      <td>0.331879</td>
+      <td>0.342868</td>
       <td>0.367003</td>
-      <td>0.352840</td>
+      <td>0.352533</td>
       <td>0.301443</td>
     </tr>
     <tr>
       <th>5</th>
       <td>residual_deviance</td>
-      <td>168.726040</td>
-      <td>14.016972</td>
-      <td>180.459840</td>
-      <td>183.527880</td>
+      <td>168.746690</td>
+      <td>14.014451</td>
+      <td>180.486480</td>
+      <td>183.527040</td>
       <td>148.841520</td>
-      <td>162.990810</td>
+      <td>163.068190</td>
       <td>167.810170</td>
     </tr>
     <tr>
       <th>6</th>
       <td>rmse</td>
-      <td>0.467252</td>
-      <td>0.019715</td>
-      <td>0.481925</td>
-      <td>0.475708</td>
+      <td>0.467280</td>
+      <td>0.019707</td>
+      <td>0.481961</td>
+      <td>0.475707</td>
       <td>0.437675</td>
-      <td>0.456832</td>
+      <td>0.456940</td>
       <td>0.484120</td>
     </tr>
     <tr>
       <th>7</th>
       <td>rmsle</td>
-      <td>0.119301</td>
-      <td>0.004620</td>
-      <td>0.122462</td>
-      <td>0.121305</td>
+      <td>0.119307</td>
+      <td>0.004621</td>
+      <td>0.122467</td>
+      <td>0.121303</td>
       <td>0.111312</td>
-      <td>0.119377</td>
+      <td>0.119405</td>
       <td>0.122048</td>
     </tr>
   </tbody>
@@ -1661,7 +1670,7 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
+      <td>2022-08-04 05:19:02</td>
       <td>0.000 sec</td>
       <td>1</td>
       <td>,22E0</td>
@@ -1679,7 +1688,7 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>1</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
+      <td>2022-08-04 05:19:02</td>
       <td>0.000 sec</td>
       <td>2</td>
       <td>,2E0</td>
@@ -1697,7 +1706,7 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>2</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
+      <td>2022-08-04 05:19:02</td>
       <td>0.000 sec</td>
       <td>3</td>
       <td>,18E0</td>
@@ -1715,8 +1724,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>3</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.000 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.009 sec</td>
       <td>4</td>
       <td>,17E0</td>
       <td>6</td>
@@ -1733,8 +1742,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.000 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.009 sec</td>
       <td>5</td>
       <td>,15E0</td>
       <td>7</td>
@@ -1751,8 +1760,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>5</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.011 sec</td>
       <td>6</td>
       <td>,14E0</td>
       <td>7</td>
@@ -1769,8 +1778,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>6</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.011 sec</td>
       <td>7</td>
       <td>,13E0</td>
       <td>7</td>
@@ -1787,8 +1796,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>7</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.011 sec</td>
       <td>8</td>
       <td>,12E0</td>
       <td>7</td>
@@ -1805,8 +1814,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>8</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.019 sec</td>
       <td>9</td>
       <td>,11E0</td>
       <td>8</td>
@@ -1823,8 +1832,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>9</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.019 sec</td>
       <td>10</td>
       <td>,96E-1</td>
       <td>8</td>
@@ -1841,8 +1850,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>10</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>11</td>
       <td>,88E-1</td>
       <td>8</td>
@@ -1859,8 +1868,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>11</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>12</td>
       <td>,8E-1</td>
       <td>8</td>
@@ -1877,8 +1886,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>12</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>13</td>
       <td>,73E-1</td>
       <td>8</td>
@@ -1895,8 +1904,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>13</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>14</td>
       <td>,66E-1</td>
       <td>8</td>
@@ -1913,8 +1922,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>14</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.029 sec</td>
       <td>15</td>
       <td>,6E-1</td>
       <td>8</td>
@@ -1931,8 +1940,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>15</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.031 sec</td>
       <td>16</td>
       <td>,55E-1</td>
       <td>8</td>
@@ -1949,8 +1958,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>16</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.031 sec</td>
       <td>17</td>
       <td>,5E-1</td>
       <td>8</td>
@@ -1967,8 +1976,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>17</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.039 sec</td>
       <td>18</td>
       <td>,46E-1</td>
       <td>8</td>
@@ -1985,8 +1994,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>18</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.039 sec</td>
       <td>19</td>
       <td>,42E-1</td>
       <td>8</td>
@@ -2003,8 +2012,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>19</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.039 sec</td>
       <td>20</td>
       <td>,38E-1</td>
       <td>8</td>
@@ -2052,70 +2061,70 @@ Variable Importances:
   <tbody>
     <tr>
       <th>0</th>
-      <td>GBM_5_AutoML_4_20220723_193615</td>
-      <td>1.615776e-01</td>
+      <td>GBM_5_AutoML_3_20220804_51832</td>
+      <td>1.593116e-01</td>
       <td>1.000000</td>
-      <td>0.475398</td>
+      <td>0.469498</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>GBM_3_AutoML_4_20220723_193615</td>
-      <td>6.446659e-02</td>
-      <td>0.398982</td>
-      <td>0.189676</td>
+      <td>GBM_3_AutoML_3_20220804_51832</td>
+      <td>6.467549e-02</td>
+      <td>0.405968</td>
+      <td>0.190601</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>GBM_1_AutoML_4_20220723_193615</td>
-      <td>4.821648e-02</td>
-      <td>0.298411</td>
-      <td>0.141864</td>
+      <td>GBM_1_AutoML_3_20220804_51832</td>
+      <td>4.807065e-02</td>
+      <td>0.301740</td>
+      <td>0.141666</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>GBM_grid_1_AutoML_4_20220723_193615_model_1</td>
-      <td>4.560824e-02</td>
-      <td>0.282268</td>
-      <td>0.134190</td>
+      <td>GBM_grid_1_AutoML_3_20220804_51832_model_1</td>
+      <td>4.483997e-02</td>
+      <td>0.281461</td>
+      <td>0.132145</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>GBM_4_AutoML_4_20220723_193615</td>
-      <td>2.000867e-02</td>
-      <td>0.123833</td>
-      <td>0.058870</td>
+      <td>GBM_4_AutoML_3_20220804_51832</td>
+      <td>2.105824e-02</td>
+      <td>0.132183</td>
+      <td>0.062059</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>DRF_1_AutoML_4_20220723_193615</td>
+      <td>DeepLearning_1_AutoML_3_20220804_51832</td>
+      <td>1.367028e-03</td>
+      <td>0.008581</td>
+      <td>0.004029</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DRF_1_AutoML_3_20220804_51832</td>
       <td>6.541608e-07</td>
       <td>0.000004</td>
       <td>0.000002</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>GBM_2_AutoML_4_20220723_193615</td>
-      <td>0.000000e+00</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
       <th>7</th>
-      <td>XRT_1_AutoML_4_20220723_193615</td>
+      <td>GBM_2_AutoML_3_20220804_51832</td>
       <td>0.000000e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>GLM_1_AutoML_4_20220723_193615</td>
+      <td>XRT_1_AutoML_3_20220804_51832</td>
       <td>0.000000e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>DeepLearning_1_AutoML_4_20220723_193615</td>
+      <td>GLM_1_AutoML_3_20220804_51832</td>
       <td>0.000000e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
@@ -2136,17 +2145,17 @@ Variable Importances:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Intercept&#39;: 2.969427791239395,
- &#39;GBM_2_AutoML_4_20220723_193615&#39;: 0.0,
- &#39;GBM_5_AutoML_4_20220723_193615&#39;: 0.16157760456069314,
- &#39;GBM_3_AutoML_4_20220723_193615&#39;: 0.06446659066834727,
- &#39;GBM_1_AutoML_4_20220723_193615&#39;: 0.048216482737530625,
- &#39;GBM_4_AutoML_4_20220723_193615&#39;: 0.020008670913876956,
- &#39;GBM_grid_1_AutoML_4_20220723_193615_model_1&#39;: 0.04560823702634901,
- &#39;XRT_1_AutoML_4_20220723_193615&#39;: 0.0,
- &#39;DRF_1_AutoML_4_20220723_193615&#39;: 6.541608387958219e-07,
- &#39;GLM_1_AutoML_4_20220723_193615&#39;: 0.0,
- &#39;DeepLearning_1_AutoML_4_20220723_193615&#39;: 0.0}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Intercept&#39;: 2.969427791239396,
+ &#39;GBM_2_AutoML_3_20220804_51832&#39;: 0.0,
+ &#39;GBM_5_AutoML_3_20220804_51832&#39;: 0.15931159666809516,
+ &#39;GBM_3_AutoML_3_20220804_51832&#39;: 0.06467548543296833,
+ &#39;GBM_1_AutoML_3_20220804_51832&#39;: 0.04807065170587735,
+ &#39;GBM_4_AutoML_3_20220804_51832&#39;: 0.021058238337922783,
+ &#39;GBM_grid_1_AutoML_3_20220804_51832_model_1&#39;: 0.04483996535251986,
+ &#39;XRT_1_AutoML_3_20220804_51832&#39;: 0.0,
+ &#39;DRF_1_AutoML_3_20220804_51832&#39;: 6.541608387958219e-07,
+ &#39;DeepLearning_1_AutoML_3_20220804_51832&#39;: 0.0013670278919920829,
+ &#39;GLM_1_AutoML_3_20220804_51832&#39;: 0.0}
 </pre></div>
 </div>
 </div>
@@ -2158,7 +2167,7 @@ Variable Importances:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;h2o.plot._plot_result._MObject at 0x20610cf4700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;h2o.plot._plot_result._MObject at 0x1d3b0f77b20&gt;
 </pre></div>
 </div>
 <img alt="../_images/14_automl-for-wage-prediction_27_1.png" src="../_images/14_automl-for-wage-prediction_27_1.png" />
@@ -2174,7 +2183,7 @@ Variable Importances:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Details
 =============
 H2OGeneralizedLinearEstimator :  Generalized Linear Modeling
-Model Key:  metalearner_AUTO_StackedEnsemble_AllModels_1_AutoML_4_20220723_193615
+Model Key:  metalearner_AUTO_StackedEnsemble_AllModels_1_AutoML_3_20220804_51832
 
 
 GLM Model: summary
@@ -2215,44 +2224,44 @@ GLM Model: summary
       <td></td>
       <td>gaussian</td>
       <td>identity</td>
-      <td>Elastic Net (alpha = 0.5, lambda = 0.00193 )</td>
-      <td>nlambda = 100, lambda.max = 0.2219, lambda.min = 0.00193, lambda.1...</td>
+      <td>Elastic Net (alpha = 0.5, lambda = 0.002325 )</td>
+      <td>nlambda = 100, lambda.max = 0.2219, lambda.min = 0.002325, lambda....</td>
       <td>10</td>
-      <td>6</td>
-      <td>52</td>
-      <td>levelone_training_StackedEnsemble_AllModels_1_AutoML_4_20220723_19...</td>
+      <td>7</td>
+      <td>50</td>
+      <td>levelone_training_StackedEnsemble_AllModels_1_AutoML_3_20220804_51832</td>
     </tr>
   </tbody>
 </table>
 </div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelMetricsRegressionGLM: glm
 ** Reported on train data. **
 
-MSE: 0.21730440781284785
-RMSE: 0.46615920865391886
-MAE: 0.35463416050720503
-RMSLE: 0.11903845781996497
-R^2: 0.3427806846646321
-Mean Residual Deviance: 0.21730440781284785
+MSE: 0.21731487482521683
+RMSE: 0.46617043538304404
+MAE: 0.35460963491810243
+RMSLE: 0.11903948402841413
+R^2: 0.3427490280462874
+Mean Residual Deviance: 0.21731487482521683
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3855
+Residual degrees of freedom: 3854
 Null deviance: 1276.9399854672324
-Residual deviance: 839.2296229732184
-AIC: 5080.707743435697
+Residual deviance: 839.2700465749874
+AIC: 5082.893761881687
 
 ModelMetricsRegressionGLM: glm
 ** Reported on cross-validation data. **
 
-MSE: 0.21841884441548665
-RMSE: 0.46735301905036053
-MAE: 0.3552791149226532
-RMSLE: 0.11935374129616676
-R^2: 0.33941016278537006
-Mean Residual Deviance: 0.21841884441548665
+MSE: 0.21847789952851338
+RMSE: 0.46741619519279964
+MAE: 0.35554760045970846
+RMSLE: 0.11935300428309502
+R^2: 0.339231555451349
+Mean Residual Deviance: 0.21847789952851338
 Null degrees of freedom: 3861
-Residual degrees of freedom: 3854
+Residual degrees of freedom: 3853
 Null deviance: 1277.1043650451534
-Residual deviance: 843.5335771326095
-AIC: 5102.4632351265645
+Residual deviance: 843.7616479791186
+AIC: 5105.507284326104
 
 Cross-Validation Metrics Summary: 
 </pre></div>
@@ -2289,34 +2298,34 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td>mae</td>
-      <td>0.355486</td>
-      <td>0.011156</td>
-      <td>0.358851</td>
-      <td>0.365678</td>
+      <td>0.355541</td>
+      <td>0.011157</td>
+      <td>0.358896</td>
+      <td>0.365684</td>
       <td>0.336852</td>
-      <td>0.354673</td>
+      <td>0.354897</td>
       <td>0.361377</td>
     </tr>
     <tr>
       <th>1</th>
       <td>mean_residual_deviance</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
       <th>2</th>
       <td>mse</td>
-      <td>0.218635</td>
-      <td>0.018191</td>
-      <td>0.232252</td>
-      <td>0.226298</td>
+      <td>0.218662</td>
+      <td>0.018184</td>
+      <td>0.232286</td>
+      <td>0.226297</td>
       <td>0.191559</td>
-      <td>0.208695</td>
+      <td>0.208794</td>
       <td>0.234372</td>
     </tr>
     <tr>
@@ -2333,45 +2342,45 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td>r2</td>
-      <td>0.339226</td>
-      <td>0.024750</td>
-      <td>0.331978</td>
-      <td>0.342865</td>
+      <td>0.339145</td>
+      <td>0.024715</td>
+      <td>0.331879</td>
+      <td>0.342868</td>
       <td>0.367003</td>
-      <td>0.352840</td>
+      <td>0.352533</td>
       <td>0.301443</td>
     </tr>
     <tr>
       <th>5</th>
       <td>residual_deviance</td>
-      <td>168.726040</td>
-      <td>14.016972</td>
-      <td>180.459840</td>
-      <td>183.527880</td>
+      <td>168.746690</td>
+      <td>14.014451</td>
+      <td>180.486480</td>
+      <td>183.527040</td>
       <td>148.841520</td>
-      <td>162.990810</td>
+      <td>163.068190</td>
       <td>167.810170</td>
     </tr>
     <tr>
       <th>6</th>
       <td>rmse</td>
-      <td>0.467252</td>
-      <td>0.019715</td>
-      <td>0.481925</td>
-      <td>0.475708</td>
+      <td>0.467280</td>
+      <td>0.019707</td>
+      <td>0.481961</td>
+      <td>0.475707</td>
       <td>0.437675</td>
-      <td>0.456832</td>
+      <td>0.456940</td>
       <td>0.484120</td>
     </tr>
     <tr>
       <th>7</th>
       <td>rmsle</td>
-      <td>0.119301</td>
-      <td>0.004620</td>
-      <td>0.122462</td>
-      <td>0.121305</td>
+      <td>0.119307</td>
+      <td>0.004621</td>
+      <td>0.122467</td>
+      <td>0.121303</td>
       <td>0.111312</td>
-      <td>0.119377</td>
+      <td>0.119405</td>
       <td>0.122048</td>
     </tr>
   </tbody>
@@ -2418,7 +2427,7 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>0</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
+      <td>2022-08-04 05:19:02</td>
       <td>0.000 sec</td>
       <td>1</td>
       <td>,22E0</td>
@@ -2436,7 +2445,7 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>1</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
+      <td>2022-08-04 05:19:02</td>
       <td>0.000 sec</td>
       <td>2</td>
       <td>,2E0</td>
@@ -2454,7 +2463,7 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>2</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
+      <td>2022-08-04 05:19:02</td>
       <td>0.000 sec</td>
       <td>3</td>
       <td>,18E0</td>
@@ -2472,8 +2481,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>3</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.000 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.009 sec</td>
       <td>4</td>
       <td>,17E0</td>
       <td>6</td>
@@ -2490,8 +2499,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>4</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.000 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.009 sec</td>
       <td>5</td>
       <td>,15E0</td>
       <td>7</td>
@@ -2508,8 +2517,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>5</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.011 sec</td>
       <td>6</td>
       <td>,14E0</td>
       <td>7</td>
@@ -2526,8 +2535,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>6</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.011 sec</td>
       <td>7</td>
       <td>,13E0</td>
       <td>7</td>
@@ -2544,8 +2553,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>7</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.011 sec</td>
       <td>8</td>
       <td>,12E0</td>
       <td>7</td>
@@ -2562,8 +2571,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>8</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.019 sec</td>
       <td>9</td>
       <td>,11E0</td>
       <td>8</td>
@@ -2580,8 +2589,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>9</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.019 sec</td>
       <td>10</td>
       <td>,96E-1</td>
       <td>8</td>
@@ -2598,8 +2607,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>10</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>11</td>
       <td>,88E-1</td>
       <td>8</td>
@@ -2616,8 +2625,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>11</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>12</td>
       <td>,8E-1</td>
       <td>8</td>
@@ -2634,8 +2643,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>12</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>13</td>
       <td>,73E-1</td>
       <td>8</td>
@@ -2652,8 +2661,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>13</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.016 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.021 sec</td>
       <td>14</td>
       <td>,66E-1</td>
       <td>8</td>
@@ -2670,8 +2679,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>14</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.029 sec</td>
       <td>15</td>
       <td>,6E-1</td>
       <td>8</td>
@@ -2688,8 +2697,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>15</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.031 sec</td>
       <td>16</td>
       <td>,55E-1</td>
       <td>8</td>
@@ -2706,8 +2715,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>16</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.031 sec</td>
       <td>17</td>
       <td>,5E-1</td>
       <td>8</td>
@@ -2724,8 +2733,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>17</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.039 sec</td>
       <td>18</td>
       <td>,46E-1</td>
       <td>8</td>
@@ -2742,8 +2751,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>18</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.039 sec</td>
       <td>19</td>
       <td>,42E-1</td>
       <td>8</td>
@@ -2760,8 +2769,8 @@ Cross-Validation Metrics Summary:
     <tr>
       <th>19</th>
       <td></td>
-      <td>2022-07-23 19:36:41</td>
-      <td>0.032 sec</td>
+      <td>2022-08-04 05:19:02</td>
+      <td>0.039 sec</td>
       <td>20</td>
       <td>,38E-1</td>
       <td>8</td>
@@ -2809,70 +2818,70 @@ Variable Importances:
   <tbody>
     <tr>
       <th>0</th>
-      <td>GBM_5_AutoML_4_20220723_193615</td>
-      <td>1.615776e-01</td>
+      <td>GBM_5_AutoML_3_20220804_51832</td>
+      <td>1.593116e-01</td>
       <td>1.000000</td>
-      <td>0.475398</td>
+      <td>0.469498</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>GBM_3_AutoML_4_20220723_193615</td>
-      <td>6.446659e-02</td>
-      <td>0.398982</td>
-      <td>0.189676</td>
+      <td>GBM_3_AutoML_3_20220804_51832</td>
+      <td>6.467549e-02</td>
+      <td>0.405968</td>
+      <td>0.190601</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>GBM_1_AutoML_4_20220723_193615</td>
-      <td>4.821648e-02</td>
-      <td>0.298411</td>
-      <td>0.141864</td>
+      <td>GBM_1_AutoML_3_20220804_51832</td>
+      <td>4.807065e-02</td>
+      <td>0.301740</td>
+      <td>0.141666</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>GBM_grid_1_AutoML_4_20220723_193615_model_1</td>
-      <td>4.560824e-02</td>
-      <td>0.282268</td>
-      <td>0.134190</td>
+      <td>GBM_grid_1_AutoML_3_20220804_51832_model_1</td>
+      <td>4.483997e-02</td>
+      <td>0.281461</td>
+      <td>0.132145</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>GBM_4_AutoML_4_20220723_193615</td>
-      <td>2.000867e-02</td>
-      <td>0.123833</td>
-      <td>0.058870</td>
+      <td>GBM_4_AutoML_3_20220804_51832</td>
+      <td>2.105824e-02</td>
+      <td>0.132183</td>
+      <td>0.062059</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>DRF_1_AutoML_4_20220723_193615</td>
+      <td>DeepLearning_1_AutoML_3_20220804_51832</td>
+      <td>1.367028e-03</td>
+      <td>0.008581</td>
+      <td>0.004029</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DRF_1_AutoML_3_20220804_51832</td>
       <td>6.541608e-07</td>
       <td>0.000004</td>
       <td>0.000002</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>GBM_2_AutoML_4_20220723_193615</td>
-      <td>0.000000e+00</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
       <th>7</th>
-      <td>XRT_1_AutoML_4_20220723_193615</td>
+      <td>GBM_2_AutoML_3_20220804_51832</td>
       <td>0.000000e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>GLM_1_AutoML_4_20220723_193615</td>
+      <td>XRT_1_AutoML_3_20220804_51832</td>
       <td>0.000000e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>DeepLearning_1_AutoML_4_20220723_193615</td>
+      <td>GLM_1_AutoML_3_20220804_51832</td>
       <td>0.000000e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
@@ -2904,16 +2913,16 @@ Variable Importances:
 <tr><th style="text-align: right;">  predict</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align: right;">  2.8821 </td></tr>
-<tr><td style="text-align: right;">  3.31972</td></tr>
-<tr><td style="text-align: right;">  3.07377</td></tr>
-<tr><td style="text-align: right;">  2.72   </td></tr>
-<tr><td style="text-align: right;">  2.5154 </td></tr>
-<tr><td style="text-align: right;">  3.12508</td></tr>
-<tr><td style="text-align: right;">  3.17561</td></tr>
-<tr><td style="text-align: right;">  3.74483</td></tr>
-<tr><td style="text-align: right;">  2.57898</td></tr>
-<tr><td style="text-align: right;">  3.30329</td></tr>
+<tr><td style="text-align: right;">  2.88156</td></tr>
+<tr><td style="text-align: right;">  3.31904</td></tr>
+<tr><td style="text-align: right;">  3.07437</td></tr>
+<tr><td style="text-align: right;">  2.72129</td></tr>
+<tr><td style="text-align: right;">  2.51465</td></tr>
+<tr><td style="text-align: right;">  3.12459</td></tr>
+<tr><td style="text-align: right;">  3.17614</td></tr>
+<tr><td style="text-align: right;">  3.74251</td></tr>
+<tr><td style="text-align: right;">  2.57992</td></tr>
+<tr><td style="text-align: right;">  3.3026 </td></tr>
 </tbody>
 </table></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
@@ -2954,8 +2963,8 @@ Variable Importances:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.221416
-Std.Err.    0.012922
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coef.       0.221405
+Std.Err.    0.012923
 Name: const, dtype: float64
 </pre></div>
 </div>
@@ -2976,17 +2985,17 @@ Name: const, dtype: float64
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelMetricsRegressionGLM: stackedensemble
 ** Reported on test data. **
 
-MSE: 0.2214160200865415
-RMSE: 0.4705486373230099
-MAE: 0.35389935234256525
-RMSLE: 0.12028104086200908
-R^2: 0.2838193846226743
-Mean Residual Deviance: 0.2214160200865415
+MSE: 0.22140489348293446
+RMSE: 0.4705368141632857
+MAE: 0.3538831803241703
+RMSLE: 0.12028001142039113
+R^2: 0.2838553741496075
+Mean Residual Deviance: 0.22140489348293446
 Null degrees of freedom: 1287
-Residual degrees of freedom: 1281
+Residual degrees of freedom: 1280
 Null deviance: 398.23902107893576
-Residual deviance: 285.1838338714654
-AIC: 1729.252730199646
+Residual deviance: 285.1695028060196
+AIC: 1731.1880039637808
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>

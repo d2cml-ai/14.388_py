@@ -35,16 +35,27 @@
 import pandas as pd
 import numpy as np
 import pyreadr
+import os
 import warnings
+import pyreadr
+from urllib.request import urlopen
 warnings.filterwarnings('ignore')
 
 
 # In[2]:
 
 
-rdata_read = pyreadr.read_r("../data/wage2015_subsample_inference.Rdata")
-data = rdata_read[ 'data' ]
-type(data)
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/wage2015_subsample_inference.Rdata"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'wage2015_subsample_inference.Rdata', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("wage2015_subsample_inference.Rdata")
+os.remove("wage2015_subsample_inference.Rdata")
+
+# Extracting the data frame from rdata_read
+data = result[ 'data' ]
 data.shape
 
 

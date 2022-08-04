@@ -10,6 +10,8 @@
 import pandas as pd
 import numpy as np
 import pyreadr
+import os
+from urllib.request import urlopen
 from sklearn import preprocessing
 import patsy
 
@@ -68,7 +70,7 @@ from sklearn.feature_selection import SelectFromModel
 # In[3]:
 
 
-data1 = pd.read_csv( r"../data/gun_clean.csv" )
+data1 = pd.read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/gun_clean.csv")
 data1.shape[1]
 
 
@@ -154,9 +156,17 @@ for var_name in varlist2:
 # In[6]:
 
 
-# load dataset
-rdata_read = pyreadr.read_r("../data/gun_clean.RData")
-data = rdata_read[ 'data' ]
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/gun_clean.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'gun_clean.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("gun_clean.RData")
+os.remove("gun_clean.RData")
+
+# Extracting the data frame from rdata_read
+data = result[ 'data' ]
 n = data.shape[0]
 
 

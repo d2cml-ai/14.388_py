@@ -34,6 +34,8 @@ import hdmpy
 import pandas as pd
 import numpy as np
 import pyreadr
+import os
+from urllib.request import urlopen
 import math
 import matplotlib.pyplot as plt
 import random
@@ -44,11 +46,17 @@ warnings.filterwarnings('ignore')
 # In[2]:
 
 
-# I downloaded the data that the author used
-growth_read = pyreadr.read_r("../data/GrowthData.RData")
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/GrowthData.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'GrowthData.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("GrowthData.RData")
+os.remove("GrowthData.RData")
 
 # Extracting the data frame from rdata_read
-growth = growth_read[ 'GrowthData' ]
+growth = result[ 'GrowthData' ]
 
 
 # We determine the dimension of our data set.

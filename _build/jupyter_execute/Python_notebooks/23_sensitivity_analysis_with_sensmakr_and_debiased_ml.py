@@ -41,8 +41,7 @@ warnings.filterwarnings('ignore')
 # In[3]:
 
 
-# loads data
-darfur = pd.read_csv("../data/darfur.csv")
+darfur = pd.read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/darfur.csv")
 darfur.shape
 
 

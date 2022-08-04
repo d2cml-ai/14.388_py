@@ -21,7 +21,7 @@ import pyreadr
 
 
 ## loading the data
-Penn = pd.read_csv("../data/penn_jae.dat" , sep='\s', engine='python')
+Penn = pd.read_csv("https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/penn_jae.dat" , sep='\s', engine='python')
 n = Penn.shape[0]
 p_1 = Penn.shape[1]
 Penn = Penn[ (Penn['tg'] == 4) | (Penn['tg'] == 0) ]

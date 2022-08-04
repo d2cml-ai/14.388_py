@@ -18,6 +18,8 @@
 
 import hdmpy
 import pyreadr
+import os
+from urllib.request import urlopen
 import patsy
 import numpy as np
 import pandas as pd
@@ -33,8 +35,17 @@ warnings.filterwarnings('ignore')
 # In[2]:
 
 
-cps2012_env = pyreadr.read_r("../data/cps2012.Rdata")
-cps2012 = cps2012_env[ 'data' ]
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/cps2012.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'cps2012.Rdata', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("cps2012.Rdata")
+os.remove("cps2012.Rdata")
+
+# Extracting the data frame from rdata_read
+cps2012 = result[ 'data' ]
 cps2012.describe()
 
 

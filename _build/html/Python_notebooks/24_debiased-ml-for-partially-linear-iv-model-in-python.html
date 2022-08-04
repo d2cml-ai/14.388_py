@@ -677,6 +677,8 @@ stage errors.</p>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
 <span class="kn">import</span> <span class="nn">patsy</span>
 
@@ -710,7 +712,6 @@ stage errors.</p>
 <span class="kn">from</span> <span class="nn">statsmodels.tools</span> <span class="kn">import</span> <span class="n">add_constant</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">ElasticNet</span>
 <span class="kn">import</span> <span class="nn">hdmpy</span>
-<span class="kn">import</span> <span class="nn">pyreadr</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -727,8 +728,23 @@ stage errors.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/ajr.Rdata&quot;</span><span class="p">)</span>
-<span class="n">AJR</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;AJR&#39;</span> <span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/ajr.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;ajr.Rdata&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;ajr.Rdata&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;ajr.Rdata&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extracting the data frame from rdata_read</span>
+<span class="n">AJR</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;AJR&#39;</span> <span class="p">]</span>
+<span class="n">AJR</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(64, 11)
 </pre></div>
 </div>
 </div>
@@ -1290,7 +1306,7 @@ quality of insitutions;</p></li>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19  
 
- Coefficient (se) = 0.8741183783725498 (0.32775653863668436)
+ Coefficient (se) = 0.8294701379574574 (0.27784264852904084)
 </pre></div>
 </div>
 </div>
@@ -1361,7 +1377,9 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-2  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
@@ -1371,9 +1389,7 @@ quality of insitutions;</p></li>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6  
+6  
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7  
@@ -1412,7 +1428,7 @@ quality of insitutions;</p></li>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18  
 19  
 
- Coefficient (se) = 0.7231475412149379 (0.17071501804247555)
+ Coefficient (se) = 0.7501317175461405 (0.17046664147965937)
 </pre></div>
 </div>
 </div>
@@ -1473,18 +1489,18 @@ quality of insitutions;</p></li>
   <tbody>
     <tr>
       <th>RMSE for Y:</th>
-      <td>0.785160</td>
-      <td>0.928944</td>
+      <td>0.797346</td>
+      <td>0.963459</td>
     </tr>
     <tr>
       <th>RMSE for D:</th>
-      <td>1.319298</td>
-      <td>1.583520</td>
+      <td>1.334685</td>
+      <td>1.612609</td>
     </tr>
     <tr>
       <th>RMSE for Z:</th>
-      <td>0.924800</td>
-      <td>0.977824</td>
+      <td>0.935141</td>
+      <td>1.032413</td>
     </tr>
   </tbody>
 </table>
@@ -1503,25 +1519,25 @@ quality of insitutions;</p></li>
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.170</td>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.167</td>
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.157</td>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.154</td>
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   8.792</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   8.057</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 26 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.00427</td>
+  <th>Date:</th>             <td>Thu, 04 Aug 2022</td> <th>  Prob (F-statistic):</th>           <td>0.00609</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>11:18:29</td>     <th>  Log-Likelihood:    </th>          <td> -114.26</td>
+  <th>Time:</th>                 <td>05:06:06</td>     <th>  Log-Likelihood:    </th>          <td> -115.55</td>
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   230.5</td>
+  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   233.1</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   232.7</td>
+  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   235.3</td>
 </tr>
 <tr>
   <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
@@ -1535,21 +1551,21 @@ quality of insitutions;</p></li>
    <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>x1</th> <td>   -0.6682</td> <td>    0.225</td> <td>   -2.965</td> <td> 0.004</td> <td>   -1.119</td> <td>   -0.218</td>
+  <th>x1</th> <td>   -0.6381</td> <td>    0.225</td> <td>   -2.839</td> <td> 0.006</td> <td>   -1.087</td> <td>   -0.189</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td> 0.541</td> <th>  Durbin-Watson:     </th> <td>   1.725</td>
+  <th>Omnibus:</th>       <td> 0.003</td> <th>  Durbin-Watson:     </th> <td>   1.676</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.763</td> <th>  Jarque-Bera (JB):  </th> <td>   0.679</td>
+  <th>Prob(Omnibus):</th> <td> 0.999</td> <th>  Jarque-Bera (JB):  </th> <td>   0.124</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td>-0.178</td> <th>  Prob(JB):          </th> <td>   0.712</td>
+  <th>Skew:</th>          <td>-0.009</td> <th>  Prob(JB):          </th> <td>   0.940</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.643</td> <th>  Cond. No.          </th> <td>    1.00</td>
+  <th>Kurtosis:</th>      <td> 2.785</td> <th>  Cond. No.          </th> <td>    1.00</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br/>[2] Standard Errors are heteroscedasticity robust (HC1)</div></div>
 </div>
@@ -1563,25 +1579,25 @@ quality of insitutions;</p></li>
 <div class="output text_html"><table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.061</td>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared (uncentered):</th>      <td>   0.077</td>
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.047</td>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.062</td>
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   3.203</td>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   4.168</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Tue, 26 Jul 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0783</td> 
+  <th>Date:</th>             <td>Thu, 04 Aug 2022</td> <th>  Prob (F-statistic):</th>           <td>0.0454</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>11:18:29</td>     <th>  Log-Likelihood:    </th>          <td> -106.52</td>
+  <th>Time:</th>                 <td>05:06:06</td>     <th>  Log-Likelihood:    </th>          <td> -106.74</td>
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   215.0</td>
+  <th>No. Observations:</th>      <td>    64</td>      <th>  AIC:               </th>          <td>   215.5</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   217.2</td>
+  <th>Df Residuals:</th>          <td>    63</td>      <th>  BIC:               </th>          <td>   217.6</td>
 </tr>
 <tr>
   <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
@@ -1595,21 +1611,21 @@ quality of insitutions;</p></li>
    <td></td>     <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>x1</th> <td>   -0.3536</td> <td>    0.198</td> <td>   -1.790</td> <td> 0.078</td> <td>   -0.748</td> <td>    0.041</td>
+  <th>x1</th> <td>   -0.3950</td> <td>    0.193</td> <td>   -2.042</td> <td> 0.045</td> <td>   -0.782</td> <td>   -0.008</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td> 0.201</td> <th>  Durbin-Watson:     </th> <td>   1.621</td>
+  <th>Omnibus:</th>       <td> 0.190</td> <th>  Durbin-Watson:     </th> <td>   1.626</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.904</td> <th>  Jarque-Bera (JB):  </th> <td>   0.209</td>
+  <th>Prob(Omnibus):</th> <td> 0.909</td> <th>  Jarque-Bera (JB):  </th> <td>   0.206</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td> 0.121</td> <th>  Prob(JB):          </th> <td>   0.901</td>
+  <th>Skew:</th>          <td> 0.119</td> <th>  Prob(JB):          </th> <td>   0.902</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.861</td> <th>  Cond. No.          </th> <td>    1.00</td>
+  <th>Kurtosis:</th>      <td> 2.856</td> <th>  Cond. No.          </th> <td>    1.00</td>
 </tr>
 </table><br/><br/>Notes:<br/>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br/>[2] Standard Errors are heteroscedasticity robust (HC1)</div></div>
 </div>
@@ -1658,11 +1674,11 @@ quality of insitutions;</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 1.690000000000003 LB = 0.45000000000000195
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UB = 2.0000000000000036 LB = 0.4600000000000022
 </pre></div>
 </div>
 <img alt="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_30_1.png" src="../_images/24_debiased-ml-for-partially-linear-iv-model-in-python_30_1.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 1.690000000000003, &#39;LB&#39;: 0.45000000000000195}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;UB&#39;: 2.0000000000000036, &#39;LB&#39;: 0.4600000000000022}
 </pre></div>
 </div>
 </div>

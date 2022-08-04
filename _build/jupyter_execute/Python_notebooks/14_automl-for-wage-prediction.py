@@ -16,6 +16,8 @@
 import pandas as pd
 import numpy as np
 import pyreadr
+import os
+from urllib.request import urlopen
 from sklearn import preprocessing
 import patsy
 from h2o.automl import H2OAutoML
@@ -46,11 +48,18 @@ h2o.init()
 # In[4]:
 
 
-# load dataset
-rdata_read = pyreadr.read_r("../data/wage2015_subsample_inference.Rdata")
-data = rdata_read[ 'data' ]
-n = data.shape[0]
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/wage2015_subsample_inference.Rdata"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'wage2015_subsample_inference.Rdata', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("wage2015_subsample_inference.Rdata")
+os.remove("wage2015_subsample_inference.Rdata")
 
+# Extracting the data frame from rdata_read
+data = result[ 'data' ]
+n = data.shape[0]
 type(data)
 
 

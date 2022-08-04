@@ -45,6 +45,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import hdmpy
 import pyreadr
+import os
+from urllib.request import urlopen
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -52,11 +54,17 @@ warnings.filterwarnings('ignore')
 # In[3]:
 
 
-rdata_read = pyreadr.read_r("../data/pension.Rdata")
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/pension.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'pension.Rdata', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("pension.Rdata")
+os.remove("pension.Rdata")
 
 # Extracting the data frame from rdata_read
-data = rdata_read[ 'pension' ]
-
+data = result[ 'pension' ]
 data.shape
 
 

@@ -640,6 +640,8 @@ Y = \beta_1 D +  \beta_2'W + \epsilon.
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -651,11 +653,17 @@ Y = \beta_1 D +  \beta_2'W + \epsilon.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I downloaded the data that the author used</span>
-<span class="n">growth_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/GrowthData.RData&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/GrowthData.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;GrowthData.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;GrowthData.RData&quot;</span><span class="p">)</span>
 
 <span class="c1"># Extracting the data frame from rdata_read</span>
-<span class="n">growth</span> <span class="o">=</span> <span class="n">growth_read</span><span class="p">[</span> <span class="s1">&#39;GrowthData&#39;</span> <span class="p">]</span>
+<span class="n">growth</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span> <span class="s1">&#39;GrowthData&#39;</span> <span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -706,8 +714,8 @@ Y = \beta_1 D +  \beta_2'W + \epsilon.
 Dep. Variable:                Outcome   R-squared:                       0.887
 Model:                            OLS   Adj. R-squared:                  0.641
 Method:                 Least Squares   F-statistic:                     3.607
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):           0.000200
-Time:                        23:28:21   Log-Likelihood:                 238.24
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):           0.000200
+Time:                        04:07:50   Log-Likelihood:                 238.24
 No. Observations:                  90   AIC:                            -352.5
 Df Residuals:                      28   BIC:                            -197.5
 Df Model:                          61                                         
@@ -1107,8 +1115,8 @@ about the convergence hypothesis since the confidence interval includes zero.</p
 Dep. Variable:                    r_Y   R-squared (uncentered):                   0.127
 Model:                            OLS   Adj. R-squared (uncentered):              0.117
 Method:                 Least Squares   F-statistic:                              12.92
-Date:                Sat, 23 Jul 2022   Prob (F-statistic):                    0.000533
-Time:                        23:28:25   Log-Likelihood:                          152.68
+Date:                Thu, 04 Aug 2022   Prob (F-statistic):                    0.000533
+Time:                        04:07:53   Log-Likelihood:                          152.68
 No. Observations:                  90   AIC:                                     -303.4
 Df Residuals:                      89   BIC:                                     -300.9
 Df Model:                           1                                                  

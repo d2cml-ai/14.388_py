@@ -23,6 +23,8 @@
 import pandas as pd
 import numpy as np
 import pyreadr
+import os
+from urllib.request import urlopen
 from sklearn import preprocessing
 import patsy
 
@@ -209,9 +211,17 @@ def DML2_for_PLM(x, d, y, dreg, yreg, nfold = 2 ):
 # In[5]:
 
 
-# load GrowthData
-rdata_read = pyreadr.read_r("../data/GrowthData.RData")
-GrowthData = rdata_read[ 'GrowthData' ]
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/GrowthData.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'GrowthData.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("GrowthData.RData")
+os.remove("GrowthData.RData")
+
+# Extracting the data frame from rdata_read
+GrowthData = result[ 'GrowthData' ]
 n = GrowthData.shape[0]
 
 
