@@ -15,6 +15,8 @@
 
 import pandas as pd
 import pyreadr
+import os
+from urllib.request import urlopen
 
 
 # In[2]:
@@ -112,7 +114,15 @@ y = Penn[['T4']].reset_index( drop = True )
 
 
 # Get data from R
-result = pyreadr.read_r('../data/m_reg.RData')
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/m_reg.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'm_reg.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("m_reg.RData")
+os.remove("m_reg.RData")
+# Extracting the data frame from rdata_read
 X_vars = result['X1']
 
 
@@ -150,7 +160,15 @@ ols_cl = smf.ols( formula = formula_cl, data = Penn ).fit().get_robustcov_result
 
 #getting data
 # Get data from R
-result = pyreadr.read_r('../data/ols_cra_reg.RData')
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/ols_cra_reg.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'ols_cra_reg.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("ols_cra_reg.RData")
+os.remove("ols_cra_reg.RData")
+# Extracting the data frame from rdata_read
 X_vars = result['X1']
 
 ols_cra = sm.OLS( log_inuidur1, X_vars ).fit().get_robustcov_results(cov_type = "HC1")
@@ -174,7 +192,15 @@ log_inuidur1 = pd.DataFrame(np.log( Penn["inuidur1"] )).reset_index( drop = True
 
 # Reset index to estimation
 # Get data from R
-result = pyreadr.read_r('../data/ols_ira_reg.RData')
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/ols_ira_reg.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'ols_ira_reg.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("ols_ira_reg.RData")
+os.remove("ols_ira_reg.RData")
+# Extracting the data frame from rdata_read
 X_vars = result['S1']
 
 ols_ira = sm.OLS( log_inuidur1, X_vars ).fit().get_robustcov_results(cov_type = "HC1")
@@ -197,7 +223,15 @@ import hdmpy
 
 
 # Get data from R
-result = pyreadr.read_r('../data/rlasso_ira_reg.RData')
+link="https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/rlasso_ira_reg.RData"
+response = urlopen(link)
+content = response.read()
+fhandle = open( 'rlasso_ira_reg.RData', 'wb')
+fhandle.write(content)
+fhandle.close()
+result = pyreadr.read_r("rlasso_ira_reg.RData")
+os.remove("rlasso_ira_reg.RData")
+# Extracting the data frame from rdata_read
 X_vars = result['S']
 
 
