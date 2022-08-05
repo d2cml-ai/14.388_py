@@ -615,6 +615,8 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 </pre></div>
 </div>
 </div>
@@ -895,7 +897,15 @@ precision of our estimates of the average treatment effect.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from R</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/m_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/m_reg.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;m_reg.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;m_reg.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;m_reg.RData&quot;</span><span class="p">)</span>
+<span class="c1"># Extracting the data frame from rdata_read</span>
 <span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -918,7 +928,7 @@ Dep. Variable:                     T4   R-squared:                       0.029
 Model:                            OLS   Adj. R-squared:                  0.009
 Method:                 Least Squares   F-statistic:                     29.07
 Date:                Thu, 04 Aug 2022   Prob (F-statistic):               0.00
-Time:                        04:06:22   Log-Likelihood:                -3358.5
+Time:                        22:33:16   Log-Likelihood:                -3358.5
 No. Observations:                5099   AIC:                             6923.
 Df Residuals:                    4996   BIC:                             7596.
 Df Model:                         102                                         
@@ -1066,7 +1076,15 @@ Number of regressors in the basic model: 103
 
 <span class="c1">#getting data</span>
 <span class="c1"># Get data from R</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/ols_cra_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/ols_cra_reg.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;ols_cra_reg.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;ols_cra_reg.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;ols_cra_reg.RData&quot;</span><span class="p">)</span>
+<span class="c1"># Extracting the data frame from rdata_read</span>
 <span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">]</span>
 
 <span class="n">ols_cra</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
@@ -1084,7 +1102,7 @@ Dep. Variable:           log_inuidur1   R-squared:                       0.001
 Model:                            OLS   Adj. R-squared:                  0.001
 Method:                 Least Squares   F-statistic:                     5.680
 Date:                Thu, 04 Aug 2022   Prob (F-statistic):             0.0172
-Time:                        04:06:22   Log-Likelihood:                -8223.8
+Time:                        22:33:16   Log-Likelihood:                -8223.8
 No. Observations:                5099   AIC:                         1.645e+04
 Df Residuals:                    5097   BIC:                         1.646e+04
 Df Model:                           1                                         
@@ -1109,7 +1127,7 @@ Dep. Variable:               inuidur1   R-squared:                       0.060
 Model:                            OLS   Adj. R-squared:                  0.040
 Method:                 Least Squares   F-statistic:                     16.64
 Date:                Thu, 04 Aug 2022   Prob (F-statistic):          3.84e-244
-Time:                        04:06:22   Log-Likelihood:                -8070.0
+Time:                        22:33:16   Log-Likelihood:                -8070.0
 No. Observations:                5099   AIC:                         1.635e+04
 Df Residuals:                    4995   BIC:                         1.703e+04
 Df Model:                         103                                         
@@ -1247,7 +1265,15 @@ Notes:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset index to estimation</span>
 <span class="c1"># Get data from R</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/ols_ira_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/ols_ira_reg.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;ols_ira_reg.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;ols_ira_reg.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;ols_ira_reg.RData&quot;</span><span class="p">)</span>
+<span class="c1"># Extracting the data frame from rdata_read</span>
 <span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;S1&#39;</span><span class="p">]</span>
 
 <span class="n">ols_ira</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
@@ -1264,7 +1290,7 @@ Dep. Variable:               inuidur1   R-squared:                       0.079
 Model:                            OLS   Adj. R-squared:                  0.041
 Method:                 Least Squares   F-statistic:                     30.32
 Date:                Thu, 04 Aug 2022   Prob (F-statistic):               0.00
-Time:                        04:06:23   Log-Likelihood:                -8016.3
+Time:                        22:33:17   Log-Likelihood:                -8016.3
 No. Observations:                5099   AIC:                         1.644e+04
 Df Residuals:                    4896   BIC:                         1.777e+04
 Df Model:                         202                                         
@@ -1504,7 +1530,15 @@ Notes:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from R</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;../data/rlasso_ira_reg.RData&#39;</span><span class="p">)</span>
+<span class="n">link</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/d2cml-ai/14.388_py/main/data/rlasso_ira_reg.RData&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fhandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span> <span class="s1">&#39;rlasso_ira_reg.RData&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="n">fhandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;rlasso_ira_reg.RData&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;rlasso_ira_reg.RData&quot;</span><span class="p">)</span>
+<span class="c1"># Extracting the data frame from rdata_read</span>
 <span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
