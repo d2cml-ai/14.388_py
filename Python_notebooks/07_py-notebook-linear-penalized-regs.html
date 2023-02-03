@@ -612,7 +612,7 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;theoretical R2:, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span> <span class="n">Y</span> <span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;theoretical R2:, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span> 
 
 <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span> <span class="n">Y</span> <span class="p">)</span> <span class="c1">#theoretical R-square in the simulation example</span>
 </pre></div>
@@ -620,10 +620,10 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/07_py-notebook-linear-penalized-regs_4_0.png" src="../_images/07_py-notebook-linear-penalized-regs_4_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.7852978477243322
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.8625702319969317
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7852978477243322
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8625702319969317
 </pre></div>
 </div>
 </div>
@@ -810,33 +810,33 @@ We find a Python code that tries to replicate the main function of hdm r-package
   <tbody>
     <tr>
       <th>Cross-Validated Lasso</th>
-      <td>0.315</td>
-      <td>0.067</td>
+      <td>0.371</td>
+      <td>0.071</td>
     </tr>
     <tr>
       <th>Cross-Validated Ridge</th>
-      <td>2.546</td>
-      <td>0.432</td>
+      <td>3.192</td>
+      <td>0.475</td>
     </tr>
     <tr>
       <th>Cross-Validated elnet</th>
-      <td>0.577</td>
-      <td>0.079</td>
+      <td>0.526</td>
+      <td>0.080</td>
     </tr>
     <tr>
       <th>Lasso</th>
-      <td>0.322</td>
-      <td>0.068</td>
+      <td>0.261</td>
+      <td>0.042</td>
     </tr>
     <tr>
       <th>Post-Lasso</th>
-      <td>0.191</td>
-      <td>0.031</td>
+      <td>0.123</td>
+      <td>0.015</td>
     </tr>
     <tr>
       <th>Lava</th>
-      <td>0.321</td>
-      <td>0.067</td>
+      <td>0.261</td>
+      <td>0.042</td>
     </tr>
   </tbody>
 </table>
@@ -897,7 +897,7 @@ We find a Python code that tries to replicate the main function of hdm r-package
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;theoretical R2:, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span> <span class="n">Y</span> <span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;theoretical R2:, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span> 
 
 <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">gX</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span> <span class="n">Y</span> <span class="p">)</span> <span class="c1">#theoretical R-square in the simulation example</span>
 </pre></div>
@@ -905,10 +905,10 @@ We find a Python code that tries to replicate the main function of hdm r-package
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/07_py-notebook-linear-penalized-regs_23_0.png" src="../_images/07_py-notebook-linear-penalized-regs_23_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.782010420087922
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theoretical R2:, 0.7908721378390314
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.782010420087922
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7908721378390314
 </pre></div>
 </div>
 </div>
@@ -1067,33 +1067,33 @@ We find a Python code that tries to replicate the main function of hdm r-package
   <tbody>
     <tr>
       <th>Cross-Validated Lasso</th>
-      <td>0.858</td>
-      <td>0.125</td>
+      <td>1.127</td>
+      <td>0.147</td>
     </tr>
     <tr>
       <th>Cross-Validated Ridge</th>
-      <td>3.202</td>
-      <td>0.575</td>
+      <td>4.348</td>
+      <td>0.653</td>
     </tr>
     <tr>
       <th>Cross-Validated elnet</th>
-      <td>1.021</td>
-      <td>0.144</td>
+      <td>0.769</td>
+      <td>0.140</td>
     </tr>
     <tr>
       <th>Lasso</th>
-      <td>0.863</td>
-      <td>0.173</td>
+      <td>0.974</td>
+      <td>0.131</td>
     </tr>
     <tr>
       <th>Post-Lasso</th>
-      <td>1.286</td>
-      <td>0.209</td>
+      <td>1.322</td>
+      <td>0.187</td>
     </tr>
     <tr>
       <th>Lava</th>
-      <td>0.861</td>
-      <td>0.173</td>
+      <td>0.971</td>
+      <td>0.130</td>
     </tr>
   </tbody>
 </table>

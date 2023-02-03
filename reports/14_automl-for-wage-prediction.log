@@ -1,74 +1,48 @@
 Traceback (most recent call last):
-  File "C:\Users\User\anaconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+  File "c:\python38\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
     executenb(
-  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 1204, in execute
+  File "c:\python38\lib\site-packages\nbclient\client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\util.py", line 84, in wrapped
+  File "c:\python38\lib\site-packages\nbclient\util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\util.py", line 62, in just_run
+  File "c:\python38\lib\site-packages\nbclient\util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "C:\Users\User\anaconda3\lib\asyncio\base_events.py", line 647, in run_until_complete
+  File "c:\python38\lib\asyncio\base_events.py", line 608, in run_until_complete
     return future.result()
-  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 663, in async_execute
+  File "c:\python38\lib\site-packages\nbclient\client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+  File "c:\python38\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+  File "c:\python38\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# run AutoML for 10 base models and a maximal runtime of 100 seconds
-# Run AutoML for 30 seconds
-aml = H2OAutoML(max_runtime_secs = 100, max_models = 10, seed = 1)
-aml.train(x = x, y = y, training_frame = train_h, leaderboard_frame = test_h)
+# Import relevant packages
+import pandas as pd
+import numpy as np
+import pyreadr
+import os
+from urllib.request import urlopen
+from sklearn import preprocessing
+import patsy
+from h2o.automl import H2OAutoML
 
+from numpy import loadtxt
+from keras.models import Sequential
+from keras.layers import Dense
+import warnings
+warnings.filterwarnings('ignore')
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mPermissionError[0m                           Traceback (most recent call last)
-Input [1;32mIn [10][0m, in [0;36m<cell line: 4>[1;34m()[0m
-[0;32m      1[0m [38;5;66;03m# run AutoML for 10 base models and a maximal runtime of 100 seconds[39;00m
-[0;32m      2[0m [38;5;66;03m# Run AutoML for 30 seconds[39;00m
-[0;32m      3[0m aml [38;5;241m=[39m H2OAutoML(max_runtime_secs [38;5;241m=[39m [38;5;241m100[39m, max_models [38;5;241m=[39m [38;5;241m10[39m, seed [38;5;241m=[39m [38;5;241m1[39m)
-[1;32m----> 4[0m [43maml[49m[38;5;241;43m.[39;49m[43mtrain[49m[43m([49m[43mx[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43mx[49m[43m,[49m[43m [49m[43my[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43my[49m[43m,[49m[43m [49m[43mtraining_frame[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43mtrain_h[49m[43m,[49m[43m [49m[43mleaderboard_frame[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43mtest_h[49m[43m)[49m
+[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [1;32mIn[1], line 9[0m
+[0;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m [38;5;28;01mimport[39;00m preprocessing
+[0;32m      8[0m [38;5;28;01mimport[39;00m [38;5;21;01mpatsy[39;00m
+[1;32m----> 9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mh2o[39;00m[38;5;21;01m.[39;00m[38;5;21;01mautoml[39;00m [38;5;28;01mimport[39;00m H2OAutoML
+[0;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mimport[39;00m loadtxt
+[0;32m     12[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkeras[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodels[39;00m [38;5;28;01mimport[39;00m Sequential
 
-File [1;32m~\anaconda3\lib\site-packages\h2o\automl\_estimator.py:683[0m, in [0;36mH2OAutoML.train[1;34m(self, x, y, training_frame, fold_column, weights_column, validation_frame, leaderboard_frame, blending_frame)[0m
-[0;32m    680[0m [38;5;28;01mfinally[39;00m:
-[0;32m    681[0m     poll_updates([38;5;28mself[39m[38;5;241m.[39m_job, [38;5;241m1[39m)
-[1;32m--> 683[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_fetch[49m[43m([49m[43m)[49m
-[0;32m    684[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39mleader
-
-File [1;32m~\anaconda3\lib\site-packages\h2o\automl\_estimator.py:712[0m, in [0;36mH2OAutoML._fetch[1;34m(self)[0m
-[0;32m    711[0m [38;5;28;01mdef[39;00m [38;5;21m_fetch[39m([38;5;28mself[39m):
-[1;32m--> 712[0m     state [38;5;241m=[39m [43m_fetch_state[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mkey[49m[43m)[49m
-[0;32m    713[0m     [38;5;28mself[39m[38;5;241m.[39m_leader_id [38;5;241m=[39m state[[38;5;124m'[39m[38;5;124mleader_id[39m[38;5;124m'[39m]
-[0;32m    714[0m     [38;5;28mself[39m[38;5;241m.[39m_leaderboard [38;5;241m=[39m state[[38;5;124m'[39m[38;5;124mleaderboard[39m[38;5;124m'[39m]
-
-File [1;32m~\anaconda3\lib\site-packages\h2o\automl\_base.py:278[0m, in [0;36m_fetch_state[1;34m(aml_id, properties, verbosity)[0m
-[0;32m    276[0m leaderboard [38;5;241m=[39m [38;5;28;01mNone[39;00m
-[0;32m    277[0m [38;5;28;01mif[39;00m should_fetch([38;5;124m'[39m[38;5;124mleaderboard[39m[38;5;124m'[39m):
-[1;32m--> 278[0m     leaderboard [38;5;241m=[39m [43m_fetch_table[49m[43m([49m[43mstate_json[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mleaderboard_table[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m[43m [49m[43mkey[49m[38;5;241;43m=[39;49m[43mproject_name[49m[38;5;241;43m+[39;49m[38;5;124;43m"[39;49m[38;5;124;43m_leaderboard[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mprogress_bar[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m
-[0;32m    280[0m event_log [38;5;241m=[39m [38;5;28;01mNone[39;00m
-[0;32m    281[0m [38;5;28;01mif[39;00m should_fetch([38;5;124m'[39m[38;5;124mevent_log[39m[38;5;124m'[39m):
-
-File [1;32m~\anaconda3\lib\site-packages\h2o\automl\_base.py:255[0m, in [0;36m_fetch_table[1;34m(table, key, progress_bar)[0m
-[0;32m    253[0m     H2OJob[38;5;241m.[39m__PROGRESS_BAR__ [38;5;241m=[39m progress_bar
-[0;32m    254[0m     [38;5;66;03m# Parse leaderboard H2OTwoDimTable & return as an H2OFrame[39;00m
-[1;32m--> 255[0m     fr [38;5;241m=[39m [43mh2o[49m[38;5;241;43m.[39;49m[43mH2OFrame[49m[43m([49m[43mtable[49m[38;5;241;43m.[39;49m[43mcell_values[49m[43m,[49m[43m [49m[43mdestination_frame[49m[38;5;241;43m=[39;49m[43mkey[49m[43m,[49m[43m [49m[43mcolumn_names[49m[38;5;241;43m=[39;49m[43mtable[49m[38;5;241;43m.[39;49m[43mcol_header[49m[43m,[49m[43m [49m[43mcolumn_types[49m[38;5;241;43m=[39;49m[43mtable[49m[38;5;241;43m.[39;49m[43mcol_types[49m[43m)[49m
-[0;32m    256[0m     [38;5;28;01mreturn[39;00m h2o[38;5;241m.[39massign(fr[[38;5;241m1[39m:], key) [38;5;66;03m# removing index and reassign id to ensure persistence on backend[39;00m
-[0;32m    257[0m [38;5;28;01mfinally[39;00m:
-
-File [1;32m~\anaconda3\lib\site-packages\h2o\frame.py:111[0m, in [0;36mH2OFrame.__init__[1;34m(self, python_obj, destination_frame, header, separator, column_names, column_types, na_strings, skipped_columns)[0m
-[0;32m    109[0m [38;5;28mself[39m[38;5;241m.[39m_is_frame [38;5;241m=[39m [38;5;28;01mTrue[39;00m  [38;5;66;03m# Indicate that this is an actual frame, allowing typechecks to be made[39;00m
-[0;32m    110[0m [38;5;28;01mif[39;00m python_obj [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[1;32m--> 111[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_upload_python_object[49m[43m([49m[43mpython_obj[49m[43m,[49m[43m [49m[43mdestination_frame[49m[43m,[49m[43m [49m[43mheader[49m[43m,[49m[43m [49m[43mseparator[49m[43m,[49m
-[0;32m    112[0m [43m                               [49m[43mcolumn_names[49m[43m,[49m[43m [49m[43mcolumn_types[49m[43m,[49m[43m [49m[43mna_strings[49m[43m,[49m[43m [49m[43mskipped_columns[49m[43m)[49m
-
-File [1;32m~\anaconda3\lib\site-packages\h2o\frame.py:154[0m, in [0;36mH2OFrame._upload_python_object[1;34m(self, python_obj, destination_frame, header, separator, column_names, column_types, na_strings, skipped_columns)[0m
-[0;32m    152[0m tmp_file[38;5;241m.[39mclose()  [38;5;66;03m# close the streams[39;00m
-[0;32m    153[0m [38;5;28mself[39m[38;5;241m.[39m_upload_parse(tmp_path, destination_frame, [38;5;241m1[39m, separator, column_names, column_types, na_strings, skipped_columns)
-[1;32m--> 154[0m [43mos[49m[38;5;241;43m.[39;49m[43mremove[49m[43m([49m[43mtmp_path[49m[43m)[49m
-
-[1;31mPermissionError[0m: [WinError 32] El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso: 'C:\\Users\\User\\AppData\\Local\\Temp\\tmp682v04sc.csv'
-PermissionError: [WinError 32] El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso: 'C:\\Users\\User\\AppData\\Local\\Temp\\tmp682v04sc.csv'
+[1;31mModuleNotFoundError[0m: No module named 'h2o'
+ModuleNotFoundError: No module named 'h2o'
 

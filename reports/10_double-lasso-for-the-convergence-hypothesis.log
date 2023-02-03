@@ -17,26 +17,27 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#Import packages
-import sensemakr as smkr
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.model_selection import KFold
-import warnings
-warnings.filterwarnings('ignore')
+from tabulate import tabulate
+table_1 = np.zeros( (1, 4) )
+
+table_1[0,0] = est_ols  
+table_1[0,1] = std_ols   
+table_1[0,2] = lower_ci
+table_1[0,3] = upper_ci    
+
+
+table_1_pandas = pd.DataFrame( table_1, columns = [ "Estimator","Std. Error", "lower bound CI", "upper bound CI"  ])
+table_1_pandas.index = [ "OLS" ]
+print(table_1_pandas.to_html())
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[2], line 2[0m
-[0;32m      1[0m [38;5;66;03m#Import packages[39;00m
-[1;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01msensemakr[39;00m [38;5;28;01mas[39;00m [38;5;21;01msmkr[39;00m
-[0;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mstatsmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mas[39;00m [38;5;21;01msm[39;00m
-[0;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mstatsmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mformula[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mas[39;00m [38;5;21;01msmf[39;00m
+Cell [1;32mIn[8], line 1[0m
+[1;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtabulate[39;00m [38;5;28;01mimport[39;00m tabulate
+[0;32m      2[0m table_1 [38;5;241m=[39m np[38;5;241m.[39mzeros( ([38;5;241m1[39m, [38;5;241m4[39m) )
+[0;32m      4[0m table_1[[38;5;241m0[39m,[38;5;241m0[39m] [38;5;241m=[39m est_ols  
 
-[1;31mModuleNotFoundError[0m: No module named 'sensemakr'
-ModuleNotFoundError: No module named 'sensemakr'
+[1;31mModuleNotFoundError[0m: No module named 'tabulate'
+ModuleNotFoundError: No module named 'tabulate'
 

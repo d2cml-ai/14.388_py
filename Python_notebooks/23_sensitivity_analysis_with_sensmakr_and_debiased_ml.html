@@ -1665,34 +1665,16 @@ Verbal interpretation of sensitivity statistics:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9  
-Coefficient is 0.08892227214537948, SE is equal to 0.025496655610661587
+1  
+2  
+3  
+4  
+5  
+6  
+7  
+8  
+9  
+Coefficient is 0.09012697712229308, SE is equal to 0.02391945640215873
 </pre></div>
 </div>
 </div>
@@ -1712,7 +1694,7 @@ Coefficient is 0.08892227214537948, SE is equal to 0.025496655610661587
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Controls explain the following fraction of variance of Outcome 0
-Controls explain the following fraction of variance of treatment 0.5177756525338284
+Controls explain the following fraction of variance of treatment 0.5258708374482872
 </pre></div>
 </div>
 </div>
@@ -1751,31 +1733,31 @@ Null hypothesis: q = 1 and reduce = True
 -- The null hypothesis deemed problematic is H0:tau = 0.0 
 
 Unadjusted Estimates of &#39; resD_rf &#39;:
-  Coef. estimate: 0.21
+  Coef. estimate: 0.217
   Standard Error: 0.043
-  t-value: 4.927 
+  t-value: 5.039 
 
 Sensitivity Statistics:
-  Partial R2 of treatment with outcome: 0.019
-  Robustness Value, q = 1 : 0.129
-  Robustness Value, q = 1 alpha = 0.05 : 0.08 
+  Partial R2 of treatment with outcome: 0.02
+  Robustness Value, q = 1 : 0.132
+  Robustness Value, q = 1 alpha = 0.05 : 0.083 
 
 Verbal interpretation of sensitivity statistics:
 
--- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 1.87 % of the residual variance of the treatment to fully account for the observed estimated effect.
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates)  that explains 100% of the residual variance of the outcome, would need to explain at least 1.954 % of the residual variance of the treatment to fully account for the observed estimated effect.
 
--- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 12.883 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 12.883 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
+-- Robustness Value, q = 1 : unobserved confounders (orthogonal to the covariates) that  explain more than 13.155 % of the residual variance of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0 % of the original estimate). Conversely, unobserved confounders that do not explain more than 13.155 % of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0 .
 
--- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 7.967 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 7.967 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
+-- Robustness Value, q = 1 , alpha = 0.05 : unobserved confounders (orthogonal to the covariates) that explain more than 8.254 % of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 (a bias of 100.0 % of the original estimate), at the significance level of alpha = 0.05 . Conversely, unobserved confounders that do not explain more than 8.254 % of the residual variance of both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer &#39;statistically different&#39; from 0.0 , at the significance level of alpha = 0.05 .
 
 Bounds on omitted variable bias:
 --The table below shows the maximum strength of unobserved confounders with association with the treatment and the outcome bounded by a multiple of the observed explanatory power of the chosen benchmark covariate(s).
 
     bound_label    r2dz_x   r2yz_dx treatment  adjusted_estimate  adjusted_se  \
-0  1x Intercept  0.000151  0.000183   resD_rf            0.20999     0.042691   
+0  1x Intercept  0.000105  0.000035   resD_rf           0.216687     0.043043   
 
    adjusted_t  adjusted_lower_CI  adjusted_upper_CI  
-0    4.918838           0.126238           0.293743  
+0    5.034236           0.132245           0.301129  
 </pre></div>
 </div>
 <img alt="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_46_1.png" src="../_images/23_sensitivity_analysis_with_sensmakr_and_debiased_ml_46_1.png" />
