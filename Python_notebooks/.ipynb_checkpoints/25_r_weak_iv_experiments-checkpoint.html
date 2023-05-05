@@ -1,0 +1,1075 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>25. Weak IV Experiments &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="24. Debiased ML for Partially Linear IV Model in Python" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
+   1. Linear Model Overfiting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+   3. OLS and lasso for gender wage gap inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
+   4. Some RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
+   5. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
+   7. Linear Penalized Regs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_ML_for_wage_prediction.html">
+   8. ML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
+   9. Experiment on orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
+   10. Double Lasso for Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   11. Heterogenous Wage Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
+   12. ColliderBias Hollywood# Collider Bias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_automl-for-wage-prediction.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
+   15. Functional Approximation By NN and RF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook-dosearch.html">
+   17. Notebook-Dosearch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
+   18. DML inference for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
+   19. DML inference using NN for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
+   22. Debiased ML for Partially Linear Model in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   24. Debiased ML for Partially Linear IV Model in Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   25. Weak IV Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/25_r_weak_iv_experiments.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Python_notebooks/25_r_weak_iv_experiments.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
+   25.1. A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
+   25.2. Run 1000 trials to evaluate distribution of the IV estimator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
+   25.3. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Weak IV Experiments</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
+   25.1. A Simple Example of Properties of IV estimator when Instruments are Weak
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
+   25.2. Run 1000 trials to evaluate distribution of the IV estimator
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
+   25.3. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="weak-iv-experiments">
+<h1><span class="section-number">25. </span>Weak IV Experiments<a class="headerlink" href="#weak-iv-experiments" title="Permalink to this headline">#</a></h1>
+<section id="a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
+<h2><span class="section-number">25.1. </span>A Simple Example of Properties of IV estimator when Instruments are Weak<a class="headerlink" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak" title="Permalink to this headline">#</a></h2>
+<p>Simulation Design</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hdmpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">from</span> <span class="nn">statsmodels.sandbox.regression.gmm</span> <span class="kn">import</span> <span class="n">IV2SLS</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>                                                              
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>                                                           
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>                                                         
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation Design</span>
+
+<span class="c1"># Set seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">IVEst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="n">B</span> <span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">.25</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span> <span class="n">mean</span> <span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">n</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span> <span class="n">mean</span> <span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">n</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">U</span> 
+<span class="n">Y</span> <span class="o">=</span> <span class="n">D</span> <span class="o">+</span> <span class="n">U</span>
+
+<span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>    <span class="c1"># Describe model</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.121
+Model:                            OLS   Adj. R-squared:                  0.112
+Method:                 Least Squares   F-statistic:                     13.47
+Date:                Sat, 23 Jul 2022   Prob (F-statistic):           0.000395
+Time:                        16:55:18   Log-Likelihood:                -142.05
+No. Observations:                 100   AIC:                             288.1
+Df Residuals:                      98   BIC:                             293.3
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.0509      0.101      0.501      0.617      -0.151       0.252
+x1             0.3588      0.098      3.670      0.000       0.165       0.553
+==============================================================================
+Omnibus:                        0.445   Durbin-Watson:                   1.865
+Prob(Omnibus):                  0.801   Jarque-Bera (JB):                0.594
+Skew:                           0.041   Prob(JB):                        0.743
+Kurtosis:                       2.632   Cond. No.                         1.09
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IV</span> <span class="o">=</span> <span class="n">IV2SLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
+<span class="n">IV_res</span> <span class="o">=</span> <span class="n">IV</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">IV_res</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                          IV2SLS Regression Results                           
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.892
+Model:                         IV2SLS   Adj. R-squared:                  0.891
+Method:                     Two Stage   F-statistic:                       nan
+                        Least Squares   Prob (F-statistic):                nan
+Date:                Sat, 23 Jul 2022                                         
+Time:                        16:55:18                                         
+No. Observations:                 100                                         
+Df Residuals:                      99                                         
+Df Model:                           1                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             1.3230      0.180      7.365      0.000       0.967       1.679
+==============================================================================
+Omnibus:                        0.446   Durbin-Watson:                   1.864
+Prob(Omnibus):                  0.800   Jarque-Bera (JB):                0.595
+Skew:                           0.044   Prob(JB):                        0.743
+Kurtosis:                       2.633   Cond. No.                         1.00
+==============================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IV_res</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Coef.&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3230345755631345
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the instrument is weak here (contolled by <span class="math notranslate nohighlight">\(\beta\)</span>) – the t-stat is less than 4.</p>
+</section>
+<section id="run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
+<h2><span class="section-number">25.2. </span>Run 1000 trials to evaluate distribution of the IV estimator<a class="headerlink" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation design </span>
+
+<span class="c1"># Set seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># Trials</span>
+<span class="n">IVEst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="n">B</span> <span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="n">B</span> <span class="p">):</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span> <span class="n">mean</span> <span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">n</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span> <span class="n">mean</span> <span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="n">n</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">U</span> 
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">D</span> <span class="o">+</span> <span class="n">U</span>
+    
+    <span class="n">IV</span> <span class="o">=</span> <span class="n">IV2SLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
+    <span class="n">IV_res</span> <span class="o">=</span> <span class="n">IV</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    
+    <span class="n">IVEst</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">IV_res</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Coef.&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IVEst</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1.32303458e+00,  1.35920545e+00,  1.27528177e+00,  1.31795707e+00,
+        8.92612860e-01,  1.15075743e+00,  1.39541223e+00,  1.24046187e+00,
+        1.03656449e+00,  7.49148368e-01,  1.66467612e-01,  5.42772305e-01,
+       -2.49194696e+00,  2.28867549e-01,  8.84861973e-02,  1.33344096e+00,
+        1.27515523e+00,  2.73053783e-01,  1.13439410e+00,  9.08455140e-01,
+        1.33805748e+00,  1.15216886e+00,  1.22138349e+00,  1.11055465e+00,
+        7.70050438e-01,  1.46744095e+00,  5.09039625e-01,  9.89986241e-01,
+        1.33663526e+00,  9.24970759e-01,  1.18487116e+00,  9.37873503e-01,
+        1.13082697e+00,  4.69246357e-01,  1.10240992e+00,  1.29446004e+00,
+        4.58298687e-01,  1.18565568e+00,  7.44442492e-01,  1.17511530e+00,
+        1.27094553e+00,  1.24699451e+00,  1.61650625e+00,  8.75531382e-01,
+        2.43879171e-01,  1.35811277e+00,  1.30501832e+00,  9.55013337e-01,
+        1.01032459e+00,  1.07437955e+00,  1.22472863e+00,  8.60868688e-01,
+        1.21146144e+00,  7.32039813e-01,  9.40206713e-01,  1.41148446e+00,
+        1.29966760e+00,  1.26453593e+00,  9.13812915e-01,  9.34567612e-01,
+        6.84297515e-01,  1.40724596e+00,  1.28151344e+00,  1.38985953e+00,
+        1.29113102e+00,  1.15739705e+00,  1.14614453e+00,  2.87099292e-01,
+        4.57912733e-01,  1.03245568e+00,  1.10229414e+00,  1.58310700e+00,
+        1.24944984e+00,  1.24387062e+00,  1.32527584e+00,  3.63357240e-01,
+        1.18653434e+00,  1.11714173e+00,  1.13778936e+00,  3.39613558e+00,
+        1.48160717e+00,  1.17381107e+00,  1.29739942e+00,  1.44539670e+00,
+        1.67834496e-01,  4.29858841e-01,  1.52581412e+00,  1.03527227e+00,
+        1.21354343e+00, -3.02276271e-01,  1.42109579e+00,  1.22173292e+00,
+        1.49972061e+00,  1.26783374e+00,  2.58161595e+00,  1.33147950e+00,
+        1.43668405e+00,  1.03611696e+00,  1.02444094e+00,  1.43756447e+00,
+        1.12728877e+00,  1.20267145e+00,  8.00063086e-01,  1.44766154e+00,
+        1.53081600e+00,  1.31222239e+00,  1.39818567e+00,  4.83095115e-01,
+        1.24265612e+00,  1.35660283e+00,  1.04598942e-01,  2.09486115e-01,
+        1.37862550e+00,  4.22518713e-01,  5.37759170e+00,  1.18962915e+00,
+        1.03492375e+00,  1.32032934e+00,  1.51287197e+00,  1.62947558e+00,
+       -1.99980289e-02,  1.24786633e+00,  1.14443476e+00,  1.33176297e+00,
+        1.01740656e+00,  1.41731807e+00,  1.47907606e+00,  1.27035193e+00,
+        9.38483134e-01,  9.56070266e-01,  1.15539125e+00,  1.33453991e+00,
+        9.88640527e-01,  1.19216990e+00,  1.18096849e+00,  4.53840105e-01,
+       -4.23748886e-01,  1.11187218e+00,  2.12152894e-01,  3.07240854e-01,
+        1.31925716e+00,  1.37409425e+00,  1.33947128e+00,  1.12822274e+00,
+        1.18732553e+00,  8.30626316e-01,  1.05142081e+00,  1.56440910e+00,
+        1.11986862e+00,  2.92530639e+00,  1.08744721e+00,  9.88174618e-01,
+        9.92507285e-01,  6.78037801e-01,  1.37133137e+00,  1.42104251e+00,
+        1.38643496e+00,  1.12749699e-01, -5.17347541e-01,  9.95097080e-01,
+        5.86376476e-01,  1.14159010e+00,  1.01006229e+00,  1.06947449e+00,
+        8.52158527e-01,  1.27289028e+00,  1.54941271e+00,  1.17234957e+00,
+        8.90879270e-01,  8.35292185e-01,  3.18218906e-01,  1.32867384e+00,
+        1.34630510e+00,  7.19693407e-01,  1.04242749e+00,  1.41108700e+00,
+        1.40093726e+00,  5.69295318e-01,  5.28410359e-01,  1.28309037e+00,
+        1.13900217e+00,  1.15515212e+00,  1.01446134e+00,  1.29257527e+00,
+        1.30130753e+00,  1.31194707e+00,  1.10400148e+00,  1.32288595e+00,
+        1.34337237e+00,  1.26188820e+00,  1.53649261e+00,  1.11468620e+00,
+        1.20978862e+00,  1.40850800e+00,  9.44082312e-01,  1.10816544e+00,
+        5.36224877e-01,  9.27126041e-01,  1.11168413e+00,  1.56231471e+00,
+        1.40802831e+00,  1.28452651e+00,  1.52437795e+00, -8.32898324e-01,
+        1.35255765e+00,  1.49676911e+00,  1.32018121e+00, -3.21693068e+00,
+        9.88946138e-01,  9.18907598e-01,  7.25815881e-01,  1.11012613e+00,
+        1.44999517e+00,  1.24624659e+00,  7.47846434e-01,  1.45436287e+00,
+        9.21874865e-01,  9.93054865e-01,  1.54262660e+00,  1.36832707e+00,
+        1.19945626e+00,  1.25028452e+00,  1.10937451e+00,  8.71109868e-01,
+        1.30248136e+00,  1.26278625e+00,  9.89599925e-01,  4.87433256e-01,
+        1.31540333e+00,  9.44303140e-01,  1.37829071e+00,  1.32361790e+00,
+        9.02691450e-01,  1.45037309e+00,  4.42604489e-01,  1.30533742e+00,
+        1.32423103e+00,  8.14894513e-01,  1.52454123e+00,  1.02240305e+00,
+        1.38350065e+00, -5.60361299e-02,  1.39753346e+00,  1.03189032e+00,
+        2.90338834e-01,  7.35713956e-01,  1.55730296e+00,  1.06104061e+00,
+        1.32785753e+00,  1.02937644e+00,  1.43870995e+00,  1.19478499e+00,
+        1.47577194e+00,  1.47935857e+00,  1.20386969e+00,  1.39491500e+00,
+        7.54434990e-01,  1.18854786e+00,  1.16714769e+00,  6.37590089e-01,
+        1.22783361e+00,  1.33281320e+00,  1.12591022e+00,  1.41095271e+00,
+        3.86505918e-01,  8.56403909e-01,  9.84028450e-01,  1.33992896e+00,
+        6.35742112e-01, -1.76508231e-01,  1.35595715e+00,  7.93231026e-02,
+        1.34521126e+00,  1.32753201e+00,  1.08995358e+00,  5.57807506e-01,
+        1.37465798e+00,  1.22066850e+00,  1.09502911e+00,  1.16568727e+00,
+       -1.88324595e-01,  1.30737880e+00,  9.80379104e-01, -2.24027257e-01,
+        1.22881433e+00,  2.20139978e-01,  1.09356435e+00,  1.28259031e+00,
+        1.32861799e+00,  9.51159983e-01,  1.19519117e+00,  1.20570451e+00,
+        1.46365170e+00,  1.04461984e+00,  1.32591144e+00,  1.37756117e+00,
+        1.12730742e+00,  1.28658429e+00,  1.11817271e+00,  1.12178244e+00,
+        1.38315702e+00,  1.17152641e+00,  1.39696599e+00,  1.45368854e+00,
+        1.34279809e+00,  1.23709543e+00,  1.12178307e+00,  1.04349302e+00,
+        7.20758152e-01,  1.40408718e+00,  1.39623268e+00,  1.59440888e+00,
+        1.27691531e+00,  1.25228537e+00,  1.11874432e+00, -8.10962817e-01,
+        1.22688864e+00,  1.37120024e+00,  1.27250789e+00, -3.03776250e+00,
+        7.07734402e-01,  1.34184443e+00,  1.44191701e+00,  1.32428779e+00,
+        6.92968414e-01,  1.41684666e+00,  1.21867534e+00,  1.41548339e+00,
+        1.07875642e+00,  1.12031667e+00,  1.15682093e+00,  1.02380907e+00,
+        1.29790932e+00,  6.10001135e-01,  9.18477825e-01,  8.85177546e-01,
+        8.34082813e-01,  9.65266918e-01,  1.14343186e+00,  1.36294114e+00,
+        1.30838293e+00,  9.43663980e-01,  1.48502096e+00,  1.16091538e+00,
+        3.98285697e-01,  9.83136066e-01,  1.44922913e+00,  1.13483997e+00,
+        1.02698326e+00,  1.33467053e+00,  1.19747190e+00,  1.07899534e+00,
+        2.04752099e-01,  1.14148383e+00,  8.36933070e-01,  5.76883774e-01,
+        1.34417868e+00,  3.86177340e-01,  9.48891993e-01,  1.34230104e+00,
+        1.31290351e+00, -8.62463492e-01,  1.33521798e+00,  1.42298987e+00,
+        7.95445130e-01,  2.39007909e-01,  9.64954374e-01,  1.33431615e+00,
+        7.77471759e-01,  1.19539489e+00,  2.58453768e+00,  1.23924481e+00,
+        1.07814755e+00,  1.32449126e+00,  1.42179880e+00,  1.05848146e+00,
+        1.12603354e+00,  1.30407261e+00,  5.80324669e-01,  4.42489377e-01,
+        6.51252961e-01,  1.12839791e+00,  8.59799478e-01,  1.28927108e+00,
+        1.47531890e+00,  6.24837371e-01,  1.36674055e+00,  1.43088976e+00,
+        1.31519704e+00,  4.21637814e-01,  1.13566021e+00,  1.51666872e+00,
+        1.06944208e+00,  1.31684239e+00,  7.60626307e-01,  1.42676366e+00,
+        1.37706045e+00,  1.48144337e+00,  4.36692671e-01,  1.12782758e+00,
+        1.56906906e-01,  8.69675139e-01,  1.13830114e+00,  1.02908132e+00,
+        6.08507301e-01,  1.36313118e+00,  1.25942438e+00,  1.07933761e+00,
+        2.72481723e-02,  1.54245328e+00,  1.47878527e+00,  1.17807279e+00,
+        2.37096792e-01,  1.28687570e+00,  1.33872441e+00,  1.17702231e+00,
+        1.29424835e+00,  6.52956275e-01,  1.27376371e+00, -4.02844985e-01,
+        1.18582479e+00,  7.12641718e-01,  1.18496444e+00,  1.52111698e+00,
+        1.56938577e+00,  4.65942681e-01,  1.22030499e+00,  1.10253572e+00,
+        1.05440748e+00,  8.55348687e-01,  1.79279142e+00,  1.39551327e-01,
+        1.41338404e-02,  9.43247126e-01,  1.31820855e+00,  4.98768321e-01,
+        1.21868298e+00, -4.52300008e-01,  1.21129161e+00,  3.84348557e-01,
+        1.46537460e+00,  1.20801144e+00,  9.37438344e-01,  1.03776649e+00,
+        1.08672913e+00,  1.37299258e+00,  1.21306323e+00,  8.14148969e-01,
+        1.27591566e+00,  1.34495619e+00,  1.16755510e+00,  1.08050991e+00,
+       -4.65086414e-01,  1.39345024e+00,  1.19866347e+00,  8.76073329e-01,
+       -1.61598436e+00,  1.33056599e+00,  1.00548014e+00,  1.25407906e+00,
+        9.39805556e-01,  1.25042203e+00,  4.03115484e-01,  1.02555037e+00,
+        1.03509362e+00,  1.28286173e+00,  6.66337819e-01,  9.92242894e-01,
+        1.25839187e+00,  1.22418821e+00,  1.13508492e+00,  1.03587955e+00,
+        1.51709153e+00,  1.31774582e+00,  9.69874214e-01,  9.53412450e-01,
+        5.15929376e-01,  1.23296144e+00,  1.50510070e+00,  1.28236055e+00,
+        4.79706783e-01,  1.34511152e+00,  4.63752828e-01, -8.45750592e+00,
+        7.37367842e-01,  1.13146346e+00,  1.00341974e+00,  1.18455282e+00,
+        1.29836583e+00,  1.00890744e+00,  1.33786611e+00,  1.33100738e+00,
+        1.25407371e+00,  9.66934407e-01,  1.41766444e+00,  2.72491218e-01,
+        1.48531425e+00,  5.26059101e-01,  1.41585286e+00,  1.31854104e+00,
+        6.03793153e-01,  1.29952145e+00,  1.38914490e+00,  1.36466327e+00,
+        1.12965207e+00,  1.35617001e+00,  1.28085812e+00,  1.09631459e+00,
+        9.99429753e-01,  1.01913967e+00,  1.23506267e+00, -5.69507455e-01,
+        1.19392072e+00,  7.17487864e-01,  1.24804722e+00,  1.14509059e+00,
+        1.10185940e+00,  1.19125004e+00,  1.01756959e+00,  8.64187997e-01,
+        1.15136946e+00,  1.07858244e+00,  1.17074625e+00,  1.13275137e+00,
+        1.53618005e+00,  8.85346745e-01,  1.49150035e+00,  1.24094570e+00,
+        1.34660428e+00,  1.35990651e+00,  1.11749082e+00,  1.40267786e+00,
+        1.24015812e+00, -6.42450893e-01,  1.38474364e+00,  1.49039376e+00,
+        1.10446377e+00,  1.40844508e+00,  3.21767016e-01,  1.24277968e+00,
+        1.09703048e+00,  1.39338370e+00, -1.21395176e+00,  9.80807891e-01,
+        1.38080192e+00,  1.41629699e+00,  1.17019274e+00,  1.41991014e+00,
+        1.43651502e+00,  1.42841717e+00,  1.00039286e+00,  1.32185031e+00,
+        6.77663894e-01,  1.32689302e+00,  1.22726151e+00,  1.34652266e+00,
+        9.98460144e-01,  9.66729733e-01,  1.07077393e+00,  1.54065224e+00,
+        1.18267795e+00,  1.27304628e+00,  3.52190516e-01,  6.12756813e-01,
+        6.22563613e-01,  1.40459119e+00,  1.45819022e+00,  2.13394494e-01,
+        1.05855640e+00,  1.75323717e+00,  1.10948438e+00,  1.06383447e+00,
+        1.42467340e+00,  1.30593090e+00,  1.17511922e+00,  1.23944569e+00,
+        1.25715005e+00,  1.45706328e+00,  2.99587726e-01,  1.02493247e+00,
+        4.11723877e-01,  1.12258063e+00,  1.31857757e+00,  1.24714511e+00,
+        8.76377113e-01,  1.73947783e-01,  5.93581002e-01,  1.45934585e+00,
+        9.91487965e-01,  1.32661726e+00,  9.77014655e-01,  1.39032524e+00,
+        1.43143681e+00,  1.13880149e+00,  1.35007980e+00,  1.14084549e+00,
+        1.27136208e+00,  2.51704058e-01,  9.63524649e-01,  1.17856431e+00,
+        1.54391061e-01,  1.51641147e+00,  1.48794191e+00,  1.13105197e+00,
+       -1.05384722e+00,  1.64389636e+00,  1.08539288e+00,  7.18056321e-01,
+        1.09766713e+00,  6.79650209e-01,  1.23794219e+00,  1.29919969e+00,
+        1.30944601e+00,  1.27441944e+00,  1.02418288e+00,  9.05084541e-01,
+       -1.02635907e+00,  1.26823122e+00,  9.09081373e-01,  1.34034246e+00,
+        1.36595293e+00,  1.50841765e+00,  1.12491908e+00,  7.17902290e-01,
+        7.32765580e-01,  1.30007759e+00,  4.16058259e-01,  5.86671685e-01,
+        1.12035419e+00,  2.54290052e-01,  1.26243848e+00,  1.42333571e+00,
+        3.51647851e-01,  1.05530652e+00,  1.54981041e+00,  1.23492587e+00,
+        5.84677888e-01,  1.09709560e+00,  1.11530873e+00,  1.17573412e+00,
+        1.23287140e+00,  1.13970295e+00,  1.25349871e+00,  1.84040835e+00,
+        9.46283765e-01,  1.11036468e+00,  9.81293460e-01,  1.52141432e+00,
+        1.30178251e+00,  1.21170244e+00,  1.18718893e+00,  1.26233973e+00,
+        9.55285832e-01,  1.09122221e+00,  1.24553055e+00,  1.39631142e+00,
+        9.15804388e-01,  1.20271764e+00,  1.24977872e+00,  6.66296639e-01,
+        7.98293249e-01,  4.69584074e-01,  1.44646333e+00,  8.43017049e-01,
+        1.31643836e+00,  1.36313291e+00,  1.27802225e+00,  1.00006193e+00,
+        6.60078010e-01,  1.43744309e+00,  9.25562480e-01,  6.42303116e-01,
+       -1.11351560e-01,  1.23681054e+00,  1.45297700e+00, -3.29804806e-01,
+        1.32323050e+00,  9.19543992e-01,  7.72233246e-01,  1.16046541e+00,
+        1.03445095e+00,  7.51939492e-01,  1.10945565e+00,  8.22181916e-01,
+        1.29532405e+00,  9.64926990e-01,  1.11163175e+00,  1.12828439e+00,
+        9.00397408e-01,  1.23200245e+00,  9.28094322e-01,  5.17536637e-01,
+        1.34726133e+00, -7.69977757e-02,  9.99407995e-01, -1.42540000e-02,
+        9.41917140e-01,  5.87473508e-01,  1.31928442e+00,  1.25837043e+00,
+        1.25278498e+00,  1.39813137e+00,  1.20582934e+00,  6.57903432e-01,
+        1.27553254e+00,  7.21452640e-01,  1.02371526e+00,  1.26120510e+00,
+        1.16302715e+00,  1.64035440e+00,  1.00344362e+00, -6.23293655e-03,
+        4.49113050e-01,  6.61793181e-01,  4.36235537e-01,  1.37059607e+00,
+        1.19093366e+00,  1.14774202e+00,  1.17806655e+00,  1.28057424e+00,
+        8.92945075e-01,  1.23662311e+00,  1.44604239e+00,  1.04028395e+00,
+        1.41384259e+00,  1.30702356e+00,  6.23929753e-01,  1.45019034e+00,
+        1.55587808e-01,  1.03967372e+00,  1.42042122e+00,  9.89534510e-01,
+        9.30416395e-01,  1.24894837e+00,  3.71170442e-01,  1.24485322e+00,
+        1.33057505e+00,  1.32888868e+00, -6.11096484e-01,  9.79612084e-01,
+        9.45659846e-01,  1.32043934e+00,  1.25911360e+00,  9.05745779e-01,
+        1.44930724e+00,  1.44728836e+00,  9.32348227e-01,  1.32814951e+00,
+        1.30295978e+00,  1.13116097e+00,  1.17702234e+00, -1.18477073e+00,
+        1.00947881e+00,  1.54363117e-01,  1.56628418e+00,  1.08248447e+00,
+        1.07404517e+00,  8.25827764e-01,  1.36673433e+00, -2.54165937e-01,
+       -5.75497666e-02,  1.26337681e+00, -4.83037031e-01,  1.11729807e+00,
+        8.43602527e-01,  1.05349259e+00,  9.30329648e-01,  7.24920913e-01,
+        1.50774236e+00,  1.25078822e+00,  9.76436086e-01,  1.48403438e+00,
+        9.99546130e-01,  1.21180690e+00,  1.31359884e+00,  1.36624856e+00,
+        1.29507346e+00,  1.12058908e+00,  8.84672655e-01,  1.31638910e+00,
+       -8.14078110e-01,  1.17085891e+00,  8.06064686e-01,  8.84126373e-01,
+        1.05415375e+00,  7.75707744e-01, -1.20001901e+00,  1.36376937e+00,
+        1.07215341e+00,  1.03435056e+00,  9.15114263e-01,  1.44667498e+00,
+        9.90932600e-01, -3.03496641e-02,  1.40006420e-01,  7.83776897e-01,
+        8.03288415e-01,  8.16869924e-01, -2.85310198e-01,  1.07425496e+00,
+       -3.36408873e-02,  1.23767583e+00,  1.31659807e+00,  1.18628956e+00,
+       -2.43079882e-01,  1.20917928e+00,  1.17743461e+00,  1.22320510e+00,
+        6.43809489e-01,  1.12827623e+00,  1.50181028e+00,  1.05820595e+00,
+        1.45156630e-01,  8.43267633e-01,  1.17421276e+00,  1.98508863e-01,
+        6.57252198e-01, -1.67704845e-01,  3.64151440e-01,  9.19726540e-01,
+        1.22044852e+00,  1.18440603e+00,  1.39661402e+00,  1.34731825e+00,
+        7.84989681e-01,  1.25807466e+00,  1.52222696e+00,  1.57072059e+00,
+       -7.29482961e-01,  1.31175844e+00,  1.23842037e+00,  1.08085992e+00,
+        1.19029693e+00,  1.43358931e+00,  1.24744117e+00,  1.24303085e+00,
+        5.69910769e-01,  8.58140831e-01,  9.83828123e-01,  1.02673792e+00,
+        8.64850073e-01,  6.84406319e-01,  1.36368348e+00,  1.22433675e+00,
+        1.51307278e+00,  7.20740381e-01,  1.27647822e+00,  9.05081706e-01,
+       -5.83157089e-01,  1.22242264e+00,  1.08572199e+00,  4.25637070e-01,
+        1.37000945e+00,  7.10221373e-01,  1.07990597e+00,  7.00187194e-01,
+        1.10698001e+00,  1.40483172e+00,  9.85194212e-01,  1.56432936e+00,
+        1.23526500e+00, -2.67699044e-01,  1.14385658e+00,  1.27840015e+00,
+        1.00488481e+00,  1.08128106e+00,  1.27843616e+00,  9.20643102e-01,
+        1.09666017e+00,  1.03854140e+00,  1.37840608e+00,  1.54853699e+00,
+        1.38178897e+00,  1.03170348e+00,  1.27730853e+00,  1.12552149e+00,
+        1.35993719e+00,  1.02082552e+00,  1.42658654e+00,  1.19045013e+00,
+        9.63838665e-01,  1.05768381e+00,  1.09364551e+00,  1.42359540e+00,
+        1.21088913e+00,  1.43483086e+00,  1.17339310e+00,  1.40621421e+00,
+        1.36135333e+00,  1.13342996e+00,  1.21157564e+00,  1.26143700e+00,
+        6.88547352e-01,  1.19236963e+00,  1.15784764e+00,  9.64586292e-01,
+        1.09538813e+00,  1.55700092e+00,  1.20614864e+00,  1.33072868e+00,
+        7.15211737e-01,  1.24102689e+00,  1.42966627e+00,  9.61176671e-01,
+        9.51414369e-01,  1.01570673e+00,  9.87145652e-01,  1.29921178e+00,
+        1.39781798e+00,  1.12072320e+00,  9.84423815e-01,  1.09640851e+00,
+        1.11880048e+00,  6.71295773e-01,  1.24751896e+00,  4.93166755e-01,
+        1.31644471e+00,  1.16189870e+00,  1.39524765e+00,  1.38968747e+00,
+        8.49982032e-01,  1.04061345e+00,  1.39999538e+00,  1.35133547e+00,
+        1.00885025e+00,  1.26080649e+00,  6.61191402e-01,  1.18617010e+00,
+        1.44605869e+00,  6.07330377e-01,  5.75998723e-01,  1.23673268e+00,
+        1.40796845e+00,  3.66000418e-01,  8.91250954e-01,  1.25486598e+00,
+        1.13756857e+00,  7.79078387e-01,  1.45912266e+00,  9.28153899e-01,
+        1.12289082e+00,  1.20735028e+00,  7.57854895e-01,  3.23471407e-02,
+        1.47875667e+00,  1.29719360e+00,  9.32486742e-01,  1.14830635e+00,
+        1.49124384e+00,  3.88442543e-01,  9.40699299e-01,  8.72395357e-01,
+        1.16889057e+00,  9.48967164e-01,  1.34141191e+00,  1.01673775e+00,
+        1.29628057e+00,  1.08619316e+00,  1.21902933e+00,  1.29238979e+00,
+        1.29022693e+00,  7.70982725e-01,  1.19573861e+00,  1.23658217e+00,
+        1.32970270e+00,  1.07422807e+00, -9.16204267e-01,  1.24155235e+00,
+        1.94345961e+00,  4.97968359e-01,  1.25467085e+00,  1.45935073e+00,
+        9.00711268e-01,  1.38717515e+00,  1.29032945e+00, -9.47868375e-02,
+        1.10692036e+00,  1.00644238e+00,  4.35397125e-01,  1.30202439e+00,
+        1.02421299e+00,  1.30695648e+00,  5.13124978e-01,  1.24719307e+00,
+        1.36896958e+00,  1.52214481e+00,  9.33154732e-01,  7.34959501e-01,
+        1.04309826e+00,  1.18507701e+00,  1.05391714e+00,  5.25348575e-01,
+        2.82973819e-01,  7.79053332e-01,  8.37287908e-01,  3.61189790e-01,
+       -1.19513153e+00,  4.00125413e-02,  8.72433268e-01, -5.38525457e-02])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
+<h2><span class="section-number">25.3. </span>Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)<a class="headerlink" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">beta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>   <span class="c1"># theoretical variance of IV</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+<span class="n">normal_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">sd</span><span class="p">,</span><span class="n">val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># plotting both distibutions on the same figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">IVEst</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">normal_dist</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Actual Distribution vs Gaussian&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;IV Estimator -True Effect&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.0, 5.0)
+</pre></div>
+</div>
+<img alt="../_images/25_r_weak_iv_experiments_12_1.png" src="../_images/25_r_weak_iv_experiments_12_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rejection_frequency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">IVEst</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">sd</span> <span class="o">&gt;</span> <span class="mf">1.96</span><span class="p">))</span><span class="o">/</span><span class="n">B</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rejection Frequency is </span><span class="si">{}</span><span class="s2"> ,while we expect it to be .05&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rejection_frequency</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rejection Frequency is 0.079 ,while we expect it to be .05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_py",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Python_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">24. </span>Debiased ML for Partially Linear IV Model in Python</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

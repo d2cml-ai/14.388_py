@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>8. ML for wage prediction &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +64,93 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Python_notebooks/08_ML_for_wage_prediction';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="9. Experiment on orthogonal Learning" href="09_py-notebook-experiment-on-orthogonal-learning.html" />
     <link rel="prev" title="7. Linear Penalized Regs" href="07_py-notebook-linear-penalized-regs.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/main_logo_ai_light.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/main_logo_ai_light.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,533 +160,340 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Linear Model Overfiting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
-   2. OLS and lasso for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. OLS and lasso for gender wage gap inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Some RCT Examples
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Linear Penalized Regs
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   8. ML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
-   9. Experiment on orthogonal Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   10. Double Lasso for Testing the Convergence Hypothesis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Heterogenous Wage Effects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. ColliderBias Hollywood# Collider Bias
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
-   13. Deep Neural Networks for Wage Prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. AutoML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximation By NN and RF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Notebook-DAGitty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Notebook-Dosearch
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
-   18. DML inference for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. DML inference using NN for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. DML for ATE and LATE of 401(k) on Wealth
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
-   21. Identification Analysis of 401(k) Example w DAGs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Debiased ML for Partially Linear Model in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensitivity Analysis with Sensmakr and Debiased ML
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Debiased ML for Partially Linear IV Model in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. Weak IV Experiments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">1. Linear Model Overfiting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">2. OLS and lasso for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">3. OLS and lasso for gender wage gap inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_py-notebook-some-rct-examples.html">4. Some RCT Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">5. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">6. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">7. Linear Penalized Regs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. ML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">9. Experiment on orthogonal Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">10. Double Lasso for Testing the Convergence Hypothesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_py-heterogenous-wage-effects.html">11. Heterogenous Wage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_py-colliderbias-hollywood.html">12. ColliderBias Hollywood# Collider Bias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">13. Deep Neural Networks for Wage Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_automl-for-wage-prediction.html">14. AutoML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">15. Functional Approximation By NN and RF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_notebook_dagitty.html">16. Notebook-DAGitty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_notebook-dosearch.html">17. Notebook-Dosearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_pm3_notebook_inference_clustering.html">18. DML inference for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_pm3_notebook_inference_nn.html">19. DML inference using NN for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_pm5-401k-kaggle-py.html">20. DML for ATE and LATE of 401(k) on Wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">21. Identification Analysis of 401(k) Example w DAGs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">22. Debiased ML for Partially Linear Model in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">23. Sensitivity Analysis with Sensmakr and Debiased ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">24. Debiased ML for Partially Linear IV Model in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_r_weak_iv_experiments.html">25. Weak IV Experiments</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_binder.svg">
   </span>
-<span class="headerbtn__text-container">Binder</span>
+<span class="btn__text-container">Binder</span>
 </a>
-
-      </li>
+</li>
       
-      <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/08_ML_for_wage_prediction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Python_notebooks/08_ML_for_wage_prediction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/08_ML_for_wage_prediction.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/08_ML_for_wage_prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/Python_notebooks/08_ML_for_wage_prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data">
-   8.1. Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysis">
-   8.2. Analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ols">
-     8.2.1. OLS
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lasso-ridge-and-elastic-net">
-     8.2.2. Lasso, Ridge and Elastic Net
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#non-linear-models">
-   8.3. Non-linear models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regression-trees">
-     8.3.1. Regression Trees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-forest-and-boosted-trees">
-     8.3.2. Random Forest and Boosted Trees
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#results">
-   8.4. Results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ensemble-learning">
-   8.5. Ensemble learning
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>ML for wage prediction</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data">
-   8.1. Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysis">
-   8.2. Analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ols">
-     8.2.1. OLS
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lasso-ridge-and-elastic-net">
-     8.2.2. Lasso, Ridge and Elastic Net
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#non-linear-models">
-   8.3. Non-linear models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regression-trees">
-     8.3.1. Regression Trees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-forest-and-boosted-trees">
-     8.3.2. Random Forest and Boosted Trees
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#results">
-   8.4. Results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ensemble-learning">
-   8.5. Ensemble learning
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ML for wage prediction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">8.1. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">8.2. Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ols">8.2.1. OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-ridge-and-elastic-net">8.2.2. Lasso, Ridge and Elastic Net</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-models">8.3. Non-linear models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-trees">8.3.1. Regression Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-and-boosted-trees">8.3.2. Random Forest and Boosted Trees</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">8.4. Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning">8.5. Ensemble learning</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="ml-for-wage-prediction">
-<h1><span class="section-number">8. </span>ML for wage prediction<a class="headerlink" href="#ml-for-wage-prediction" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">8. </span>ML for wage prediction<a class="headerlink" href="#ml-for-wage-prediction" title="Permalink to this heading">#</a></h1>
 <p>We illustrate how to predict an outcome variable Y in a high-dimensional setting, where the number of covariates <span class="math notranslate nohighlight">\(p\)</span> is large in relation to the sample size <span class="math notranslate nohighlight">\(n\)</span>. So far we have used linear prediction rules, e.g. Lasso regression, for estimation.
 Now, we also consider nonlinear prediction rules including tree-based methods.</p>
 <section id="data">
-<h2><span class="section-number">8.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h2>
 <p>Again, we consider data from the U.S. March Supplement of the Current Population Survey (CPS) in 2015.
 The preproccessed sample consists of <span class="math notranslate nohighlight">\(5150\)</span> never-married individuals.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span>  <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -850,14 +701,14 @@ The preproccessed sample consists of <span class="math notranslate nohighlight">
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_ML_for_wage_prediction_10_0.png" src="../_images/08_ML_for_wage_prediction_10_0.png" />
+<img alt="../_images/f73a6d74492189f17968d004a810d26d58803a2a64f568651a02853cba38ad95.png" src="../_images/f73a6d74492189f17968d004a810d26d58803a2a64f568651a02853cba38ad95.png" />
 </div>
 </div>
 <p>Wages show a high degree of skewness. Hence, wages are transformed in almost all studies by
 the logarithm.</p>
 </section>
 <section id="analysis">
-<h2><span class="section-number">8.2. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.2. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
 <p>Due to the skewness of the data, we are considering log wages which leads to the following regression model</p>
 <div class="math notranslate nohighlight">
 \[log(wage) = g(Z) + \epsilon.\]</div>
@@ -866,7 +717,7 @@ In linear models, we estimate the prediction rule of the form</p>
 <div class="math notranslate nohighlight">
 \[\hat g(Z) = \hat \beta'X.\]</div>
 <p>Again, we generate <span class="math notranslate nohighlight">\(X\)</span> in two ways:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Basic Model:   <span class="math notranslate nohighlight">\(X\)</span> consists of a set of raw regressors (e.g. gender, experience, education indicators, regional indicators).</p></li>
 <li><p>Flexible Model:  <span class="math notranslate nohighlight">\(X\)</span> consists of all raw regressors from the basic model plus occupation and industry indicators, transformations (e.g., <span class="math notranslate nohighlight">\({exp}^2\)</span> and <span class="math notranslate nohighlight">\({exp}^3\)</span>) and additional two-way interactions.</p></li>
 </ol>
@@ -929,7 +780,7 @@ In linear models, we estimate the prediction rule of the form</p>
 </div>
 <p>As known from our first lab, the basic model consists of <span class="math notranslate nohighlight">\(10\)</span> regressors and the flexible model of <span class="math notranslate nohighlight">\(246\)</span> regressors. Let us fit our models to the training sample using the two different model specifications. We are starting by running a simple ols regression.</p>
 <section id="ols">
-<h3><span class="section-number">8.2.1. </span>OLS<a class="headerlink" href="#ols" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.1. </span>OLS<a class="headerlink" href="#ols" title="Permalink to this heading">#</a></h3>
 <p>We fit the basic model to our training data by running an ols regression and compute the mean squared error on the test sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1136,7 +987,7 @@ Name: const, dtype: float64
 <p>We observe that ols regression works better for the basic model with smaller <span class="math notranslate nohighlight">\(p/n\)</span> ratio. We are proceeding by running lasso regressions and its versions.</p>
 </section>
 <section id="lasso-ridge-and-elastic-net">
-<h3><span class="section-number">8.2.2. </span>Lasso, Ridge and Elastic Net<a class="headerlink" href="#lasso-ridge-and-elastic-net" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.2. </span>Lasso, Ridge and Elastic Net<a class="headerlink" href="#lasso-ridge-and-elastic-net" title="Permalink to this heading">#</a></h3>
 <p>Considering the basic model, we run a lasso/post-lasso regression first and then we compute the measures for the out-of-sample performance. Note that applying the package <em>hdm</em> and the function <em>rlasso</em> we rely on a theory-based choice of the penalty level <span class="math notranslate nohighlight">\(\lambda\)</span> in the lasso regression.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1149,6 +1000,46 @@ Name: const, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_rlasso</span> <span class="o">=</span> <span class="n">hdm</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span><span class="n">x_basic_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">size</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span>
 <span class="n">fit_rlasso_post</span> <span class="o">=</span> <span class="n">hdm</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span><span class="n">x_basic_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">size</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
 </pre></div>
 </div>
 </div>
@@ -1226,6 +1117,42 @@ Name: const, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_rlasso_flex</span> <span class="o">=</span> <span class="n">hdm</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span><span class="n">x_flex_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">size</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span>
 <span class="n">fit_rlasso_post_flex</span> <span class="o">=</span> <span class="n">hdm</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span><span class="n">x_flex_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">size</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
 </pre></div>
 </div>
 </div>
@@ -1336,6 +1263,74 @@ Name: const, dtype: float64
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge, and elastic net in the basic model: 0.23032, 0.23338, 0.23032
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+</pre></div>
+</div>
 </div>
 </div>
 <p>Note that the following calculations for the flexible model require significant computation time.</p>
@@ -1366,6 +1361,738 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16581324345997928, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1678078988946936, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16363316256570215, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0669461177604944, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.952454960287582, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0254332839571134, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11377039412604972, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.23576360495599147, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6531991654060221, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.477089604166963, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.836746741327488, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.065939423035161, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6554591172340452, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.20966200716986805, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13309604053551993, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11794256421603677, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1256861208735245, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.886834080940048, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14618838621640862, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12040692123980534, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.110812312848111, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 6.257921011946792, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1665494585123497, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7770228923302511, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.1383647329130326, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.4633162003989355, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2972033114853048, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8616429255878302, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6999516734695135, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5936668574936448, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.526916641891944, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12214773876098661, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2736574180237312, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.30469045001621, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.20083609904088462, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8764359533100787, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.000957542692049, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 6.154183121740971, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 9.32704784394923, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1555860529998654, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4194941685620961, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6796281039084988, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9530745774059142, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.234474299518979, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.5194791836677268, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.7407905811140836, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1266336469120688, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17720183108190213, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2617631893617727, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15269301267835544, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.19388020367034642, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5820282213978771, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14150156849927953, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9908064002902393, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 3.745532807448285, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 7.866682422780514, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.227517161493097, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4632367244394118, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.1815014062483442, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.4878934889054563, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5725247205748474, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17011945947365348, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13472262226071052, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12755182809178223, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13735801699203876, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14604436090564832, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14402223188176322, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15354137573910975, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17779146690293146, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.24937836699348281, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2516668005090423, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5448464852714778, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8014436381233736, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 3.463041600168026, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 7.894213086437958, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.36994279587702295, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6861121734996232, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9777115606231064, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2677446193963533, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.5534770099725392, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1368627560477762, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1467587142967659, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.18195356093531245, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1927724312419059, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1452876146311155, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16185690591294133, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 3.826636506248633, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13936487135651987, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13735754005415401, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.3855087305092866, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7058182937710171, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0292113018437021, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.3620456868278552, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.7009680695089173, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.7753423647986892, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.833292086733536, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0906584780692583, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1292533944169918, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12799189354052487, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1245015580063864, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11722771249242214, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12136076168405907, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16308825144813, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11902208133676595, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2317021411666929, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.3054274729732924, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11390263614043761, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5441917657674367, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7529097568460656, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.23092481587207203, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15787525256951085, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4839459828950794, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5533286433844751, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6167134629240536, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6778649519341116, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7362717527639688, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.792051660568859, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8519522896310718, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9123992606507727, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9755423794861144, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12189680941230563, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2198052765184002, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.29240821226267144, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.1545466824182995, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8839346653486473, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 3.1975537586904466, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 6.922712348796267, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 11.84354382331935, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 5.063972019346238, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.3511790586809411, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0673909294055193, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.3938393073088946, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.722174906157079, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16125336759239417, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1605161698179245, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.19336911231857812, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16120199758677245, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12614875658675828, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13229736026266892, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16589454435938933, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.998612542715591, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.141895138211112, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 7.536690811828066, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9940134006219523, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.287266494313144, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6444150418210484, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9813883660150395, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.283820875702986, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.5687386857265437, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.6290113582807635, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17242735627326056, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.22058627043440993, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15389174804522554, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16686905884580483, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1635101980118634, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15928078604770235, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1297701005047429, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.3182896676554492, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.3173031545163667, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9778242147017409, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.8373872132427778, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.1955533075877156, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6432843755288786, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15278277908646487, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 5.9625861251090555, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 26.019893365242638, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:647: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 8.528e+00, tolerance: 1.253e-01
+  model = cd_fast.enet_coordinate_descent(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.18116187993257427, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16568667140586513, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16194811580646729, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.539481903327328, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 5.512763799536742, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.478891695863922, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12762751562081576, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4512982051792278, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.1947136436151595, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.519907573820774, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.8126186692169313, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.074527700913791, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11714854330750768, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1207635653951229, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11317892031263455, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12081842307713941, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.247076046782013, tolerance: 0.11146464292939776
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16555830996230725, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12102643185767192, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.7227217174123552, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 6.889081842176779, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.3498521864136137, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9133138471313487, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2372447348981268, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0719197228551138, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8635438761281193, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7492384716562128, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6299326519452961, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5498579296527168, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.499850173031291, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4685416274388672, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.24875921851389649, tolerance: 0.11323123739388508
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17396473498115483, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2980721666356203, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.20233028693519373, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.264832298428928, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 6.078917923253357, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 7.375415451833078, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 8.916915693580563, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2499538740036087, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5288912344143455, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.776387781313133, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0318069524024622, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2902165786813384, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.548635561183346, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.7929986684570167, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15109750812621314, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11799942015056786, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.26628761091672004, tolerance: 0.11281840967457779
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1471314086942357, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14460663843487964, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4674588907314501, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2300303310308891, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.4989325223865535, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.49200205633781, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 8.542164771648117, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5518103105155205, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5896010143105741, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.3102402309787067, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.5884392692016718, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2598918228918592, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.18620071448140152, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13617313408099108, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12821246047394652, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13809667582552265, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14382572250315206, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1419800088502825, tolerance: 0.11267944581523541
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17182193811140678, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2172774391611938, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.340137317726203, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6410230365850111, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.2730019185407855, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.274660137309411, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.6721792098779815, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.2595567091060502, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5107083328754243, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7734941947900325, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.043084024921086, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.309097276971329, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9028566205627158, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.19925414558508692, tolerance: 0.11365509563329593
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17782097312999667, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.190076219393859, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14806314299653422, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5408852623276061, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 4.348686980681691, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4253750327235366, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.17323202913348723, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5257077811693307, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8261582682545168, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.1309971535388286, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.4395096785832493, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.749111469981699, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.8575062297293243, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.075488546264637, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8004832844180783, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1453107744761155, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1255240502275683, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12096200451787809, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11531352192139366, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11672140368295914, tolerance: 0.11333220073744452
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16005606941564565, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12623146092892057, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.22489674701955664, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5246617132191886, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13971750296320806, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9716122686530753, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11798143065925615, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1955429148449639, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.5973916400097323, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.734376482946459, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7771493744756981, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8176975994470013, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8558047616550084, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.8917498885958821, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9322203681589372, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.9783950714343064, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12392801366377171, tolerance: 0.11331487742204527
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.11898348091324351, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.22200954363245273, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.772843566056963, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.52573464597549, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 3.79146337115219, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 7.704335225471937, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 11.409807714399335, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.6987346078805103, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.154158552062313, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4521143400922938, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.171242635255112, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.4727806230134775, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.771815134706344, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.13239319931881255, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.18635833476514563, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.18134784762946765, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12510941201833248, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1266504859638644, tolerance: 0.11167322032275435
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.15957272050229676, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.749372630847688, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 5.781100090374252, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 8.506120092826109, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.21605285482132786, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.4146611602993744, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.7639789877231351, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0968953033544722, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.3879993852192456, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.6652435855717158, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.7232366393251368, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1273622266228358, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.20939798792437614, tolerance: 0.11436955122138627
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14836990488606716, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.16413325117900968, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1615834970115202, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.1580561996936467, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.12811952811716765, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.310180357037325, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.24923019512414157, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.43620186255395765, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.0791375881092335, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.9213790812433444, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 2.2432488517969205, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 1.214093848724474, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 0.14414188996465782, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 7.225788828593636, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:633: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Duality gap: 27.13743091362778, tolerance: 0.11149001330224016
+  model = cd_fast.enet_coordinate_descent_gram(
+c:\Python38\lib\site-packages\sklearn\linear_model\_base.py:148: FutureWarning: &#39;normalize&#39; was deprecated in version 1.0 and will be removed in 1.2. Please leave the normalize parameter to its default value to silence this warning. The default behavior of this estimator is to not do any normalization. If normalization is needed please use sklearn.preprocessing.StandardScaler instead.
+  warnings.warn(
+c:\Python38\lib\site-packages\sklearn\linear_model\_coordinate_descent.py:647: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.367e+00, tolerance: 1.253e-01
+  model = cd_fast.enet_coordinate_descent(
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 using cross-validation for lasso, ridge, and elastic net in the basic model: 0.230, 0.233, 0.230
 </pre></div>
 </div>
@@ -1375,11 +2102,11 @@ Name: const, dtype: float64
 </section>
 </section>
 <section id="non-linear-models">
-<h2><span class="section-number">8.3. </span>Non-linear models<a class="headerlink" href="#non-linear-models" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.3. </span>Non-linear models<a class="headerlink" href="#non-linear-models" title="Permalink to this heading">#</a></h2>
 <p>Besides linear regression models, we consider nonlinear regression models to build a predictive model. We are apply regression trees, random forests, boosted trees and neural nets to estimate the regression function <span class="math notranslate nohighlight">\(g(X)\)</span>. First, we load the relevant libraries.</p>
 <p>and we illustrate the application of regression trees.</p>
 <section id="regression-trees">
-<h3><span class="section-number">8.3.1. </span>Regression Trees<a class="headerlink" href="#regression-trees" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.3.1. </span>Regression Trees<a class="headerlink" href="#regression-trees" title="Permalink to this heading">#</a></h3>
 <p>We fit a regression tree to the training data using the basic model. The variable <em>cp</em> controls the complexity of the regression tree, i.e. how deep we build the tree.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1402,7 +2129,7 @@ Name: const, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_ML_for_wage_prediction_59_0.png" src="../_images/08_ML_for_wage_prediction_59_0.png" />
+<img alt="../_images/210f9ea7b24be5e9246cfe4f8a75fa36223b113cea3dd1103fca082610ab2451.png" src="../_images/210f9ea7b24be5e9246cfe4f8a75fa36223b113cea3dd1103fca082610ab2451.png" />
 </div>
 </div>
 <p>An important method to improve predictive performance is called “Pruning the Tree”. This
@@ -1479,7 +2206,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08_ML_for_wage_prediction_63_0.png" src="../_images/08_ML_for_wage_prediction_63_0.png" />
+<img alt="../_images/e09c6e27d899cd9e86fde733ded1aea65e5bbe08bb2c7aa3bf37e55870040340.png" src="../_images/e09c6e27d899cd9e86fde733ded1aea65e5bbe08bb2c7aa3bf37e55870040340.png" />
 </div>
 </div>
 <p>Finally, we calculate the mean-squared error and the <span class="math notranslate nohighlight">\(R^2\)</span> on the test sample to evaluate the out-of-sample performance of the pruned tree.</p>
@@ -1501,7 +2228,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 </div>
 </section>
 <section id="random-forest-and-boosted-trees">
-<h3><span class="section-number">8.3.2. </span>Random Forest and Boosted Trees<a class="headerlink" href="#random-forest-and-boosted-trees" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.3.2. </span>Random Forest and Boosted Trees<a class="headerlink" href="#random-forest-and-boosted-trees" title="Permalink to this heading">#</a></h3>
 <p>In the next step, we apply the more advanced tree-based methods: random forest and boosted trees.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1536,6 +2263,12 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Python38\lib\site-packages\sklearn\ensemble\_gb.py:286: FutureWarning: The loss &#39;ls&#39; was deprecated in v1.0 and will be removed in version 1.2. Use &#39;squared_error&#39; which is equivalent.
+  warnings.warn(
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1553,7 +2286,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 </section>
 </section>
 <section id="results">
-<h2><span class="section-number">8.4. </span>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.4. </span>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;MSE&quot;</span><span class="p">,</span> <span class="s2">&quot;S.E for MSE&quot;</span><span class="p">,</span> <span class="s2">&quot;R-squared&quot;</span><span class="p">])</span> 
@@ -1719,7 +2452,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 <p>We see that the prediction rule produced by the Elastic Net using the flexible model performs the best here, giving the lowest test MSE. Cross-Validated Lasso and Ridge, perform nearly as well. For any two of these methods, their testing MSEs are within one standard error of each other. Remarkably, OLS on a simple model performs extremely well, almost as well as best tree based method Random Forest. On the other hand, OLS on a flexible model with many regressors performs very poorly giving the highest test MSE. Notice that the nonlinear models, e.g. Random Forest, are not tuned. Thus, there is a lot of potential to improve the performance of the nonlinear methods we used in the analysis.</p>
 </section>
 <section id="ensemble-learning">
-<h2><span class="section-number">8.5. </span>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.5. </span>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this heading">#</a></h2>
 <p>In the final step, we can build a prediction model by combining the strengths of the models we considered so far. This ensemble method is of the form</p>
 <div class="math notranslate nohighlight">
 \[ f(x) = \sum_{k=1}^K \alpha_k f_k(x) \]</div>
@@ -1759,7 +2492,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
   <td>Dependent Variable:</td>      <td>y_test</td>             <td>AIC:</td>         <td>1746.1107</td>
 </tr>
 <tr>
-         <td>Date:</td>        <td>2023-02-03 14:26</td>        <td>BIC:</td>         <td>1782.2366</td>
+         <td>Date:</td>        <td>2023-02-03 13:23</td>        <td>BIC:</td>         <td>1782.2366</td>
 </tr>
 <tr>
    <td>No. Observations:</td>        <td>1288</td>         <td>Log-Likelihood:</td>    <td>-866.06</td> 
@@ -1822,6 +2555,22 @@ means the process of cutting down the branches of a tree. We apply pruning to th
 <span class="n">cvt</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;ones&quot;</span><span class="p">]</span>
 
 <span class="n">rlasso_essemble</span> <span class="o">=</span> <span class="n">hdm</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span><span class="n">esemble_df</span><span class="p">[</span><span class="n">cvt</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">esemble_df</span><span class="p">[</span><span class="s2">&quot;y_test&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">esemble_df</span><span class="p">[</span><span class="s2">&quot;y_test&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2853: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+c:\Python38\lib\site-packages\numpy\lib\function_base.py:2854: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
 </pre></div>
 </div>
 </div>
@@ -1988,7 +2737,7 @@ means the process of cutting down the branches of a tree. We apply pruning to th
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Python_notebooks"
         },
         predefinedOutput: true
@@ -1996,49 +2745,110 @@ means the process of cutting down the branches of a tree. We apply pruning to th
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="07_py-notebook-linear-penalized-regs.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Linear Penalized Regs</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_py-notebook-linear-penalized-regs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Linear Penalized Regs</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="09_py-notebook-experiment-on-orthogonal-learning.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="09_py-notebook-experiment-on-orthogonal-learning.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">9. </span>Experiment on orthogonal Learning</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Victor Chernozhukov<br/>
-  
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">8.1. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">8.2. Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ols">8.2.1. OLS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-ridge-and-elastic-net">8.2.2. Lasso, Ridge and Elastic Net</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-models">8.3. Non-linear models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-trees">8.3.1. Regression Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-and-boosted-trees">8.3.2. Random Forest and Boosted Trees</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">8.4. Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning">8.5. Ensemble learning</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Victor Chernozhukov & Jannis Kueck. Translated into Python by Alexander Quispe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

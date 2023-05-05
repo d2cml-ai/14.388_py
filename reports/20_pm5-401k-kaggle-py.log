@@ -1,55 +1,72 @@
 Traceback (most recent call last):
-  File "c:\python38\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+  File "C:\Users\User\anaconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
     executenb(
-  File "c:\python38\lib\site-packages\nbclient\client.py", line 1204, in execute
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "c:\python38\lib\site-packages\nbclient\util.py", line 84, in wrapped
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "c:\python38\lib\site-packages\nbclient\util.py", line 62, in just_run
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "c:\python38\lib\asyncio\base_events.py", line 608, in run_until_complete
+  File "C:\Users\User\anaconda3\lib\asyncio\base_events.py", line 647, in run_until_complete
     return future.result()
-  File "c:\python38\lib\site-packages\nbclient\client.py", line 663, in async_execute
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "c:\python38\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "c:\python38\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+  File "C:\Users\User\anaconda3\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import pandas as pd
-import doubleml as dml
-from doubleml.datasets import fetch_401K
+# Trees
+trees = DecisionTreeRegressor(
+        max_depth=30, ccp_alpha=0.01, min_samples_split=20, \
+        min_samples_leaf= np.round(20/3).astype(int))
 
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LassoCV, LogisticRegressionCV
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
+trees_class = DecisionTreeClassifier( max_depth=30, ccp_alpha=0.01, \
+                min_samples_split=20, \
+                min_samples_leaf= np.round(20/3).astype(int) )
 
-from xgboost import XGBClassifier, XGBRegressor
+np.random.seed(123)
+dml_plr = dml.DoubleMLPLR(data_ml_aux,
+                               ml_g = trees,
+                               ml_m = trees_class,
+                               n_folds = 3)
+dml_plr.fit(store_predictions=True)
+tree_summary = dml_plr.summary
+print(tree_summary)
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-import hdmpy
-import pyreadr
-import os
-from urllib.request import urlopen
-import warnings
-warnings.filterwarnings('ignore')
+dml_plr.fit(store_predictions=True)
+dml_plr.summary
+
+tree_plr = dml_plr.coef
+tree_std_plr = dml_plr.summary[ 'std err' ]
+
+# Evaluation predictions
+g_hat = dml_plr.predictions['ml_g'].flatten() # predictions of g_o
+m_hat = dml_plr.predictions['ml_m'].flatten() # predictions of m_o
+
+y = pension.net_tfa.to_numpy()
+theta = dml_plr.coef[ 0 ]
+predictions_y = d*theta + g_hat
+tree_y_rmse = np.sqrt( np.mean( ( y - predictions_y ) ** 2 ) ) 
+print( tree_y_rmse )
+
+# cross-fitted RMSE: treatment
+tree_d_rmse = np.sqrt( np.mean( ( d - m_hat ) ** 2 ) )
+print( tree_d_rmse )
+# cross-fitted ce: treatment
+np.mean( ( m_hat > 0.5 ) * 1 != d )
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[2], line 3[0m
-[0;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[0;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
-[1;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mdoubleml[39;00m [38;5;28;01mas[39;00m [38;5;21;01mdml[39;00m
-[0;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mdoubleml[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdatasets[39;00m [38;5;28;01mimport[39;00m fetch_401K
-[0;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpreprocessing[39;00m [38;5;28;01mimport[39;00m PolynomialFeatures
+[1;31mKeyError[0m                                  Traceback (most recent call last)
+Input [1;32mIn [18][0m, in [0;36m<cell line: 26>[1;34m()[0m
+[0;32m     23[0m tree_std_plr [38;5;241m=[39m dml_plr[38;5;241m.[39msummary[ [38;5;124m'[39m[38;5;124mstd err[39m[38;5;124m'[39m ]
+[0;32m     25[0m [38;5;66;03m# Evaluation predictions[39;00m
+[1;32m---> 26[0m g_hat [38;5;241m=[39m [43mdml_plr[49m[38;5;241;43m.[39;49m[43mpredictions[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mml_g[39;49m[38;5;124;43m'[39;49m[43m][49m[38;5;241m.[39mflatten() [38;5;66;03m# predictions of g_o[39;00m
+[0;32m     27[0m m_hat [38;5;241m=[39m dml_plr[38;5;241m.[39mpredictions[[38;5;124m'[39m[38;5;124mml_m[39m[38;5;124m'[39m][38;5;241m.[39mflatten() [38;5;66;03m# predictions of m_o[39;00m
+[0;32m     29[0m y [38;5;241m=[39m pension[38;5;241m.[39mnet_tfa[38;5;241m.[39mto_numpy()
 
-[1;31mModuleNotFoundError[0m: No module named 'doubleml'
-ModuleNotFoundError: No module named 'doubleml'
+[1;31mKeyError[0m: 'ml_g'
+KeyError: 'ml_g'
 

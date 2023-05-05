@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>25. Weak IV Experiments &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,60 +64,92 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Python_notebooks/25_r_weak_iv_experiments';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="24. Debiased ML for Partially Linear IV Model in Python" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/main_logo_ai_light.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/main_logo_ai_light.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,453 +159,326 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Linear Model Overfiting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
-   2. OLS and lasso for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. OLS and lasso for gender wage gap inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Some RCT Examples
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Linear Penalized Regs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_ML_for_wage_prediction.html">
-   8. ML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
-   9. Experiment on orthogonal Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   10. Double Lasso for Testing the Convergence Hypothesis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Heterogenous Wage Effects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. ColliderBias Hollywood# Collider Bias
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
-   13. Deep Neural Networks for Wage Prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. AutoML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximation By NN and RF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Notebook-DAGitty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Notebook-Dosearch
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
-   18. DML inference for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. DML inference using NN for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. DML for ATE and LATE of 401(k) on Wealth
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
-   21. Identification Analysis of 401(k) Example w DAGs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Debiased ML for Partially Linear Model in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensitivity Analysis with Sensmakr and Debiased ML
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Debiased ML for Partially Linear IV Model in Python
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   25. Weak IV Experiments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">1. Linear Model Overfiting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">2. OLS and lasso for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">3. OLS and lasso for gender wage gap inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_py-notebook-some-rct-examples.html">4. Some RCT Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">5. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">6. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">7. Linear Penalized Regs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_ML_for_wage_prediction.html">8. ML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">9. Experiment on orthogonal Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">10. Double Lasso for Testing the Convergence Hypothesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_py-heterogenous-wage-effects.html">11. Heterogenous Wage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_py-colliderbias-hollywood.html">12. ColliderBias Hollywood# Collider Bias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">13. Deep Neural Networks for Wage Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_automl-for-wage-prediction.html">14. AutoML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">15. Functional Approximation By NN and RF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_notebook_dagitty.html">16. Notebook-DAGitty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_notebook-dosearch.html">17. Notebook-Dosearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_pm3_notebook_inference_clustering.html">18. DML inference for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_pm3_notebook_inference_nn.html">19. DML inference using NN for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_pm5-401k-kaggle-py.html">20. DML for ATE and LATE of 401(k) on Wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">21. Identification Analysis of 401(k) Example w DAGs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">22. Debiased ML for Partially Linear Model in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">23. Sensitivity Analysis with Sensmakr and Debiased ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">24. Debiased ML for Partially Linear IV Model in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">25. Weak IV Experiments</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_binder.svg">
   </span>
-<span class="headerbtn__text-container">Binder</span>
+<span class="btn__text-container">Binder</span>
 </a>
-
-      </li>
+</li>
       
-      <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/25_r_weak_iv_experiments.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Python_notebooks/25_r_weak_iv_experiments.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/25_r_weak_iv_experiments.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/25_r_weak_iv_experiments.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/Python_notebooks/25_r_weak_iv_experiments.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
-   25.1. A Simple Example of Properties of IV estimator when Instruments are Weak
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
-   25.2. Run 1000 trials to evaluate distribution of the IV estimator
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
-   25.3. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Weak IV Experiments</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
-   25.1. A Simple Example of Properties of IV estimator when Instruments are Weak
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
-   25.2. Run 1000 trials to evaluate distribution of the IV estimator
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
-   25.3. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Weak IV Experiments</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">25.1. A Simple Example of Properties of IV estimator when Instruments are Weak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">25.2. Run 1000 trials to evaluate distribution of the IV estimator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">25.3. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="weak-iv-experiments">
-<h1><span class="section-number">25. </span>Weak IV Experiments<a class="headerlink" href="#weak-iv-experiments" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">25. </span>Weak IV Experiments<a class="headerlink" href="#weak-iv-experiments" title="Permalink to this heading">#</a></h1>
 <section id="a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">
-<h2><span class="section-number">25.1. </span>A Simple Example of Properties of IV estimator when Instruments are Weak<a class="headerlink" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.1. </span>A Simple Example of Properties of IV estimator when Instruments are Weak<a class="headerlink" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak" title="Permalink to this heading">#</a></h2>
 <p>Simulation Design</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -612,8 +529,8 @@ title="Print to PDF"
 Dep. Variable:                      y   R-squared:                       0.121
 Model:                            OLS   Adj. R-squared:                  0.112
 Method:                 Least Squares   F-statistic:                     13.47
-Date:                Fri, 03 Feb 2023   Prob (F-statistic):           0.000395
-Time:                        14:10:09   Log-Likelihood:                -142.05
+Date:                Wed, 19 May 2021   Prob (F-statistic):           0.000395
+Time:                        07:45:45   Log-Likelihood:                -142.05
 No. Observations:                 100   AIC:                             288.1
 Df Residuals:                      98   BIC:                             293.3
 Df Model:                           1                                         
@@ -651,8 +568,8 @@ Dep. Variable:                      y   R-squared:                       0.892
 Model:                         IV2SLS   Adj. R-squared:                  0.891
 Method:                     Two Stage   F-statistic:                       nan
                         Least Squares   Prob (F-statistic):                nan
-Date:                Fri, 03 Feb 2023                                         
-Time:                        14:10:09                                         
+Date:                Wed, 19 May 2021                                         
+Time:                        07:45:45                                         
 No. Observations:                 100                                         
 Df Residuals:                      99                                         
 Df Model:                           1                                         
@@ -677,7 +594,7 @@ Kurtosis:                       2.633   Cond. No.                         1.00
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3230345755631348
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3230345755631345
 </pre></div>
 </div>
 </div>
@@ -685,7 +602,7 @@ Kurtosis:                       2.633   Cond. No.                         1.00
 <p>Note that the instrument is weak here (contolled by <span class="math notranslate nohighlight">\(\beta\)</span>) – the t-stat is less than 4.</p>
 </section>
 <section id="run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">
-<h2><span class="section-number">25.2. </span>Run 1000 trials to evaluate distribution of the IV estimator<a class="headerlink" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.2. </span>Run 1000 trials to evaluate distribution of the IV estimator<a class="headerlink" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation design </span>
@@ -972,7 +889,7 @@ Kurtosis:                       2.633   Cond. No.                         1.00
 </div>
 </section>
 <section id="plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">
-<h2><span class="section-number">25.3. </span>Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)<a class="headerlink" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">25.3. </span>Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)<a class="headerlink" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mf">5.5</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)</span>
@@ -992,24 +909,10 @@ Kurtosis:                       2.633   Cond. No.                         1.00
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\User\AppData\Local\Temp\ipykernel_13424\3064813652.py:8: FutureWarning: 
-
-`shade` is now deprecated in favor of `fill`; setting `fill=True`.
-This will become an error in seaborn v0.14.0; please update your code.
-
-  fig = sns.kdeplot(IVEst-1, shade=True, color=&quot;r&quot;)
-C:\Users\User\AppData\Local\Temp\ipykernel_13424\3064813652.py:9: FutureWarning: 
-
-`shade` is now deprecated in favor of `fill`; setting `fill=True`.
-This will become an error in seaborn v0.14.0; please update your code.
-
-  fig = sns.kdeplot(normal_dist, shade=True, color=&quot;b&quot;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.0, 5.0)
 </pre></div>
 </div>
-<img alt="../_images/25_r_weak_iv_experiments_12_2.png" src="../_images/25_r_weak_iv_experiments_12_2.png" />
+<img alt="../_images/79267020d100199abd190ac78e7866daeacaf042c6076325b7380bd84ed3ae9a.png" src="../_images/79267020d100199abd190ac78e7866daeacaf042c6076325b7380bd84ed3ae9a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1040,7 +943,7 @@ This will become an error in seaborn v0.14.0; please update your code.
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Python_notebooks"
         },
         predefinedOutput: true
@@ -1048,42 +951,91 @@ This will become an error in seaborn v0.14.0; please update your code.
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">24. </span>Debiased ML for Partially Linear IV Model in Python</p>
-        </div>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Victor Chernozhukov<br/>
-  
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="24_debiased-ml-for-partially-linear-iv-model-in-python.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Debiased ML for Partially Linear IV Model in Python</p>
       </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example-of-properties-of-iv-estimator-when-instruments-are-weak">25.1. A Simple Example of Properties of IV estimator when Instruments are Weak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-1000-trials-to-evaluate-distribution-of-the-iv-estimator">25.2. Run 1000 trials to evaluate distribution of the IV estimator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-actual-distribution-against-the-normal-approximation-based-on-strong-instrument-assumption">25.3. Plot the Actual Distribution against the Normal Approximation (based on Strong Instrument Assumption)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Victor Chernozhukov & Jannis Kueck. Translated into Python by Alexander Quispe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

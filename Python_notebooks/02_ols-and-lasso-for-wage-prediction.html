@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. OLS and lasso for wage prediction &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +64,93 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Python_notebooks/02_ols-and-lasso-for-wage-prediction';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. OLS and lasso for gender wage gap inference" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
     <link rel="prev" title="1. Linear Model Overfiting" href="01_Python_Notebook_Linear_Model_Overfitting.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/main_logo_ai_light.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/main_logo_ai_light.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,506 +160,333 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
-   1. Linear Model Overfiting
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. OLS and lasso for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
-   3. OLS and lasso for gender wage gap inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
-   4. Some RCT Examples
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
-   5. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
-   6. Analyzing RCT reemployment experiment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
-   7. Linear Penalized Regs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_ML_for_wage_prediction.html">
-   8. ML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
-   9. Experiment on orthogonal Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
-   10. Double Lasso for Testing the Convergence Hypothesis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
-   11. Heterogenous Wage Effects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
-   12. ColliderBias Hollywood# Collider Bias
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
-   13. Deep Neural Networks for Wage Prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_automl-for-wage-prediction.html">
-   14. AutoML for wage prediction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
-   15. Functional Approximation By NN and RF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16_notebook_dagitty.html">
-   16. Notebook-DAGitty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17_notebook-dosearch.html">
-   17. Notebook-Dosearch
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
-   18. DML inference for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
-   19. DML inference using NN for gun ownership
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
-   20. DML for ATE and LATE of 401(k) on Wealth
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
-   21. Identification Analysis of 401(k) Example w DAGs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
-   22. Debiased ML for Partially Linear Model in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
-   23. Sensitivity Analysis with Sensmakr and Debiased ML
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
-   24. Debiased ML for Partially Linear IV Model in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="25_r_weak_iv_experiments.html">
-   25. Weak IV Experiments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">1. Linear Model Overfiting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. OLS and lasso for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">3. OLS and lasso for gender wage gap inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_py-notebook-some-rct-examples.html">4. Some RCT Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">5. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">6. Analyzing RCT reemployment experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">7. Linear Penalized Regs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_ML_for_wage_prediction.html">8. ML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">9. Experiment on orthogonal Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">10. Double Lasso for Testing the Convergence Hypothesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_py-heterogenous-wage-effects.html">11. Heterogenous Wage Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_py-colliderbias-hollywood.html">12. ColliderBias Hollywood# Collider Bias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">13. Deep Neural Networks for Wage Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_automl-for-wage-prediction.html">14. AutoML for wage prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">15. Functional Approximation By NN and RF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_notebook_dagitty.html">16. Notebook-DAGitty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_notebook-dosearch.html">17. Notebook-Dosearch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_pm3_notebook_inference_clustering.html">18. DML inference for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_pm3_notebook_inference_nn.html">19. DML inference using NN for gun ownership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_pm5-401k-kaggle-py.html">20. DML for ATE and LATE of 401(k) on Wealth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">21. Identification Analysis of 401(k) Example w DAGs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">22. Debiased ML for Partially Linear Model in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">23. Sensitivity Analysis with Sensmakr and Debiased ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">24. Debiased ML for Partially Linear IV Model in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_r_weak_iv_experiments.html">25. Weak IV Experiments</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_binder.svg">
   </span>
-<span class="headerbtn__text-container">Binder</span>
+<span class="btn__text-container">Binder</span>
 </a>
-
-      </li>
+</li>
       
-      <li>
-        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/02_ols-and-lasso-for-wage-prediction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/02_ols-and-lasso-for-wage-prediction.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/Python_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   2.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data">
-   2.2. Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-analysis">
-   2.3. Data analysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prediction-question">
-   2.4. Prediction Question
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#note-that-the-basic-model-consists-of-51-regressors">
-     2.4.1. Note that the basic model consists of
-     <span class="math notranslate nohighlight">
-      \(51\)
-     </span>
-     regressors.
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#try-lasso-next">
-   2.5. Try Lasso next
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-splitting">
-   2.6. Data Splitting
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>OLS and lasso for wage prediction</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   2.1. Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data">
-   2.2. Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-analysis">
-   2.3. Data analysis
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prediction-question">
-   2.4. Prediction Question
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#note-that-the-basic-model-consists-of-51-regressors">
-     2.4.1. Note that the basic model consists of
-     <span class="math notranslate nohighlight">
-      \(51\)
-     </span>
-     regressors.
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#try-lasso-next">
-   2.5. Try Lasso next
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-splitting">
-   2.6. Data Splitting
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>OLS and lasso for wage prediction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">2.2. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">2.3. Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-question">2.4. Prediction Question</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-the-basic-model-consists-of-51-regressors">2.4.1. Note that the basic model consists of <span class="math notranslate nohighlight">\(51\)</span> regressors.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-lasso-next">2.5. Try Lasso next</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">2.6. Data Splitting</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="ols-and-lasso-for-wage-prediction">
-<h1><span class="section-number">2. </span>OLS and lasso for wage prediction<a class="headerlink" href="#ols-and-lasso-for-wage-prediction" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">2. </span>OLS and lasso for wage prediction<a class="headerlink" href="#ols-and-lasso-for-wage-prediction" title="Permalink to this heading">#</a></h1>
 <p>This notebook contains an example for teaching.</p>
 <section id="introduction">
-<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>In labor economics an important question is what determines the wage of workers. This is a causal question, but we could begin to investigate from a predictive perspective.</p>
 <p>In the following wage example,  Y  is the hourly wage of a worker and  X  is a vector of worker’s characteristics, e.g., education, experience, gender. Two main questions here are:</p>
 <ul class="simple">
@@ -625,12 +496,12 @@ title="Print to PDF"
 <p>In this lab, we focus on the prediction question first.</p>
 </section>
 <section id="data">
-<h2><span class="section-number">2.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h2>
 <p>The data set we consider is from the March Supplement of the U.S. Current Population Survey, year 2015. We select white non-hispanic individuals, aged 25 to 64 years, and working more than 35 hours per week during at least 50 weeks of the year. We exclude self-employed workers; individuals living in group quarters; individuals in the military, agricultural or private household sectors; individuals with inconsistent reports on earnings and employment status; individuals with allocated or missing information in any of the variables used in the analysis; and individuals with hourly wage below  3 .</p>
 <p>The variable of interest  Y  is the hourly wage rate constructed as the ratio of the annual earnings to the total number of hours worked, which is constructed in turn as the product of number of weeks worked and the usual number of hours worked per week. In our analysis, we also focus on single (never married) workers. The final sample is of size  <strong>n=5150</strong> .</p>
 </section>
 <section id="data-analysis">
-<h2><span class="section-number">2.3. </span>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3. </span>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this heading">#</a></h2>
 <p>We start by loading the data set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1055,7 +926,7 @@ dtype: float64
 <p>Alternatively, we can also print the table as latex.</p>
 </section>
 <section id="prediction-question">
-<h2><span class="section-number">2.4. </span>Prediction Question<a class="headerlink" href="#prediction-question" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4. </span>Prediction Question<a class="headerlink" href="#prediction-question" title="Permalink to this heading">#</a></h2>
 <p>Now, we will construct a prediction rule for hourly wage <span class="math notranslate nohighlight">\(Y\)</span>, which depends linearly on job-relevant characteristics <span class="math notranslate nohighlight">\(X\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1069,7 +940,7 @@ Y = \beta'X+ \epsilon.
 <li><p>Assess the predictive performance using the (adjusted) sample MSE, the (adjusted) sample <span class="math notranslate nohighlight">\(R^2\)</span> and the out-of-sample MSE and <span class="math notranslate nohighlight">\(R^2\)</span>.</p></li>
 </ul>
 <p>We employ two different specifications for prediction:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Basic Model:   <span class="math notranslate nohighlight">\(X\)</span> consists of a set of raw regressors (e.g. gender, experience, education indicators,  occupation and industry indicators, regional indicators).</p></li>
 <li><p>Flexible Model:  <span class="math notranslate nohighlight">\(X\)</span> consists of all raw regressors from the basic model plus occupation and industry indicators, transformations (e.g., <span class="math notranslate nohighlight">\({exp}^2\)</span> and <span class="math notranslate nohighlight">\({exp}^3\)</span>) and additional two-way interactions of polynomial in experience with other regressors. An example of a regressor created through a two-way interaction is <em>experience</em> times the indicator of having a <em>college degree</em>.</p></li>
 </ol>
@@ -1096,8 +967,8 @@ more complex regression model and therefore to reduce the bias. The <strong>Flex
 Dep. Variable:                  lwage   R-squared:                       0.310
 Model:                            OLS   Adj. R-squared:                  0.303
 Method:                 Least Squares   F-statistic:                     45.83
-Date:                Fri, 03 Feb 2023   Prob (F-statistic):               0.00
-Time:                        14:10:03   Log-Likelihood:                -3459.9
+Date:                Wed, 03 Aug 2022   Prob (F-statistic):               0.00
+Time:                        23:47:31   Log-Likelihood:                -3459.9
 No. Observations:                5150   AIC:                             7022.
 Df Residuals:                    5099   BIC:                             7356.
 Df Model:                          50                                         
@@ -1171,7 +1042,7 @@ Number of regressors in the basic model: 51
 </div>
 </div>
 <section id="note-that-the-basic-model-consists-of-51-regressors">
-<h3><span class="section-number">2.4.1. </span>Note that the basic model consists of <span class="math notranslate nohighlight">\(51\)</span> regressors.<a class="headerlink" href="#note-that-the-basic-model-consists-of-51-regressors" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>Note that the basic model consists of <span class="math notranslate nohighlight">\(51\)</span> regressors.<a class="headerlink" href="#note-that-the-basic-model-consists-of-51-regressors" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. flexible model</span>
@@ -1189,8 +1060,8 @@ Number of regressors in the basic model: 51
 Dep. Variable:                  lwage   R-squared:                       0.351
 Model:                            OLS   Adj. R-squared:                  0.319
 Method:                 Least Squares   F-statistic:                     10.83
-Date:                Fri, 03 Feb 2023   Prob (F-statistic):          2.69e-305
-Time:                        14:10:03   Log-Likelihood:                -3301.9
+Date:                Wed, 03 Aug 2022   Prob (F-statistic):          2.69e-305
+Time:                        23:48:33   Log-Likelihood:                -3301.9
 No. Observations:                5150   AIC:                             7096.
 Df Residuals:                    4904   BIC:                             8706.
 Df Model:                         245                                         
@@ -1464,7 +1335,7 @@ Number of regressors in the basic model: 246
 </section>
 </section>
 <section id="try-lasso-next">
-<h2><span class="section-number">2.5. </span>Try Lasso next<a class="headerlink" href="#try-lasso-next" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.5. </span>Try Lasso next<a class="headerlink" href="#try-lasso-next" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import relevant packages for lasso </span>
@@ -1583,13 +1454,13 @@ Number of regressors in the basic model: 246
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-squared for the basic model:  0.31004650692219493 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-squared for the basic model:  0.31004650692219504 
 
-adjusted R-squared for the basic model:  0.3032809304064291 
+adjusted R-squared for the basic model:  0.3032809304064292 
 
-R-squared for the basic model:  0.35110989506172274 
+R-squared for the basic model:  0.3511098950617231 
 
-adjusted R-squared for the basic model:  0.318691853522188 
+adjusted R-squared for the basic model:  0.31869185352218843 
 
 R-squared for LASSO:  0.1604784962552065 
 
@@ -1626,13 +1497,13 @@ adjusted R-squared for LASSO:  0.11835687889415825
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE for the basic model:  0.22442505581164396 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE for the basic model:  0.22442505581164474 
 
-adjusted MSE for the basic model:  0.2266697465051905 
+adjusted MSE for the basic model:  0.22666974650519128 
 
-MSE for the flexible model:  0.21106813644318217 
+MSE for the flexible model:  0.21106813644318256 
 
-adjusted MSE for the flexible model:  0.2216559752614984 
+adjusted MSE for the flexible model:  0.22165597526149883 
 
 MSE for the LASSO model:  0.273075884423059 
 
@@ -1721,7 +1592,7 @@ adjusted MSE for LASSO model:  0.2867742260968095
 <p>One procedure to circumvent this issue is to use <strong>data splitting</strong> that is described and applied in the following.</p>
 </section>
 <section id="data-splitting">
-<h2><span class="section-number">2.6. </span>Data Splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.6. </span>Data Splitting<a class="headerlink" href="#data-splitting" title="Permalink to this heading">#</a></h2>
 <p>Measure the prediction quality of the two models via data splitting:</p>
 <ul class="simple">
 <li><p>Randomly split the data into one training sample and one testing sample. Here we just use a simple method (stratified splitting is a more sophisticated version of splitting that we can consider).</p></li>
@@ -1994,8 +1865,8 @@ adjusted MSE for LASSO model:  0.2867742260968095
 Dep. Variable:                  lwage   R-squared:                       0.316
 Model:                            OLS   Adj. R-squared:                  0.308
 Method:                 Least Squares   F-statistic:                     37.65
-Date:                Fri, 03 Feb 2023   Prob (F-statistic):          4.85e-293
-Time:                        14:10:04   Log-Likelihood:                -2784.1
+Date:                Wed, 03 Aug 2022   Prob (F-statistic):          4.85e-293
+Time:                        23:52:25   Log-Likelihood:                -2784.1
 No. Observations:                4120   AIC:                             5670.
 Df Residuals:                    4069   BIC:                             5993.
 Df Model:                          50                                         
@@ -2115,8 +1986,8 @@ Length: 1030, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the basic model:  0.21963534669163975  
-Test R2 for the basic model:  0.2749843118453732
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the basic model:  0.21963534669163998  
+Test R2 for the basic model:  0.2749843118453724
 </pre></div>
 </div>
 </div>
@@ -2141,11 +2012,8 @@ Test R2 for the basic model:  0.2749843118453732
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the flexible model: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 0.2332944574254934  
-Test R2 for the flexible model:  0.22989562408425113
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the flexible model:  0.2332944574254996  
+Test R2 for the flexible model:  0.2298956240842307
 </pre></div>
 </div>
 </div>
@@ -2213,7 +2081,7 @@ Test R2 for the flexible model:  0.22989562408425113
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the flexible model:  0.2540862168655473  
-Test R2 for the flexible model:  0.1612620821455759
+Test R2 for the flexible model:  0.1612620821455767
 </pre></div>
 </div>
 </div>
@@ -2296,7 +2164,7 @@ Test R2 for the flexible model:  0.1612620821455759
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Python_notebooks"
         },
         predefinedOutput: true
@@ -2304,49 +2172,106 @@ Test R2 for the flexible model:  0.1612620821455759
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="01_Python_Notebook_Linear_Model_Overfitting.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Linear Model Overfiting</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Python_Notebook_Linear_Model_Overfitting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Linear Model Overfiting</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="03_ols-and-lasso-for-gender-wage-gap-inference.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">3. </span>OLS and lasso for gender wage gap inference</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Victor Chernozhukov<br/>
-  
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">2.2. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">2.3. Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-question">2.4. Prediction Question</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-the-basic-model-consists-of-51-regressors">2.4.1. Note that the basic model consists of <span class="math notranslate nohighlight">\(51\)</span> regressors.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-lasso-next">2.5. Try Lasso next</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">2.6. Data Splitting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Victor Chernozhukov & Jannis Kueck. Translated into Python by Alexander Quispe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

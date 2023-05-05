@@ -1,0 +1,1026 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Some RCT Examples &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Analyzing RCT reemployment experiment" href="05_py-notebook-analyzing-rct-with-precision.html" />
+    <link rel="prev" title="3. OLS and lasso for gender wage gap inference" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
+   1. Linear Model Overfiting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+   3. OLS and lasso for gender wage gap inference
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Some RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
+   5. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
+   7. Linear Penalized Regs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_ML_for_wage_prediction.html">
+   8. ML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
+   9. Experiment on orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
+   10. Double Lasso for Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   11. Heterogenous Wage Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
+   12. ColliderBias Hollywood# Collider Bias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_automl-for-wage-prediction.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
+   15. Functional Approximation By NN and RF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook-dosearch.html">
+   17. Notebook-Dosearch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
+   18. DML inference for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
+   19. DML inference using NN for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_debiased-ml-for-partially-linear-model-in-python.html">
+   22. Debiased ML for Partially Linear Model in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   24. Debiased ML for Partially Linear IV Model in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   25. Weak IV Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/04_py-notebook-some-rct-examples.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/04_py-notebook-some-rct-examples.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/04_py-notebook-some-rct-examples.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/04_py-notebook-some-rct-examples.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Python_notebooks/04_py-notebook-some-rct-examples.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polio-rct">
+   4.1. Polio RCT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pfizer-bntx-covid-19-rct">
+   4.2. Pfizer/BNTX Covid-19 RCT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-binomial-test-inversion">
+   4.3. Exact Binomial Test Inversion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Some RCT Examples</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polio-rct">
+   4.1. Polio RCT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pfizer-bntx-covid-19-rct">
+   4.2. Pfizer/BNTX Covid-19 RCT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-binomial-test-inversion">
+   4.3. Exact Binomial Test Inversion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="some-rct-examples">
+<h1><span class="section-number">4. </span>Some RCT Examples<a class="headerlink" href="#some-rct-examples" title="Permalink to this headline">#</a></h1>
+<section id="polio-rct">
+<h2><span class="section-number">4.1. </span>Polio RCT<a class="headerlink" href="#polio-rct" title="Permalink to this headline">#</a></h2>
+<p>One of the earliest randomized experiments were the Polio vaccination trias conducted by the Public Health Service in 1954.  The question was whether Salk vaccine prevented polio.  Children in the study were randomly assigned either a treatment (polio vaccine shot) or a placebo (saline solution shot), without knowing which one they received. The doctors in the study, making the diagnosis, did not know whether a child received a vaccine or not. In other words, the trial was a double-blind, randomized control trial.  The trial had to be large, because the rate at which Polio occured in the population was 50 per 100,000.  The treatment group saw 33 polio cases per 200,745; the control group saw 115 cases per 201,229. The estimated avearage treatment effect is about
+$<span class="math notranslate nohighlight">\(
+-40
+\)</span><span class="math notranslate nohighlight">\(
+with the 95% confidence band (based on approximate normality of the two sample means and their differences):
+\)</span><span class="math notranslate nohighlight">\([-52, -28].\)</span>$
+As this is an RCT, the confidence band suggests that the Polio vaccine <strong>caused</strong> the reduction in the risk of polio.</p>
+<p>The interesting thing here is that we don’t need the underlying individual data to evaluate the effectivess of the vaccine. This is because the outcomes are Bernoulli random variables, and we have enough information to compute the estimate of ATE as well as the confidence intervals from the group case counts.</p>
+<p>We also compute the Vaccine Efficacy metric, which refers to the following measure according to the <a class="reference external" href="https://www.cdc.gov/csels/dsepd/ss1978/lesson3/section6.html">CDC</a>:
+$<span class="math notranslate nohighlight">\(
+VE = \frac{\text{Risk for Unvaccinated - Risk for Vaccinated}}{\text{Risk for Unvaccinated}}.
+\)</span>$
+It describes the relative reduction in risk caused by vaccination.</p>
+<p>It is staighforward to get the VE estimate by just plugging-in the numbers, but how do we get the approximate variance estimate? I am too lazy to do calculations for the delta method, so I will just use a simulation (a form of approximate bootstrap) to obtain the confidence intervals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># linear algebra</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># data processing, CSV file I/O (e.g. pd.read_csv)</span>
+
+
+<span class="n">NT</span> <span class="o">=</span> <span class="mi">200745</span> <span class="c1">#number of treated</span>
+
+<span class="n">NC</span> <span class="o">=</span> <span class="mi">201229</span> <span class="c1">#number of controlled</span>
+
+<span class="n">YT</span> <span class="o">=</span> <span class="mi">33</span><span class="o">/</span><span class="n">NT</span>  <span class="c1">#average outcome for treated</span>
+
+<span class="n">YC</span> <span class="o">=</span><span class="mi">115</span><span class="o">/</span><span class="n">NC</span>  <span class="c1">#average outcome for controlled</span>
+
+<span class="c1">#incidence per 100000 </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Incidence per 100000 among treated:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">YT</span><span class="o">*</span><span class="mi">100000</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Incidence per 100000 among controlled:&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">YC</span><span class="o">*</span><span class="mi">100000</span><span class="p">))</span>
+
+
+<span class="c1"># treatment effect estimate reduction in incidence  per 100000 people</span>
+
+<span class="n">delta_hat</span> <span class="o">=</span> <span class="mi">100000</span><span class="o">*</span><span class="p">(</span><span class="n">YT</span><span class="o">-</span><span class="n">YC</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate TE of occurances per 100,000 &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">100000</span><span class="o">*</span><span class="p">(</span><span class="n">YT</span><span class="o">-</span><span class="n">YC</span><span class="p">)))</span>
+
+<span class="n">Var_delta_hat</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">100000</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">YT</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">YT</span><span class="p">)</span><span class="o">/</span><span class="n">NT</span> <span class="o">+</span>  <span class="n">YC</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">YC</span><span class="p">)</span><span class="o">/</span><span class="n">NC</span><span class="p">)</span>
+
+<span class="c1"># standard deviation</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard deviation for ATE&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Var_delta_hat</span><span class="o">**</span><span class="mf">.5</span><span class="p">))</span>
+
+<span class="c1"># here we are using the fact that outcomes are Bernoulli </span>
+
+<span class="n">CI_delta</span> <span class="o">=</span> <span class="p">[</span><span class="n">delta_hat</span> <span class="o">-</span><span class="mf">1.96</span><span class="o">*</span><span class="n">Var_delta_hat</span><span class="o">**</span><span class="mf">.5</span><span class="p">,</span> <span class="n">delta_hat</span> <span class="o">+</span><span class="mf">1.96</span><span class="o">*</span><span class="n">Var_delta_hat</span><span class="o">**</span><span class="mf">.5</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_delta</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">CI_delta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+<span class="c1"># Here we calculate the overall effectiveness of the vaccine and construct confidence intervals for it</span>
+
+<span class="n">NV</span> <span class="o">=</span>  <span class="mi">200745</span><span class="p">;</span>
+<span class="n">NU</span> <span class="o">=</span>  <span class="mi">201229</span><span class="p">;</span>
+<span class="n">RV</span> <span class="o">=</span> <span class="mi">33</span><span class="o">/</span><span class="n">NV</span><span class="p">;</span>
+<span class="n">RU</span> <span class="o">=</span> <span class="mi">115</span><span class="o">/</span><span class="n">NU</span><span class="p">;</span>
+<span class="n">VE</span> <span class="o">=</span> <span class="p">(</span><span class="n">RU</span> <span class="o">-</span> <span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">RU</span><span class="p">;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall VE is &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">VE</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c1"># this recovers the number in the table.</span>
+
+<span class="c1"># we set up a simulation example.</span>
+
+<span class="c1"># calulate variance of risk estimates:</span>
+
+<span class="n">Var_RV</span> <span class="o">=</span> <span class="n">RV</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">NV</span>
+<span class="n">Var_RU</span> <span class="o">=</span> <span class="n">RU</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RU</span><span class="p">)</span><span class="o">/</span><span class="n">NU</span>
+
+
+
+<span class="c1"># set-up MC draws:</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">RVs</span> <span class="o">=</span> <span class="n">RV</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Var_RV</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+<span class="n">RUs</span> <span class="o">=</span> <span class="n">RU</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Var_RU</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+<span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">/</span><span class="n">RUs</span>
+
+
+<span class="n">CI_VE_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.025</span><span class="p">)</span>
+<span class="n">CI_VE_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.975</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_L</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_U</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">parse_version</span>
+
+
+<span class="c1"># instantiate and fit the KDE model</span>
+<span class="n">X</span><span class="o">=</span> <span class="n">VEs</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Incidence per 100000 among treated:16.438765598146905
+Incidence per 100000 among controlled:57.14882049803955
+Estimate TE of occurances per 100,000 -40.71005489989265
+Standard deviation for ATE6.047412320702958
+95 % confidence interval is [-52.56298304847044,-28.85712675131485]
+Overall VE is 0.7123516206478694
+95 % confidence interval is [0.5891709070669607 , 0.8147644003639567 ]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x26cbf1d4790&gt;
+</pre></div>
+</div>
+<img alt="../_images/04_py-notebook-some-rct-examples_2_2.png" src="../_images/04_py-notebook-some-rct-examples_2_2.png" />
+</div>
+</div>
+</section>
+<section id="pfizer-bntx-covid-19-rct">
+<h2><span class="section-number">4.2. </span>Pfizer/BNTX Covid-19 RCT<a class="headerlink" href="#pfizer-bntx-covid-19-rct" title="Permalink to this headline">#</a></h2>
+<p>Here is a link to the FDA <a class="reference external" href="https://www.fda.gov/media/144245/download">briefing</a> and an interesting <a class="reference external" href="https://garycornell.com/2020/12/09/statistics-in-the-pfizer-data-how-good-is-the-vaccine/?fbclid=IwAR282lS0Vl3tWmicQDDhIJAQCMO8NIsCXyWbUWwTtPuKcnuJ2v0VWXRDQac">discussion</a>, as well as data.</p>
+<p>Pfizer/BNTX was the first vaccine approved for emergency use to reduce the risk of Covid-19 decease. In studies to assess vaccine efficacy, volunteers were randomly assigned to receive either a treatment (2-dose vaccination) or a placebo, without knowing which they recieved. The doctors making the diagnoses did not know now whether a given volunteer received a vaccination or not. The results of the study are given in the following table <img alt="" src="https://lh6.googleusercontent.com/oiO6gYom1UZyrOhgpFx2iq8ike979u3805JHiVygP-Efh1Yaz2ttyPcgWKlT1AqHDM4v46th3EPIkOvRLyXA0fNUloPL-mL9eOFmSAzfbNOHyCZSQ0DyzMhcFUtQuZ520R5Qd2lj" />:</p>
+<p>Here we see both the overall effects and the effects by age group. The confidence intervals for the averal ATE are tight and suggest high effectiveness of the vaccine. The confidence intervals for the age group 65-75 are much wider.  We could group 65-75 and &gt;75 groups to evaluate the effectiveness of the vaccine and also narrow down the width of the confidence band.</p>
+<p>In this case, the reported results are for vaccine effectiveness. We use the same approach as above.</p>
+<p>In the code cell below  we calculate the overall effectiveness of the vaccie and construct confidence intervals for it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NV</span> <span class="o">=</span>  <span class="mi">19965</span><span class="p">;</span>
+<span class="n">NU</span> <span class="o">=</span>  <span class="mi">20172</span><span class="p">;</span>
+<span class="n">RV</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="n">NV</span><span class="p">;</span>
+<span class="n">RU</span> <span class="o">=</span> <span class="mi">169</span><span class="o">/</span><span class="n">NU</span><span class="p">;</span>
+<span class="n">VE</span> <span class="o">=</span> <span class="p">(</span><span class="n">RU</span> <span class="o">-</span> <span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">RU</span><span class="p">;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall VE is &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">VE</span><span class="p">))</span>
+
+<span class="c1"># this recovers the number in the table.</span>
+
+<span class="c1"># we set up a simulation example.</span>
+
+<span class="c1"># calulate variance of risk estimates:</span>
+
+
+<span class="n">Var_RV</span> <span class="o">=</span> <span class="n">RV</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">NV</span>
+<span class="n">Var_RU</span> <span class="o">=</span> <span class="n">RU</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RU</span><span class="p">)</span><span class="o">/</span><span class="n">NU</span>
+
+<span class="c1"># set-up MC draws:</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">RVs</span> <span class="o">=</span> <span class="n">RV</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Var_RV</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+<span class="n">RUs</span> <span class="o">=</span> <span class="n">RU</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Var_RU</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+<span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">/</span><span class="n">RUs</span>
+
+
+<span class="n">CI_VE_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.025</span><span class="p">)</span>
+<span class="n">CI_VE_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.975</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_L</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_U</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">parse_version</span>
+
+
+<span class="c1"># instantiate and fit the KDE model</span>
+<span class="n">X</span><span class="o">=</span> <span class="n">VEs</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9461934124362605
+95 % confidence interval is [0.9074435832732113 , 0.9825370644211036 ]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x26cbf2df670&gt;
+</pre></div>
+</div>
+<img alt="../_images/04_py-notebook-some-rct-examples_5_2.png" src="../_images/04_py-notebook-some-rct-examples_5_2.png" />
+</div>
+</div>
+<p>In the code cell below  we calculate the effectiveness of the vaccine for the two groups that are 65 or older</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we calculate the overall effectiveness of the vaccine for the two groups that are 65 or older</span>
+
+<span class="n">NV</span> <span class="o">=</span>  <span class="mi">3239</span><span class="o">+</span><span class="mi">805</span><span class="p">;</span>
+<span class="n">NU</span> <span class="o">=</span>  <span class="mi">3255</span><span class="o">+</span><span class="mi">812</span><span class="p">;</span>
+<span class="n">RV</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">NV</span><span class="p">;</span>
+<span class="n">RU</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="n">NU</span><span class="p">;</span>
+<span class="n">VE</span> <span class="o">=</span> <span class="p">(</span><span class="n">RU</span> <span class="o">-</span> <span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">RU</span><span class="p">;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall VE is &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">VE</span><span class="p">))</span>
+
+<span class="c1"># this recovers the number in the table.</span>
+
+<span class="c1"># we set up a simulation example.</span>
+
+<span class="c1"># calulate variance of risk estimates:</span>
+
+
+<span class="n">Var_RV</span> <span class="o">=</span> <span class="n">RV</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">NV</span>
+<span class="n">Var_RU</span> <span class="o">=</span> <span class="n">RU</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RU</span><span class="p">)</span><span class="o">/</span><span class="n">NU</span>
+
+<span class="c1"># set-up MC draws:</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">RVs</span> <span class="o">=</span> <span class="n">RV</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Var_RV</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+<span class="n">RUs</span> <span class="o">=</span> <span class="n">RU</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Var_RU</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+<span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">/</span><span class="n">RUs</span>
+
+
+<span class="n">CI_VE_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.025</span><span class="p">)</span>
+<span class="n">CI_VE_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.975</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_L</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_U</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+
+<span class="n">CI_VE_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.05</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_L</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">parse_version</span>
+
+
+<span class="c1"># instantiate and fit the KDE model</span>
+<span class="n">X</span><span class="o">=</span> <span class="n">VEs</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9470690822010516
+95 % confidence interval is [0.8170318329099402 , 1.0531156141554732 ]
+95 % confidence interval is [0.8438051618676976 , 1 ]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x26cbf34afa0&gt;
+</pre></div>
+</div>
+<img alt="../_images/04_py-notebook-some-rct-examples_7_2.png" src="../_images/04_py-notebook-some-rct-examples_7_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NV</span> <span class="o">=</span>  <span class="mi">3239</span><span class="o">+</span><span class="mi">805</span><span class="p">;</span>
+<span class="n">NU</span> <span class="o">=</span>  <span class="mi">3255</span><span class="o">+</span><span class="mi">812</span><span class="p">;</span>
+<span class="n">RV</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">NV</span><span class="p">;</span>
+<span class="n">RU</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="n">NU</span><span class="p">;</span>
+<span class="n">VE</span> <span class="o">=</span> <span class="p">(</span><span class="n">RU</span> <span class="o">-</span> <span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">RU</span><span class="p">;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall VE is &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">VE</span><span class="p">))</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1">#number of simulation draw</span>
+
+<span class="c1">#numpy.random.binomial(n, p, size=None)</span>
+
+<span class="n">RVs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">NV</span><span class="p">,</span> <span class="n">RV</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> 
+<span class="n">RUs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">NU</span><span class="p">,</span> <span class="n">RU</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>  
+<span class="n">VEs</span><span class="o">=</span> <span class="p">(</span><span class="n">RUs</span> <span class="o">-</span> <span class="n">RVs</span><span class="p">)</span><span class="o">/</span><span class="n">RUs</span>
+
+
+<span class="n">CI_VE_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.025</span><span class="p">)</span>
+<span class="n">CI_VE_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.975</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_L</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_U</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+
+<span class="n">CI_VE_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">VEs</span><span class="p">,</span> <span class="mf">.05</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">CI_VE_L</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+            <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils.fixes</span> <span class="kn">import</span> <span class="n">parse_version</span>
+
+
+<span class="c1"># instantiate and fit the KDE model</span>
+<span class="n">X</span><span class="o">=</span> <span class="n">VEs</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">X_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">log_dens</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X_plot</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_plot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dens</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9470690822010516
+95 % confidence interval is [0.7916118421052631 , 1.0 ]
+95 % confidence interval is [0.8260869565217391 , 1 ]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x26cbf3ba700&gt;
+</pre></div>
+</div>
+<img alt="../_images/04_py-notebook-some-rct-examples_8_2.png" src="../_images/04_py-notebook-some-rct-examples_8_2.png" />
+</div>
+</div>
+</section>
+<section id="exact-binomial-test-inversion">
+<h2><span class="section-number">4.3. </span>Exact Binomial Test Inversion<a class="headerlink" href="#exact-binomial-test-inversion" title="Permalink to this headline">#</a></h2>
+<p>It is possible to use exact inference by inverting tests based on the exact binomial nature of the outcome variable. Here, we perform the Cornfield Procedure to find the exact confidence interval on the estimate of vaccine efficacy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CI_journal</span><span class="p">(</span><span class="n">NV</span><span class="p">,</span> <span class="n">RV_infected</span><span class="p">,</span> <span class="n">NU</span><span class="p">,</span> <span class="n">RU_infected</span><span class="p">):</span>
+    <span class="c1"># from https://www.medrxiv.org/content/10.1101/2020.12.16.20248359v1.full.pdf</span>
+    <span class="n">RV</span> <span class="o">=</span> <span class="n">RV_infected</span><span class="o">/</span><span class="n">NV</span><span class="p">;</span>
+    <span class="n">RU</span> <span class="o">=</span> <span class="n">RU_infected</span><span class="o">/</span><span class="n">NU</span><span class="p">;</span>
+    <span class="n">RR</span> <span class="o">=</span> <span class="n">RV</span><span class="o">/</span><span class="n">RU</span><span class="p">;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall Risk Ratio is &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">RR</span><span class="p">))</span>
+
+    <span class="c1"># this recovers the number in the table.</span>
+
+    <span class="c1"># we set up a simulation example.</span>
+
+    <span class="c1"># calulate variance of risk estimates:</span>
+    <span class="n">stat</span> <span class="o">=</span> <span class="mf">1.96</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">RV_infected</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">RU_infected</span><span class="p">)</span><span class="o">**</span><span class="mf">.5</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95 </span><span class="si">% c</span><span class="s2">onfidence interval is [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RR</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">stat</span><span class="p">)),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> 
+                <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">RR</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">stat</span><span class="p">)),</span> <span class="s2">&quot;]&quot;</span>   <span class="p">)</span>
+
+<span class="c1"># Exact CI exploiting Bernoulli outcome using the Cornfield Procedure</span>
+
+<span class="n">NV</span> <span class="o">=</span>  <span class="mi">19965</span>
+<span class="n">NU</span> <span class="o">=</span>  <span class="mi">20172</span>
+<span class="n">RV</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="n">NV</span>
+<span class="n">RU</span> <span class="o">=</span> <span class="mi">169</span><span class="o">/</span><span class="n">NU</span>
+<span class="n">VE</span> <span class="o">=</span> <span class="p">(</span><span class="n">RU</span> <span class="o">-</span> <span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">RU</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Overall VE is </span><span class="si">{</span><span class="n">VE</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9461934124362605
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that this exactly recovers the result in the FDA table (first row).</p>
+<p>Next we repeat the cornfield procedure to find the exact confidence interval on vaccine effectiveness for the two groups that are 65 or older. Here we see a big discrepancy between various asymptotic approaches and the exact finite-sample inference. This occurs because the binomial counts are too low for central limit theorems to work successfully.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exact CI exploiting Bernoulli outcome for the two groups that are 65 or older</span>
+<span class="n">NV</span> <span class="o">=</span>  <span class="mi">3239</span><span class="o">+</span><span class="mi">805</span>
+<span class="n">NU</span> <span class="o">=</span>  <span class="mi">3255</span><span class="o">+</span><span class="mi">812</span>
+<span class="n">RV</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">NV</span>
+<span class="n">RU</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="n">NU</span>
+<span class="n">VE</span> <span class="o">=</span> <span class="p">(</span><span class="n">RU</span> <span class="o">-</span> <span class="n">RV</span><span class="p">)</span><span class="o">/</span><span class="n">RU</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Overall VE is </span><span class="si">{</span><span class="n">VE</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overall VE is 0.9470690822010516
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_py",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Python_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>OLS and lasso for gender wage gap inference</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05_py-notebook-analyzing-rct-with-precision.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Analyzing RCT reemployment experiment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

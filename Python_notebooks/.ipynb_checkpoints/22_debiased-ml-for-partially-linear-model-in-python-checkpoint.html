@@ -1,0 +1,1079 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>22. Debiased ML for Partially Linear Model in Python &#8212; Inference on Causal and Structural Parametters Using ML and AI</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="23. Sensitivity Analysis with Sensmakr and Debiased ML" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html" />
+    <link rel="prev" title="21. Identification Analysis of 401(k) Example w DAGs" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/main_logo_ai_light.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Inference on Causal and Structural Parametters Using ML and AI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python_Notebook_Linear_Model_Overfitting.html">
+   1. Linear Model Overfiting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+   2. OLS and lasso for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+   3. OLS and lasso for gender wage gap inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_py-notebook-some-rct-examples.html">
+   4. Some RCT Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_py-notebook-analyzing-rct-with-precision.html">
+   5. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_analyzing-rct-reemployment-experiment.html">
+   6. Analyzing RCT reemployment experiment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_py-notebook-linear-penalized-regs.html">
+   7. Linear Penalized Regs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_ML_for_wage_prediction.html">
+   8. ML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_py-notebook-experiment-on-orthogonal-learning.html">
+   9. Experiment on orthogonal Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_double-lasso-for-the-convergence-hypothesis.html">
+   10. Double Lasso for Testing the Convergence Hypothesis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_py-heterogenous-wage-effects.html">
+   11. Heterogenous Wage Effects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_py-colliderbias-hollywood.html">
+   12. ColliderBias Hollywood# Collider Bias
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_deep_neural_networks_for_wage_prediction.html">
+   13. Deep Neural Networks for Wage Prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_automl-for-wage-prediction.html">
+   14. AutoML for wage prediction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_py-Functional-Approximation-By-NN-and-RF.html">
+   15. Functional Approximation By NN and RF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_notebook_dagitty.html">
+   16. Notebook-DAGitty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17_notebook-dosearch.html">
+   17. Notebook-Dosearch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="18_pm3_notebook_inference_clustering.html">
+   18. DML inference for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="19_pm3_notebook_inference_nn.html">
+   19. DML inference using NN for gun ownership
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="20_pm5-401k-kaggle-py.html">
+   20. DML for ATE and LATE of 401(k) on Wealth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html">
+   21. Identification Analysis of 401(k) Example w DAGs
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   22. Debiased ML for Partially Linear Model in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html">
+   23. Sensitivity Analysis with Sensmakr and Debiased ML
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_debiased-ml-for-partially-linear-iv-model-in-python.html">
+   24. Debiased ML for Partially Linear IV Model in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_r_weak_iv_experiments.html">
+   25. Weak IV Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/d2cml-ai/14.388_py/master?urlpath=tree/_build/jupyter_execute/Python_notebooks/22_debiased-ml-for-partially-linear-model-in-python.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/d2cml-ai/14.388_py/blob/master/_build/jupyter_execute/Python_notebooks/22_debiased-ml-for-partially-linear-model-in-python.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py/issues/new?title=Issue%20on%20page%20%2FPython_notebooks/22_debiased-ml-for-partially-linear-model-in-python.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/d2cml-ai/14.388_py/edit/master/_build/jupyter_execute/Python_notebooks/22_debiased-ml-for-partially-linear-model-in-python.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Python_notebooks/22_debiased-ml-for-partially-linear-model-in-python.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-debiased-machine-learning-for-the-partially-linear-regression-model">
+   22.1. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dml-algorithm">
+   22.2. DML algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clases-needed-for-regression">
+     22.2.1. Clases needed for regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#previous-function">
+     22.2.2. Previous Function
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Debiased ML for Partially Linear Model in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#double-debiased-machine-learning-for-the-partially-linear-regression-model">
+   22.1. Double/Debiased Machine Learning for the Partially Linear Regression Model.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dml-algorithm">
+   22.2. DML algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clases-needed-for-regression">
+     22.2.1. Clases needed for regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#previous-function">
+     22.2.2. Previous Function
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="debiased-ml-for-partially-linear-model-in-python">
+<h1><span class="section-number">22. </span>Debiased ML for Partially Linear Model in Python<a class="headerlink" href="#debiased-ml-for-partially-linear-model-in-python" title="Permalink to this headline">#</a></h1>
+<section id="double-debiased-machine-learning-for-the-partially-linear-regression-model">
+<h2><span class="section-number">22.1. </span>Double/Debiased Machine Learning for the Partially Linear Regression Model.<a class="headerlink" href="#double-debiased-machine-learning-for-the-partially-linear-regression-model" title="Permalink to this headline">#</a></h2>
+<p>This is a simple implementation of Debiased Machine Learning for the Partially Linear Regression Model.</p>
+<p>Reference:</p>
+<p><a class="reference external" href="https://arxiv.org/abs/1608.00060">https://arxiv.org/abs/1608.00060</a></p>
+<p><a class="reference external" href="https://www.amazon.com/Business-Data-Science-Combining-Accelerate/dp/1260452778">https://www.amazon.com/Business-Data-Science-Combining-Accelerate/dp/1260452778</a></p>
+<p>The code is based on the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import relevant packages</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">import</span> <span class="nn">patsy</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+
+<span class="kn">import</span> <span class="nn">hdmpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeCV</span><span class="p">,</span> <span class="n">ElasticNetCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_string_dtype</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_numeric_dtype</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_categorical_dtype</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">compress</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools</span> <span class="kn">import</span> <span class="n">add_constant</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">ElasticNet</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dml-algorithm">
+<h2><span class="section-number">22.2. </span>DML algorithm<a class="headerlink" href="#dml-algorithm" title="Permalink to this headline">#</a></h2>
+<p>Here we perform estimation and inference of predictive coefficient <span class="math notranslate nohighlight">\(\alpha\)</span> in the partially linear statistical model,
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+Y = D\alpha + g(X) + U, \quad E (U | D, X) = 0. 
+\end{align}
+\)</span><span class="math notranslate nohighlight">\(
+For \)</span>\tilde Y = Y- E(Y|X)<span class="math notranslate nohighlight">\( and \)</span>\tilde D= D- E(D|X)<span class="math notranslate nohighlight">\(, we can write
+\)</span><span class="math notranslate nohighlight">\(
+\begin{align}
+\tilde Y = \alpha \tilde D + U, \quad E (U |\tilde D) =0.
+\end{align}
+\)</span><span class="math notranslate nohighlight">\(
+Parameter \)</span>\alpha<span class="math notranslate nohighlight">\( is then estimated using cross-fitting approach to obtain the residuals \)</span>\tilde D<span class="math notranslate nohighlight">\( and \)</span>\tilde Y<span class="math notranslate nohighlight">\(.
+The algorithm comsumes \)</span>Y, D, X<span class="math notranslate nohighlight">\(, and machine learning methods for learning the residuals \)</span>\tilde Y<span class="math notranslate nohighlight">\( and \)</span>\tilde D$, where
+the residuals are obtained by cross-validation (cross-fitting).</p>
+<p>The statistical parameter <span class="math notranslate nohighlight">\(\alpha\)</span> has a causal intertpreation of being the effect of <span class="math notranslate nohighlight">\(D\)</span> on <span class="math notranslate nohighlight">\(Y\)</span> in the causal DAG
+$<span class="math notranslate nohighlight">\(
+\begin{align}
+D\to Y, \quad X\to (D,Y)
+\end{align}
+\)</span><span class="math notranslate nohighlight">\(
+or the counterfactual outcome model with conditionally exogenous (conditionally random) assignment of treatment \)</span>D<span class="math notranslate nohighlight">\( given \)</span>X<span class="math notranslate nohighlight">\(:
+\)</span><span class="math notranslate nohighlight">\(
+\begin{align}
+Y(d) = d\alpha + g(X) + U(d),\quad  U(d) \text{ indep } D |X, \quad Y = Y(D), \quad U = U(D).
+\end{align}
+\)</span>$</p>
+<section id="clases-needed-for-regression">
+<h3><span class="section-number">22.2.1. </span>Clases needed for regression<a class="headerlink" href="#clases-needed-for-regression" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">standard_skl_model</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+       
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="p">):</span>
+        
+        <span class="c1"># Standarization of X and Y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaler_X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaler_X</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span>
+        <span class="n">std_X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaler_X</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">std_X</span> <span class="p">,</span> <span class="n">Y</span> <span class="p">)</span>
+                
+        <span class="k">return</span> <span class="bp">self</span>
+    
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span> <span class="bp">self</span> <span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaler_X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaler_X</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span>
+        <span class="n">std_X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaler_X</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span>
+        
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">std_X</span> <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">rlasso_sklearn</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post</span> <span class="o">=</span> <span class="n">post</span>
+       
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="p">):</span>
+        
+        <span class="c1"># Standarization of X and Y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rlasso_model</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span> <span class="n">X</span> <span class="p">,</span> <span class="n">Y</span> <span class="p">,</span> <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span> <span class="p">)</span>                
+        <span class="k">return</span> <span class="bp">self</span>
+    
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span> <span class="bp">self</span> <span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+        
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rlasso_model</span><span class="o">.</span><span class="n">est</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="p">(</span> <span class="n">add_constant</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="o">@</span> <span class="n">beta</span> <span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+                
+        <span class="k">return</span> <span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="previous-function">
+<h3><span class="section-number">22.2.2. </span>Previous Function<a class="headerlink" href="#previous-function" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">DML2_for_PLM</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="n">nfold</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">):</span>
+    
+    <span class="c1"># Num ob observations</span>
+    <span class="n">nobs</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Define folds indices </span>
+    <span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nfold</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span><span class="o">*</span><span class="n">nobs</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">nobs</span><span class="p">,</span><span class="n">nobs</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">foldid</span> <span class="o">=</span> <span class="p">[</span><span class="n">list_1</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">]</span>
+
+    <span class="c1"># Create split function(similar to R)</span>
+    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">el</span> <span class="o">==</span> <span class="n">i</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">)</span> 
+
+    <span class="c1"># Split observation indices into folds </span>
+    <span class="n">list_2</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">list_2</span><span class="p">,</span> <span class="n">foldid</span><span class="p">)</span>
+    
+    <span class="c1"># Create array to save errors </span>
+    <span class="n">dtil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">ytil</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+    
+    <span class="c1"># loop to save results</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)):</span>
+    
+        <span class="c1"># Split data - index to keep are in mask as booleans</span>
+        <span class="n">include_idx</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>  <span class="c1">#Here should go I[b] Set is more efficient, but doesn&#39;t reorder your elements if that is desireable</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">include_idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))])</span>
+
+        <span class="c1"># Lasso regression, excluding folds selected </span>
+        <span class="n">dfit</span> <span class="o">=</span> <span class="n">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">d</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+
+        <span class="c1"># predict estimates using the </span>
+        <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+        <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+
+        <span class="c1"># save errors  </span>
+        <span class="n">dtil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span>  <span class="n">d</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">dhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">ytil</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="o">-</span> <span class="n">yhat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Create dataframe </span>
+    <span class="n">data_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span> <span class="n">ytil</span><span class="p">,</span> <span class="n">dtil</span> <span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ytil&#39;</span><span class="p">,</span><span class="s1">&#39;dtil&#39;</span> <span class="p">])</span>
+   
+    <span class="c1"># OLS clustering at the County level</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;ytil ~ dtil&quot;</span>
+    <span class="n">baseline_ols</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">model</span> <span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data_2</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC3&quot;</span><span class="p">)</span>
+    <span class="n">coef_est</span> <span class="o">=</span> <span class="n">baseline_ols</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span> <span class="mi">1</span> <span class="p">][</span> <span class="s1">&#39;Coef.&#39;</span> <span class="p">][</span> <span class="s1">&#39;dtil&#39;</span> <span class="p">]</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">baseline_ols</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span> <span class="mi">1</span> <span class="p">][</span> <span class="s1">&#39;Std.Err.&#39;</span> <span class="p">][</span> <span class="s1">&#39;dtil&#39;</span> <span class="p">]</span>
+    
+    <span class="n">Final_result</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;coef_est&#39;</span> <span class="p">:</span> <span class="n">coef_est</span> <span class="p">,</span> <span class="s1">&#39;se&#39;</span> <span class="p">:</span> <span class="n">se</span> <span class="p">,</span> <span class="s1">&#39;dtil&#39;</span> <span class="p">:</span> <span class="n">dtil</span> <span class="p">,</span> <span class="s1">&#39;ytil&#39;</span> <span class="p">:</span> <span class="n">ytil</span> <span class="p">}</span>
+
+    <span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Coefficient (se) = </span><span class="si">{</span><span class="n">coef_est</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">se</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">Final_result</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load GrowthData</span>
+<span class="n">rdata_read</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s2">&quot;../data/GrowthData.RData&quot;</span><span class="p">)</span>
+<span class="n">GrowthData</span> <span class="o">=</span> <span class="n">rdata_read</span><span class="p">[</span> <span class="s1">&#39;GrowthData&#39;</span> <span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span> <span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">GrowthData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> length of y is </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> num features x is </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Naive OLS that uses all features w/o cross-fitting </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="n">lres</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">y</span> <span class="p">,</span> <span class="n">add_constant</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span> <span class="n">d</span> <span class="p">,</span> <span class="n">x</span> <span class="p">)</span> <span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">)</span>  <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span> <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> coef (se) = </span><span class="si">{</span><span class="n">lres</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">lres</span><span class="p">[</span> <span class="mi">1</span> <span class="p">]</span><span class="si">}</span><span class="s1">)&#39;</span> <span class="p">)</span>
+
+
+
+
+<span class="c1">#DML with OLS</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with OLS w/o feature selection </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">standard_skl_model</span><span class="p">(</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">d</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">standard_skl_model</span><span class="p">(</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span>  <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">DML2_ols</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dreg</span><span class="p">,</span> <span class="n">yreg</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+
+
+
+
+<span class="c1"># DML with LASSO</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with Lasso </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="k">def</span> <span class="nf">dreg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">DML2_lasso</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+
+
+
+
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with Random Forest </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+
+<span class="c1">#DML with cross-validated Lasso:</span>
+<span class="k">def</span> <span class="nf">dreg</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">500</span> <span class="p">,</span> <span class="n">max_features</span> <span class="o">=</span> <span class="mi">20</span> <span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">,</span> <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">d</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">yreg</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">500</span> <span class="p">,</span> <span class="n">max_features</span> <span class="o">=</span> <span class="mi">20</span> <span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">,</span> <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">DML2_RF</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>   <span class="c1"># set to 2 due to computation time</span>
+
+
+
+<span class="c1">#DML with Lasso:</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with Lasso/Random Forest </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="k">def</span> <span class="nf">dreg</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">yreg</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">500</span> <span class="p">,</span> <span class="n">max_features</span> <span class="o">=</span> <span class="mi">20</span> <span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">,</span> <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">DML2_RF</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="mi">2</span> <span class="p">)</span>   <span class="c1"># set to 2 due to computation time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> length of y is 
+ 90
+
+ num features x is 
+ 60
+
+ Naive OLS that uses all features w/o cross-fitting 
+
+
+ coef (se) = -0.009377988732378034 (0.029887726372324425)
+
+ DML with OLS w/o feature selection 
+
+0  
+1  
+2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  
+3  
+4  
+5  
+6  
+7  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8  
+9  
+
+ Coefficient (se) = -0.027705587920389234 (0.01218318109889944)
+
+ DML with Lasso 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0  
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">Input In [7],</span> in <span class="ni">&lt;cell line: 37&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">rlasso_sklearn</span><span class="p">(</span> <span class="n">post</span> <span class="o">=</span> <span class="kc">False</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="k">return</span> <span class="n">result</span>
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="n">DML2_lasso</span> <span class="o">=</span> <span class="n">DML2_for_PLM</span><span class="p">(</span> <span class="n">x</span> <span class="p">,</span> <span class="n">d</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">dreg</span> <span class="p">,</span> <span class="n">yreg</span> <span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> DML with Random Forest </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="c1">#DML with cross-validated Lasso:</span>
+
+<span class="nn">Input In [4],</span> in <span class="ni">DML2_for_PLM</span><span class="nt">(x, d, y, dreg, yreg, nfold)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">yfit</span> <span class="o">=</span> <span class="n">yreg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,],</span> <span class="n">y</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">,])</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="c1"># predict estimates using the </span>
+<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">dhat</span> <span class="o">=</span> <span class="n">dfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">yhat</span> <span class="o">=</span> <span class="n">yfit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">,]</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1"># save errors  </span>
+
+<span class="nn">Input In [3],</span> in <span class="ni">rlasso_sklearn.predict</span><span class="nt">(self, X)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span> <span class="bp">self</span> <span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rlasso_model</span><span class="o">.</span><span class="n">est</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">prediction</span> <span class="o">=</span> <span class="p">(</span> <span class="n">add_constant</span><span class="p">(</span> <span class="n">X</span> <span class="p">)</span> <span class="o">@</span> <span class="n">beta</span> <span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">return</span> <span class="n">prediction</span>
+
+<span class="nn">ValueError: matmul: Input operand 1 has a mismatch</span> in <span class="ni">its core dimension 0, with gufunc signature (n?,k),(k,m?)-&gt;(n?,m?) </span><span class="nt">(size 61 is different from 60)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mods</span> <span class="o">=</span> <span class="p">[</span> <span class="n">DML2_ols</span><span class="p">,</span> <span class="n">DML2_lasso</span><span class="p">,</span> <span class="n">DML2_RF</span> <span class="p">]</span>
+<span class="n">mods_name</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;OLS&quot;</span><span class="p">,</span> <span class="s2">&quot;Lasso&quot;</span><span class="p">,</span> <span class="s1">&#39;RF&#39;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">mdl</span><span class="p">(</span> <span class="n">model</span> <span class="p">,</span> <span class="n">model_name</span> <span class="p">):</span>
+    
+    <span class="n">RMSEY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">model</span><span class="p">[</span> <span class="s1">&#39;ytil&#39;</span> <span class="p">]</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="p">)</span> <span class="c1"># I have some doubts about these equations...we have to recheck</span>
+    <span class="n">RMSED</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="n">model</span><span class="p">[</span> <span class="s1">&#39;dtil&#39;</span> <span class="p">]</span> <span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="p">)</span> <span class="c1"># I have some doubts about these equations...we have to recheck</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span> <span class="n">model_name</span> <span class="p">:</span> <span class="p">[</span> <span class="n">RMSEY</span> <span class="p">,</span> <span class="n">RMSED</span> <span class="p">]}</span> <span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;RMSEY&#39;</span> <span class="p">,</span> <span class="s1">&#39;RMSED&#39;</span> <span class="p">])</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">RES</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mdl</span><span class="p">(</span> <span class="n">model</span> <span class="p">,</span> <span class="n">name</span> <span class="p">)</span> <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span> <span class="n">mods</span> <span class="p">,</span> <span class="n">mods_name</span> <span class="p">)</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr_Res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span> <span class="n">RES</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr_Res</span><span class="o">.</span><span class="n">round</span><span class="p">(</span> <span class="mi">7</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OLS</th>
+      <th>Lasso</th>
+      <th>RF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>RMSEY</th>
+      <td>0.0</td>
+      <td>0.000029</td>
+      <td>0.000978</td>
+    </tr>
+    <tr>
+      <th>RMSED</th>
+      <td>0.0</td>
+      <td>0.012986</td>
+      <td>0.040936</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "d2cml-ai/14.388_py",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Python_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="21_Identification%20Analysis%20of%20401%28k%29%20Example%20w%20DAGs.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">21. </span>Identification Analysis of 401(k) Example w DAGs</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="23_sensitivity_analysis_with_sensmakr_and_debiased_ml.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Sensitivity Analysis with Sensmakr and Debiased ML</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Victor Chernozhukov<br/>
+  
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
